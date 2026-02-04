@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, Zap, HelpCircle, ArrowRight, FileText } from 'lucide-react';
-import { MagneticButton } from './ui/MagneticButton';
 
 const offers = [
   {
@@ -57,7 +56,7 @@ export const Offer: React.FC = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl h-[800px] bg-premium-green/5 blur-[120px] rounded-full pointer-events-none"></div>
 
       <div className="container mx-auto max-w-7xl relative z-10">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -77,8 +76,8 @@ export const Offer: React.FC = () => {
               viewport={{ once: true }}
               transition={{ delay: offer.delay, duration: 0.6 }}
               className={`relative p-8 md:p-10 rounded-[2rem] transition-all duration-300 group
-                ${offer.highlight 
-                  ? 'bg-[#0A0A0A] border border-premium-green/30 shadow-[0_0_50px_-20px_rgba(0,255,133,0.3)] z-10 scale-100 md:scale-110' 
+                ${offer.highlight
+                  ? 'bg-[#0A0A0A] border border-premium-green/30 shadow-[0_0_50px_-20px_rgba(0,255,133,0.3)] z-10 scale-100 md:scale-110'
                   : 'bg-white/[0.02] border border-white/5 hover:border-white/10'
                 }
               `}
@@ -86,7 +85,7 @@ export const Offer: React.FC = () => {
               {offer.highlight && (
                 <div className="absolute inset-0 bg-gradient-to-b from-premium-green/5 to-transparent rounded-[2rem] pointer-events-none"></div>
               )}
-              
+
               {offer.highlight && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-premium-green text-black text-[10px] font-bold uppercase tracking-widest rounded-full flex items-center gap-2 shadow-lg shadow-premium-green/20">
                   <Zap className="w-3 h-3 fill-black" />
@@ -97,37 +96,36 @@ export const Offer: React.FC = () => {
               <h3 className={`text-lg font-bold mb-2 font-display uppercase tracking-wider ${offer.highlight ? 'text-premium-green' : 'text-white'}`}>
                 {offer.title}
               </h3>
-              
+
               <div className="flex items-baseline gap-1 mb-4">
                 <span className="text-4xl md:text-5xl font-black text-white tracking-tight">{offer.price}€</span>
               </div>
-              
+
               <p className="text-gray-400 text-xs mb-8 h-8 font-medium">{offer.description}</p>
-              
+
               <div className={`w-full h-[1px] mb-8 ${offer.highlight ? 'bg-gradient-to-r from-transparent via-premium-green/30 to-transparent' : 'bg-white/5'}`}></div>
-              
+
               <ul className="space-y-4 mb-10">
                 {offer.features.map((feature, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <div className={`mt-0.5 w-4 h-4 rounded-full flex items-center justify-center ${offer.highlight ? 'bg-premium-green text-black' : 'bg-white/10 text-gray-400'}`}>
-                        <Check className="w-2.5 h-2.5" />
+                      <Check className="w-2.5 h-2.5" />
                     </div>
                     <span className={`text-sm ${offer.highlight ? 'text-white' : 'text-gray-400'}`}>{feature}</span>
                   </li>
                 ))}
               </ul>
 
-              <MagneticButton className="w-full">
-                <button className={`w-full py-4 rounded-full font-bold text-xs uppercase tracking-widest transition-all duration-300 border flex items-center justify-center gap-2
-                  ${offer.highlight 
-                    ? 'bg-premium-green text-black border-transparent hover:bg-white hover:shadow-[0_0_20px_rgba(255,255,255,0.4)]' 
-                    : 'bg-transparent text-white border-white/10 hover:bg-white/5 hover:border-white/30'
-                  }
+              <button className={`w-full py-4 rounded-full font-bold text-xs uppercase tracking-widest transition-all duration-300 border flex items-center justify-center gap-2
+                  ${offer.highlight
+                  ? 'bg-premium-green text-black border-transparent hover:bg-white hover:shadow-[0_0_20px_rgba(255,255,255,0.4)]'
+                  : 'bg-transparent text-white border-white/10 hover:bg-white/5 hover:border-white/30'
+                }
                 `}>
-                  Choisir ce pack
-                  {offer.highlight && <ArrowRight className="w-4 h-4" />}
-                </button>
-              </MagneticButton>
+                Choisir ce pack
+                {offer.highlight && <ArrowRight className="w-4 h-4" />}
+              </button>
+
             </motion.div>
           ))}
         </div>
@@ -136,14 +134,14 @@ export const Offer: React.FC = () => {
         <div className="max-w-3xl mx-auto border border-white/5 bg-white/[0.02] rounded-[2.5rem] backdrop-blur-sm overflow-hidden flex flex-col items-center">
           {/* Tabs Header - Pill Style */}
           <div className="flex p-2 gap-2 mt-8 bg-black/20 rounded-full border border-white/5">
-            <button 
+            <button
               onClick={() => setActiveTab('faq')}
               className={`py-3 px-8 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all rounded-full ${activeTab === 'faq' ? 'bg-premium-green text-black shadow-lg shadow-premium-green/20' : 'text-gray-500 hover:text-white hover:bg-white/5'}`}
             >
               <HelpCircle className="w-3.5 h-3.5" />
               FAQ
             </button>
-            <button 
+            <button
               onClick={() => setActiveTab('quote')}
               className={`py-3 px-8 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all rounded-full ${activeTab === 'quote' ? 'bg-premium-green text-black shadow-lg shadow-premium-green/20' : 'text-gray-500 hover:text-white hover:bg-white/5'}`}
             >
@@ -156,7 +154,7 @@ export const Offer: React.FC = () => {
           <div className="p-10 w-full min-h-[220px]">
             <AnimatePresence mode="wait">
               {activeTab === 'faq' ? (
-                <motion.div 
+                <motion.div
                   key="faq"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -180,28 +178,28 @@ export const Offer: React.FC = () => {
                   </div>
                 </motion.div>
               ) : (
-                <motion.div 
-                   key="quote"
-                   initial={{ opacity: 0, y: 10 }}
-                   animate={{ opacity: 1, y: 0 }}
-                   exit={{ opacity: 0, y: -10 }}
-                   transition={{ duration: 0.3 }}
-                   className="flex flex-col items-center justify-center text-center h-full"
+                <motion.div
+                  key="quote"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex flex-col items-center justify-center text-center h-full"
                 >
-                    <h4 className="text-white font-bold mb-3 text-lg">Un projet spécifique ?</h4>
-                    <p className="text-gray-400 text-sm leading-relaxed mb-8 max-w-md">
-                      Vous avez des besoins particuliers ou un cahier des charges complexe ? 
-                      Demandez un devis sur-mesure adapté à votre ambition.
-                    </p>
-                    <a href="#contact" className="px-8 py-4 bg-white text-black font-bold text-xs uppercase tracking-widest rounded-full hover:bg-premium-green hover:shadow-[0_0_20px_rgba(0,255,133,0.4)] transition-all">
-                        Demander un Devis Personnalisé
-                    </a>
+                  <h4 className="text-white font-bold mb-3 text-lg">Un projet spécifique ?</h4>
+                  <p className="text-gray-400 text-sm leading-relaxed mb-8 max-w-md">
+                    Vous avez des besoins particuliers ou un cahier des charges complexe ?
+                    Demandez un devis sur-mesure adapté à votre ambition.
+                  </p>
+                  <a href="#contact" className="px-8 py-4 bg-white text-black font-bold text-xs uppercase tracking-widest rounded-full hover:bg-premium-green hover:shadow-[0_0_20px_rgba(0,255,133,0.4)] transition-all">
+                    Demander un devis personnalisé
+                  </a>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
         </div>
       </div>
-    </section>
+    </section >
   );
 };

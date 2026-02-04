@@ -9,7 +9,18 @@ export const ParticleBackground: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let particles: { x: number; y: number; vx: number; vy: number; size: number; baseAlpha: number }[] = [];
+    let particles: {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      size: number;
+      baseAlpha: number;
+      rotation: number;
+      rotationSpeed: number;
+      flickerOffset: number;
+    }[] = [];
+
     let animationFrameId: number;
     let mouse = { x: -1000, y: -1000 };
 
@@ -21,17 +32,19 @@ export const ParticleBackground: React.FC = () => {
 
     const initParticles = () => {
       particles = [];
-      // Higher density for a "matrix" feel
       const density = Math.floor((canvas.width * canvas.height) / 10000);
-      
+
       for (let i = 0; i < density; i++) {
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.2, // Slower, more elegant movement
+          vx: (Math.random() - 0.5) * 0.2,
           vy: (Math.random() - 0.5) * 0.2,
-          size: Math.random() * 2 + 1, // Slightly larger for crosses to be visible
-          baseAlpha: Math.random() * 0.3 + 0.1
+          size: Math.random() * 2 + 1,
+          baseAlpha: Math.random() * 0.3 + 0.1,
+          rotation: Math.random() * Math.PI * 2,
+          rotationSpeed: (Math.random() - 0.5) * 0.02,
+          flickerOffset: Math.random() * 100
         });
       }
     };
@@ -43,10 +56,14 @@ export const ParticleBackground: React.FC = () => {
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
+      const time = Date.now() * 0.001;
+
       particles.forEach((p, i) => {
         p.x += p.vx;
         p.y += p.vy;
+
+        // Base rotation
+        p.rotation += p.rotationSpeed;
 
         // Wrap around edges
         if (p.x < 0) p.x = canvas.width;
@@ -63,53 +80,65 @@ export const ParticleBackground: React.FC = () => {
         let alpha = p.baseAlpha;
         let scale = 1;
 
+        // Mouse Interaction
         if (dist < interactionRadius) {
-            const intensity = 1 - dist / interactionRadius;
-            alpha += intensity * 0.8; // Brighten near mouse
-            scale = 1 + intensity * 1.5; // Grow near mouse
+          const intensity = 1 - dist / interactionRadius;
+          alpha += intensity * 0.8;
+          scale = 1 + intensity * 1.5;
+
+          // Spin faster near mouse
+          p.rotation += p.rotationSpeed * 5 * intensity;
         }
 
-        // Draw particle as a CROSS (+)
+        // Flicker effect
+        const flicker = Math.sin(time * 2 + p.flickerOffset) * 0.2;
+        alpha = Math.max(0, Math.min(1, alpha + flicker));
+
+        // Draw particle as a ROTATED CROSS (+)
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rotation);
+        ctx.scale(scale, scale);
+
         ctx.beginPath();
-        const size = p.size * scale;
-        
-        // Horizontal line
-        ctx.moveTo(p.x - size, p.y);
-        ctx.lineTo(p.x + size, p.y);
-        
-        // Vertical line
-        ctx.moveTo(p.x, p.y - size);
-        ctx.lineTo(p.x, p.y + size);
-        
-        ctx.strokeStyle = `rgba(0, 255, 133, ${Math.min(alpha, 1)})`; // Premium green color
+        const size = p.size;
+
+        ctx.moveTo(-size, 0);
+        ctx.lineTo(size, 0);
+
+        ctx.moveTo(0, -size);
+        ctx.lineTo(0, size);
+
+        ctx.strokeStyle = `rgba(0, 255, 133, ${alpha})`;
         ctx.lineWidth = 1;
         ctx.stroke();
+        ctx.restore();
 
-        // Connect particles ONLY near mouse
+        // Connect particles
         if (dist < interactionRadius) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const p2 = particles[j];
-                const dx2 = p.x - p2.x;
-                const dy2 = p.y - p2.y;
-                const dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
-                
-                // Only connect close particles that are ALSO within the mouse radius
-                if (dist2 < 100) {
-                    const dxM = mouse.x - p2.x;
-                    const dyM = mouse.y - p2.y;
-                    const distM = Math.sqrt(dxM * dxM + dyM * dyM);
+          for (let j = i + 1; j < particles.length; j++) {
+            const p2 = particles[j];
+            const dx2 = p.x - p2.x;
+            const dy2 = p.y - p2.y;
+            const dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
 
-                    if (distM < interactionRadius) {
-                        const opacity = (1 - dist / interactionRadius) * (1 - dist2 / 100) * 0.5;
-                        ctx.beginPath();
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.strokeStyle = `rgba(0, 255, 133, ${opacity})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
-                    }
-                }
+            if (dist2 < 100) {
+              const dxM = mouse.x - p2.x;
+              const dyM = mouse.y - p2.y;
+              const distM = Math.sqrt(dxM * dxM + dyM * dyM);
+
+              if (distM < interactionRadius) {
+                const opacity = (1 - dist / interactionRadius) * (1 - dist2 / 100) * 0.3; // Lower opacity for elegance
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                // Simple line without rotation for connections is cleaner
+                ctx.lineTo(p2.x, p2.y);
+                ctx.strokeStyle = `rgba(0, 255, 133, ${opacity})`;
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+              }
             }
+          }
         }
       });
 
@@ -118,7 +147,7 @@ export const ParticleBackground: React.FC = () => {
 
     window.addEventListener('resize', resize);
     window.addEventListener('mousemove', handleMouseMove);
-    
+
     resize();
     animate();
 
@@ -130,8 +159,8 @@ export const ParticleBackground: React.FC = () => {
   }, []);
 
   return (
-    <canvas 
-      ref={canvasRef} 
+    <canvas
+      ref={canvasRef}
       className="fixed inset-0 z-0 pointer-events-none"
     />
   );

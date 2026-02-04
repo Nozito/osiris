@@ -5,55 +5,53 @@ import { ArrowRight, User } from 'lucide-react';
 export const Hero: React.FC = () => {
   return (
     <section className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden px-6 pt-20">
-      
+
       {/* Premium Gyroscopic Reactor Background */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] pointer-events-none opacity-100 md:opacity-100"
-           style={{ perspective: '1200px' }}>
-         
-         {/* Core Glow */}
-         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] bg-premium-green/20 blur-[100px] rounded-full animate-pulse"></div>
+        style={{ perspective: '1200px' }}>
 
-         {/* Ring 1 - Slow Outer - Accentuated */}
-         <div className="absolute inset-0 rounded-full border border-white/20 shadow-[0_0_30px_rgba(255,255,255,0.05)] animate-[spin_60s_linear_infinite]"></div>
-         
-         {/* Ring 2 - Dashed Green - Accentuated */}
-         <div className="absolute top-10 bottom-10 left-10 right-10 rounded-full border border-dashed border-premium-green/40 shadow-[0_0_20px_rgba(0,255,133,0.1)] animate-[spin_40s_linear_infinite_reverse]"></div>
+        {/* Core Glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] bg-premium-green/20 blur-[100px] rounded-full animate-pulse"></div>
 
-         {/* Ring 3 - 3D Tilted - Accentuated */}
-         <div className="absolute top-20 bottom-20 left-20 right-20 rounded-full border-2 border-white/10 animate-[spin_30s_linear_infinite]" 
-              style={{ transform: 'rotateX(60deg)' }}></div>
+        {/* Ring 1 - Slow Outer - Accentuated */}
+        <div className="absolute inset-0 rounded-full border border-white/20 shadow-[0_0_30px_rgba(255,255,255,0.05)] animate-[spin_60s_linear_infinite]"></div>
 
-         {/* Ring 4 - 3D Tilted Opposite - Accentuated */}
-         <div className="absolute top-32 bottom-32 left-32 right-32 rounded-full border-2 border-white/10 animate-[spin_25s_linear_infinite_reverse]" 
-              style={{ transform: 'rotateY(60deg)' }}></div>
-         
-         {/* Ring 5 - Inner Dashed - Accentuated */}
-         <div className="absolute top-1/3 bottom-1/3 left-1/3 right-1/3 rounded-full border-2 border-dashed border-premium-green/30 shadow-[inset_0_0_20px_rgba(0,255,133,0.1)] animate-[spin_20s_linear_infinite]"></div>
+        {/* Ring 2 - Dashed Green - Accentuated */}
+        <div className="absolute top-10 bottom-10 left-10 right-10 rounded-full border border-dashed border-premium-green/40 shadow-[0_0_20px_rgba(0,255,133,0.1)] animate-[spin_40s_linear_infinite_reverse]"></div>
 
-         {/* Geometric Accents - Floating Squares */}
-         <div className="absolute top-0 left-1/2 w-2 h-2 bg-premium-green rounded-full shadow-[0_0_10px_#00FF85]"></div>
-         <div className="absolute bottom-0 left-1/2 w-2 h-2 bg-white rounded-full"></div>
+        {/* Ring 3 - 3D Tilted - Accentuated */}
+        <div className="absolute top-20 bottom-20 left-20 right-20 rounded-full border-2 border-white/10 animate-[spin_30s_linear_infinite]"
+          style={{ transform: 'rotateX(60deg)' }}></div>
+
+        {/* Ring 4 - 3D Tilted Opposite - Accentuated */}
+        <div className="absolute top-32 bottom-32 left-32 right-32 rounded-full border-2 border-white/10 animate-[spin_25s_linear_infinite_reverse]"
+          style={{ transform: 'rotateY(60deg)' }}></div>
+
+        {/* Ring 5 - Inner Dashed - Accentuated */}
+        <div className="absolute top-1/3 bottom-1/3 left-1/3 right-1/3 rounded-full border-2 border-dashed border-premium-green/30 shadow-[inset_0_0_20px_rgba(0,255,133,0.1)] animate-[spin_20s_linear_infinite]"></div>
+
+        {/* Geometric Accents - Floating Squares */}
+        <div className="absolute top-0 left-1/2 w-2 h-2 bg-premium-green rounded-full shadow-[0_0_10px_#00FF85]"></div>
+        <div className="absolute bottom-0 left-1/2 w-2 h-2 bg-white rounded-full"></div>
       </div>
 
       <div className="container mx-auto max-w-5xl relative z-10 text-center flex flex-col items-center">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="flex flex-col items-center"
         >
-          
+
           <h1 className="font-display text-6xl md:text-8xl lg:text-[10rem] font-black tracking-tighter leading-[1] mb-8 text-white mt-12 select-none">
-             {/* Aluminum Reflection Effect */}
-             <span className="bg-clip-text text-transparent bg-[linear-gradient(110deg,#555_25%,#ffffff_45%,#555_55%)] bg-[length:250%_100%] animate-shimmer">
-              OSIRIS
-            </span>
+            {/* Aluminum Reflection Effect */}
+            <span className="bg-clip-text text-transparent bg-[linear-gradient(110deg,#555_25%,#ffffff_45%,#555_55%)] bg-[length:250%_100%] animate-shimmer pb-2 pr-2">OSIRIS</span>
           </h1>
-          
+
           <p className="text-lg md:text-2xl text-gray-400 max-w-2xl mb-12 leading-relaxed font-light border-l-2 border-premium-green/50 pl-6 text-left md:text-center md:border-l-0 md:pl-0">
             Nous ne créons pas de simples sites web. Nous construisons des empires digitaux pour les marques qui exigent l'excellence absolue.
           </p>
-          
+
           <div className="flex flex-col md:flex-row items-center gap-8">
             {/* Standard Button without Magnetic Effect */}
             <div className="group relative">
@@ -63,23 +61,23 @@ export const Hero: React.FC = () => {
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
-            
+
             {/* Enhanced Badge */}
             <div className="flex items-center gap-4 text-sm font-mono text-gray-400 bg-black/40 px-6 py-3 rounded-full border border-white/10 backdrop-blur-md shadow-2xl hover:border-white/20 transition-colors cursor-default">
               <div className="flex -space-x-3">
                 <div className="w-8 h-8 rounded-full bg-zinc-800 border-2 border-black flex items-center justify-center">
-                    <User className="w-4 h-4 text-gray-500" />
+                  <User className="w-4 h-4 text-gray-500" />
                 </div>
                 <div className="w-8 h-8 rounded-full bg-zinc-700 border-2 border-black flex items-center justify-center">
-                    <User className="w-4 h-4 text-gray-400" />
+                  <User className="w-4 h-4 text-gray-400" />
                 </div>
                 <div className="w-8 h-8 rounded-full bg-premium-green/20 border-2 border-black flex items-center justify-center backdrop-blur-sm">
-                    <div className="w-2 h-2 bg-premium-green rounded-full animate-pulse"></div>
+                  <div className="w-2 h-2 bg-premium-green rounded-full animate-pulse"></div>
                 </div>
               </div>
               <div className="flex flex-col text-left">
                 <span className="block text-white font-bold leading-none text-xs uppercase tracking-wider mb-1">
-                    2 places <span className="text-premium-green">disponibles</span>
+                  2 places <span className="text-premium-green">disponibles</span>
                 </span>
                 <span className="text-[10px] uppercase tracking-wide text-gray-500 font-semibold">Pour ce mois</span>
               </div>
@@ -89,7 +87,7 @@ export const Hero: React.FC = () => {
       </div>
 
       {/* Geometric Scroll Indicator */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 1 }}
@@ -97,7 +95,7 @@ export const Hero: React.FC = () => {
       >
         <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-premium-green to-transparent opacity-50"></div>
         <div className="w-4 h-4 border border-white/20 rotate-45 flex items-center justify-center">
-            <div className="w-1 h-1 bg-premium-green rounded-full"></div>
+          <div className="w-1 h-1 bg-premium-green rounded-full"></div>
         </div>
       </motion.div>
     </section>

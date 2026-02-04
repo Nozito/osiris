@@ -11,7 +11,7 @@ export const Contact: React.FC = () => {
 
       <div className="container mx-auto max-w-7xl relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
-          
+
           {/* Left Column: Info */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -20,11 +20,11 @@ export const Contact: React.FC = () => {
           >
             <span className="text-premium-green text-xs font-bold uppercase tracking-widest mb-4 block">Contact</span>
             <h2 className="text-5xl md:text-7xl font-black font-display text-white mb-8">
-              Parlons <br/>
+              Parlons <br />
               <span className="text-gray-500">Futur.</span>
             </h2>
             <p className="text-xl text-gray-400 mb-12 leading-relaxed">
-              Vous avez un projet ambitieux ? Nous avons l'équipe pour le réaliser. 
+              Vous avez un projet ambitieux ? Nous avons l'équipe pour le réaliser.
               Remplissez le formulaire et obtenez une réponse sous 24h.
             </p>
 
@@ -86,7 +86,7 @@ export const Contact: React.FC = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">Budget Estimé</label>
+                <label className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">Budget estimé</label>
                 <select className="w-full bg-black/50 border border-white/10 p-4 text-white focus:border-premium-green focus:outline-none transition-colors appearance-none rounded-2xl">
                   <option>1k€ - 3k€</option>
                   <option>3k€ - 10k€</option>
