@@ -20,7 +20,7 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
                 return saved;
             }
         }
-        return 'fr'; // Default to French
+        return 'fr';
     });
 
     useEffect(() => {
