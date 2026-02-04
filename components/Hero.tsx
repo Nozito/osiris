@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, User } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export const Hero: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden px-6 pt-20">
 
@@ -43,13 +46,31 @@ export const Hero: React.FC = () => {
           className="flex flex-col items-center"
         >
 
-          <h1 className="font-display text-6xl md:text-8xl lg:text-[10rem] font-black tracking-tighter leading-[1] mb-8 text-white mt-12 select-none">
-            {/* Aluminum Reflection Effect */}
-            <span className="bg-clip-text text-transparent bg-[linear-gradient(110deg,#555_25%,#ffffff_45%,#555_55%)] bg-[length:250%_100%] animate-shimmer pb-2 pr-2">OSIRIS</span>
+          <h1 className="font-display text-6xl md:text-8xl lg:text-[10rem] font-black tracking-tighter leading-[1] mb-8 text-white mt-12 select-none relative z-20">
+            {/* Refined Metal Effect with Shimmer */}
+            <div className="relative inline-block">
+              {/* Base Metal Text - Smoothed Gradient */}
+              <span
+                className="inline-block bg-clip-text text-transparent bg-[linear-gradient(180deg,#e0eafc_0%,#cfdef3_20%,#8899a6_40%,#333333_50%,#8899a6_60%,#cfdef3_80%,#e0eafc_100%)] contrast-[1.1] brightness-[1.1] drop-shadow-[0_0_30px_rgba(255,255,255,0.2)] px-4 mx-[-16px]"
+                style={{
+                  filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.5))'
+                }}
+              >
+                OSIRIS
+              </span>
+
+              {/* Shimmer Overlay - Intensified */}
+              <span
+                className="absolute inset-0 bg-clip-text text-transparent bg-[linear-gradient(110deg,transparent_30%,rgba(255,255,255,0.1)_45%,rgba(255,255,255,1)_50%,rgba(255,255,255,0.1)_55%,transparent_70%)] bg-[length:250%_100%] animate-shimmer pointer-events-none px-4 mx-[-16px] mix-blend-plus-lighter"
+                aria-hidden="true"
+              >
+                OSIRIS
+              </span>
+            </div>
           </h1>
 
           <p className="text-lg md:text-2xl text-gray-400 max-w-2xl mb-12 leading-relaxed font-light border-l-2 border-premium-green/50 pl-6 text-left md:text-center md:border-l-0 md:pl-0">
-            Nous ne créons pas de simples sites web. Nous construisons des empires digitaux pour les marques qui exigent l'excellence absolue.
+            {t.hero.tagline}
           </p>
 
           <div className="flex flex-col md:flex-row items-center gap-8">
@@ -57,13 +78,13 @@ export const Hero: React.FC = () => {
             <div className="group relative">
               <div className="absolute inset-0 bg-premium-green blur-xl opacity-20 group-hover:opacity-50 transition-opacity duration-500 rounded-full"></div>
               <a href="#contact" className="relative bg-premium-green text-black font-bold py-5 px-10 border border-transparent hover:scale-105 transition-all duration-300 flex items-center gap-3 text-lg tracking-wider uppercase rounded-full shadow-[0_0_30px_rgba(0,255,133,0.2)]">
-                Démarrer le projet
+                {t.hero.cta}
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
 
             {/* Enhanced Badge */}
-            <div className="flex items-center gap-4 text-sm font-mono text-gray-400 bg-black/40 px-6 py-3 rounded-full border border-white/10 backdrop-blur-md shadow-2xl hover:border-white/20 transition-colors cursor-default">
+            <div className="flex items-center gap-4 text-sm font-mono text-gray-400 bg-premium-black/40 px-6 py-3 rounded-full border border-white/10 backdrop-blur-md shadow-2xl hover:border-white/20 transition-colors cursor-default">
               <div className="flex -space-x-3">
                 <div className="w-8 h-8 rounded-full bg-zinc-800 border-2 border-black flex items-center justify-center">
                   <User className="w-4 h-4 text-gray-500" />
@@ -77,9 +98,9 @@ export const Hero: React.FC = () => {
               </div>
               <div className="flex flex-col text-left">
                 <span className="block text-white font-bold leading-none text-xs uppercase tracking-wider mb-1">
-                  2 places <span className="text-premium-green">disponibles</span>
+                  2 {t.hero.spotsAvailable} <span className="text-premium-green">{t.hero.available}</span>
                 </span>
-                <span className="text-[10px] uppercase tracking-wide text-gray-500 font-semibold">Pour ce mois</span>
+                <span className="text-[10px] uppercase tracking-wide text-gray-500 font-semibold">{t.hero.thisMonth}</span>
               </div>
             </div>
           </div>

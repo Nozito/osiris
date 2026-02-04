@@ -1,57 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Zap, Diamond, Target, Terminal, Palette, BarChart3, Layers, Cpu, TrendingUp, CheckCircle2, Globe, Lock, Smartphone, Code2, Database, Server } from 'lucide-react';
-
-const cards = [
-  {
-    icon: Zap,
-    title: "Vitesse Hypersonique",
-    description: "Des sites optimisés au millimètre (Core Web Vitals). Chargement instantané. Google adore ça. Vos clients aussi."
-  },
-  {
-    icon: Diamond,
-    title: "Esthétique \"Premium\"",
-    description: "Un design épuré, noir et vert, qui positionne immédiatement votre marque dans le haut de gamme."
-  },
-  {
-    icon: Target,
-    title: "Conversion Maximale",
-    description: "Nous n'utilisons pas seulement l'art, mais la psychologie cognitive pour transformer les visiteurs en acheteurs."
-  }
-];
-
-const services = [
-  {
-    id: "design",
-    title: "Design & Immersion",
-    description: "Nous ne dessinons pas seulement des pages, nous créons des univers. Chaque pixel est intentionnel, chaque animation raconte une histoire.",
-    icon: Palette,
-    items: ["UI/UX High-End", "Direction Artistique", "Motion Design (GSAP)", "Modélisation 3D / WebGL", "Branding sonore"],
-    color: "text-purple-400",
-    bgGlow: "bg-purple-500/10",
-    borderGlow: "group-hover:border-purple-500/50"
-  },
-  {
-    id: "engineering",
-    title: "Engineering & Code",
-    description: "Une architecture invisible mais invincible. Nous développons des fondations solides pour supporter votre croissance exponentielle.",
-    icon: Terminal,
-    items: ["Next.js 14 / React", "Architecture Headless", "Shaders GLSL", "API Rest / GraphQL", "Cyber-sécurité avancée"],
-    color: "text-blue-400",
-    bgGlow: "bg-blue-500/10",
-    borderGlow: "group-hover:border-blue-500/50"
-  },
-  {
-    id: "growth",
-    title: "Growth & Data",
-    description: "L'art de la vente scientifique. Nous connectons votre plateforme aux outils les plus puissants pour tracker et maximiser le ROI.",
-    icon: BarChart3,
-    items: ["SEO Technique", "Tracking server-side", "A/B Testing", "CRO (Conversion)", "Analytics Dashboards"],
-    color: "text-emerald-400",
-    bgGlow: "bg-emerald-500/10",
-    borderGlow: "group-hover:border-emerald-500/50"
-  }
-];
+import { Zap, Diamond, Target, Terminal, Palette, BarChart3, Layers, Cpu, TrendingUp, CheckCircle2, Globe, Lock, Code2, Database, Server } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const techRow1 = [
   { name: "React", icon: Code2 },
@@ -61,6 +11,10 @@ const techRow1 = [
   { name: "Framer Motion", icon: Zap },
   { name: "Three.js", icon: Layers },
   { name: "WebGL", icon: Cpu },
+  { name: "Vue.js", icon: Code2 },
+  { name: "Nuxt", icon: Globe },
+  { name: "GSAP", icon: Zap },
+  { name: "Figma", icon: Palette },
 ];
 
 const techRow2 = [
@@ -71,6 +25,10 @@ const techRow2 = [
   { name: "Docker", icon: Layers },
   { name: "GraphQL", icon: Zap },
   { name: "Stripe", icon: Lock },
+  { name: "AWS", icon: Server },
+  { name: "MongoDB", icon: Database },
+  { name: "Redis", icon: Cpu },
+  { name: "Prisma", icon: Database },
 ];
 
 // Visual Component for Design
@@ -92,7 +50,7 @@ const DesignVisual = () => (
         className="absolute -bottom-8 -right-8 w-56 h-40 bg-pink-900/20 border border-pink-500/20 backdrop-blur-sm -z-10 transform rotate-6 rounded-2xl"
       />
 
-      <div className="w-64 h-80 bg-black/40 border border-white/10 backdrop-blur-xl shadow-2xl flex flex-col overflow-hidden relative rounded-3xl">
+      <div className="w-64 h-80 bg-premium-black/40 border border-white/10 backdrop-blur-xl shadow-2xl flex flex-col overflow-hidden relative rounded-3xl">
         <div className="h-32 bg-gradient-to-br from-purple-500/20 to-blue-600/20 relative overflow-hidden">
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20"></div>
         </div>
@@ -169,7 +127,7 @@ const GrowthVisual = () => (
     {/* Geometric Background Beam */}
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[120%] bg-gradient-to-t from-emerald-500/10 to-transparent rotate-45 border-l border-r border-white/5 pointer-events-none"></div>
 
-    <div className="relative w-full max-w-sm bg-black/40 backdrop-blur-md border border-white/10 p-6 shadow-2xl group-hover:border-emerald-500/30 transition-colors duration-500 z-10 rounded-3xl">
+    <div className="relative w-full max-w-sm bg-premium-black/40 backdrop-blur-md border border-white/10 p-6 shadow-2xl group-hover:border-emerald-500/30 transition-colors duration-500 z-10 rounded-3xl">
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
         <div>
@@ -249,8 +207,61 @@ const Marquee = ({ items, direction = "left", speed = 20 }: { items: typeof tech
 };
 
 export const ValueTrifecta: React.FC = () => {
+  const { t } = useLanguage();
+
+  const cards = [
+    {
+      icon: Zap,
+      title: t.valueTrifecta.cards.speed.title,
+      description: t.valueTrifecta.cards.speed.description
+    },
+    {
+      icon: Diamond,
+      title: t.valueTrifecta.cards.aesthetic.title,
+      description: t.valueTrifecta.cards.aesthetic.description
+    },
+    {
+      icon: Target,
+      title: t.valueTrifecta.cards.conversion.title,
+      description: t.valueTrifecta.cards.conversion.description
+    }
+  ];
+
+  const services = [
+    {
+      id: "design",
+      title: t.valueTrifecta.services.design.title,
+      description: t.valueTrifecta.services.design.description,
+      icon: Palette,
+      items: t.valueTrifecta.services.design.items,
+      color: "text-purple-400",
+      bgGlow: "bg-purple-500/10",
+      borderGlow: "group-hover:border-purple-500/50"
+    },
+    {
+      id: "engineering",
+      title: t.valueTrifecta.services.engineering.title,
+      description: t.valueTrifecta.services.engineering.description,
+      icon: Terminal,
+      items: t.valueTrifecta.services.engineering.items,
+      color: "text-blue-400",
+      bgGlow: "bg-blue-500/10",
+      borderGlow: "group-hover:border-blue-500/50"
+    },
+    {
+      id: "growth",
+      title: t.valueTrifecta.services.growth.title,
+      description: t.valueTrifecta.services.growth.description,
+      icon: BarChart3,
+      items: t.valueTrifecta.services.growth.items,
+      color: "text-emerald-400",
+      bgGlow: "bg-emerald-500/10",
+      borderGlow: "group-hover:border-emerald-500/50"
+    }
+  ];
+
   return (
-    <section id="expertise" className="px-6 py-32 relative scroll-mt-20 overflow-hidden bg-premium-black">
+    <section id="expertise" className="px-6 py-32 relative scroll-mt-20 overflow-hidden metal-bg">
       {/* Premium Geometric Backgrounds */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-b from-premium-green/10 to-transparent blur-[100px] -skew-x-12 translate-x-1/3 pointer-events-none -z-10" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-t from-blue-500/10 to-transparent blur-[100px] skew-x-12 -translate-x-1/3 pointer-events-none -z-10" />
@@ -266,12 +277,12 @@ export const ValueTrifecta: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="mb-20 text-center md:text-left"
         >
-          <span className="text-premium-green text-xs font-bold uppercase tracking-widest mb-2 block">Notre Expertise</span>
+          <span className="text-premium-green text-xs font-bold uppercase tracking-widest mb-2 block">{t.valueTrifecta.sectionLabel}</span>
           <h2 className="text-4xl md:text-6xl font-black mb-6 font-display text-white">
-            La Trinité de la <span className="text-premium-green">Performance</span>.
+            {t.valueTrifecta.title} <span className="text-premium-green">{t.valueTrifecta.titleHighlight}</span>.
           </h2>
           <p className="text-gray-400 max-w-2xl text-lg leading-relaxed">
-            Nous avons banni le médiocre. Chaque pixel, chaque ligne de code et chaque animation sert un but unique : la domination de votre marché.
+            {t.valueTrifecta.subtitle}
           </p>
         </motion.div>
 
@@ -305,7 +316,7 @@ export const ValueTrifecta: React.FC = () => {
               <div className="absolute -top-[100px] -right-[100px] w-[200px] h-[200px] bg-gradient-to-br from-premium-green/20 to-transparent rotate-45 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
               <div className="mb-6 relative">
-                <div className="w-14 h-14 flex items-center justify-center bg-black/50 border border-premium-green/30 text-premium-green shadow-[0_0_15px_rgba(0,255,133,0.15)] group-hover:shadow-[0_0_25px_rgba(0,255,133,0.3)] transition-shadow duration-500 rotate-3 group-hover:rotate-0 transition-transform rounded-2xl">
+                <div className="w-14 h-14 flex items-center justify-center bg-premium-black/50 border border-premium-green/30 text-premium-green shadow-[0_0_15px_rgba(0,255,133,0.15)] group-hover:shadow-[0_0_25px_rgba(0,255,133,0.3)] transition-shadow duration-500 rotate-3 group-hover:rotate-0 transition-transform rounded-2xl">
                   <card.icon className="w-7 h-7" />
                 </div>
               </div>
@@ -330,7 +341,7 @@ export const ValueTrifecta: React.FC = () => {
             className="flex items-center gap-4 mb-20 justify-center"
           >
             <div className="h-[1px] bg-white/10 w-24"></div>
-            <h3 className="text-2xl font-bold uppercase tracking-widest text-white text-center">L'arsenal tactique</h3>
+            <h3 className="text-2xl font-bold uppercase tracking-widest text-white text-center">{t.valueTrifecta.arsenal}</h3>
             <div className="h-[1px] bg-white/10 w-24"></div>
           </motion.div>
 
@@ -347,7 +358,7 @@ export const ValueTrifecta: React.FC = () => {
                 {/* Text Content */}
                 <div className="flex-1 space-y-8">
                   <div className="flex items-center gap-4">
-                    <div className={`p-3 bg-black border border-white/10 ${service.color} shadow-lg shadow-${service.color}/10 rotate-3 rounded-2xl`}>
+                    <div className={`p-3 bg-premium-black border border-white/10 ${service.color} shadow-lg shadow-${service.color}/10 rotate-3 rounded-2xl`}>
                       <service.icon className="w-8 h-8" />
                     </div>
                     <h4 className={`text-3xl md:text-5xl font-black font-display text-white`}>{service.title}</h4>
@@ -386,18 +397,26 @@ export const ValueTrifecta: React.FC = () => {
             ))}
           </div>
         </div>
+      </div>
 
-        {/* Tech Stack - Infinite Data Streams */}
-        <div className="border-t border-white/5 pt-20 relative">
-          <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-premium-black px-4 flex items-center gap-2">
-            <div className="w-2 h-2 bg-premium-green animate-pulse rounded-full"></div>
-            <span className="text-xs text-premium-green font-bold uppercase tracking-[0.2em]">Architecture système</span>
+      {/* Tech Stack - Full Width Infinite Data Streams */}
+      <div className="w-full border-t border-white/10 pt-24 pb-8 relative mt-20">
+        {/* Simple Label */}
+        <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-transparent via-[#1a1a1c] to-transparent px-8 flex items-center gap-3 z-10">
+          <div className="w-16 h-[1px] bg-gradient-to-r from-transparent to-premium-green/50"></div>
+          <div className="flex items-center gap-2 px-4 py-2 bg-premium-black/80 border border-premium-green/30 rounded-full shadow-[0_0_20px_rgba(0,255,133,0.15)]">
+            <div className="w-2 h-2 bg-premium-green animate-pulse rounded-full shadow-[0_0_8px_rgba(0,255,133,0.8)]"></div>
+            <span className="text-xs text-premium-green font-bold uppercase tracking-[0.2em]">{t.valueTrifecta.systemArchitecture}</span>
           </div>
+          <div className="w-16 h-[1px] bg-gradient-to-l from-transparent to-premium-green/50"></div>
+        </div>
 
-          <div className="space-y-4 opacity-80 hover:opacity-100 transition-opacity duration-500">
-            <Marquee items={techRow1} direction="left" speed={30} />
-            <Marquee items={techRow2} direction="right" speed={35} />
-          </div>
+        {/* Glow line under border */}
+        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-premium-green/30 to-transparent"></div>
+
+        <div className="space-y-4 opacity-90 hover:opacity-100 transition-opacity duration-500">
+          <Marquee items={techRow1} direction="left" speed={30} />
+          <Marquee items={techRow2} direction="right" speed={35} />
         </div>
       </div>
     </section>

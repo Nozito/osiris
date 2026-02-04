@@ -1,71 +1,112 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Osiris - Dominance Digitale</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Satoshi:wght@400;700;900&display=swap" rel="stylesheet">
-    <style>
-      body {
-        background-color: #050505;
-        color: white;
-        font-family: 'Inter', sans-serif;
-        overflow-x: hidden;
-      }
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #050505;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #333;
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #00FF85;
-      }
-      
-      .neon-text {
-        text-shadow: 0 0 10px rgba(0, 255, 133, 0.5);
-      }
-      .neon-border {
-        box-shadow: 0 0 15px rgba(0, 255, 133, 0.2);
-      }
-    </style>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              premium: {
-                black: '#050505',
-                green: '#00FF85',
-                glass: 'rgba(255, 255, 255, 0.05)',
-                glassBorder: 'rgba(255, 255, 255, 0.1)',
-              }
-            },
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              display: ['Satoshi', 'Inter', 'sans-serif'],
-            },
-            animation: {
-              shimmer: 'shimmer 8s linear infinite',
-            },
-            keyframes: {
-              shimmer: {
-                '0%': { backgroundPosition: '200% center' },
-                '100%': { backgroundPosition: '-200% center' },
-              }
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Osiris - Dominance Digitale</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Satoshi:wght@400;700;900&display=swap"
+    rel="stylesheet">
+  <style>
+    body {
+      background-color: #141414;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #141414;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #333;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00FF85;
+    }
+
+    .neon-text {
+      text-shadow: 0 0 10px rgba(0, 255, 133, 0.5);
+    }
+
+    .neon-border {
+      box-shadow: 0 0 15px rgba(0, 255, 133, 0.2);
+    }
+
+    /* Premium Brushed Metal Background - Gray */
+    /* Premium Brushed Metal Background - Textured */
+    .metal-bg {
+      background:
+        /* Noise Texture */
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E"),
+        /* Vignette - darker edges */
+        radial-gradient(ellipse 100% 100% at 50% 50%, transparent 40%, rgba(0, 0, 0, 0.3) 100%),
+        /* Top edge highlight */
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, transparent 10%, transparent 90%, rgba(255, 255, 255, 0.04) 100%),
+        /* Fine brushed metal texture */
+        repeating-linear-gradient(95deg, transparent 0px, transparent 1px, rgba(255, 255, 255, 0.015) 1px, rgba(255, 255, 255, 0.015) 2px),
+        /* Diagonal sheen lines */
+        linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, 0.01) 45%, rgba(255, 255, 255, 0.01) 50%, transparent 55%),
+        /* Radial center glow */
+        radial-gradient(ellipse 70% 40% at 50% 40%, rgba(50, 50, 55, 1) 0%, rgba(28, 28, 32, 1) 100%),
+        /* Base metal - lighter gray */
+        linear-gradient(180deg, #1e1e22 0%, #1a1a1e 40%, #161618 60%, #1c1c20 100%);
+      background-size: 200px 200px, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    }
+
+    /* Dark Black Section Background */
+    .dark-bg {
+      background:
+        /* Subtle vignette */
+        radial-gradient(ellipse 100% 100% at 50% 50%, transparent 50%, rgba(0, 0, 0, 0.5) 100%),
+        /* Very subtle top highlight */
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 5%, transparent 95%, rgba(255, 255, 255, 0.02) 100%),
+        /* Base black */
+        linear-gradient(180deg, #0c0c0e 0%, #0a0a0c 50%, #0e0e10 100%);
+      background-size: 100% 100%, 100% 100%, 100% 100%;
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            premium: {
+              black: '#141414',
+              green: '#00FF85',
+              glass: 'rgba(255, 255, 255, 0.05)',
+              glassBorder: 'rgba(255, 255, 255, 0.1)',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Satoshi', 'Inter', 'sans-serif'],
+          },
+          animation: {
+            shimmer: 'shimmer 8s linear infinite',
+          },
+          keyframes: {
+            shimmer: {
+              '0%': { backgroundPosition: '200% center' },
+              '100%': { backgroundPosition: '-200% center' },
             }
           }
         }
       }
-    </script>
+    }
+  </script>
   <script type="importmap">
 {
   "imports": {
@@ -77,10 +118,12 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
+  <link rel="stylesheet" href="/index.css">
 </head>
-  <body>
-    <div id="root"></div>
+
+<body>
+  <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>
+
 </html>

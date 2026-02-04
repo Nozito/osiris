@@ -1,31 +1,34 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Quote, Star } from 'lucide-react';
-
-const reviews = [
-  {
-    text: "Le retour sur investissement a été immédiat. Notre image de marque est passée de 'locale' à 'internationale' en 3 semaines.",
-    author: "Thomas Durand",
-    role: "CEO, LuxEstate",
-    image: "https://randomuser.me/api/portraits/men/32.jpg"
-  },
-  {
-    text: "Une équipe qui comprend vraiment le luxe et la tech. Le design est époustouflant et la vitesse du site est incroyable.",
-    author: "Sophie Laurent",
-    role: "Fondatrice, Vogue Noir",
-    image: "https://randomuser.me/api/portraits/women/44.jpg"
-  },
-  {
-    text: "Ils ne font pas que des sites web, ils construisent des machines de guerre digitales. Absolument recommandé.",
-    author: "Marc Levy",
-    role: "CTO, NexTech",
-    image: "https://randomuser.me/api/portraits/men/86.jpg"
-  }
-];
+import { useLanguage } from '../context/LanguageContext';
 
 export const Testimonials: React.FC = () => {
+  const { t } = useLanguage();
+
+  const reviews = [
+    {
+      text: t.testimonials.reviews[0].text,
+      author: t.testimonials.reviews[0].author,
+      role: t.testimonials.reviews[0].role,
+      image: "https://randomuser.me/api/portraits/men/32.jpg"
+    },
+    {
+      text: t.testimonials.reviews[1].text,
+      author: t.testimonials.reviews[1].author,
+      role: t.testimonials.reviews[1].role,
+      image: "https://randomuser.me/api/portraits/women/44.jpg"
+    },
+    {
+      text: t.testimonials.reviews[2].text,
+      author: t.testimonials.reviews[2].author,
+      role: t.testimonials.reviews[2].role,
+      image: "https://randomuser.me/api/portraits/men/86.jpg"
+    }
+  ];
+
   return (
-    <section className="px-6 py-32 border-b border-white/5 relative bg-black/50">
+    <section className="px-6 py-32 border-b border-white/5 relative dark-bg">
       <div className="container mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -39,7 +42,7 @@ export const Testimonials: React.FC = () => {
             ))}
           </div>
           <h2 className="text-3xl md:text-5xl font-black text-white font-display">
-            Ce qu'ils disent <span className="text-gray-600">de nous.</span>
+            {t.testimonials.title} <span className="text-gray-600">{t.testimonials.titleFaded}</span>
           </h2>
         </motion.div>
 
