@@ -97,19 +97,25 @@ export const fr = {
         titleFaded: "de nous.",
         reviews: [
             {
-                text: "Le retour sur investissement a été immédiat. Notre image de marque est passée de 'locale' à 'internationale' en 3 semaines.",
-                author: "Thomas Durand",
-                role: "CEO, LuxEstate"
+                text: "Avant Osiris, notre taux de conversion plafonnait à 1.2%. Trois mois après le lancement du nouveau site, on est passé à 4.8%. L'investissement a été rentabilisé en 6 semaines.",
+                author: "Antoine Mercier",
+                role: "Directeur Marketing",
+                company: "ImmoPrestige Lyon",
+                date: "Janvier 2025"
             },
             {
-                text: "Une équipe qui comprend vraiment le luxe et la tech. Le design est époustouflant et la vitesse du site est incroyable.",
-                author: "Sophie Laurent",
-                role: "Fondatrice, Vogue Noir"
+                text: "J'ai travaillé avec une dizaine d'agences web en 15 ans de carrière. Osiris est la première à avoir dépassé mes attentes. Le niveau de détail et la réactivité sont exceptionnels.",
+                author: "Caroline Dubois",
+                role: "CEO & Fondatrice",
+                company: "Maison Éclat Paris",
+                date: "Décembre 2024"
             },
             {
-                text: "Ils ne font pas que des sites web, ils construisent des machines de guerre digitales. Absolument recommandé.",
-                author: "Marc Levy",
-                role: "CTO, NexTech"
+                text: "Notre ancien site mettait 8 secondes à charger. Le nouveau ? 0.9 seconde. Les clients nous disent que naviguer dessus est un plaisir. C'est exactement ce qu'on voulait.",
+                author: "Julien Moreau",
+                role: "CTO",
+                company: "FinanceFlow",
+                date: "Novembre 2024"
             }
         ]
     },

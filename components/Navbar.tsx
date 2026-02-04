@@ -21,6 +21,11 @@ export const Navbar: React.FC = () => {
   // Determine if we're on the homepage
   const isHomePage = location.pathname === '/';
 
+  // Scroll to top when clicking navigation links
+  const handleNavClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <motion.nav
       variants={{
@@ -37,6 +42,7 @@ export const Navbar: React.FC = () => {
         <div className="hidden md:flex flex-1 justify-start">
           <Link
             to="/tarifs"
+            onClick={handleNavClick}
             className="text-sm font-medium text-gray-400 hover:text-white transition-colors uppercase tracking-wider text-[10px]"
           >
             {t.navbar.pricing}
@@ -45,7 +51,7 @@ export const Navbar: React.FC = () => {
 
         {/* Center: OSIRIS + Language Flags */}
         <div className="flex items-center gap-4">
-          <Link to="/" className="text-xl font-bold font-display tracking-tighter text-white">
+          <Link to="/" onClick={handleNavClick} className="text-xl font-bold font-display tracking-tighter text-white">
             OSIRIS<span className="text-premium-green">.</span>
           </Link>
 
@@ -90,7 +96,7 @@ export const Navbar: React.FC = () => {
 
         {/* Right: Contact */}
         <div className="hidden md:flex flex-1 justify-end">
-          <Link to="/contact" className="px-5 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-bold uppercase tracking-widest hover:bg-premium-green hover:text-black hover:border-premium-green transition-all duration-300">
+          <Link to="/contact" onClick={handleNavClick} className="px-5 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-bold uppercase tracking-widest hover:bg-premium-green hover:text-black hover:border-premium-green transition-all duration-300">
             {t.navbar.contact}
           </Link>
         </div>

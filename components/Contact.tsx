@@ -59,26 +59,6 @@ export const Contact: React.FC = () => {
                   <p className="text-gray-400">hello@osiris.com</p>
                 </div>
               </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-premium-green">
-                  <Phone className="w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="text-white font-bold mb-1">{t.contact.phone}</h4>
-                  <p className="text-gray-400">+33 1 23 45 67 89</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-premium-green">
-                  <MapPin className="w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="text-white font-bold mb-1">{t.contact.studio}</h4>
-                  <p className="text-gray-400">12 Rue de la Paix, Paris</p>
-                </div>
-              </div>
             </div>
           </motion.div>
 

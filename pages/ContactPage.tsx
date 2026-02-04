@@ -70,36 +70,6 @@ export const ContactPage: React.FC = () => {
                                 <motion.div
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.4 }}
-                                    className="flex items-start gap-4 p-6 bg-white/[0.03] border border-white/5 rounded-2xl hover:border-white/10 transition-colors"
-                                >
-                                    <div className="w-14 h-14 rounded-full bg-premium-green/10 border border-premium-green/20 flex items-center justify-center text-premium-green">
-                                        <Phone className="w-6 h-6" />
-                                    </div>
-                                    <div>
-                                        <h4 className="text-white font-bold mb-1">Téléphone</h4>
-                                        <p className="text-gray-400">+33 1 23 45 67 89</p>
-                                    </div>
-                                </motion.div>
-
-                                <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.5 }}
-                                    className="flex items-start gap-4 p-6 bg-white/[0.03] border border-white/5 rounded-2xl hover:border-white/10 transition-colors"
-                                >
-                                    <div className="w-14 h-14 rounded-full bg-premium-green/10 border border-premium-green/20 flex items-center justify-center text-premium-green">
-                                        <MapPin className="w-6 h-6" />
-                                    </div>
-                                    <div>
-                                        <h4 className="text-white font-bold mb-1">Studio</h4>
-                                        <p className="text-gray-400">12 Rue de la Paix, Paris</p>
-                                    </div>
-                                </motion.div>
-
-                                <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.6 }}
                                     className="flex items-start gap-4 p-6 bg-white/[0.03] border border-white/5 rounded-2xl hover:border-white/10 transition-colors"
                                 >
