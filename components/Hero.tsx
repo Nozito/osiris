@@ -47,25 +47,71 @@ export const Hero: React.FC = () => {
         >
 
           <h1 className="font-display text-6xl md:text-8xl lg:text-[10rem] font-black tracking-tighter leading-[1] mb-8 text-white mt-12 select-none relative z-20">
-            {/* Refined Metal Effect with Shimmer */}
-            <div className="relative inline-block">
-              {/* Base Metal Text - Smoothed Gradient */}
-              <span
-                className="inline-block bg-clip-text text-transparent bg-[linear-gradient(180deg,#e0eafc_0%,#cfdef3_20%,#8899a6_40%,#333333_50%,#8899a6_60%,#cfdef3_80%,#e0eafc_100%)] contrast-[1.1] brightness-[1.1] drop-shadow-[0_0_30px_rgba(255,255,255,0.2)] px-4 mx-[-16px]"
-                style={{
-                  filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.5))'
+            {/* Enhanced 3D Metal Effect with Premium Glow */}
+            <div className="relative inline-block" style={{ perspective: '1000px' }}>
+              
+              {/* Ambient Green Glow - Background Pulse */}
+              <div className="absolute inset-0 blur-[80px] bg-premium-green/20 animate-pulse pointer-events-none scale-150"></div>
+              
+              {/* Secondary Glow Ring */}
+              <div className="absolute inset-0 blur-[40px] bg-white/10 animate-[pulse_3s_ease-in-out_infinite] pointer-events-none scale-125"></div>
+
+              {/* 3D Text Container with Transform */}
+              <div 
+                className="relative"
+                style={{ 
+                  transform: 'rotateX(5deg)',
+                  transformStyle: 'preserve-3d'
                 }}
               >
-                OSIRIS
-              </span>
+                {/* Deep Shadow Layer for 3D Depth */}
+                <span
+                  className="absolute inset-0 bg-clip-text text-transparent bg-gradient-to-b from-gray-900 to-black px-4 mx-[-16px] blur-[2px]"
+                  style={{ 
+                    transform: 'translateZ(-20px) translateY(8px)',
+                    opacity: 0.5
+                  }}
+                  aria-hidden="true"
+                >
+                  OSIRIS
+                </span>
 
-              {/* Shimmer Overlay - Intensified */}
-              <span
-                className="absolute inset-0 bg-clip-text text-transparent bg-[linear-gradient(110deg,transparent_30%,rgba(255,255,255,0.1)_45%,rgba(255,255,255,1)_50%,rgba(255,255,255,0.1)_55%,transparent_70%)] bg-[length:250%_100%] animate-shimmer pointer-events-none px-4 mx-[-16px] mix-blend-plus-lighter"
-                aria-hidden="true"
-              >
-                OSIRIS
-              </span>
+                {/* Base Metal Text with Enhanced Gradient */}
+                <span
+                  className="relative inline-block bg-clip-text text-transparent bg-[linear-gradient(180deg,#ffffff_0%,#e0eafc_15%,#c0d6f0_30%,#6b7b8a_45%,#2a2a2a_50%,#6b7b8a_55%,#c0d6f0_70%,#e0eafc_85%,#ffffff_100%)] px-4 mx-[-16px]"
+                  style={{
+                    filter: 'drop-shadow(0 0 30px rgba(255,255,255,0.3)) drop-shadow(0 4px 8px rgba(0,0,0,0.8))',
+                    textShadow: '0 0 60px rgba(0,255,133,0.3), 0 0 120px rgba(0,255,133,0.15)',
+                    transform: 'translateZ(0)'
+                  }}
+                >
+                  OSIRIS
+                </span>
+
+                {/* Primary Shimmer Overlay - Bright White Sweep */}
+                <span
+                  className="absolute inset-0 bg-clip-text text-transparent bg-[linear-gradient(110deg,transparent_20%,rgba(255,255,255,0.05)_35%,rgba(255,255,255,0.8)_50%,rgba(255,255,255,0.05)_65%,transparent_80%)] bg-[length:200%_100%] animate-shimmer pointer-events-none px-4 mx-[-16px] mix-blend-plus-lighter"
+                  aria-hidden="true"
+                >
+                  OSIRIS
+                </span>
+
+                {/* Green Tint Overlay - Subtle Color Wash */}
+                <span
+                  className="absolute inset-0 bg-clip-text text-transparent bg-[linear-gradient(180deg,rgba(0,255,133,0.1)_0%,transparent_30%,transparent_70%,rgba(0,255,133,0.1)_100%)] pointer-events-none px-4 mx-[-16px] animate-[pulse_4s_ease-in-out_infinite]"
+                  aria-hidden="true"
+                >
+                  OSIRIS
+                </span>
+
+                {/* Edge Highlight - Top Light */}
+                <span
+                  className="absolute inset-0 bg-clip-text text-transparent bg-[linear-gradient(180deg,rgba(255,255,255,0.4)_0%,transparent_20%,transparent_100%)] pointer-events-none px-4 mx-[-16px]"
+                  aria-hidden="true"
+                >
+                  OSIRIS
+                </span>
+              </div>
             </div>
           </h1>
 

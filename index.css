@@ -15,3 +15,65 @@ html {
   background-color: #00FF85;
   color: #000;
 }
+
+/* === PERFORMANCE OPTIMIZATIONS === */
+
+/* GPU acceleration hints for animated elements */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+/* Contain paint for fixed backgrounds */
+.contain-paint {
+  contain: paint;
+}
+
+/* Content visibility for off-screen sections (improves initial render) */
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
+}
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Optimize blur elements - use hardware acceleration */
+[class*="blur-"] {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Optimize transforms and opacity transitions */
+.transition-all,
+.transition-transform,
+.transition-opacity {
+  will-change: auto;
+}
+
+/* Lazy loaded images - prevent layout shift */
+img[loading="lazy"] {
+  content-visibility: auto;
+}
+
+/* Optimize fixed elements */
+.fixed {
+  contain: layout style;
+}
+
+/* Reduce paint operations for hover states */
+.group:hover,
+[class*="hover:"]:hover {
+  will-change: transform, opacity;
+}
