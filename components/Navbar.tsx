@@ -36,7 +36,7 @@ export const Navbar: React.FC = () => {
       transition={{ duration: 0.35, ease: "easeInOut" }}
       className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
     >
-      <div className="pointer-events-auto flex items-center justify-between gap-4 md:gap-8 px-4 md:px-8 py-4 rounded-full bg-premium-black/60 backdrop-blur-xl border border-white/10 shadow-[0_0_20px_rgba(0,0,0,0.5)] min-w-[320px] md:min-w-[600px]">
+      <div className="pointer-events-auto relative flex items-center justify-between gap-4 md:gap-8 px-6 md:px-10 py-4 rounded-[50px] bg-white/[0.08] backdrop-blur-[24px] min-w-[320px] md:min-w-[600px] transition-all duration-500 border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.15),inset_0_-1px_0_rgba(255,255,255,0.05)] hover:bg-white/[0.12] hover:border-white/40 hover:shadow-[0_12px_48px_rgba(0,0,0,0.4)]">
 
         {/* Left: Tarifs */}
         <div className="hidden md:flex flex-1 justify-start">

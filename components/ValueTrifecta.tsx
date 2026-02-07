@@ -55,9 +55,9 @@ const DesignVisual = () => (
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         className="absolute inset-0 z-10 transition-all duration-700 ease-out group-hover/design:translate-z-[0px]"
       >
-        <div className="w-full h-full bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col">
+        <div className="w-full h-full bg-gradient-to-br from-white/10 to-transparent backdrop-blur-2xl border border-white/20 rounded-3xl overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.37),inset_0_0_10px_rgba(255,255,255,0.05)] flex flex-col">
           {/* Card Header image */}
-          <div className="h-48 bg-gradient-to-br from-purple-500/20 to-blue-600/20 relative p-6 flex flex-col justify-end overflow-hidden">
+          <div className="h-48 bg-gradient-to-br from-purple-500/20 to-blue-600/20 relative p-6 flex flex-col justify-end overflow-hidden border-b border-white/5">
             {/* Shimmer effect */}
             <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover/design:animate-[shimmer_2s_infinite]"></div>
 
@@ -141,7 +141,7 @@ const CodeVisual = () => {
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
-        className="w-full max-w-sm bg-[#09090b]/95 backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden font-mono text-xs z-10 rounded-2xl relative"
+        className="w-full max-w-sm bg-gradient-to-br from-[#09090b]/95 to-[#09090b]/80 backdrop-blur-2xl border border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.37),inset_0_0_10px_rgba(255,255,255,0.05)] overflow-hidden font-mono text-xs z-10 rounded-2xl relative"
       >
         {/* Glow Effect */}
         <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
@@ -214,7 +214,7 @@ const GrowthVisual = () => (
     {/* Grid Background */}
     <div className="absolute inset-0 bg-[linear-gradient(rgba(16,185,129,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.05)_1px,transparent_1px)] bg-[size:40px_40px] opacity-30"></div>
 
-    <div className="relative w-full max-w-sm bg-premium-black/80 backdrop-blur-xl border border-white/10 p-6 shadow-2xl z-10 rounded-2xl overflow-hidden">
+    <div className="relative w-full max-w-sm bg-gradient-to-br from-premium-black/80 to-premium-black/60 backdrop-blur-2xl border border-white/20 p-6 shadow-[0_8px_32px_0_rgba(0,0,0,0.37),inset_0_0_10px_rgba(255,255,255,0.05)] z-10 rounded-2xl overflow-hidden">
       {/* Header */}
       <div className="flex justify-between items-start mb-8 relative z-20">
         <div>
@@ -399,7 +399,7 @@ export const ValueTrifecta: React.FC = () => {
   ];
 
   return (
-    <section id="expertise" className="py-32 relative scroll-mt-20 overflow-hidden metal-bg">
+    <section id="expertise" className="py-32 relative scroll-mt-20 overflow-hidden bg-gradient-to-b from-transparent via-white/[0.02] to-transparent">
       {/* Premium Geometric Backgrounds */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-b from-premium-green/10 to-transparent blur-[100px] -skew-x-12 translate-x-1/3 pointer-events-none -z-10" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-t from-blue-500/10 to-transparent blur-[100px] skew-x-12 -translate-x-1/3 pointer-events-none -z-10" />
@@ -479,9 +479,12 @@ export const ValueTrifecta: React.FC = () => {
             className="flex items-center gap-4 mb-20 justify-center"
           >
             <div className="h-[1px] bg-gradient-to-r from-transparent via-premium-green/50 to-transparent w-32"></div>
-            <h3 className="text-3xl md:text-4xl font-black uppercase tracking-[0.2em] text-white text-center font-display drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-              {t.valueTrifecta.arsenal}
-            </h3>
+            <div className="relative">
+              <div className="absolute -inset-4 bg-premium-green/20 blur-xl rounded-full opacity-50"></div>
+              <h3 className="relative text-3xl md:text-4xl font-black uppercase tracking-[0.2em] text-white text-center font-display drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+                {t.valueTrifecta.arsenalTitle}
+              </h3>
+            </div>
             <div className="h-[1px] bg-gradient-to-r from-transparent via-premium-green/50 to-transparent w-32"></div>
           </motion.div>
 
@@ -497,14 +500,14 @@ export const ValueTrifecta: React.FC = () => {
               >
                 {/* Text Content */}
                 <div className="flex-1 space-y-8 relative">
-                  <div className="absolute inset-0 bg-white/[0.02] border border-white/5 backdrop-blur-sm -z-10 rounded-3xl transform rotate-1 scale-105 opacity-50"></div>
-                  <div className="bg-white/[0.03] border border-white/10 backdrop-blur-md rounded-3xl p-8 lg:p-10 hover:border-white/20 transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,0,0,0.5)] group-hover:bg-white/[0.05]">
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent border border-white/5 backdrop-blur-sm -z-10 rounded-3xl transform rotate-1 scale-105 opacity-30 group-hover:rotate-2 group-hover:scale-110 transition-all duration-700"></div>
+                  <div className="bg-gradient-to-b from-white/10 to-transparent border border-white/20 backdrop-blur-2xl rounded-3xl p-8 lg:p-10 hover:border-white/30 transition-all duration-500 shadow-[0_8px_32px_0_rgba(0,0,0,0.37),inset_0_0_10px_rgba(255,255,255,0.05)] group-hover:bg-white/[0.05] group-hover:-translate-y-2 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)]">
 
                     <div className="flex items-center gap-5 mb-8">
                       <div className={`p-4 bg-premium-black border border-white/10 ${service.color} shadow-lg shadow-${service.color}/10 rotate-3 group-hover:rotate-0 transition-transform duration-500 rounded-2xl`}>
                         <service.icon className="w-8 h-8" />
                       </div>
-                      <h4 className={`text-3xl md:text-5xl font-black font-display text-white tracking-tight`}>{service.title}</h4>
+                      <h4 className={`text-3xl md:text-5xl font-black font-display text-white tracking-tight drop-shadow-lg`}>{service.title}</h4>
                     </div>
 
                     <p className="text-gray-400 text-lg leading-relaxed mb-10 pl-2">
@@ -515,9 +518,9 @@ export const ValueTrifecta: React.FC = () => {
                       {service.items.map((item, idx) => (
                         <span
                           key={idx}
-                          className="px-4 py-2 rounded-full bg-white/5 border border-white/5 text-sm font-medium text-gray-300 hover:bg-white/10 hover:border-white/20 hover:text-white transition-all duration-300 flex items-center gap-2 cursor-default"
+                          className={`px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm font-medium text-gray-300 hover:text-white transition-all duration-300 flex items-center gap-2 cursor-default group/item hover:bg-white/10 hover:border-${service.color.split('-')[1]}-500/50 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]`}
                         >
-                          <CheckCircle2 className={`w-3.5 h-3.5 ${service.color}`} />
+                          <CheckCircle2 className={`w-3.5 h-3.5 ${service.color} group-hover/item:scale-110 transition-transform`} />
                           {item}
                         </span>
                       ))}
@@ -535,6 +538,9 @@ export const ValueTrifecta: React.FC = () => {
                     transition={{ duration: 0.5 }}
                     className={`relative w-full aspect-[5/4] lg:aspect-square border border-white/10 bg-black/40 overflow-hidden group hover:border-white/20 transition-all duration-500 rounded-[2.5rem] shadow-2xl backdrop-blur-sm z-10`}
                   >
+                    {/* Specular Highlight Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent skew-x-12 translate-x-[-150%] group-hover:animate-[shimmer_1.5s_infinite] pointer-events-none z-50 mix-blend-overlay"></div>
+
                     {/* Render the specific visual based on ID */}
                     {service.id === 'design' && <DesignVisual />}
                     {service.id === 'engineering' && <CodeVisual />}

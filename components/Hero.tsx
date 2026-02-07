@@ -49,17 +49,17 @@ export const Hero: React.FC = () => {
           <h1 className="font-display text-6xl md:text-8xl lg:text-[10rem] font-black tracking-tighter leading-[1] mb-8 text-white mt-12 select-none relative z-20">
             {/* Enhanced 3D Metal Effect with Premium Glow */}
             <div className="relative inline-block" style={{ perspective: '1000px' }}>
-              
+
               {/* Ambient Green Glow - Background Pulse */}
               <div className="absolute inset-0 blur-[80px] bg-premium-green/20 animate-pulse pointer-events-none scale-150"></div>
-              
+
               {/* Secondary Glow Ring */}
               <div className="absolute inset-0 blur-[40px] bg-white/10 animate-[pulse_3s_ease-in-out_infinite] pointer-events-none scale-125"></div>
 
               {/* 3D Text Container with Transform */}
-              <div 
+              <div
                 className="relative"
-                style={{ 
+                style={{
                   transform: 'rotateX(5deg)',
                   transformStyle: 'preserve-3d'
                 }}
@@ -67,7 +67,7 @@ export const Hero: React.FC = () => {
                 {/* Deep Shadow Layer for 3D Depth */}
                 <span
                   className="absolute inset-0 bg-clip-text text-transparent bg-gradient-to-b from-gray-900 to-black px-4 mx-[-16px] blur-[2px]"
-                  style={{ 
+                  style={{
                     transform: 'translateZ(-20px) translateY(8px)',
                     opacity: 0.5
                   }}
