@@ -34,98 +34,64 @@ export const Process: React.FC = () => {
   ];
 
   return (
-    <section id="process" className="px-6 py-32 metal-bg relative overflow-hidden scroll-mt-20">
-      {/* Abstract Line Background */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20 pointer-events-none">
-        <div className="absolute top-[20%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-        <div className="absolute top-[50%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-        <div className="absolute top-[80%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+    <section id="process" className="px-4 sm:px-6 py-10 sm:py-16 lg:py-32 bg-[#050505] relative overflow-hidden scroll-mt-20">
 
-        {/* Vertical Pulse Line */}
-        <motion.div
-          animate={{ top: ["0%", "100%"] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-          className="absolute left-1/2 w-[1px] h-32 bg-gradient-to-b from-transparent via-premium-green to-transparent opacity-50"
-        />
-      </div>
+      {/* Background Ambience */}
+      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.02] pointer-events-none"></div>
 
-      <div className="container mx-auto max-w-7xl relative z-10">
+      <div className="container mx-auto max-w-5xl lg:max-w-7xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-6"
+          transition={{ duration: 0.6 }}
+          className="mb-8 sm:mb-12 lg:mb-24 text-center"
         >
-          <div>
-            <span className="text-premium-green text-xs font-bold uppercase tracking-widest mb-2 block">{t.process.sectionLabel}</span>
-            <h2 className="text-4xl md:text-6xl font-black text-white font-display">
-              {t.process.title} <br /> <span className="text-white/20">{t.process.titleFaded}</span>
-            </h2>
-          </div>
-          <p className="text-gray-400 max-w-sm text-sm md:text-base leading-relaxed">
-            {t.process.subtitle}
-          </p>
+          <span className="text-premium-green text-[10px] font-bold uppercase tracking-[0.2em] mb-2 block">{t.process.sectionLabel}</span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white font-display tracking-tight">
+            {t.process.title} <span className="text-white/20">{t.process.titleFaded}</span>
+          </h2>
         </motion.div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-10%" }}
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: {
-                staggerChildren: 0.2
-              }
-            }
-          }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-        >
+        {/* Compact Steps Grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-8">
           {steps.map((step, i) => (
             <motion.div
               key={i}
-              variants={{
-                hidden: { opacity: 0, y: 50 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-              }}
-              className="relative group bg-white/[0.02] border border-white/5 p-6 rounded-[2rem] hover:bg-white/[0.04] transition-colors duration-500 overflow-hidden backdrop-blur-sm"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              whileHover={{ y: -10 }}
+              className="group relative"
             >
-              {/* Progress Bar Container */}
-              <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden mb-8 relative">
-                {/* Animated Fill */}
-                <motion.div
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "100%" }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.5, delay: 0.5 + (i * 0.2), ease: "easeInOut" }}
-                  className="absolute top-0 left-0 h-full bg-premium-green shadow-[0_0_10px_rgba(0,255,133,0.5)]"
-                />
-              </div>
-
-              {/* Step Content */}
-              <div className="flex justify-between items-start mb-6">
-                <div className="p-3 bg-black border border-white/10 rounded-full group-hover:border-premium-green/30 group-hover:shadow-[0_0_15px_rgba(0,255,133,0.1)] transition-all">
-                  <step.icon className="w-6 h-6 text-gray-400 group-hover:text-premium-green transition-colors" />
+              <div className="bg-gradient-to-br from-white/[0.07] to-white/[0.01] backdrop-blur-sm border border-white/10 p-4 sm:p-5 lg:p-10 rounded-xl sm:rounded-2xl lg:rounded-[2rem] hover:bg-white/[0.08] transition-all duration-300 hover:border-premium-green/40 hover:shadow-[0_0_50px_-20px_rgba(0,255,133,0.15)] h-full flex flex-col justify-between">
+                {/* Header Row */}
+                <div className="flex items-center gap-2 sm:gap-3 lg:gap-6 mb-3 lg:mb-6">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-20 lg:h-20 rounded-lg sm:rounded-xl lg:rounded-2xl bg-black/50 border border-white/10 flex items-center justify-center text-gray-400 group-hover:text-premium-green group-hover:bg-premium-green/10 group-hover:border-premium-green/50 group-hover:shadow-[0_0_30px_rgba(0,255,133,0.3)] group-hover:scale-110 transition-all duration-300 flex-shrink-0">
+                    <step.icon className="w-4 h-4 sm:w-5 sm:h-5 lg:w-10 lg:h-10" />
+                  </div>
+                  <span className="text-2xl sm:text-3xl lg:text-6xl font-black text-white/[0.06] group-hover:text-white/[0.1] transition-colors font-display select-none">
+                    {step.num}
+                  </span>
                 </div>
-                <span className="text-4xl font-black text-white/[0.05] group-hover:text-white/[0.1] transition-colors font-display select-none">
-                  {step.num}
-                </span>
+
+                <h3 className="text-sm sm:text-base lg:text-2xl font-bold text-white mb-1.5 lg:mb-4 group-hover:text-premium-green transition-colors font-display leading-tight">
+                  {step.title}
+                </h3>
+
+                <p className="text-gray-500 text-[11px] sm:text-xs lg:text-base leading-relaxed group-hover:text-gray-400 transition-colors line-clamp-3 lg:line-clamp-none">
+                  {step.desc}
+                </p>
               </div>
 
-              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-premium-green transition-colors font-display">
-                {step.title}
-              </h3>
-
-              <p className="text-gray-500 text-sm leading-relaxed group-hover:text-gray-400 transition-colors">
-                {step.desc}
-              </p>
-
-              {/* Decorative Elements */}
-              <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-premium-green/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              {/* Connector Line (Desktop only) */}
+              {i < steps.length - 1 && (
+                <div className="hidden lg:block absolute top-1/2 -right-2 w-4 h-[2px] bg-gradient-to-r from-white/10 to-transparent"></div>
+              )}
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

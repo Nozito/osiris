@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { PricingPage } from './pages/PricingPage';
 import { ContactPage } from './pages/ContactPage';
+import { PortfolioPage } from './pages/PortfolioPage';
 import { Navbar } from './components/Navbar';
 import { ParticleBackground } from './components/ParticleBackground';
 import { WhatsAppButton } from './components/WhatsAppButton';
@@ -43,6 +44,7 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/tarifs" element={<PricingPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/portfolio" element={<PortfolioPage />} />
         </Routes>
       </main>
 

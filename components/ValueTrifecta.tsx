@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Zap, Diamond, Target, Terminal, Palette, BarChart3, Layers, Cpu, TrendingUp, CheckCircle2, Globe, Lock, Code2, Database, Server } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -40,9 +40,7 @@ const DesignVisual = () => (
     {/* Floating Layers Composition */}
     <div className="relative w-full max-w-[300px] aspect-[3/4] transform-style-3d">
       {/* Back Layer - Abstract Shape - Moves backwards on hover */}
-      <motion.div
-        animate={{ rotate: 360 }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+      <div
         className="absolute top-[-20%] right-[-20%] w-64 h-64 bg-purple-500/20 blur-[60px] rounded-full group-hover/design:scale-110 transition-transform duration-700"
       />
 
@@ -50,9 +48,7 @@ const DesignVisual = () => (
       <div className="absolute inset-0 z-0 bg-premium-black/40 backdrop-blur-xl border border-white/5 rounded-3xl transition-all duration-700 ease-out group-hover/design:translate-z-[-40px] group-hover/design:opacity-50"></div>
 
       {/* Layer 2: Main Card - Floating UI - Moves slightly */}
-      <motion.div
-        animate={{ y: [0, -15, 0], rotateX: [0, 5, 0], rotateY: [0, 5, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      <div
         className="absolute inset-0 z-10 transition-all duration-700 ease-out group-hover/design:translate-z-[0px]"
       >
         <div className="w-full h-full bg-gradient-to-br from-white/10 to-transparent backdrop-blur-2xl border border-white/20 rounded-3xl overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.37),inset_0_0_10px_rgba(255,255,255,0.05)] flex flex-col">
@@ -85,29 +81,25 @@ const DesignVisual = () => (
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Layer 3: Floating Elements - Move FORWARD in Z space on hover (Exploded view) */}
-      <motion.div
-        animate={{ y: [0, 20, 0], x: [0, -10, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        className="absolute -bottom-8 -left-8 z-30 transition-all duration-700 ease-out group-hover/design:translate-z-[60px] group-hover/design:scale-110"
+      <div
+        className="absolute -bottom-8 -left-8 z-30 transition-all duration-700 ease-out group-hover/design:translate-z-[60px] group-hover/design:scale-110 animate-[float-slow_5s_ease-in-out_infinite_1s]"
       >
         <div className="px-5 py-3 bg-premium-black/90 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.5)] flex items-center gap-3">
           <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
           <span className="text-xs font-bold text-gray-200">System Active</span>
         </div>
-      </motion.div>
+      </div>
 
-      <motion.div
-        animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-        className="absolute bottom-20 -right-12 z-20 transition-all duration-700 ease-out group-hover/design:translate-z-[30px] group-hover/design:rotate-12"
+      <div
+        className="absolute bottom-20 -right-12 z-20 transition-all duration-700 ease-out group-hover/design:translate-z-[30px] group-hover/design:rotate-12 animate-[float-slow_7s_ease-in-out_infinite_0.5s]"
       >
         <div className="w-32 h-32 bg-purple-500/10 backdrop-blur-sm border border-white/5 rounded-full flex items-center justify-center">
           <div className="w-20 h-20 bg-purple-500/20 rounded-full border border-white/5 group-hover/design:scale-90 transition-transform duration-1000"></div>
         </div>
-      </motion.div>
+      </div>
     </div>
   </div>
 );
@@ -115,23 +107,10 @@ const DesignVisual = () => (
 // Visual Component for Engineering (Code Terminal)
 const CodeVisual = () => {
   // Typewriter effect states
-  const [line1, setLine1] = React.useState("");
-  const [line2, setLine2] = React.useState("");
-  const [line3, setLine3] = React.useState("");
-
-  React.useEffect(() => {
-    const typeLine = async (text: string, setter: React.Dispatch<React.SetStateAction<string>>, delay: number) => {
-      await new Promise(r => setTimeout(r, delay));
-      for (let i = 0; i <= text.length; i++) {
-        setter(text.substring(0, i));
-        await new Promise(r => setTimeout(r, 30 + Math.random() * 20));
-      }
-    };
-
-    typeLine("import { QuantumShield } from '@osiris/security';", setLine1, 500);
-    typeLine("export const Defend = async () => {", setLine2, 2500);
-    typeLine("  await QuantumShield.activate({ mode: 'ULTRA' });", setLine3, 4000);
-  }, []);
+  // Static content
+  const line1 = "import { QuantumShield } from '@osiris/security';";
+  const line2 = "export const Defend = async () => {";
+  const line3 = "  await QuantumShield.activate({ mode: 'ULTRA' });";
 
   return (
     <div className="relative w-full h-full flex items-center justify-center p-8 group/code">
@@ -166,7 +145,7 @@ const CodeVisual = () => {
           <div className="flex group/line">
             <span className="w-6 text-gray-700 select-none text-right mr-3 group-hover/line:text-gray-500 transition-colors">1</span>
             <span className="text-purple-400">{line1}</span>
-            {line1.length < 43 && <span className="w-2 h-4 bg-blue-400 animate-pulse ml-1 inline-block align-middle"></span>}
+            {line1.length < 43 && <span className="w-2 h-4 bg-blue-400 opacity-50 ml-1 inline-block align-middle"></span>}
           </div>
 
           {/* Line 2 */}
@@ -191,12 +170,10 @@ const CodeVisual = () => {
 
           {/* Compiling Status Bar */}
           <div className="absolute bottom-0 left-0 w-full h-8 bg-black/40 border-t border-white/5 flex items-center px-4 gap-3">
-            <div className="text-[9px] font-bold text-blue-400 uppercase tracking-wider animate-pulse">Compiling</div>
+            <div className="text-[9px] font-bold text-blue-400 uppercase tracking-wider">Compiling</div>
             <div className="flex-1 h-1 bg-white/10 rounded-full overflow-hidden">
               <motion.div
-                initial={{ width: "0%" }}
                 whileInView={{ width: "100%" }}
-                transition={{ duration: 4, ease: "linear", repeat: Infinity }}
                 className="h-full bg-blue-500"
               ></motion.div>
             </div>
@@ -221,9 +198,7 @@ const GrowthVisual = () => (
           <div className="text-[10px] text-gray-400 uppercase tracking-widest font-bold mb-1">Total Revenue</div>
           <div className="text-3xl font-black text-white font-display flex items-baseline gap-2">
             <motion.span
-              initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              transition={{ duration: 1 }}
             >
               $128,420
             </motion.span>
@@ -257,9 +232,7 @@ const GrowthVisual = () => (
             strokeWidth="3"
             strokeLinecap="round"
             strokeLinejoin="round"
-            initial={{ pathLength: 0 }}
-            whileInView={{ pathLength: 1 }}
-            transition={{ duration: 2, ease: "easeInOut", delay: 0.5 }}
+            initial={{ pathLength: 1 }}
             className="drop-shadow-[0_0_10px_rgba(16,185,129,0.5)]"
           />
 
@@ -275,8 +248,7 @@ const GrowthVisual = () => (
             cx="315" cy="15" r="8"
             stroke="#10b981" strokeWidth="2" fill="none"
             initial={{ opacity: 0, scale: 0.5 }}
-            whileInView={{ opacity: [0, 1, 0], scale: [0.5, 1.5] }}
-            transition={{ delay: 2.5, repeat: Infinity, duration: 1.5 }}
+            whileInView={{ opacity: 1, scale: 1 }}
           />
         </svg>
 
@@ -345,6 +317,7 @@ const Marquee = ({ items, direction = "left", speed = 20 }: { items: typeof tech
 };
 
 export const ValueTrifecta: React.FC = () => {
+  const [activeTab, setActiveTab] = React.useState('design');
   const { t } = useLanguage();
 
   const cards = [
@@ -399,29 +372,76 @@ export const ValueTrifecta: React.FC = () => {
   ];
 
   return (
-    <section id="expertise" className="py-32 relative scroll-mt-20 overflow-hidden bg-gradient-to-b from-transparent via-white/[0.02] to-transparent">
-      {/* Premium Geometric Backgrounds */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-b from-premium-green/10 to-transparent blur-[100px] -skew-x-12 translate-x-1/3 pointer-events-none -z-10" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-t from-blue-500/10 to-transparent blur-[100px] skew-x-12 -translate-x-1/3 pointer-events-none -z-10" />
+    <section id="expertise" className="relative px-4 sm:px-6 py-12 sm:py-20 bg-[#050505] overflow-hidden scroll-mt-20 selection:bg-premium-green selection:text-black">
+      {/* Ambient Background Elements */}
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-premium-green/5 blur-[120px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/3 mix-blend-screen" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-900/10 blur-[120px] rounded-full pointer-events-none translate-y-1/3 -translate-x-1/3 mix-blend-screen" />
+
+      {/* Noise Texture */}
+      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] pointer-events-none"></div>
 
       {/* Grid Lines */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)] -z-10"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_80%)] -z-10"></div>
 
-      <div className="container mx-auto max-w-7xl px-6">
+      {/* Scroll Progress Indicator */}
+      <motion.div
+        className="fixed right-0 top-0 bottom-0 w-[2px] bg-white/5 origin-top z-50 mix-blend-difference hidden lg:block"
+        style={{ scaleY: 0 }} // This will be driven by scroll progress in a real app, for now let's animate it on view
+        whileInView={{ scaleY: 1 }}
+        viewport={{ once: false }}
+        transition={{ duration: 1.5, ease: "easeInOut" }}
+      >
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          className="absolute top-0 w-full bg-premium-green box-content border-r-[2px] border-premium-green shadow-[0_0_15px_rgba(0,255,133,0.5)]"
+          initial={{ height: "0%" }}
+          whileInView={{ height: "30%" }} // Simulated progress
+          transition={{ duration: 2 }}
+        ></motion.div>
+      </motion.div>
+
+      <div className="container mx-auto max-w-7xl px-2 sm:px-6 relative z-10">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true, margin: "-10%" }}
-          transition={{ duration: 0.8 }}
-          className="mb-20 text-center md:text-left"
+          variants={{
+            hidden: { opacity: 0, y: 50, filter: "blur(10px)" },
+            visible: {
+              opacity: 1,
+              y: 0,
+              filter: "blur(0px)",
+              transition: { duration: 1, ease: [0.22, 1, 0.36, 1] }
+            }
+          }}
+          className="mb-12 sm:mb-20 text-center md:text-left"
         >
-          <span className="text-premium-green text-xs font-bold uppercase tracking-widest mb-2 block">{t.valueTrifecta.sectionLabel}</span>
-          <h2 className="text-4xl md:text-6xl font-black mb-6 font-display text-white">
+          <motion.span
+            variants={{
+              hidden: { opacity: 0, x: -20 },
+              visible: { opacity: 1, x: 0, transition: { duration: 0.8, delay: 0.2 } }
+            }}
+            className="text-premium-green text-xs font-bold uppercase tracking-widest mb-2 block"
+          >
+            {t.valueTrifecta.sectionLabel}
+          </motion.span>
+          <motion.h2
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.3 } }
+            }}
+            className="text-3xl sm:text-4xl md:text-6xl font-black mb-4 sm:mb-6 font-display text-white"
+          >
             {t.valueTrifecta.title} <span className="text-premium-green">{t.valueTrifecta.titleHighlight}</span>.
-          </h2>
-          <p className="text-gray-400 max-w-2xl text-lg leading-relaxed">
+          </motion.h2>
+          <motion.p
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1, transition: { duration: 1, delay: 0.5 } }
+            }}
+            className="text-gray-400 max-w-2xl text-base sm:text-lg leading-relaxed mx-auto md:mx-0"
+          >
             {t.valueTrifecta.subtitle}
-          </p>
+          </motion.p>
         </motion.div>
 
         {/* The 3 Main Cards */}
@@ -438,7 +458,7 @@ export const ValueTrifecta: React.FC = () => {
               }
             }
           }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-40"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-12 sm:mb-24"
         >
           {cards.map((card, index) => (
             <motion.div
@@ -447,23 +467,23 @@ export const ValueTrifecta: React.FC = () => {
                 hidden: { opacity: 0, y: 50 },
                 visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
               }}
-              whileHover={{ y: -10 }}
-              className="group relative p-8 bg-premium-glass backdrop-blur-md border border-premium-glassBorder hover:border-premium-green/50 transition-colors duration-500 overflow-hidden rounded-[2rem]"
+              whileHover={{ y: -5 }}
+              className="group relative p-5 sm:p-6 bg-white/[0.02] border border-white/5 hover:border-white/10 transition-colors duration-500 overflow-hidden rounded-2xl sm:rounded-[1.5rem] hover:bg-white/[0.04]"
             >
-              {/* Angular Glow Effect */}
-              <div className="absolute -top-[100px] -right-[100px] w-[200px] h-[200px] bg-gradient-to-br from-premium-green/20 to-transparent rotate-45 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              {/* Hover Gradient Background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-premium-green/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
 
-              <div className="mb-6 relative">
-                <div className="w-14 h-14 flex items-center justify-center bg-premium-black/50 border border-premium-green/30 text-premium-green shadow-[0_0_15px_rgba(0,255,133,0.15)] group-hover:shadow-[0_0_25px_rgba(0,255,133,0.3)] transition-shadow duration-500 rotate-3 group-hover:rotate-0 transition-transform rounded-2xl">
-                  <card.icon className="w-7 h-7" />
+              <div className="mb-4 relative">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-black/50 border border-white/10 text-premium-green shadow-[0_0_15px_rgba(0,0,0,0.5)] group-hover:shadow-[0_0_20px_rgba(0,255,133,0.2)] group-hover:border-premium-green/30 transition-all duration-500 rounded-xl group-hover:scale-110">
+                  <card.icon className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
               </div>
 
-              <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-premium-green transition-colors font-display">
+              <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-white font-display tracking-tight">
                 {card.title}
               </h3>
 
-              <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">
+              <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors text-xs sm:text-sm">
                 {card.description}
               </p>
             </motion.div>
@@ -488,39 +508,38 @@ export const ValueTrifecta: React.FC = () => {
             <div className="h-[1px] bg-gradient-to-r from-transparent via-premium-green/50 to-transparent w-32"></div>
           </motion.div>
 
-          <div className="space-y-32">
+          {/* Desktop View: List */}
+          <div className="hidden lg:block space-y-32">
             {services.map((service, index) => (
               <motion.div
                 key={service.id}
-                initial={{ opacity: 0, y: 100 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-10%" }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 lg:gap-24 items-center group`}
+                initial={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 lg:gap-16 items-center group`}
               >
                 {/* Text Content */}
-                <div className="flex-1 space-y-8 relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent border border-white/5 backdrop-blur-sm -z-10 rounded-3xl transform rotate-1 scale-105 opacity-30 group-hover:rotate-2 group-hover:scale-110 transition-all duration-700"></div>
-                  <div className="bg-gradient-to-b from-white/10 to-transparent border border-white/20 backdrop-blur-2xl rounded-3xl p-8 lg:p-10 hover:border-white/30 transition-all duration-500 shadow-[0_8px_32px_0_rgba(0,0,0,0.37),inset_0_0_10px_rgba(255,255,255,0.05)] group-hover:bg-white/[0.05] group-hover:-translate-y-2 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)]">
+                <div className="flex-1 space-y-6 relative">
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent border border-white/5 backdrop-blur-sm -z-10 rounded-2xl transform rotate-1 scale-105 opacity-30 group-hover:rotate-2 group-hover:scale-110 transition-all duration-700"></div>
+                  <div className="bg-gradient-to-b from-white/10 to-transparent border border-white/20 backdrop-blur-2xl rounded-2xl p-6 lg:p-8 hover:border-white/30 transition-all duration-500 shadow-[0_8px_32px_0_rgba(0,0,0,0.37),inset_0_0_10px_rgba(255,255,255,0.05)] group-hover:bg-white/[0.05] group-hover:-translate-y-2 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)]">
 
-                    <div className="flex items-center gap-5 mb-8">
-                      <div className={`p-4 bg-premium-black border border-white/10 ${service.color} shadow-lg shadow-${service.color}/10 rotate-3 group-hover:rotate-0 transition-transform duration-500 rounded-2xl`}>
-                        <service.icon className="w-8 h-8" />
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className={`p-3 bg-premium-black border border-white/10 ${service.color} shadow-lg shadow-${service.color}/10 rotate-3 group-hover:rotate-0 transition-transform duration-500 rounded-xl`}>
+                        <service.icon className="w-6 h-6 sm:w-7 sm:h-7" />
                       </div>
-                      <h4 className={`text-3xl md:text-5xl font-black font-display text-white tracking-tight drop-shadow-lg`}>{service.title}</h4>
+                      <h4 className={`text-2xl sm:text-3xl md:text-4xl font-black font-display text-white tracking-tight drop-shadow-lg`}>{service.title}</h4>
                     </div>
 
-                    <p className="text-gray-400 text-lg leading-relaxed mb-10 pl-2">
+                    <p className="text-gray-400 text-sm sm:text-base leading-relaxed mb-8 pl-1">
                       {service.description}
                     </p>
 
-                    <div className="flex flex-wrap gap-3">
+                    <div className="flex flex-wrap gap-2 sm:gap-3">
                       {service.items.map((item, idx) => (
                         <span
                           key={idx}
-                          className={`px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm font-medium text-gray-300 hover:text-white transition-all duration-300 flex items-center gap-2 cursor-default group/item hover:bg-white/10 hover:border-${service.color.split('-')[1]}-500/50 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]`}
+                          className={`px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs sm:text-sm font-medium text-gray-300 hover:text-white transition-all duration-300 flex items-center gap-1.5 cursor-default group/item hover:bg-white/10 hover:border-${service.color.split('-')[1]}-500/50 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]`}
                         >
-                          <CheckCircle2 className={`w-3.5 h-3.5 ${service.color} group-hover/item:scale-110 transition-transform`} />
+                          <CheckCircle2 className={`w-3 h-3 ${service.color} group-hover/item:scale-110 transition-transform`} />
                           {item}
                         </span>
                       ))}
@@ -529,14 +548,14 @@ export const ValueTrifecta: React.FC = () => {
                 </div>
 
                 {/* Visual Placeholder (Component Based) */}
-                <div className="flex-1 w-full max-w-lg mx-auto lg:max-w-none relative">
+                <div className="flex-1 w-full max-w-lg mx-auto lg:max-w-none relative mt-6 lg:mt-0">
                   {/* Spotlight Effect */}
-                  <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-${service.color.split('-')[1]}-500/20 blur-[100px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000`}></div>
+                  <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-${service.color.split('-')[1]}-500/20 blur-[80px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000`}></div>
 
                   <motion.div
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.5 }}
-                    className={`relative w-full aspect-[5/4] lg:aspect-square border border-white/10 bg-black/40 overflow-hidden group hover:border-white/20 transition-all duration-500 rounded-[2.5rem] shadow-2xl backdrop-blur-sm z-10`}
+                    className={`relative w-full aspect-[4/3] lg:aspect-square border border-white/10 bg-black/40 overflow-hidden group hover:border-white/20 transition-all duration-500 rounded-2xl sm:rounded-[2rem] shadow-2xl backdrop-blur-sm z-10`}
                   >
                     {/* Specular Highlight Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent skew-x-12 translate-x-[-150%] group-hover:animate-[shimmer_1.5s_infinite] pointer-events-none z-50 mix-blend-overlay"></div>
@@ -549,6 +568,66 @@ export const ValueTrifecta: React.FC = () => {
                 </div>
               </motion.div>
             ))}
+          </div>
+
+          {/* Mobile View: Tabs */}
+          <div className="lg:hidden">
+            <div className="flex p-1 bg-white/5 rounded-xl mb-8 overflow-x-auto no-scrollbar">
+              {services.map((service) => (
+                <button
+                  key={service.id}
+                  onClick={() => setActiveTab(service.id)}
+                  className={`flex-1 py-3 px-2 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wide transition-all whitespace-nowrap
+                    ${activeTab === service.id
+                      ? 'bg-premium-green text-black shadow-lg shadow-premium-green/20'
+                      : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    }`}
+                >
+                  {service.title.split('&')[0]} {/* Shorten title for mobile tabs if needed, or keeping full */}
+                </button>
+              ))}
+            </div>
+
+            <div className="relative">
+              <AnimatePresence mode="wait">
+                {services.map((service) => (
+                  activeTab === service.id && (
+                    <motion.div
+                      key={service.id}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.3 }}
+                      className="flex flex-col gap-6"
+                    >
+
+
+                      <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6">
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className={`p-2 bg-premium-black border border-white/10 ${service.color} rounded-lg`}>
+                            <service.icon className="w-5 h-5" />
+                          </div>
+                          <h4 className={`text-2xl font-black font-display text-white tracking-tight`}>{service.title}</h4>
+                        </div>
+
+                        <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                          {service.description}
+                        </p>
+
+                        <div className="flex flex-wrap gap-2">
+                          {service.items.map((item, idx) => (
+                            <span key={idx} className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-gray-300 flex items-center gap-1.5">
+                              <CheckCircle2 className={`w-3 h-3 ${service.color}`} />
+                              {item}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )
+                ))}
+              </AnimatePresence>
+            </div>
           </div>
         </div>
       </div>

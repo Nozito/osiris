@@ -1,152 +1,146 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 
 export const ParticleBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const mouseRef = useRef({ x: -1000, y: -1000 });
+  const rafRef = useRef<number>(0);
+
+  // Throttled mouse handler to reduce event processing
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    mouseRef.current.x = e.clientX;
+    mouseRef.current.y = e.clientY;
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
-    let particles: {
+    // Particle configuration - optimized counts
+    const isMobile = window.innerWidth < 768;
+    const PARTICLE_COUNT = isMobile ? 30 : 50; // Reduced for performance
+    const INTERACTION_RADIUS = isMobile ? 150 : 200; // Smaller on mobile
+    const CONNECTION_DISTANCE = 80;
+
+    interface Particle {
       x: number;
       y: number;
       vx: number;
       vy: number;
       size: number;
-      baseAlpha: number;
-      rotation: number;
-      rotationSpeed: number;
-      flickerOffset: number;
-    }[] = [];
+      alpha: number;
+    }
 
-    let animationFrameId: number;
-    let mouse = { x: -1000, y: -1000 };
-
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      initParticles();
-    };
+    let particles: Particle[] = [];
+    let isVisible = true;
 
     const initParticles = () => {
       particles = [];
-      const density = Math.floor((canvas.width * canvas.height) / 10000);
-
-      for (let i = 0; i < density; i++) {
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.2,
-          vy: (Math.random() - 0.5) * 0.2,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
           size: Math.random() * 2 + 1,
-          baseAlpha: Math.random() * 0.3 + 0.1,
-          rotation: Math.random() * Math.PI * 2,
-          rotationSpeed: (Math.random() - 0.5) * 0.02,
-          flickerOffset: Math.random() * 100
+          alpha: Math.random() * 0.4 + 0.1
         });
       }
     };
 
-    const handleMouseMove = (e: MouseEvent) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
+    const resize = () => {
+      const dpr = Math.min(window.devicePixelRatio, 2); // Cap DPR for performance
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
+      ctx.scale(dpr, dpr);
+      initParticles();
+    };
+
+    // Visibility API to pause when tab is hidden
+    const handleVisibility = () => {
+      isVisible = !document.hidden;
     };
 
     const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const time = Date.now() * 0.001;
+      if (!isVisible) {
+        rafRef.current = requestAnimationFrame(animate);
+        return;
+      }
 
-      particles.forEach((p, i) => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const mouse = mouseRef.current;
+
+      // Update and draw particles
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+
+        // Update position
         p.x += p.vx;
         p.y += p.vy;
 
-        // Base rotation
-        p.rotation += p.rotationSpeed;
-
         // Wrap around edges
-        if (p.x < 0) p.x = canvas.width;
-        if (p.x > canvas.width) p.x = 0;
-        if (p.y < 0) p.y = canvas.height;
-        if (p.y > canvas.height) p.y = 0;
+        if (p.x < 0) p.x = window.innerWidth;
+        if (p.x > window.innerWidth) p.x = 0;
+        if (p.y < 0) p.y = window.innerHeight;
+        if (p.y > window.innerHeight) p.y = 0;
 
-        // Distance from mouse
+        // Mouse interaction
         const dx = mouse.x - p.x;
         const dy = mouse.y - p.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const interactionRadius = 300;
+        const distSq = dx * dx + dy * dy; // Avoid sqrt when possible
+        const radiusSq = INTERACTION_RADIUS * INTERACTION_RADIUS;
 
-        let alpha = p.baseAlpha;
-        let scale = 1;
+        let currentAlpha = p.alpha;
 
-        // Mouse Interaction
-        if (dist < interactionRadius) {
-          const intensity = 1 - dist / interactionRadius;
-          alpha += intensity * 0.8;
-          scale = 1 + intensity * 1.5;
+        if (distSq < radiusSq) {
+          const dist = Math.sqrt(distSq);
+          const intensity = 1 - dist / INTERACTION_RADIUS;
+          currentAlpha = Math.min(1, p.alpha + intensity * 0.5);
 
-          // Spin faster near mouse
-          p.rotation += p.rotationSpeed * 5 * intensity;
+          // Gentle push
+          const force = intensity * 0.3;
+          p.x -= (dx / dist) * force;
+          p.y -= (dy / dist) * force;
         }
 
-        // Flicker effect
-        const flicker = Math.sin(time * 2 + p.flickerOffset) * 0.2;
-        alpha = Math.max(0, Math.min(1, alpha + flicker));
-
-        // Draw particle as a ROTATED CROSS (+)
-        ctx.save();
-        ctx.translate(p.x, p.y);
-        ctx.rotate(p.rotation);
-        ctx.scale(scale, scale);
-
+        // Draw simple circle (much faster than diamond + shadow)
         ctx.beginPath();
-        const size = p.size;
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0, 255, 133, ${currentAlpha})`;
+        ctx.fill();
 
-        ctx.moveTo(-size, 0);
-        ctx.lineTo(size, 0);
-
-        ctx.moveTo(0, -size);
-        ctx.lineTo(0, size);
-
-        ctx.strokeStyle = `rgba(0, 255, 133, ${alpha})`;
-        ctx.lineWidth = 1;
-        ctx.stroke();
-        ctx.restore();
-
-        // Connect particles
-        if (dist < interactionRadius) {
+        // Draw connections (optimized: only check forward)
+        if (distSq < radiusSq) {
           for (let j = i + 1; j < particles.length; j++) {
             const p2 = particles[j];
             const dx2 = p.x - p2.x;
             const dy2 = p.y - p2.y;
-            const dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
+            const dist2Sq = dx2 * dx2 + dy2 * dy2;
 
-            if (dist2 < 100) {
-              const dxM = mouse.x - p2.x;
-              const dyM = mouse.y - p2.y;
-              const distM = Math.sqrt(dxM * dxM + dyM * dyM);
-
-              if (distM < interactionRadius) {
-                const opacity = (1 - dist / interactionRadius) * (1 - dist2 / 100) * 0.3; // Lower opacity for elegance
-                ctx.beginPath();
-                ctx.moveTo(p.x, p.y);
-                // Simple line without rotation for connections is cleaner
-                ctx.lineTo(p2.x, p2.y);
-                ctx.strokeStyle = `rgba(0, 255, 133, ${opacity})`;
-                ctx.lineWidth = 0.5;
-                ctx.stroke();
-              }
+            if (dist2Sq < CONNECTION_DISTANCE * CONNECTION_DISTANCE) {
+              const dist2 = Math.sqrt(dist2Sq);
+              const opacity = (1 - dist2 / CONNECTION_DISTANCE) * 0.2;
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = `rgba(0, 255, 133, ${opacity})`;
+              ctx.lineWidth = 0.5;
+              ctx.stroke();
             }
           }
         }
-      });
+      }
 
-      animationFrameId = requestAnimationFrame(animate);
+      rafRef.current = requestAnimationFrame(animate);
     };
 
-    window.addEventListener('resize', resize);
-    window.addEventListener('mousemove', handleMouseMove);
+    // Event listeners with passive flag for better scroll performance
+    window.addEventListener('resize', resize, { passive: true });
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    document.addEventListener('visibilitychange', handleVisibility);
 
     resize();
     animate();
@@ -154,14 +148,16 @@ export const ParticleBackground: React.FC = () => {
     return () => {
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', handleMouseMove);
-      cancelAnimationFrame(animationFrameId);
+      document.removeEventListener('visibilitychange', handleVisibility);
+      cancelAnimationFrame(rafRef.current);
     };
-  }, []);
+  }, [handleMouseMove]);
 
   return (
     <canvas
       ref={canvasRef}
       className="fixed inset-0 z-0 pointer-events-none"
+      style={{ willChange: 'transform' }}
     />
   );
 };

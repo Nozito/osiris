@@ -7,7 +7,7 @@ export const Footer: React.FC = () => {
   const { t } = useLanguage();
 
   return (
-    <footer className="px-6 py-20 border-t border-white/5 metal-bg">
+    <footer className="px-4 sm:px-6 py-10 sm:py-16 border-t border-white/5 metal-bg">
       <div className="container mx-auto max-w-7xl">
         {/* Main CTA */}
         <motion.div
@@ -15,23 +15,23 @@ export const Footer: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-20"
+          className="text-center mb-16"
         >
           <p className="text-gray-500 mb-6 text-sm uppercase tracking-widest">{t.footer.cta}</p>
           <a
             href="#contact"
-            className="block text-5xl md:text-8xl font-black text-white hover:text-premium-green transition-colors duration-500 font-display leading-tight"
+            className="block text-3xl sm:text-5xl md:text-8xl font-black text-white hover:text-premium-green transition-colors duration-500 font-display leading-tight"
           >
             {t.footer.ctaLink.split(' ').slice(0, -2).join(' ')} <br />{t.footer.ctaLink.split(' ').slice(-2).join(' ')}
           </a>
         </motion.div>
 
         {/* Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-t border-white/5 pt-16 pb-12">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 border-t border-white/5 pt-12 sm:pt-16 pb-8 sm:pb-12">
           {/* Company Info */}
-          <div>
+          <div className="col-span-2 md:col-span-1">
             <h4 className="text-white font-bold text-lg mb-6 font-display">OSIRIS</h4>
-            <p className="text-gray-400 text-sm leading-relaxed mb-6">
+            <p className="text-gray-400 text-sm leading-relaxed mb-4 sm:mb-6">
               Agence web premium spécialisée dans la création de sites vitrines haute performance et designs sur-mesure.
             </p>
             <div className="flex gap-4">
@@ -95,11 +95,11 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar - Legal Links */}
-        <div className="border-t border-white/5 pt-8 mt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="border-t border-white/5 pt-6 sm:pt-8 mt-6 sm:mt-8">
+          <div className="flex flex-col gap-4 sm:gap-6 items-center text-center">
             <p className="text-xs text-gray-600">{t.footer.copyright}</p>
 
-            <div className="flex flex-wrap justify-center gap-6 text-xs text-gray-500">
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-xs text-gray-500">
               <a href="#" className="hover:text-white transition-colors">{t.footer.legal}</a>
               <a href="#" className="hover:text-white transition-colors">{t.footer.terms}</a>
               <a href="#" className="hover:text-white transition-colors">Politique de confidentialité</a>

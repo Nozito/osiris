@@ -1,7 +1,9 @@
 export const fr = {
     // Navbar
     navbar: {
+        home: "Accueil",
         pricing: "Tarifs",
+        portfolio: "Portfolio",
         contact: "Contact",
     },
 

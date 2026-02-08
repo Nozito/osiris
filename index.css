@@ -16,6 +16,16 @@ html {
   color: #000;
 }
 
+/* Hide scrollbar for horizontal scroll areas on mobile */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* === PERFORMANCE OPTIMIZATIONS === */
 
 /* GPU acceleration hints for animated elements */
@@ -53,6 +63,7 @@ section {
 [class*="blur-"] {
   transform: translateZ(0);
   backface-visibility: hidden;
+  contain: layout paint;
 }
 
 /* Optimize transforms and opacity transitions */
@@ -76,4 +87,53 @@ img[loading="lazy"] {
 .group:hover,
 [class*="hover:"]:hover {
   will-change: transform, opacity;
+}
+
+/* === OPTIMIZED KEYFRAME ANIMATIONS === */
+
+/* Slow floating animation for background orbs */
+@keyframes float-slow {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.4;
+  }
+
+  50% {
+    transform: translate(40px, -30px) scale(1.1);
+    opacity: 0.6;
+  }
+}
+
+/* Shimmer animation for text effects */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 8s ease-in-out infinite;
+}
+
+/* === ADDITIONAL PERFORMANCE RULES === */
+
+/* Optimize large blur elements */
+[class*="blur-["] {
+  contain: strict;
+  will-change: opacity;
+}
+
+/* Reduce animation complexity on low-power mode */
+@media (prefers-reduced-motion: reduce) {
+
+  .animate-shimmer,
+  [class*="animate-"] {
+    animation: none !important;
+  }
 }

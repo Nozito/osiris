@@ -8,7 +8,7 @@ export const Contact: React.FC = () => {
   const { t } = useLanguage();
 
   return (
-    <section id="contact" className="px-6 py-32 dark-bg relative overflow-hidden scroll-mt-20">
+    <section id="contact" className="px-4 sm:px-6 py-10 sm:py-20 bg-[#0A0A0A] relative overflow-hidden scroll-mt-20 border-t border-white/5">
       {/* Scrolling OSIRIS Marquee Band - Background */}
       <div className="absolute inset-0 flex items-center overflow-hidden pointer-events-none select-none">
         <motion.div
@@ -32,7 +32,7 @@ export const Contact: React.FC = () => {
       <div className="absolute top-0 right-0 w-1/3 h-full bg-premium-green/5 skew-x-12 pointer-events-none border-l border-white/5"></div>
 
       <div className="container mx-auto max-w-7xl relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 lg:gap-24">
 
           {/* Left Column: Info */}
           <motion.div
@@ -41,11 +41,11 @@ export const Contact: React.FC = () => {
             viewport={{ once: true }}
           >
             <span className="text-premium-green text-xs font-bold uppercase tracking-widest mb-4 block">{t.contact.sectionLabel}</span>
-            <h2 className="text-5xl md:text-7xl font-black font-display text-white mb-8">
+            <h2 className="text-3xl sm:text-5xl md:text-7xl font-black font-display text-white mb-6 sm:mb-8">
               {t.contact.title} <br />
               <span className="text-gray-500">{t.contact.titleFaded}</span>
             </h2>
-            <p className="text-xl text-gray-400 mb-12 leading-relaxed">
+            <p className="text-base sm:text-xl text-gray-400 mb-8 sm:mb-12 leading-relaxed">
               {t.contact.subtitle}
             </p>
 
@@ -67,28 +67,28 @@ export const Contact: React.FC = () => {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-white/5 backdrop-blur-xl p-8 md:p-12 border border-white/10 rounded-[2.5rem]"
+            className="bg-white/5 backdrop-blur-xl p-4 sm:p-8 md:p-12 border border-white/10 rounded-2xl sm:rounded-[2.5rem]"
           >
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <form className="space-y-4 sm:space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 <div className="space-y-2">
                   <label className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.name}</label>
-                  <input type="text" className="w-full bg-black/50 border border-white/10 p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-2xl" placeholder="John Doe" />
+                  <input type="text" className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl" placeholder="John Doe" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.company}</label>
-                  <input type="text" className="w-full bg-black/50 border border-white/10 p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-2xl" placeholder="Company Ltd" />
+                  <input type="text" className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl" placeholder="Company Ltd" />
                 </div>
               </div>
 
               <div className="space-y-2">
                 <label className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.email}</label>
-                <input type="email" className="w-full bg-black/50 border border-white/10 p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-2xl" placeholder="john@company.com" />
+                <input type="email" className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl" placeholder="john@company.com" />
               </div>
 
               <div className="space-y-2">
                 <label className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.budget}</label>
-                <select className="w-full bg-black/50 border border-white/10 p-4 text-white focus:border-premium-green focus:outline-none transition-colors appearance-none rounded-2xl">
+                <select className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors appearance-none rounded-xl sm:rounded-2xl">
                   <option>1k€ - 3k€</option>
                   <option>3k€ - 10k€</option>
                   <option>10k€ +</option>
@@ -97,7 +97,7 @@ export const Contact: React.FC = () => {
 
               <div className="space-y-2">
                 <label className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.message}</label>
-                <textarea rows={4} className="w-full bg-black/50 border border-white/10 p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-2xl" placeholder={t.contact.form.messagePlaceholder}></textarea>
+                <textarea rows={4} className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl" placeholder={t.contact.form.messagePlaceholder}></textarea>
               </div>
 
               <MagneticButton className="w-full">

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Hero } from '../components/Hero';
 import { ValueTrifecta } from '../components/ValueTrifecta';
-import { Showcase } from '../components/Showcase';
 import { Process } from '../components/Process';
 import { Offer } from '../components/Offer';
 import { Contact } from '../components/Contact';
@@ -12,7 +11,6 @@ export const HomePage: React.FC = () => {
         <>
             <Hero />
             <ValueTrifecta />
-            <Showcase />
             <Process />
             <Offer />
             <Contact />
