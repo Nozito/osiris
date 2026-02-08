@@ -14,6 +14,7 @@ export default function App() {
     <div className="relative min-h-screen bg-[#0a0a0a] text-white selection:bg-premium-green selection:text-black overflow-hidden font-sans">
 
       {/* === GLOBAL BACKGROUND LAYERS === */}
+      
 
       {/* 1. Deep Base & Radial Vignette */}
       <div className="fixed inset-0 z-0 pointer-events-none">
