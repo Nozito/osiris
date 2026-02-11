@@ -35,16 +35,16 @@ export const Footer: React.FC = () => {
               {t.footer.companyDesc}
             </p>
             <div className="flex gap-4">
-              <a href="https://wa.me/message/HQMHR57XSDJTP1" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#25D366]/10 border border-[#25D366]/30 flex items-center justify-center text-[#25D366] hover:bg-[#25D366] hover:text-black transition-all">
+              <a href="https://wa.me/message/HQMHR57XSDJTP1" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="w-10 h-10 rounded-full bg-[#25D366]/10 border border-[#25D366]/30 flex items-center justify-center text-[#25D366] hover:bg-[#25D366] hover:text-black transition-all">
                 <MessageCircle className="w-4 h-4" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-premium-green hover:border-premium-green/50 transition-all">
+              <a href="#" aria-label="Instagram" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-premium-green hover:border-premium-green/50 transition-all">
                 <Instagram className="w-4 h-4" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-premium-green hover:border-premium-green/50 transition-all">
+              <a href="#" aria-label="LinkedIn" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-premium-green hover:border-premium-green/50 transition-all">
                 <Linkedin className="w-4 h-4" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-premium-green hover:border-premium-green/50 transition-all">
+              <a href="#" aria-label="Twitter" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-premium-green hover:border-premium-green/50 transition-all">
                 <Twitter className="w-4 h-4" />
               </a>
             </div>

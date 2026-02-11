@@ -72,23 +72,23 @@ export const Contact: React.FC = () => {
             <form className="space-y-4 sm:space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.name}</label>
-                  <input type="text" className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl" placeholder="John Doe" />
+                  <label htmlFor="contact-name" className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.name}</label>
+                  <input id="contact-name" type="text" className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl" placeholder="John Doe" />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.company}</label>
-                  <input type="text" className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl" placeholder="Company Ltd" />
+                  <label htmlFor="contact-company" className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.company}</label>
+                  <input id="contact-company" type="text" className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl" placeholder="Company Ltd" />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.email}</label>
-                <input type="email" className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl" placeholder="john@company.com" />
+                <label htmlFor="contact-email" className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.email}</label>
+                <input id="contact-email" type="email" className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl" placeholder="john@company.com" />
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.budget}</label>
-                <select className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors appearance-none rounded-xl sm:rounded-2xl">
+                <label htmlFor="contact-budget" className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.budget}</label>
+                <select id="contact-budget" aria-label="Budget" className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors appearance-none rounded-xl sm:rounded-2xl">
                   <option>1k€ - 3k€</option>
                   <option>3k€ - 10k€</option>
                   <option>10k€ +</option>
@@ -96,8 +96,8 @@ export const Contact: React.FC = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.message}</label>
-                <textarea rows={4} className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl" placeholder={t.contact.form.messagePlaceholder}></textarea>
+                <label htmlFor="contact-message" className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.message}</label>
+                <textarea id="contact-message" rows={4} className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl" placeholder={t.contact.form.messagePlaceholder}></textarea>
               </div>
 
               <MagneticButton className="w-full">

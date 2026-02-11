@@ -252,12 +252,14 @@ export const PricingPage: React.FC = () => {
                         {/* Navigation Arrows */}
                         <button
                             onClick={prevSlide}
+                            aria-label="Previous offer"
                             className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/60 border border-white/10 flex items-center justify-center text-white backdrop-blur-md active:scale-90 transition-transform"
                         >
                             <ChevronLeft className="w-5 h-5" />
                         </button>
                         <button
                             onClick={nextSlide}
+                            aria-label="Next offer"
                             className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/60 border border-white/10 flex items-center justify-center text-white backdrop-blur-md active:scale-90 transition-transform"
                         >
                             <ChevronRight className="w-5 h-5" />

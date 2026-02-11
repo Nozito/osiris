@@ -80,7 +80,7 @@ export const Navbar: React.FC = () => {
                   }`}
                 aria-label="Français"
               >
-                <img src="https://flagcdn.com/fr.svg" alt="FR" className="w-full h-full object-cover" />
+                <img src="https://flagcdn.com/fr.svg" alt="FR" className="w-full h-full object-cover" width="20" height="20" loading="lazy" />
               </button>
               <button
                 onClick={() => setLanguage('en')}
@@ -90,7 +90,7 @@ export const Navbar: React.FC = () => {
                   }`}
                 aria-label="English"
               >
-                <img src="https://flagcdn.com/gb.svg" alt="EN" className="w-full h-full object-cover" />
+                <img src="https://flagcdn.com/gb.svg" alt="EN" className="w-full h-full object-cover" width="20" height="20" loading="lazy" />
               </button>
             </div>
 
@@ -154,7 +154,7 @@ export const Navbar: React.FC = () => {
                 transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-premium-green/10 blur-[100px] rounded-full"
               />
-              <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.05]" />
+              <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-[0.05]" />
             </div>
 
             {/* Menu Links */}
@@ -212,12 +212,14 @@ export const Navbar: React.FC = () => {
               <div className="flex items-center gap-1 p-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
                 <button
                   onClick={() => setLanguage('fr')}
+                  aria-label="Français"
                   className={`px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-500 ${language === 'fr' ? 'bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.2)]' : 'text-gray-500 hover:text-white'}`}
                 >
                   FR
                 </button>
                 <button
                   onClick={() => setLanguage('en')}
+                  aria-label="English"
                   className={`px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-500 ${language === 'en' ? 'bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.2)]' : 'text-gray-500 hover:text-white'}`}
                 >
                   EN

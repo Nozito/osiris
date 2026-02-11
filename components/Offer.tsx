@@ -362,6 +362,7 @@ export const Offer: React.FC = () => {
             >
               <button
                 onClick={() => setExpandedOffer(null)}
+                aria-label="Close"
                 className="absolute top-4 right-4 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
               >
                 <X className="w-5 h-5" />

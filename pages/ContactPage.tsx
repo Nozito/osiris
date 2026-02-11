@@ -54,7 +54,7 @@ export const ContactPage: React.FC = () => {
             <div className="fixed inset-0 pointer-events-none">
                 <div className="absolute top-[-20%] left-[-10%] w-[70vw] h-[70vw] bg-premium-green/5 blur-[150px] rounded-full animate-pulse"></div>
                 <div className="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] bg-blue-900/10 blur-[150px] rounded-full"></div>
-                <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03]"></div>
+                <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-[0.03]"></div>
             </div>
 
             <div className="relative z-10 pt-32 pb-20 px-6">
@@ -177,11 +177,11 @@ export const ContactPage: React.FC = () => {
                                 <span className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-6 block">{t.contactPage.socialLabel}</span>
                                 <div className="flex gap-4">
                                     {[
-                                        { icon: Linkedin, href: "#" },
-                                        { icon: Twitter, href: "#" },
-                                        { icon: Instagram, href: "#" }
+                                        { icon: Linkedin, href: "#", label: "LinkedIn" },
+                                        { icon: Twitter, href: "#", label: "Twitter" },
+                                        { icon: Instagram, href: "#", label: "Instagram" }
                                     ].map((social, i) => (
-                                        <a key={i} href={social.href} className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/5 hover:border-premium-green/50 transition-all duration-300">
+                                        <a key={i} href={social.href} aria-label={social.label} className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/5 hover:border-premium-green/50 transition-all duration-300">
                                             <social.icon className="w-5 h-5" />
                                         </a>
                                     ))}
@@ -242,33 +242,33 @@ export const ContactPage: React.FC = () => {
 
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                                                 <div className="space-y-2 group relative">
-                                                    <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold ml-1 mb-1 block group-focus-within:text-premium-green transition-colors duration-300">{t.contactPage.labelName}</label>
+                                                    <label htmlFor="cp-name" className="text-[10px] uppercase tracking-widest text-gray-500 font-bold ml-1 mb-1 block group-focus-within:text-premium-green transition-colors duration-300">{t.contactPage.labelName}</label>
                                                     <div className="relative">
-                                                        <input required type="text" className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none focus:shadow-[0_0_20px_rgba(0,255,133,0.05)] transition-all duration-300 text-sm md:text-base font-medium" placeholder="Ex: John Doe" />
+                                                        <input id="cp-name" required type="text" className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none focus:shadow-[0_0_20px_rgba(0,255,133,0.05)] transition-all duration-300 text-sm md:text-base font-medium" placeholder="Ex: John Doe" />
                                                         <div className="absolute inset-0 rounded-xl border border-transparent group-focus-within:border-premium-green/20 pointer-events-none transition-all duration-500 scale-105 opacity-0 group-focus-within:opacity-100 group-focus-within:scale-100"></div>
                                                     </div>
                                                 </div>
                                                 <div className="space-y-2 group relative">
-                                                    <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold ml-1 mb-1 block group-focus-within:text-premium-green transition-colors duration-300">{t.contactPage.labelCompany}</label>
+                                                    <label htmlFor="cp-company" className="text-[10px] uppercase tracking-widest text-gray-500 font-bold ml-1 mb-1 block group-focus-within:text-premium-green transition-colors duration-300">{t.contactPage.labelCompany}</label>
                                                     <div className="relative">
-                                                        <input type="text" className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none focus:shadow-[0_0_20px_rgba(0,255,133,0.05)] transition-all duration-300 text-sm md:text-base font-medium" placeholder="Ex: Studio Osiris" />
+                                                        <input id="cp-company" type="text" className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none focus:shadow-[0_0_20px_rgba(0,255,133,0.05)] transition-all duration-300 text-sm md:text-base font-medium" placeholder="Ex: Studio Osiris" />
                                                         <div className="absolute inset-0 rounded-xl border border-transparent group-focus-within:border-premium-green/20 pointer-events-none transition-all duration-500 scale-105 opacity-0 group-focus-within:opacity-100 group-focus-within:scale-100"></div>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div className="space-y-2 group relative">
-                                                <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold ml-1 mb-1 block group-focus-within:text-premium-green transition-colors duration-300">{t.contactPage.labelEmail}</label>
+                                                <label htmlFor="cp-email" className="text-[10px] uppercase tracking-widest text-gray-500 font-bold ml-1 mb-1 block group-focus-within:text-premium-green transition-colors duration-300">{t.contactPage.labelEmail}</label>
                                                 <div className="relative">
-                                                    <input required type="email" className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none focus:shadow-[0_0_20px_rgba(0,255,133,0.05)] transition-all duration-300 text-sm md:text-base font-medium" placeholder="Ex: john@osiris.com" />
+                                                    <input id="cp-email" required type="email" className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none focus:shadow-[0_0_20px_rgba(0,255,133,0.05)] transition-all duration-300 text-sm md:text-base font-medium" placeholder="Ex: john@osiris.com" />
                                                     <Mail className="absolute right-5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600 group-focus-within:text-premium-green transition-colors duration-300" />
                                                 </div>
                                             </div>
 
                                             <div className="space-y-2 group relative">
-                                                <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold ml-1 mb-1 block group-focus-within:text-premium-green transition-colors duration-300">{t.contactPage.labelBudget}</label>
+                                                <label htmlFor="cp-budget" className="text-[10px] uppercase tracking-widest text-gray-500 font-bold ml-1 mb-1 block group-focus-within:text-premium-green transition-colors duration-300">{t.contactPage.labelBudget}</label>
                                                 <div className="relative">
-                                                    <select className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 text-white focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none focus:shadow-[0_0_20px_rgba(0,255,133,0.05)] transition-all duration-300 text-sm md:text-base font-medium appearance-none cursor-pointer">
+                                                    <select id="cp-budget" aria-label="Budget" className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 text-white focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none focus:shadow-[0_0_20px_rgba(0,255,133,0.05)] transition-all duration-300 text-sm md:text-base font-medium appearance-none cursor-pointer">
                                                         {t.contactPage.budgetOptions.map((option: string, i: number) => (
                                                             <option key={i} className="bg-[#111] text-gray-200 py-2">{option}</option>
                                                         ))}
@@ -280,9 +280,9 @@ export const ContactPage: React.FC = () => {
                                             </div>
 
                                             <div className="space-y-2 group relative">
-                                                <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold ml-1 mb-1 block group-focus-within:text-premium-green transition-colors duration-300">{t.contactPage.labelMessage}</label>
+                                                <label htmlFor="cp-message" className="text-[10px] uppercase tracking-widest text-gray-500 font-bold ml-1 mb-1 block group-focus-within:text-premium-green transition-colors duration-300">{t.contactPage.labelMessage}</label>
                                                 <div className="relative">
-                                                    <textarea required rows={5} className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none focus:shadow-[0_0_20px_rgba(0,255,133,0.05)] transition-all duration-300 text-sm md:text-base font-medium resize-none leading-relaxed" placeholder={t.contactPage.messagePlaceholder}></textarea>
+                                                    <textarea id="cp-message" required rows={5} className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none focus:shadow-[0_0_20px_rgba(0,255,133,0.05)] transition-all duration-300 text-sm md:text-base font-medium resize-none leading-relaxed" placeholder={t.contactPage.messagePlaceholder}></textarea>
                                                     <div className="absolute inset-0 rounded-xl border border-transparent group-focus-within:border-premium-green/20 pointer-events-none transition-all duration-500 scale-105 opacity-0 group-focus-within:opacity-100 group-focus-within:scale-100"></div>
                                                 </div>
                                             </div>
