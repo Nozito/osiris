@@ -54,7 +54,7 @@ export const ContactPage: React.FC = () => {
             <div className="fixed inset-0 pointer-events-none">
                 <div className="absolute top-[-20%] left-[-10%] w-[70vw] h-[70vw] bg-premium-green/5 blur-[150px] rounded-full animate-pulse"></div>
                 <div className="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] bg-blue-900/10 blur-[150px] rounded-full"></div>
-                <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-[0.03]"></div>
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.02)_0%,transparent_60%)]"></div>
             </div>
 
             <div className="relative z-10 pt-32 pb-20 px-6">
@@ -147,9 +147,10 @@ export const ContactPage: React.FC = () => {
                                             <Mail className="w-5 h-5" />
                                         </div>
                                         <div>
-                                            <h3 className="text-white font-bold font-display text-lg mb-1">{t.contactPage.emailTitle}</h3>
-                                            <p className="text-gray-400 text-sm mb-2">{t.contactPage.emailDesc}</p>
-                                            <a href="mailto:hello@osiris.com" className="text-white hover:text-premium-green transition-colors font-mono text-sm underline decoration-premium-green/30 hover:decoration-premium-green underline-offset-4">hello@osiris.com</a>
+                                            <h3 className="text-white font-bold font-display text-lg mb-1">
+                                                <a href="mailto:contact@osiris-agency.fr" className="hover:text-premium-green transition-colors">{t.contactPage.emailTitle}</a>
+                                            </h3>
+                                            <p className="text-gray-400 text-sm">{t.contactPage.emailDesc}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -168,25 +169,7 @@ export const ContactPage: React.FC = () => {
                                 </div>
                             </motion.div>
 
-                            {/* Social Links */}
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: 0.6 }}
-                            >
-                                <span className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-6 block">{t.contactPage.socialLabel}</span>
-                                <div className="flex gap-4">
-                                    {[
-                                        { icon: Linkedin, href: "#", label: "LinkedIn" },
-                                        { icon: Twitter, href: "#", label: "Twitter" },
-                                        { icon: Instagram, href: "#", label: "Instagram" }
-                                    ].map((social, i) => (
-                                        <a key={i} href={social.href} aria-label={social.label} className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/5 hover:border-premium-green/50 transition-all duration-300">
-                                            <social.icon className="w-5 h-5" />
-                                        </a>
-                                    ))}
-                                </div>
-                            </motion.div>
+
                         </div>
 
                         {/* Right Column: Interactive Form */}
@@ -285,6 +268,18 @@ export const ContactPage: React.FC = () => {
                                                     <textarea id="cp-message" required rows={5} className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none focus:shadow-[0_0_20px_rgba(0,255,133,0.05)] transition-all duration-300 text-sm md:text-base font-medium resize-none leading-relaxed" placeholder={t.contactPage.messagePlaceholder}></textarea>
                                                     <div className="absolute inset-0 rounded-xl border border-transparent group-focus-within:border-premium-green/20 pointer-events-none transition-all duration-500 scale-105 opacity-0 group-focus-within:opacity-100 group-focus-within:scale-100"></div>
                                                 </div>
+                                            </div>
+
+                                            <div className="flex items-start gap-3">
+                                                <input
+                                                    id="cp-consent"
+                                                    type="checkbox"
+                                                    required
+                                                    className="mt-1 w-4 h-4 rounded border-white/10 bg-black/50 text-premium-green focus:ring-premium-green focus:bg-premium-green/20"
+                                                />
+                                                <label htmlFor="cp-consent" className="text-xs text-gray-500 leading-relaxed cursor-pointer">
+                                                    J'accepte que mes données soient traitées conformément à la <a href="/legal#confidentialite" className="text-white hover:text-premium-green underline decoration-white/20 hover:decoration-premium-green transition-colors">politique de confidentialité</a> d'Osiris Agency.
+                                                </label>
                                             </div>
 
                                             <div className="pt-6">

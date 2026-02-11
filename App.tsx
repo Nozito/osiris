@@ -9,6 +9,7 @@ import { ScrollToTop } from './components/ScrollToTop';
 const HomePage = lazy(() => import('./pages/HomePage').then(m => ({ default: m.HomePage })));
 const PricingPage = lazy(() => import('./pages/PricingPage').then(m => ({ default: m.PricingPage })));
 const ContactPage = lazy(() => import('./pages/ContactPage').then(m => ({ default: m.ContactPage })));
+const LegalPage = lazy(() => import('./pages/LegalPage').then(m => ({ default: m.LegalPage })));
 
 // Minimal loading fallback
 const PageLoader = () => (
@@ -46,6 +47,7 @@ export default function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/tarifs" element={<PricingPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/legal" element={<LegalPage />} />
           </Routes>
         </Suspense>
       </main>

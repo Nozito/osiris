@@ -57,7 +57,8 @@ const DesignVisual = () => (
             {/* Shimmer effect */}
             <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover/design:animate-[shimmer_2s_infinite]"></div>
 
-            <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-20 mix-blend-overlay"></div>
+            {/* Smooth sheen instead of noise */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent opacity-50 pointer-events-none"></div>
             <div className="flex justify-between items-end relative z-10">
               <div>
                 <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-md border border-white/20 mb-3 shadow-lg group-hover/design:scale-110 transition-transform duration-500"></div>
@@ -378,7 +379,8 @@ export const ValueTrifecta: React.FC = () => {
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-900/10 blur-[120px] rounded-full pointer-events-none translate-y-1/3 -translate-x-1/3 mix-blend-screen" />
 
       {/* Noise Texture */}
-      <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-[0.03] pointer-events-none"></div>
+      {/* Premium Smooth Background - No Noise */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_0%,transparent_70%)] pointer-events-none"></div>
 
       {/* Grid Lines */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_80%)] -z-10"></div>

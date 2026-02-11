@@ -154,7 +154,7 @@ export const Navbar: React.FC = () => {
                 transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-premium-green/10 blur-[100px] rounded-full"
               />
-              <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-[0.05]" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_0%,transparent_70%)]" />
             </div>
 
             {/* Menu Links */}
@@ -227,8 +227,8 @@ export const Navbar: React.FC = () => {
               </div>
 
               {/* Contact Link */}
-              <a href="mailto:hello@osiris.com" className="text-gray-600 hover:text-premium-green transition-colors text-[10px] font-mono uppercase tracking-[0.3em] opacity-60 hover:opacity-100 hover:tracking-[0.4em] duration-300">
-                hello@osiris.com
+              <a href="mailto:contact@osiris-agency.fr" className="text-gray-600 hover:text-premium-green transition-colors text-[10px] font-mono uppercase tracking-[0.3em] opacity-60 hover:opacity-100 hover:tracking-[0.4em] duration-300">
+                contact@osiris-agency.fr
               </a>
             </motion.div>
           </motion.div>

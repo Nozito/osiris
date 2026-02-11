@@ -103,24 +103,31 @@ export const Hero: React.FC = () => {
               </a>
             </div>
 
-            {/* Enhanced Badge */}
-            <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm font-mono text-gray-400 bg-premium-black/40 px-3 sm:px-6 py-2 sm:py-3 rounded-full border border-white/10 backdrop-blur-md shadow-2xl hover:border-white/20 transition-colors cursor-default w-full md:w-auto justify-center">
-              <div className="flex -space-x-3">
-                <div className="w-8 h-8 rounded-full bg-zinc-800 border-2 border-black flex items-center justify-center">
-                  <User className="w-4 h-4 text-gray-500" />
+            {/* Enhanced Badge with Social Proof */}
+            <div className="group relative bg-white/[0.03] hover:bg-white/[0.05] backdrop-blur-xl border border-white/10 hover:border-premium-green/30 rounded-full pl-2 pr-6 py-2 flex items-center gap-4 transition-all duration-500 w-full md:w-auto justify-center md:justify-start overflow-hidden">
+
+              {/* Shimmer Effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] pointer-events-none"></div>
+
+              {/* Avatars Stack */}
+              <div className="flex -space-x-3 relative z-10">
+                <div className="w-8 h-8 rounded-full bg-zinc-800 border-[3px] border-black flex items-center justify-center shadow-lg transform group-hover:-translate-x-1 transition-transform duration-300">
+                  <User className="w-3.5 h-3.5 text-gray-500" />
                 </div>
-                <div className="w-8 h-8 rounded-full bg-zinc-700 border-2 border-black flex items-center justify-center">
-                  <User className="w-4 h-4 text-gray-400" />
+                <div className="w-8 h-8 rounded-full bg-zinc-700 border-[3px] border-black flex items-center justify-center shadow-lg transform group-hover:translate-x-0 transition-transform duration-300">
+                  <User className="w-3.5 h-3.5 text-gray-400" />
                 </div>
-                <div className="w-8 h-8 rounded-full bg-premium-green/20 border-2 border-black flex items-center justify-center backdrop-blur-sm">
-                  <div className="w-2 h-2 bg-premium-green rounded-full animate-pulse"></div>
+                <div className="w-8 h-8 rounded-full bg-premium-green/10 border-[3px] border-black flex items-center justify-center backdrop-blur-sm shadow-[0_0_15px_rgba(0,255,133,0.3)] transform group-hover:translate-x-1 transition-transform duration-300">
+                  <div className="w-2 h-2 bg-premium-green rounded-full animate-pulse shadow-[0_0_10px_#00FF85]"></div>
                 </div>
               </div>
-              <div className="flex flex-col text-left">
-                <span className="block text-white font-bold leading-none text-xs uppercase tracking-wider mb-1">
-                  2 {t.hero.spotsAvailable} <span className="text-premium-green">{t.hero.available}</span>
+
+              {/* Text Content */}
+              <div className="flex flex-col text-left z-10">
+                <span className="block text-white font-bold leading-none text-xs uppercase tracking-wider mb-0.5 group-hover:text-premium-green transition-colors duration-300">
+                  2 {t.hero.spotsAvailable} <span className="opacity-50 mx-1 text-gray-600">|</span> {t.hero.available}
                 </span>
-                <span className="text-[10px] uppercase tracking-wide text-gray-500 font-semibold">{t.hero.thisMonth}</span>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-gray-500 font-semibold group-hover:text-white transition-colors duration-300">{t.hero.thisMonth}</span>
               </div>
             </div>
           </div>

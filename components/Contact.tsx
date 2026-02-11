@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Send, Mail, MapPin, Phone } from 'lucide-react';
-import { MagneticButton } from './ui/MagneticButton';
+
 import { useLanguage } from '../context/LanguageContext';
 
 export const Contact: React.FC = () => {
@@ -56,7 +56,7 @@ export const Contact: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="text-white font-bold mb-1">{t.contact.emailDirect}</h4>
-                  <p className="text-gray-400">hello@osiris.com</p>
+                  {/* Additional info removed since email is now the title */}
                 </div>
               </div>
             </div>
@@ -98,14 +98,26 @@ export const Contact: React.FC = () => {
               <div className="space-y-2">
                 <label htmlFor="contact-message" className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.message}</label>
                 <textarea id="contact-message" rows={4} className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl" placeholder={t.contact.form.messagePlaceholder}></textarea>
+
+
               </div>
 
-              <MagneticButton className="w-full">
-                <button type="button" className="w-full bg-premium-green text-black font-bold py-5 uppercase tracking-widest hover:bg-white transition-colors duration-300 flex items-center justify-center gap-2 rounded-full mt-4">
-                  {t.contact.form.submit}
-                  <Send className="w-4 h-4" />
-                </button>
-              </MagneticButton>
+              <div className="flex items-start gap-3 pt-2">
+                <input
+                  id="contact-consent"
+                  type="checkbox"
+                  required
+                  className="mt-1 w-4 h-4 rounded border-white/10 bg-black/50 text-premium-green focus:ring-premium-green focus:bg-premium-green/20"
+                />
+                <label htmlFor="contact-consent" className="text-xs text-gray-500 leading-relaxed cursor-pointer">
+                  J'accepte que mes données soient traitées conformément à la <a href="/legal#confidentialite" className="text-white hover:text-premium-green underline decoration-white/20 hover:decoration-premium-green transition-colors">politique de confidentialité</a> d'Osiris Agency.
+                </label>
+              </div>
+
+              <button type="button" className="w-full bg-premium-green text-black font-bold py-5 uppercase tracking-widest hover:bg-white transition-colors duration-300 flex items-center justify-center gap-2 rounded-full mt-4">
+                {t.contact.form.submit}
+                <Send className="w-4 h-4" />
+              </button>
             </form>
           </motion.div>
         </div>

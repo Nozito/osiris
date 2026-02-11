@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
+import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Instagram, Linkedin, Twitter, MessageCircle } from 'lucide-react';
 
 export const Footer: React.FC = () => {
@@ -26,86 +27,32 @@ export const Footer: React.FC = () => {
           </a>
         </motion.div>
 
-        {/* Footer Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 border-t border-white/5 pt-12 sm:pt-16 pb-8 sm:pb-12">
-          {/* Company Info */}
-          <div className="col-span-2 md:col-span-1">
-            <h4 className="text-white font-bold text-lg mb-6 font-display">OSIRIS</h4>
-            <p className="text-gray-400 text-sm leading-relaxed mb-4 sm:mb-6">
+        {/* Simplified Footer Content */}
+        <div className="flex flex-col items-center justify-center gap-8 py-12 border-t border-white/5">
+          {/* Company Info - Centered */}
+          <div className="flex flex-col items-center text-center max-w-lg">
+            <h4 className="text-white font-bold text-2xl mb-6 font-display">OSIRIS</h4>
+            <p className="text-gray-400 text-sm leading-relaxed mb-6">
               {t.footer.companyDesc}
             </p>
-            <div className="flex gap-4">
-              <a href="https://wa.me/message/HQMHR57XSDJTP1" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="w-10 h-10 rounded-full bg-[#25D366]/10 border border-[#25D366]/30 flex items-center justify-center text-[#25D366] hover:bg-[#25D366] hover:text-black transition-all">
+            <div className="flex gap-4 mb-4">
+              <a href="https://wa.me/33772328932" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="w-10 h-10 rounded-full bg-[#25D366]/10 border border-[#25D366]/30 flex items-center justify-center text-[#25D366] hover:bg-[#25D366] hover:text-black transition-all">
                 <MessageCircle className="w-4 h-4" />
               </a>
-              <a href="#" aria-label="Instagram" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-premium-green hover:border-premium-green/50 transition-all">
-                <Instagram className="w-4 h-4" />
-              </a>
-              <a href="#" aria-label="LinkedIn" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-premium-green hover:border-premium-green/50 transition-all">
-                <Linkedin className="w-4 h-4" />
-              </a>
-              <a href="#" aria-label="Twitter" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-premium-green hover:border-premium-green/50 transition-all">
-                <Twitter className="w-4 h-4" />
-              </a>
             </div>
-          </div>
-
-          {/* Services */}
-          <div>
-            <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-6">{t.footer.services}</h4>
-            <ul className="space-y-3 text-sm">
-              {t.footer.serviceLinks.map((link: string, i: number) => (
-                <li key={i}><a href="#expertise" className="text-gray-400 hover:text-premium-green transition-colors">{link}</a></li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Navigation */}
-          <div>
-            <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-6">{t.footer.navigation}</h4>
-            <ul className="space-y-3 text-sm">
-              <li><a href="#expertise" className="text-gray-400 hover:text-premium-green transition-colors">{t.footer.navLinks.expertise}</a></li>
-              <li><a href="#projects" className="text-gray-400 hover:text-premium-green transition-colors">{t.footer.navLinks.projects}</a></li>
-              <li><a href="#process" className="text-gray-400 hover:text-premium-green transition-colors">{t.footer.navLinks.process}</a></li>
-              <li><a href="#pricing" className="text-gray-400 hover:text-premium-green transition-colors">{t.footer.navLinks.pricing}</a></li>
-              <li><a href="#contact" className="text-gray-400 hover:text-premium-green transition-colors">{t.footer.navLinks.contact}</a></li>
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-6">{t.footer.contactTitle}</h4>
-            <ul className="space-y-4 text-sm">
-              <li className="flex items-start gap-3">
-                <Mail className="w-4 h-4 text-premium-green mt-0.5" />
-                <span className="text-gray-400">hello@osiris.com</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Phone className="w-4 h-4 text-premium-green mt-0.5" />
-                <span className="text-gray-400">+33 1 23 45 67 89</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-premium-green mt-0.5" />
-                <span className="text-gray-400">12 Rue de la Paix, Paris</span>
-              </li>
-            </ul>
           </div>
         </div>
 
         {/* Bottom Bar - Legal Links */}
-        <div className="border-t border-white/5 pt-6 sm:pt-8 mt-6 sm:mt-8">
-          <div className="flex flex-col gap-4 sm:gap-6 items-center text-center">
-            <p className="text-xs text-gray-600">{t.footer.copyright}</p>
+        <div className="border-t border-white/5 pt-8 mt-8">
+          <div className="flex flex-col gap-6 items-center text-center">
+            <p className="text-xs text-gray-600">© 2026 OSIRIS. Tous droits réservés.</p>
 
-            <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-xs text-gray-500">
-              <a href="#" className="hover:text-white transition-colors">{t.footer.legal}</a>
-              <a href="#" className="hover:text-white transition-colors">{t.footer.terms}</a>
-              <a href="#" className="hover:text-white transition-colors">{t.footer.privacyPolicy}</a>
-              <a href="#" className="hover:text-white transition-colors">{t.footer.cookies}</a>
-              <a href="#" className="hover:text-white transition-colors">{t.footer.gdpr}</a>
+            <div className="flex flex-wrap justify-center gap-6 text-xs text-gray-500">
+              <Link to="/legal#cgv" className="hover:text-white transition-colors">CGV</Link>
+              <Link to="/legal#confidentialite" className="hover:text-white transition-colors">{t.footer.privacyPolicy}</Link>
+              <Link to="/legal#cookies" className="hover:text-white transition-colors">{t.footer.cookies}</Link>
             </div>
-
-            <span className="text-xs text-gray-700">{t.footer.designBy}</span>
           </div>
         </div>
       </div>

@@ -37,7 +37,8 @@ export const Process: React.FC = () => {
     <section id="process" className="px-4 sm:px-6 py-10 sm:py-16 lg:py-32 bg-[#050505] relative overflow-hidden scroll-mt-20">
 
       {/* Background Ambience */}
-      <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-[0.02] pointer-events-none"></div>
+      {/* Premium Smooth Background */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.02)_0%,transparent_60%)] pointer-events-none"></div>
 
       <div className="container mx-auto max-w-5xl lg:max-w-7xl relative z-10">
         <motion.div
