@@ -1,0 +1,22 @@
+{
+    "name": "Osiris - Agence Web Premium",
+    "short_name": "Osiris",
+    "description": "Agence web premium spécialisée dans la création de sites vitrines haute performance et designs sur-mesure.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#050505",
+    "theme_color": "#050505",
+    "orientation": "portrait-primary",
+    "categories": [
+        "business",
+        "web"
+    ],
+    "lang": "fr",
+    "icons": [
+        {
+            "src": "/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml"
+        }
+    ]
+}

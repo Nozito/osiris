@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Mail, MapPin, Phone, ArrowRight, MessageSquare, Clock, Sparkles, CheckCircle2, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { Send, Mail, ArrowRight, MessageSquare, Clock, CheckCircle2, Instagram, Linkedin, Twitter } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Footer } from '../components/Footer';
 import { MagneticButton } from '../components/ui/MagneticButton';
+import { SEOHead } from '../components/SEOHead';
+import { useLanguage } from '../context/LanguageContext';
 
 export const ContactPage: React.FC = () => {
+    const { t, language } = useLanguage();
     const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -19,6 +22,33 @@ export const ContactPage: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-[#050505] selection:bg-premium-green selection:text-black overflow-hidden font-sans">
+            <SEOHead
+                title={language === 'fr'
+                    ? 'Contact - Osiris | Agence Web Premium'
+                    : 'Contact - Osiris | Premium Web Agency'}
+                description={language === 'fr'
+                    ? 'Contactez Osiris pour votre projet web. Devis gratuit sous 24h. Cr\u00e9ation de sites vitrines haute performance, landing pages et design UI/UX sur-mesure.'
+                    : 'Contact Osiris for your web project. Free quote within 24h. High-performance showcase websites, landing pages and custom UI/UX design.'}
+                canonical="https://osiris-web.com/contact"
+                jsonLd={{
+                    "@context": "https://schema.org",
+                    "@type": "BreadcrumbList",
+                    "itemListElement": [
+                        {
+                            "@type": "ListItem",
+                            "position": 1,
+                            "name": "Accueil",
+                            "item": "https://osiris-web.com/"
+                        },
+                        {
+                            "@type": "ListItem",
+                            "position": 2,
+                            "name": "Contact",
+                            "item": "https://osiris-web.com/contact"
+                        }
+                    ]
+                }}
+            />
 
             {/* Ambient Background Elements */}
             <div className="fixed inset-0 pointer-events-none">
@@ -41,7 +71,7 @@ export const ContactPage: React.FC = () => {
                                 <span className="transform group-hover:-translate-x-1 transition-transform inline-block">
                                     <ArrowRight className="w-3.5 h-3.5 rotate-180" />
                                 </span>
-                                Retour à l'accueil
+                                {t.common.backToHome}
                             </Link>
 
                             <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
@@ -59,28 +89,28 @@ export const ContactPage: React.FC = () => {
                                             transition={{ delay: 0.6, duration: 0.5 }}
                                             className="text-premium-green text-xs font-bold uppercase tracking-[0.2em]"
                                         >
-                                            Contactez-nous
+                                            {t.contactPage.sectionLabel}
                                         </motion.span>
                                     </div>
-                                    <h1 className="text-6xl md:text-8xl lg:text-9xl font-black font-display text-white tracking-tighter leading-[0.9]">
-                                        <span className="block overflow-hidden">
+                                    <h1 className="text-6xl md:text-8xl lg:text-9xl font-black font-display text-white tracking-tighter leading-none">
+                                        <span className="block overflow-hidden pb-4 pr-4 -mr-4">
                                             <motion.span
                                                 initial={{ y: "100%" }}
                                                 animate={{ y: 0 }}
                                                 transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
                                                 className="block"
                                             >
-                                                PARLONS
+                                                {t.contactPage.title}
                                             </motion.span>
                                         </span>
-                                        <span className="block overflow-hidden">
+                                        <span className="block overflow-hidden pb-2 -mt-2 md:-mt-4">
                                             <motion.span
                                                 initial={{ y: "100%" }}
                                                 animate={{ y: 0 }}
                                                 transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
                                                 className="block text-transparent bg-clip-text bg-gradient-to-r from-gray-500 to-gray-800"
                                             >
-                                                FUTUR.
+                                                {t.contactPage.titleFaded}
                                             </motion.span>
                                         </span>
                                     </h1>
@@ -91,9 +121,9 @@ export const ContactPage: React.FC = () => {
                                     transition={{ delay: 0.8, duration: 0.8 }}
                                     className="text-gray-400 max-w-md text-lg leading-relaxed md:text-right border-l-2 md:border-l-0 md:border-r-2 border-premium-green/30 pl-6 md:pl-0 md:pr-6"
                                 >
-                                    Vous avez une vision ambitieuse ? <br />
-                                    Nous avons l'expertise pour la concrétiser. <br />
-                                    <span className="text-white font-medium">Réponse garantie sous 24h.</span>
+                                    {t.contactPage.subtitle} <br />
+                                    {t.contactPage.subtitleLine2} <br />
+                                    <span className="text-white font-medium">{t.contactPage.subtitleHighlight}</span>
                                 </motion.p>
                             </div>
                         </motion.div>
@@ -117,8 +147,8 @@ export const ContactPage: React.FC = () => {
                                             <Mail className="w-5 h-5" />
                                         </div>
                                         <div>
-                                            <h3 className="text-white font-bold font-display text-lg mb-1">Email Direct</h3>
-                                            <p className="text-gray-400 text-sm mb-2">Pour les demandes commerciales</p>
+                                            <h3 className="text-white font-bold font-display text-lg mb-1">{t.contactPage.emailTitle}</h3>
+                                            <p className="text-gray-400 text-sm mb-2">{t.contactPage.emailDesc}</p>
                                             <a href="mailto:hello@osiris.com" className="text-white hover:text-premium-green transition-colors font-mono text-sm underline decoration-premium-green/30 hover:decoration-premium-green underline-offset-4">hello@osiris.com</a>
                                         </div>
                                     </div>
@@ -130,9 +160,9 @@ export const ContactPage: React.FC = () => {
                                             <Clock className="w-5 h-5" />
                                         </div>
                                         <div>
-                                            <h3 className="text-white font-bold font-display text-lg mb-1">Disponibilité</h3>
-                                            <p className="text-gray-400 text-sm mb-2">Support réactif et dédié</p>
-                                            <p className="text-white font-mono text-sm">Lun - Ven : 09h - 18h</p>
+                                            <h3 className="text-white font-bold font-display text-lg mb-1">{t.contactPage.availabilityTitle}</h3>
+                                            <p className="text-gray-400 text-sm mb-2">{t.contactPage.availabilityDesc}</p>
+                                            <p className="text-white font-mono text-sm">{t.contactPage.availabilityHours}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -144,7 +174,7 @@ export const ContactPage: React.FC = () => {
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 0.6 }}
                             >
-                                <span className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-6 block">Réseaux Sociaux</span>
+                                <span className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-6 block">{t.contactPage.socialLabel}</span>
                                 <div className="flex gap-4">
                                     {[
                                         { icon: Linkedin, href: "#" },
@@ -168,8 +198,11 @@ export const ContactPage: React.FC = () => {
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.4 }}
-                                className="relative bg-black/40 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] p-8 md:p-12 shadow-2xl overflow-hidden"
+                                className="relative bg-[#080808]/80 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] p-6 md:p-12 shadow-[0_0_50px_-10px_rgba(0,0,0,0.5)] overflow-hidden"
                             >
+                                {/* Subtle inner border gradient */}
+                                <div className="absolute inset-0 border border-white/5 rounded-[2.5rem] pointer-events-none"></div>
+
                                 {/* Form content */}
                                 <AnimatePresence mode="wait">
                                     {formStatus === 'success' ? (
@@ -180,16 +213,16 @@ export const ContactPage: React.FC = () => {
                                             exit={{ opacity: 0, scale: 0.9 }}
                                             className="min-h-[400px] flex flex-col items-center justify-center text-center"
                                         >
-                                            <div className="w-24 h-24 bg-premium-green/10 rounded-full flex items-center justify-center text-premium-green mb-6 animate-[pulse_2s_infinite]">
+                                            <div className="w-24 h-24 bg-premium-green/10 rounded-full flex items-center justify-center text-premium-green mb-8 animate-[pulse_2s_infinite] shadow-[0_0_30px_rgba(0,255,133,0.2)]">
                                                 <CheckCircle2 className="w-12 h-12" />
                                             </div>
-                                            <h3 className="text-3xl font-bold text-white font-display mb-4">Message Envoyé !</h3>
-                                            <p className="text-gray-400 mb-8 max-w-sm">Votre demande a bien été reçue. Notre équipe vous contactera dans les plus brefs délais.</p>
+                                            <h3 className="text-3xl md:text-4xl font-bold text-white font-display mb-4">{t.contactPage.successTitle}</h3>
+                                            <p className="text-gray-400 mb-10 max-w-sm text-lg font-light leading-relaxed">{t.contactPage.successMessage}</p>
                                             <button
                                                 onClick={() => setFormStatus('idle')}
-                                                className="text-premium-green font-bold text-sm uppercase tracking-widest hover:text-white transition-colors"
+                                                className="px-8 py-3 rounded-full border border-premium-green/30 text-premium-green font-bold text-xs uppercase tracking-widest hover:bg-premium-green hover:text-black transition-all duration-300"
                                             >
-                                                Envoyer un autre message
+                                                {t.contactPage.sendAnother}
                                             </button>
                                         </motion.div>
                                     ) : (
@@ -200,64 +233,83 @@ export const ContactPage: React.FC = () => {
                                             onSubmit={handleSubmit}
                                             className="space-y-8"
                                         >
-                                            <div className="flex items-center gap-3 mb-8 pb-8 border-b border-white/5">
-                                                <MessageSquare className="w-5 h-5 text-premium-green" />
-                                                <h3 className="text-xl font-bold text-white font-display">Détails du Projet</h3>
-                                            </div>
-
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                                <div className="space-y-2 group">
-                                                    <label className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-1 group-focus-within:text-premium-green transition-colors">Nom complet</label>
-                                                    <input required type="text" className="w-full bg-white/[0.03] border-b border-white/10 p-4 text-white focus:border-premium-green focus:outline-none focus:bg-white/[0.05] transition-all rounded-t-lg" placeholder="John Doe" />
+                                            <div className="flex items-center gap-4 mb-10 pb-8 border-b border-white/5">
+                                                <div className="w-10 h-10 rounded-full bg-premium-green/10 flex items-center justify-center text-premium-green shadow-[0_0_15px_rgba(0,255,133,0.2)]">
+                                                    <MessageSquare className="w-5 h-5" />
                                                 </div>
-                                                <div className="space-y-2 group">
-                                                    <label className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-1 group-focus-within:text-premium-green transition-colors">Entreprise</label>
-                                                    <input type="text" className="w-full bg-white/[0.03] border-b border-white/10 p-4 text-white focus:border-premium-green focus:outline-none focus:bg-white/[0.05] transition-all rounded-t-lg" placeholder="Studio Osiris" />
+                                                <h3 className="text-2xl font-bold text-white font-display uppercase tracking-wide">{t.contactPage.formTitle}</h3>
+                                            </div>
+
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                                                <div className="space-y-2 group relative">
+                                                    <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold ml-1 mb-1 block group-focus-within:text-premium-green transition-colors duration-300">{t.contactPage.labelName}</label>
+                                                    <div className="relative">
+                                                        <input required type="text" className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none focus:shadow-[0_0_20px_rgba(0,255,133,0.05)] transition-all duration-300 text-sm md:text-base font-medium" placeholder="Ex: John Doe" />
+                                                        <div className="absolute inset-0 rounded-xl border border-transparent group-focus-within:border-premium-green/20 pointer-events-none transition-all duration-500 scale-105 opacity-0 group-focus-within:opacity-100 group-focus-within:scale-100"></div>
+                                                    </div>
+                                                </div>
+                                                <div className="space-y-2 group relative">
+                                                    <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold ml-1 mb-1 block group-focus-within:text-premium-green transition-colors duration-300">{t.contactPage.labelCompany}</label>
+                                                    <div className="relative">
+                                                        <input type="text" className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none focus:shadow-[0_0_20px_rgba(0,255,133,0.05)] transition-all duration-300 text-sm md:text-base font-medium" placeholder="Ex: Studio Osiris" />
+                                                        <div className="absolute inset-0 rounded-xl border border-transparent group-focus-within:border-premium-green/20 pointer-events-none transition-all duration-500 scale-105 opacity-0 group-focus-within:opacity-100 group-focus-within:scale-100"></div>
+                                                    </div>
                                                 </div>
                                             </div>
 
-                                            <div className="space-y-2 group">
-                                                <label className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-1 group-focus-within:text-premium-green transition-colors">Email professionnel</label>
-                                                <input required type="email" className="w-full bg-white/[0.03] border-b border-white/10 p-4 text-white focus:border-premium-green focus:outline-none focus:bg-white/[0.05] transition-all rounded-t-lg" placeholder="john@osiris.com" />
-                                            </div>
-
-                                            <div className="space-y-2 group">
-                                                <label className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-1 group-focus-within:text-premium-green transition-colors">Budget estimé</label>
+                                            <div className="space-y-2 group relative">
+                                                <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold ml-1 mb-1 block group-focus-within:text-premium-green transition-colors duration-300">{t.contactPage.labelEmail}</label>
                                                 <div className="relative">
-                                                    <select className="w-full bg-white/[0.03] border-b border-white/10 p-4 text-white focus:border-premium-green focus:outline-none focus:bg-white/[0.05] transition-all rounded-t-lg appearance-none cursor-pointer">
-                                                        <option className="bg-zinc-900">Moins de 5k€</option>
-                                                        <option className="bg-zinc-900">5k€ - 15k€</option>
-                                                        <option className="bg-zinc-900">15k€ - 50k€</option>
-                                                        <option className="bg-zinc-900">Plus de 50k€</option>
+                                                    <input required type="email" className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none focus:shadow-[0_0_20px_rgba(0,255,133,0.05)] transition-all duration-300 text-sm md:text-base font-medium" placeholder="Ex: john@osiris.com" />
+                                                    <Mail className="absolute right-5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600 group-focus-within:text-premium-green transition-colors duration-300" />
+                                                </div>
+                                            </div>
+
+                                            <div className="space-y-2 group relative">
+                                                <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold ml-1 mb-1 block group-focus-within:text-premium-green transition-colors duration-300">{t.contactPage.labelBudget}</label>
+                                                <div className="relative">
+                                                    <select className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 text-white focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none focus:shadow-[0_0_20px_rgba(0,255,133,0.05)] transition-all duration-300 text-sm md:text-base font-medium appearance-none cursor-pointer">
+                                                        {t.contactPage.budgetOptions.map((option: string, i: number) => (
+                                                            <option key={i} className="bg-[#111] text-gray-200 py-2">{option}</option>
+                                                        ))}
                                                     </select>
-                                                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                                                    <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-300 group-focus-within:rotate-180">
                                                         <ArrowRight className="w-4 h-4 text-gray-500 rotate-90" />
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div className="space-y-2 group">
-                                                <label className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-1 group-focus-within:text-premium-green transition-colors">Message</label>
-                                                <textarea required rows={4} className="w-full bg-white/[0.03] border-b border-white/10 p-4 text-white focus:border-premium-green focus:outline-none focus:bg-white/[0.05] transition-all rounded-t-lg resize-none" placeholder="Décrivez votre projet..."></textarea>
+                                            <div className="space-y-2 group relative">
+                                                <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold ml-1 mb-1 block group-focus-within:text-premium-green transition-colors duration-300">{t.contactPage.labelMessage}</label>
+                                                <div className="relative">
+                                                    <textarea required rows={5} className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none focus:shadow-[0_0_20px_rgba(0,255,133,0.05)] transition-all duration-300 text-sm md:text-base font-medium resize-none leading-relaxed" placeholder={t.contactPage.messagePlaceholder}></textarea>
+                                                    <div className="absolute inset-0 rounded-xl border border-transparent group-focus-within:border-premium-green/20 pointer-events-none transition-all duration-500 scale-105 opacity-0 group-focus-within:opacity-100 group-focus-within:scale-100"></div>
+                                                </div>
                                             </div>
 
-                                            <div className="pt-4">
-                                                <MagneticButton className="w-full">
-                                                    <button
-                                                        type="submit"
-                                                        disabled={formStatus === 'submitting'}
-                                                        className="w-full bg-white text-black font-black py-5 uppercase tracking-[0.2em] hover:bg-premium-green transition-colors duration-300 flex items-center justify-center gap-3 rounded-full shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(0,255,133,0.4)] disabled:opacity-70 disabled:cursor-not-allowed"
-                                                    >
-                                                        {formStatus === 'submitting' ? (
-                                                            <span className="animate-pulse">Envoi en cours...</span>
-                                                        ) : (
-                                                            <>
-                                                                Lancer le projet
-                                                                <Send className="w-4 h-4" />
-                                                            </>
-                                                        )}
-                                                    </button>
-                                                </MagneticButton>
+                                            <div className="pt-6">
+                                                <button
+                                                    type="submit"
+                                                    disabled={formStatus === 'submitting'}
+                                                    className="w-full bg-white text-black font-black py-5 uppercase tracking-[0.2em] hover:bg-premium-green transition-colors duration-300 flex items-center justify-center gap-3 rounded-xl shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
+                                                >
+                                                    {formStatus === 'submitting' ? (
+                                                        <span className="animate-pulse flex items-center gap-2">
+                                                            {t.contactPage.submitting}
+                                                            <span className="flex gap-1">
+                                                                <span className="w-1 h-1 bg-black rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+                                                                <span className="w-1 h-1 bg-black rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+                                                                <span className="w-1 h-1 bg-black rounded-full animate-bounce"></span>
+                                                            </span>
+                                                        </span>
+                                                    ) : (
+                                                        <>
+                                                            {t.contactPage.submitButton}
+                                                            <Send className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                                                        </>
+                                                    )}
+                                                </button>
+                                                <p className="text-center text-gray-600 text-[10px] mt-4 uppercase tracking-widest">{t.contactPage.spamProtection || "Protected by ReCAPTCHA"}</p>
                                             </div>
                                         </motion.form>
                                     )}

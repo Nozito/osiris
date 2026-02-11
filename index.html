@@ -3,14 +3,159 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Osiris - Dominance Digitale</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- SEO: Title & Description -->
+  <title>Osiris - Agence Web Premium | Sites Vitrines Haute Performance</title>
+  <meta name="description"
+    content="Osiris, agence web premium spécialisée dans la création de sites vitrines haute performance, landing pages sur-mesure et design UI/UX d'exception. Dominez votre marché digital." />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <link rel="canonical" href="https://osiris-web.com/" />
+
+  <!-- SEO: Hreflang for Multilingual -->
+  <link rel="alternate" hreflang="fr" href="https://osiris-web.com/" />
+  <link rel="alternate" hreflang="en" href="https://osiris-web.com/?lang=en" />
+  <link rel="alternate" hreflang="x-default" href="https://osiris-web.com/" />
+
+  <!-- SEO: Open Graph (Facebook/LinkedIn) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Osiris - Agence Web Premium | Dominance Digitale" />
+  <meta property="og:description"
+    content="Agence web premium spécialisée dans la création de sites vitrines haute performance et designs sur-mesure." />
+  <meta property="og:url" content="https://osiris-web.com/" />
+  <meta property="og:site_name" content="Osiris" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://osiris-web.com/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Osiris - Agence Web Premium" />
+
+  <!-- SEO: Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Osiris - Agence Web Premium" />
+  <meta name="twitter:description"
+    content="Sites vitrines haute performance et designs sur-mesure pour dominer votre marché digital." />
+  <meta name="twitter:image" content="https://osiris-web.com/og-image.png" />
+  <meta name="twitter:image:alt" content="Osiris - Agence Web Premium" />
+
+  <!-- SEO: Additional Meta -->
+  <meta name="author" content="Osiris" />
+  <meta name="generator" content="Osiris Web Studio" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <!-- Theme Color (Mobile Browser) -->
+  <meta name="theme-color" content="#050505" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Osiris" />
+  <meta name="mobile-web-app-capable" content="yes" />
+
+  <!-- Favicon & Icons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/favicon.svg" />
+
+  <!-- Web App Manifest -->
+  <link rel="manifest" href="/manifest.json" />
+
+  <!-- Tailwind CSS (CDN) -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Performance: DNS Prefetch & Preconnect for Fonts -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Fonts with display=swap -->
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Satoshi:wght@400;700;900&display=swap" />
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Satoshi:wght@400;700;900&display=swap"
-    rel="stylesheet">
+    rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Satoshi:wght@400;700;900&display=swap"
+      rel="stylesheet" />
+  </noscript>
+
+  <!-- JSON-LD: Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Osiris",
+    "url": "https://osiris-web.com",
+    "logo": "https://osiris-web.com/favicon.svg",
+    "description": "Agence web premium spécialisée dans la création de sites vitrines haute performance et designs sur-mesure.",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "hello@osiris.com",
+      "contactType": "customer service",
+      "availableLanguage": ["French", "English"]
+    },
+    "sameAs": []
+  }
+  </script>
+
+  <!-- JSON-LD: WebSite Schema with SearchAction -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Osiris",
+    "url": "https://osiris-web.com",
+    "inLanguage": ["fr", "en"],
+    "description": "Agence web premium spécialisée dans la création de sites vitrines haute performance."
+  }
+  </script>
+
+  <!-- JSON-LD: LocalBusiness Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Osiris",
+    "url": "https://osiris-web.com",
+    "description": "Agence web premium spécialisée dans la création de sites vitrines haute performance, landing pages sur-mesure et design UI/UX d'exception.",
+    "email": "hello@osiris.com",
+    "priceRange": "€€€",
+    "serviceType": ["Web Design", "Web Development", "UI/UX Design", "Landing Page", "Site Vitrine"],
+    "areaServed": {
+      "@type": "Country",
+      "name": "France"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Services Web Premium",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Site Vitrine Premium"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Landing Page Sur-Mesure"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Design UI/UX"
+          }
+        }
+      ]
+    }
+  }
+  </script>
+
   <style>
     body {
       background-color: #0a0a0a;
@@ -106,18 +251,6 @@
       }
     }
   </script>
-  <script type="importmap">
-{
-  "imports": {
-    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
-    "react/": "https://esm.sh/react@^19.2.4/",
-    "react": "https://esm.sh/react@^19.2.4",
-    "framer-motion": "https://esm.sh/framer-motion@^12.31.0"
-  }
-}
-
-</script>
   <link rel="stylesheet" href="/index.css">
 </head>
 

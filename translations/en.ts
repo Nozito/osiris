@@ -99,24 +99,30 @@ export const en = {
         titleFaded: "about us.",
         reviews: [
             {
-                text: "The return on investment was immediate. Our brand image went from 'local' to 'international' in 3 weeks.",
-                author: "Thomas Durand",
-                role: "CEO, LuxEstate"
+                text: "Before Osiris, our conversion rate was stuck at 1.2%. Three months after launching the new site, we reached 4.8%. The investment paid for itself in 6 weeks.",
+                author: "Antoine Mercier",
+                role: "Marketing Director",
+                company: "ImmoPrestige Lyon",
+                date: "January 2025"
             },
             {
-                text: "A team that truly understands luxury and tech. The design is stunning and the site speed is incredible.",
-                author: "Sophie Laurent",
-                role: "Founder, Vogue Noir"
+                text: "I've worked with a dozen web agencies in 15 years. Osiris is the first to exceed my expectations. The level of detail and responsiveness are exceptional.",
+                author: "Caroline Dubois",
+                role: "CEO & Founder",
+                company: "Maison Éclat Paris",
+                date: "December 2024"
             },
             {
-                text: "They don't just make websites, they build digital war machines. Absolutely recommended.",
-                author: "Marc Levy",
-                role: "CTO, NexTech"
+                text: "Our old site took 8 seconds to load. The new one? 0.9 seconds. Clients tell us browsing it is a pleasure. That's exactly what we wanted.",
+                author: "Julien Moreau",
+                role: "CTO",
+                company: "FinanceFlow",
+                date: "November 2024"
             }
         ]
     },
 
-    // Offer
+    // Offer (Homepage)
     offer: {
         sectionLabel: "Transparent Pricing",
         title: "Investment.",
@@ -179,7 +185,7 @@ export const en = {
         }
     },
 
-    // Contact
+    // Contact (Homepage section)
     contact: {
         sectionLabel: "Contact",
         title: "Let's talk",
@@ -209,7 +215,16 @@ export const en = {
         copyright: "© 2024 OSIRIS. All rights reserved.",
         legal: "Legal Notice",
         terms: "Terms",
-        designBy: "Design by Excellence"
+        designBy: "Design by Excellence",
+        services: "Services",
+        navigation: "Navigation",
+        contactTitle: "Contact",
+        companyDesc: "Premium web agency specializing in high-performance showcase websites and custom designs.",
+        serviceLinks: ["Showcase Sites", "Landing Pages", "UI/UX Design", "SEO & Performance", "Maintenance & Support"],
+        navLinks: { expertise: "Expertise", projects: "Projects", process: "Process", pricing: "Pricing", contact: "Contact" },
+        privacyPolicy: "Privacy Policy",
+        cookies: "Cookies",
+        gdpr: "GDPR"
     },
 
     // Common
@@ -220,17 +235,53 @@ export const en = {
 
     // Pricing Page
     pricingPage: {
-        sectionLabel: "Transparent Pricing",
-        title: "Our",
-        titleHighlight: "Pricing",
-        subtitle: "Three levels of excellence to propel your business. No hidden costs, no surprises.",
-        guarantees: {
-            delivery: { title: "Guaranteed delivery", desc: "Deadline respect or partial refund" },
-            payment: { title: "Secure payment", desc: "Deposit only, balance on delivery" },
-            support: { title: "Responsive support", desc: "Response within 24 business hours guaranteed" },
-            satisfaction: { title: "Satisfaction", desc: "Revisions included until validation" }
+        sectionLabel: "Strategic Investment",
+        title: "OUR",
+        titleHighlight: "OFFERS",
+        subtitle: "Elite solutions for those who aim for ",
+        subtitleHighlight: "excellence",
+        subtitleEnd: ". Total transparency. Maximum impact.",
+        choosePack: "Choose this pack",
+        badges: { starter: "Launch", business: "Recommended", empire: "Domination" },
+        comparison: {
+            title: "Detailed Comparison",
+            subtitle: "Total transparency for an informed choice.",
+            features: "Features",
+            sections: {
+                design: "Design & Experience",
+                tech: "Tech & Performance",
+                support: "VIP Support"
+            },
+            rows: {
+                figma: "Figma Mockups & UX",
+                animations: "60FPS Animations",
+                responsive: "3-Screen Responsive",
+                structure: "Site Structure",
+                seo: "Technical SEO",
+                cms: "CMS (Admin)",
+                maintenance: "Included Maintenance"
+            },
+            values: {
+                landingPage: "Landing Page",
+                multiPages: "Multi-Pages",
+                custom: "Custom-Built",
+                standard: "Standard",
+                advanced: "Advanced +",
+                expert: "Expert + Audit",
+                month1: "1 Month",
+                month3: "3 Months",
+                month12: "12 Months"
+            },
+            recommended: "Recommended"
         },
-        faqTitle: "Frequently asked questions",
+        faq: {
+            label: "Support & Help",
+            title: "Frequently",
+            titleLine2: "Asked Questions",
+            subtitle: "Have more questions?",
+            subtitleLine2: "Our team is available to answer them directly.",
+            contactSupport: "Contact support"
+        },
         faqs: [
             { question: "What are the delivery times?", answer: "Starter: 7 business days. Business: 14 business days. Empire: 3-5 weeks depending on complexity." },
             { question: "Can payment be staggered?", answer: "Yes. 50% deposit at project launch, and the remaining 50% upon final delivery." },
@@ -242,14 +293,42 @@ export const en = {
             title: "A specific project?",
             description: "Do you have particular needs or complex specifications? Request a custom quote tailored to your ambition.",
             button: "Request a custom quote"
-        }
+        },
+        guarantees: {
+            delivery: { title: "Guaranteed delivery", desc: "Deadline respect or partial refund" },
+            payment: { title: "Secure payment", desc: "Deposit only, balance on delivery" },
+            support: { title: "Responsive support", desc: "Response within 24 business hours guaranteed" },
+            satisfaction: { title: "Satisfaction", desc: "Revisions included until validation" }
+        },
+        faqTitle: "Frequently asked questions"
     },
 
     // Contact Page
     contactPage: {
         sectionLabel: "Contact us",
-        title: "Let's talk",
-        titleFaded: "Future.",
-        subtitle: "Do you have an ambitious project? We have the team to make it happen. Fill out the form and get a response within 24h."
+        title: "LET'S TALK",
+        titleFaded: "FUTURE.",
+        subtitle: "You have an ambitious vision?",
+        subtitleLine2: "We have the expertise to make it happen.",
+        subtitleHighlight: "Response guaranteed within 24h.",
+        emailTitle: "Direct Email",
+        emailDesc: "For business inquiries",
+        availabilityTitle: "Availability",
+        availabilityDesc: "Responsive and dedicated support",
+        availabilityHours: "Mon - Fri: 9am - 6pm",
+        socialLabel: "Social Media",
+        formTitle: "Project Details",
+        labelName: "Full name",
+        labelCompany: "Company",
+        labelEmail: "Professional email",
+        labelBudget: "Estimated budget",
+        budgetOptions: ["Under €5k", "€5k - €15k", "€15k - €50k", "Over €50k"],
+        labelMessage: "Message",
+        messagePlaceholder: "Describe your project...",
+        submitButton: "Launch the project",
+        submitting: "Sending...",
+        successTitle: "Message Sent!",
+        successMessage: "Your request has been received. Our team will contact you as soon as possible.",
+        sendAnother: "Send another message"
     }
 };

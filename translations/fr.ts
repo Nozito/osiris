@@ -122,7 +122,7 @@ export const fr = {
         ]
     },
 
-    // Offer
+    // Offer (Homepage)
     offer: {
         sectionLabel: "Tarifs Transparents",
         title: "Investissement.",
@@ -185,7 +185,7 @@ export const fr = {
         }
     },
 
-    // Contact
+    // Contact (Homepage section)
     contact: {
         sectionLabel: "Contact",
         title: "Parlons",
@@ -215,7 +215,16 @@ export const fr = {
         copyright: "© 2024 OSIRIS. Tous droits réservés.",
         legal: "Mentions Légales",
         terms: "CGV",
-        designBy: "Design par Excellence"
+        designBy: "Design par Excellence",
+        services: "Services",
+        navigation: "Navigation",
+        contactTitle: "Contact",
+        companyDesc: "Agence web premium spécialisée dans la création de sites vitrines haute performance et designs sur-mesure.",
+        serviceLinks: ["Sites Vitrines", "Landing Pages", "Design UI/UX", "SEO & Performance", "Maintenance & Support"],
+        navLinks: { expertise: "Expertise", projects: "Réalisations", process: "Processus", pricing: "Tarifs", contact: "Contact" },
+        privacyPolicy: "Politique de confidentialité",
+        cookies: "Cookies",
+        gdpr: "RGPD"
     },
 
     // Common
@@ -226,17 +235,53 @@ export const fr = {
 
     // Pricing Page
     pricingPage: {
-        sectionLabel: "Tarifs Transparents",
-        title: "Nos",
-        titleHighlight: "Tarifs",
-        subtitle: "Trois niveaux d'excellence pour propulser votre business. Pas de coûts cachés, pas de surprises.",
-        guarantees: {
-            delivery: { title: "Livraison garantie", desc: "Respect des délais ou remboursement partiel" },
-            payment: { title: "Paiement sécurisé", desc: "Acompte uniquement, solde à la livraison" },
-            support: { title: "Support réactif", desc: "Réponse sous 24h ouvrées garantie" },
-            satisfaction: { title: "Satisfaction", desc: "Révisions incluses jusqu'à validation" }
+        sectionLabel: "Investissement Stratégique",
+        title: "NOS",
+        titleHighlight: "OFFRES",
+        subtitle: "Des solutions d'élite pour ceux qui visent l'",
+        subtitleHighlight: "excellence",
+        subtitleEnd: ". Transparence totale. Impact maximal.",
+        choosePack: "Choisir ce pack",
+        badges: { starter: "Lancement", business: "Recommandé", empire: "Domination" },
+        comparison: {
+            title: "Comparatif Détaillé",
+            subtitle: "Une transparence totale pour un choix éclairé.",
+            features: "Fonctionnalités",
+            sections: {
+                design: "Design & Expérience",
+                tech: "Tech & Perf",
+                support: "Support VIP"
+            },
+            rows: {
+                figma: "Maquettes Figma & UX",
+                animations: "Animations 60FPS",
+                responsive: "Responsive 3 Écrans",
+                structure: "Structure du Site",
+                seo: "SEO Technique",
+                cms: "CMS (Admin)",
+                maintenance: "Maintenance Incluse"
+            },
+            values: {
+                landingPage: "Landing Page",
+                multiPages: "Multi-Pages",
+                custom: "Sur-Mesure",
+                standard: "Standard",
+                advanced: "Avancé +",
+                expert: "Expert + Audit",
+                month1: "1 Mois",
+                month3: "3 Mois",
+                month12: "12 Mois"
+            },
+            recommended: "Recommandé"
         },
-        faqTitle: "Questions fréquentes",
+        faq: {
+            label: "Support & Aide",
+            title: "Questions",
+            titleLine2: "Fréquentes",
+            subtitle: "Vous avez d'autres questions ?",
+            subtitleLine2: "Notre équipe est disponible pour y répondre directement.",
+            contactSupport: "Contactez le support"
+        },
         faqs: [
             { question: "Quels sont les délais de livraison ?", answer: "Starter : 7 jours ouvrés. Business : 14 jours ouvrés. Empire : 3-5 semaines selon la complexité." },
             { question: "Le paiement peut-il être échelonné ?", answer: "Oui. 50% d'acompte au lancement du projet, et les 50% restants à la livraison finale." },
@@ -248,14 +293,42 @@ export const fr = {
             title: "Un projet spécifique ?",
             description: "Vous avez des besoins particuliers ou un cahier des charges complexe ? Demandez un devis sur-mesure adapté à votre ambition.",
             button: "Demander un devis personnalisé"
-        }
+        },
+        guarantees: {
+            delivery: { title: "Livraison garantie", desc: "Respect des délais ou remboursement partiel" },
+            payment: { title: "Paiement sécurisé", desc: "Acompte uniquement, solde à la livraison" },
+            support: { title: "Support réactif", desc: "Réponse sous 24h ouvrées garantie" },
+            satisfaction: { title: "Satisfaction", desc: "Révisions incluses jusqu'à validation" }
+        },
+        faqTitle: "Questions fréquentes"
     },
 
     // Contact Page
     contactPage: {
         sectionLabel: "Contactez-nous",
-        title: "Parlons",
-        titleFaded: "Futur.",
-        subtitle: "Vous avez un projet ambitieux ? Nous avons l'équipe pour le réaliser. Remplissez le formulaire et obtenez une réponse sous 24h."
+        title: "PARLONS",
+        titleFaded: "FUTUR.",
+        subtitle: "Vous avez une vision ambitieuse ?",
+        subtitleLine2: "Nous avons l'expertise pour la concrétiser.",
+        subtitleHighlight: "Réponse garantie sous 24h.",
+        emailTitle: "Email Direct",
+        emailDesc: "Pour les demandes commerciales",
+        availabilityTitle: "Disponibilité",
+        availabilityDesc: "Support réactif et dédié",
+        availabilityHours: "Lun - Ven : 09h - 18h",
+        socialLabel: "Réseaux Sociaux",
+        formTitle: "Détails du Projet",
+        labelName: "Nom complet",
+        labelCompany: "Entreprise",
+        labelEmail: "Email professionnel",
+        labelBudget: "Budget estimé",
+        budgetOptions: ["Moins de 5k€", "5k€ - 15k€", "15k€ - 50k€", "Plus de 50k€"],
+        labelMessage: "Message",
+        messagePlaceholder: "Décrivez votre projet...",
+        submitButton: "Lancer le projet",
+        submitting: "Envoi en cours...",
+        successTitle: "Message Envoyé !",
+        successMessage: "Votre demande a bien été reçue. Notre équipe vous contactera dans les plus brefs délais.",
+        sendAnother: "Envoyer un autre message"
     }
 };

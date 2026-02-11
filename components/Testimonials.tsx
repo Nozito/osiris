@@ -97,7 +97,7 @@ export const Testimonials: React.FC = () => {
 
               <div className="flex items-center gap-4 pt-4 border-t border-white/5">
                 <div className="w-12 h-12 rounded-full bg-gray-700 overflow-hidden border-2 border-white/10 group-hover:border-premium-green/50 transition-colors duration-500">
-                  <img src={review.image} alt={review.author} className="w-full h-full object-cover" />
+                  <img src={review.image} alt={review.author} className="w-full h-full object-cover" loading="lazy" width="48" height="48" />
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2">

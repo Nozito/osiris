@@ -32,7 +32,7 @@ export const Footer: React.FC = () => {
           <div className="col-span-2 md:col-span-1">
             <h4 className="text-white font-bold text-lg mb-6 font-display">OSIRIS</h4>
             <p className="text-gray-400 text-sm leading-relaxed mb-4 sm:mb-6">
-              Agence web premium spécialisée dans la création de sites vitrines haute performance et designs sur-mesure.
+              {t.footer.companyDesc}
             </p>
             <div className="flex gap-4">
               <a href="https://wa.me/message/HQMHR57XSDJTP1" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#25D366]/10 border border-[#25D366]/30 flex items-center justify-center text-[#25D366] hover:bg-[#25D366] hover:text-black transition-all">
@@ -52,31 +52,29 @@ export const Footer: React.FC = () => {
 
           {/* Services */}
           <div>
-            <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-6">Services</h4>
+            <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-6">{t.footer.services}</h4>
             <ul className="space-y-3 text-sm">
-              <li><a href="#expertise" className="text-gray-400 hover:text-premium-green transition-colors">Sites Vitrines</a></li>
-              <li><a href="#expertise" className="text-gray-400 hover:text-premium-green transition-colors">Landing Pages</a></li>
-              <li><a href="#expertise" className="text-gray-400 hover:text-premium-green transition-colors">Design UI/UX</a></li>
-              <li><a href="#expertise" className="text-gray-400 hover:text-premium-green transition-colors">SEO & Performance</a></li>
-              <li><a href="#expertise" className="text-gray-400 hover:text-premium-green transition-colors">Maintenance & Support</a></li>
+              {t.footer.serviceLinks.map((link: string, i: number) => (
+                <li key={i}><a href="#expertise" className="text-gray-400 hover:text-premium-green transition-colors">{link}</a></li>
+              ))}
             </ul>
           </div>
 
           {/* Navigation */}
           <div>
-            <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-6">Navigation</h4>
+            <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-6">{t.footer.navigation}</h4>
             <ul className="space-y-3 text-sm">
-              <li><a href="#expertise" className="text-gray-400 hover:text-premium-green transition-colors">Expertise</a></li>
-              <li><a href="#projects" className="text-gray-400 hover:text-premium-green transition-colors">Réalisations</a></li>
-              <li><a href="#process" className="text-gray-400 hover:text-premium-green transition-colors">Processus</a></li>
-              <li><a href="#pricing" className="text-gray-400 hover:text-premium-green transition-colors">Tarifs</a></li>
-              <li><a href="#contact" className="text-gray-400 hover:text-premium-green transition-colors">Contact</a></li>
+              <li><a href="#expertise" className="text-gray-400 hover:text-premium-green transition-colors">{t.footer.navLinks.expertise}</a></li>
+              <li><a href="#projects" className="text-gray-400 hover:text-premium-green transition-colors">{t.footer.navLinks.projects}</a></li>
+              <li><a href="#process" className="text-gray-400 hover:text-premium-green transition-colors">{t.footer.navLinks.process}</a></li>
+              <li><a href="#pricing" className="text-gray-400 hover:text-premium-green transition-colors">{t.footer.navLinks.pricing}</a></li>
+              <li><a href="#contact" className="text-gray-400 hover:text-premium-green transition-colors">{t.footer.navLinks.contact}</a></li>
             </ul>
           </div>
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-6">Contact</h4>
+            <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-6">{t.footer.contactTitle}</h4>
             <ul className="space-y-4 text-sm">
               <li className="flex items-start gap-3">
                 <Mail className="w-4 h-4 text-premium-green mt-0.5" />
@@ -102,9 +100,9 @@ export const Footer: React.FC = () => {
             <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-xs text-gray-500">
               <a href="#" className="hover:text-white transition-colors">{t.footer.legal}</a>
               <a href="#" className="hover:text-white transition-colors">{t.footer.terms}</a>
-              <a href="#" className="hover:text-white transition-colors">Politique de confidentialité</a>
-              <a href="#" className="hover:text-white transition-colors">Cookies</a>
-              <a href="#" className="hover:text-white transition-colors">RGPD</a>
+              <a href="#" className="hover:text-white transition-colors">{t.footer.privacyPolicy}</a>
+              <a href="#" className="hover:text-white transition-colors">{t.footer.cookies}</a>
+              <a href="#" className="hover:text-white transition-colors">{t.footer.gdpr}</a>
             </div>
 
             <span className="text-xs text-gray-700">{t.footer.designBy}</span>

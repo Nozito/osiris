@@ -1,4 +1,4 @@
-/* Global styles & Premium Tweaks */
+/* === GLOBAL STYLES === */
 :root {
   color-scheme: dark;
 }
@@ -11,34 +11,13 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Smooth scrolling & High-End Selection */
 html {
   scroll-behavior: smooth;
-  background-color: #030303; /* Deepest Black */
 }
 
 ::selection {
-  background-color: rgba(0, 255, 133, 0.2); /* Premium Green Tint */
+  background-color: rgba(0, 255, 133, 0.2);
   color: #fff;
-  text-shadow: 0 0 10px rgba(0, 255, 133, 0.5);
-}
-
-/* Custom Premium Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #050505;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #1f1f1f;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #333;
 }
 
 /* Hide scrollbar for horizontal scroll areas on mobile */
@@ -53,25 +32,21 @@ html {
 
 /* === PERFORMANCE OPTIMIZATIONS === */
 
-/* GPU acceleration hints for animated elements */
 .gpu-accelerated {
   transform: translateZ(0);
   backface-visibility: hidden;
   will-change: transform, opacity;
 }
 
-/* Contain paint for fixed backgrounds */
 .contain-paint {
   contain: paint;
 }
 
-/* Content visibility for off-screen sections (improves initial render) */
 section {
   content-visibility: auto;
   contain-intrinsic-size: auto 800px;
 }
 
-/* Respect user preference for reduced motion */
 @media (prefers-reduced-motion: reduce) {
 
   *,
@@ -84,39 +59,33 @@ section {
   }
 }
 
-/* Optimize blur elements - use hardware acceleration */
 [class*="blur-"] {
   transform: translateZ(0);
   backface-visibility: hidden;
   contain: layout paint;
 }
 
-/* Optimize transforms and opacity transitions */
 .transition-all,
 .transition-transform,
 .transition-opacity {
   will-change: auto;
 }
 
-/* Lazy loaded images - prevent layout shift */
 img[loading="lazy"] {
   content-visibility: auto;
 }
 
-/* Optimize fixed elements */
 .fixed {
   contain: layout style;
 }
 
-/* Reduce paint operations for hover states */
 .group:hover,
 [class*="hover:"]:hover {
   will-change: transform, opacity;
 }
 
-/* === OPTIMIZED KEYFRAME ANIMATIONS === */
+/* === KEYFRAME ANIMATIONS === */
 
-/* Slow floating animation for background orbs */
 @keyframes float-slow {
 
   0%,
@@ -131,7 +100,6 @@ img[loading="lazy"] {
   }
 }
 
-/* Shimmer animation for text effects */
 @keyframes shimmer {
   0% {
     background-position: -200% 0;
@@ -146,15 +114,11 @@ img[loading="lazy"] {
   animation: shimmer 8s ease-in-out infinite;
 }
 
-/* === ADDITIONAL PERFORMANCE RULES === */
-
-/* Optimize large blur elements */
 [class*="blur-["] {
   contain: strict;
   will-change: opacity;
 }
 
-/* Reduce animation complexity on low-power mode */
 @media (prefers-reduced-motion: reduce) {
 
   .animate-shimmer,

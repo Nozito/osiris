@@ -1,82 +1,13 @@
-import React, { useState, useRef, MouseEvent } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, useMotionTemplate, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { Check, ArrowRight, HelpCircle, X, ChevronLeft, ChevronRight, Rocket, Zap, Crown } from 'lucide-react';
+import { Check, ArrowRight, HelpCircle, ChevronLeft, ChevronRight, Rocket, Zap, Crown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Footer } from '../components/Footer';
-
-const offers = [
-    {
-        title: "Starter",
-        price: "950",
-        description: "L'essentiel pour exister avec élégance.",
-        features: [
-            "Site One-Page (Landing Page)",
-            "Design UI/UX Premium",
-            "Responsive Mobile & Tablette",
-            "Optimisation Vitesse",
-            "Hébergement offert (1 an)"
-        ],
-        highlight: false,
-        icon: Rocket,
-        color: "blue"
-    },
-    {
-        title: "Business",
-        price: "1 650",
-        description: "Pour les entreprises en pleine expansion.",
-        features: [
-            "Site Vitrine (jusqu'à 5 pages)",
-            "CMS (Gestion autonome)",
-            "Animations avancées",
-            "SEO Technique Optimisé",
-            "Analytics & Pixel Tracking"
-        ],
-        highlight: true,
-        icon: Zap,
-        color: "green"
-    },
-    {
-        title: "Empire",
-        price: "2 950",
-        description: "La domination totale de votre marché.",
-        features: [
-            "Site E-commerce ou Complexe",
-            "Design 100% Sur-Mesure",
-            "Effets 3D & WebGL",
-            "Intégration CRM & API",
-            "Stratégie Digitale & Support"
-        ],
-        highlight: false,
-        icon: Crown,
-        color: "purple"
-    }
-];
-
-const faqs = [
-    {
-        question: "Quels sont les délais de livraison ?",
-        answer: "Starter : 7 jours ouvrés. Business : 14 jours ouvrés. Empire : 3-5 semaines selon la complexité."
-    },
-    {
-        question: "Le paiement peut-il être échelonné ?",
-        answer: "Oui. 50% d'acompte au lancement du projet, et les 50% restants à la livraison finale."
-    },
-    {
-        question: "Que comprend l'hébergement offert ?",
-        answer: "Hébergement haute performance pendant 1 an, certificat SSL inclus, et support technique de base."
-    },
-    {
-        question: "Puis-je modifier mon site après livraison ?",
-        answer: "Absolument. Avec le CMS inclus (packs Business et Empire), vous gérez votre contenu en autonomie."
-    },
-    {
-        question: "Proposez-vous de la maintenance ?",
-        answer: "Oui, nous proposons des forfaits de maintenance mensuelle pour garantir la sécurité et les mises à jour."
-    }
-];
+import { SEOHead } from '../components/SEOHead';
+import { useLanguage } from '../context/LanguageContext';
 
 // --- 3D Tilt Card Component (Refined) ---
-const TiltCard = ({ children, className, highlight, color = "green" }: { children: React.ReactNode, className?: string, highlight?: boolean, color?: string }) => {
+const TiltCard = ({ children, className, highlight, color = "green" }: { key?: React.Key, children: React.ReactNode, className?: string, highlight?: boolean, color?: string }) => {
     const x = useMotionValue(0);
     const y = useMotionValue(0);
     const ref = useRef<HTMLDivElement>(null);
@@ -92,10 +23,10 @@ const TiltCard = ({ children, className, highlight, color = "green" }: { childre
         if (rect) {
             const width = rect.width;
             const height = rect.height;
-            const mouseX = e.clientX - rect.left;
-            const mouseY = e.clientY - rect.top;
-            const xPct = mouseX / width - 0.5;
-            const yPct = mouseY / height - 0.5;
+            const mX = e.clientX - rect.left;
+            const mY = e.clientY - rect.top;
+            const xPct = mX / width - 0.5;
+            const yPct = mY / height - 0.5;
             x.set(xPct);
             y.set(yPct);
         }
@@ -106,12 +37,11 @@ const TiltCard = ({ children, className, highlight, color = "green" }: { childre
         y.set(0);
     };
 
-    // Dynamic Color Mapping for Spotlight
     const getColorRgba = (c: string) => {
         switch (c) {
-            case 'blue': return 'rgba(59, 130, 246,'; // Blue-500
-            case 'purple': return 'rgba(168, 85, 247,'; // Purple-500
-            case 'green': return 'rgba(0, 255, 133,'; // Premium Green
+            case 'blue': return 'rgba(59, 130, 246,';
+            case 'purple': return 'rgba(168, 85, 247,';
+            case 'green': return 'rgba(0, 255, 133,';
             default: return 'rgba(0, 255, 133,';
         }
     };
@@ -130,7 +60,6 @@ const TiltCard = ({ children, className, highlight, color = "green" }: { childre
             }}
             className={`relative h-full transition-all duration-200 ease-out ${className}`}
         >
-            {/* Spotlight Effect - Dynamic Color */}
             <motion.div
                 style={{
                     background: useMotionTemplate`radial-gradient(600px circle at ${mouseX.get() * 100 + 50}% ${mouseY.get() * 100 + 50}%, ${colorRgba} 0.15), transparent 80%)`,
@@ -140,7 +69,6 @@ const TiltCard = ({ children, className, highlight, color = "green" }: { childre
                 transition={{ duration: 0.3 }}
                 className="absolute inset-0 pointer-events-none rounded-[2.5rem] z-20"
             />
-            {/* Default weak spotlight for visibility */}
             <motion.div
                 style={{
                     background: useMotionTemplate`radial-gradient(600px circle at ${mouseX.get() * 100 + 50}% ${mouseY.get() * 100 + 50}%, rgba(255,255,255,0.03), transparent 80%)`,
@@ -154,7 +82,38 @@ const TiltCard = ({ children, className, highlight, color = "green" }: { childre
 };
 
 export const PricingPage: React.FC = () => {
+    const { t, language } = useLanguage();
     const [currentIndex, setCurrentIndex] = useState(1);
+
+    const offers = [
+        {
+            title: "Starter",
+            price: "950",
+            description: t.offer.offers.starter.description,
+            features: t.offer.offers.starter.features,
+            highlight: false,
+            icon: Rocket,
+            color: "blue"
+        },
+        {
+            title: "Business",
+            price: "1 650",
+            description: t.offer.offers.business.description,
+            features: t.offer.offers.business.features,
+            highlight: true,
+            icon: Zap,
+            color: "green"
+        },
+        {
+            title: "Empire",
+            price: "2 950",
+            description: t.offer.offers.empire.description,
+            features: t.offer.offers.empire.features,
+            highlight: false,
+            icon: Crown,
+            color: "purple"
+        }
+    ];
 
     const nextSlide = () => {
         setCurrentIndex((prev) => (prev + 1) % offers.length);
@@ -184,14 +143,13 @@ export const PricingPage: React.FC = () => {
 
     const getBadge = (title: string) => {
         switch (title) {
-            case 'Starter': return "Lancement";
-            case 'Business': return "Recommandé";
-            case 'Empire': return "Domination";
+            case 'Starter': return t.pricingPage.badges.starter;
+            case 'Business': return t.pricingPage.badges.business;
+            case 'Empire': return t.pricingPage.badges.empire;
             default: return "";
         }
     };
 
-    // Helper to get hover border color
     const getBorderColorClass = (color: string) => {
         switch (color) {
             case 'blue': return 'group-hover:border-blue-500/40';
@@ -203,6 +161,33 @@ export const PricingPage: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-transparent selection:bg-premium-green selection:text-black font-sans overflow-x-hidden">
+            <SEOHead
+                title={language === 'fr'
+                    ? 'Tarifs & Offres - Osiris | Agence Web Premium'
+                    : 'Pricing & Plans - Osiris | Premium Web Agency'}
+                description={language === 'fr'
+                    ? 'Découvrez nos offres de création de sites web premium. Starter à partir de 950€, Business dès 1650€, Empire dès 2950€. Sites vitrines haute performance sur-mesure.'
+                    : 'Discover our premium web design packages. Starter from €950, Business from €1650, Empire from €2950. High-performance custom showcase websites.'}
+                canonical="https://osiris-web.com/tarifs"
+                jsonLd={{
+                    "@context": "https://schema.org",
+                    "@type": "BreadcrumbList",
+                    "itemListElement": [
+                        {
+                            "@type": "ListItem",
+                            "position": 1,
+                            "name": "Accueil",
+                            "item": "https://osiris-web.com/"
+                        },
+                        {
+                            "@type": "ListItem",
+                            "position": 2,
+                            "name": "Tarifs",
+                            "item": "https://osiris-web.com/tarifs"
+                        }
+                    ]
+                }}
+            />
 
             {/* Premium Background Removed (Handled Globally in App.tsx) */}
 
@@ -220,60 +205,83 @@ export const PricingPage: React.FC = () => {
                             <span className="transform group-hover:-translate-x-1 transition-transform inline-block">
                                 <ArrowRight className="w-3.5 h-3.5 rotate-180" />
                             </span>
-                            Retour à l'accueil
+                            {t.common.backToHome}
                         </Link>
 
                         <div className="flex items-center justify-center gap-2 mb-8">
                             <span className="px-4 py-1.5 rounded-full bg-premium-green/5 text-premium-green text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] border border-premium-green/10 shadow-[0_0_25px_-5px_rgba(0,255,133,0.3)] backdrop-blur-md">
-                                Investissement Stratégique
+                                {t.pricingPage.sectionLabel}
                             </span>
                         </div>
 
                         <h1 className="text-5xl md:text-7xl lg:text-8xl font-black font-display text-white mb-8 tracking-tighter relative inline-block">
-                            NOS <span className="relative inline-block">
+                            {t.pricingPage.title} <span className="relative inline-block">
                                 <span className="absolute -inset-2 blur-2xl bg-premium-green/20 animate-pulse"></span>
-                                <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-white via-premium-green to-emerald-400 animate-gradient-x">OFFRES</span>
+                                <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-white via-premium-green to-emerald-400 animate-gradient-x">{t.pricingPage.titleHighlight}</span>
                             </span>
                         </h1>
 
                         <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed font-light">
-                            Des solutions d'élite pour ceux qui visent l'<span className="text-white font-medium">excellence</span>.
+                            {t.pricingPage.subtitle}<span className="text-white font-medium">{t.pricingPage.subtitleHighlight}</span>
                             <br className="hidden md:block" />
-                            Transparence totale. Impact maximal.
+                            {t.pricingPage.subtitleEnd}
                         </p>
                     </motion.div>
 
-                    {/* Mobile: Carousel Card */}
-                    <div className="lg:hidden relative mb-32 h-[600px] flex items-center justify-center">
+                    {/* Mobile: Swipeable Carousel */}
+                    <div className="lg:hidden relative mb-32 flex flex-col items-center"
+                        onTouchStart={(e) => {
+                            const touch = e.touches[0];
+                            (e.currentTarget as any)._touchStartX = touch.clientX;
+                            (e.currentTarget as any)._touchStartY = touch.clientY;
+                        }}
+                        onTouchEnd={(e) => {
+                            const startX = (e.currentTarget as any)._touchStartX;
+                            const startY = (e.currentTarget as any)._touchStartY;
+                            if (startX == null) return;
+                            const touch = e.changedTouches[0];
+                            const diffX = touch.clientX - startX;
+                            const diffY = touch.clientY - startY;
+                            // Only trigger if horizontal swipe is dominant
+                            if (Math.abs(diffX) > 30 && Math.abs(diffX) > Math.abs(diffY) * 1.2) {
+                                if (diffX < 0) nextSlide();
+                                else prevSlide();
+                            }
+                        }}
+                    >
+                        {/* Navigation Arrows */}
                         <button
                             onClick={prevSlide}
-                            className="absolute left-0 z-20 w-10 h-10 rounded-full bg-black/50 border border-white/10 flex items-center justify-center text-white backdrop-blur-md"
+                            className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/60 border border-white/10 flex items-center justify-center text-white backdrop-blur-md active:scale-90 transition-transform"
                         >
-                            <ChevronLeft className="w-6 h-6" />
+                            <ChevronLeft className="w-5 h-5" />
                         </button>
                         <button
                             onClick={nextSlide}
-                            className="absolute right-0 z-20 w-10 h-10 rounded-full bg-black/50 border border-white/10 flex items-center justify-center text-white backdrop-blur-md"
+                            className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/60 border border-white/10 flex items-center justify-center text-white backdrop-blur-md active:scale-90 transition-transform"
                         >
-                            <ChevronRight className="w-6 h-6" />
+                            <ChevronRight className="w-5 h-5" />
                         </button>
 
-                        <div className="relative w-full h-full flex items-center justify-center">
+                        {/* Cards Container */}
+                        <div className="relative w-full h-[560px] flex items-center justify-center overflow-hidden">
                             {offers.map((offer, index) => {
                                 const position = getSlidePosition(index);
                                 const isCenter = position === 'center';
                                 return (
                                     <motion.div
-                                        key={index}
+                                        key={offer.title}
                                         animate={{
-                                            x: position === 'left' ? '-110%' : position === 'right' ? '110%' : '0%',
-                                            scale: isCenter ? 1 : 0.85,
-                                            opacity: isCenter ? 1 : 0.4,
+                                            x: position === 'left' ? '-105%' : position === 'right' ? '105%' : '0%',
+                                            scale: isCenter ? 1 : 0.88,
+                                            opacity: isCenter ? 1 : 0.3,
                                             zIndex: isCenter ? 10 : 1,
-                                            rotateY: isCenter ? 0 : position === 'left' ? 15 : -15
                                         }}
-                                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                                        className={`absolute w-[90%] max-w-[340px] p-8 rounded-[2rem] flex flex-col h-[520px] backdrop-blur-xl transition-all
+                                        transition={{
+                                            duration: 0.2,
+                                            ease: [0.25, 0.1, 0.25, 1],
+                                        }}
+                                        className={`absolute w-[88%] max-w-[340px] p-8 rounded-[2rem] flex flex-col h-[520px] backdrop-blur-xl will-change-transform
                                             ${isCenter
                                                 ? 'bg-[#0A0A0A]/90 border border-premium-green/30 shadow-[0_0_50px_-10px_rgba(0,255,133,0.15)]'
                                                 : 'bg-white/[0.03] border border-white/5'
@@ -323,12 +331,27 @@ export const PricingPage: React.FC = () => {
                                                 : 'bg-white/5 text-white border border-white/10'
                                             }
                                         `}>
-                                            Choisir ce pack
+                                            {t.pricingPage.choosePack}
                                             <ArrowRight className="w-4 h-4" />
                                         </Link>
                                     </motion.div>
                                 );
                             })}
+                        </div>
+
+                        {/* Dot Indicators */}
+                        <div className="flex items-center gap-3 mt-8">
+                            {offers.map((_, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => setCurrentIndex(index)}
+                                    className={`rounded-full transition-all duration-500 ${index === currentIndex
+                                        ? 'w-8 h-2 bg-premium-green shadow-[0_0_10px_rgba(0,255,133,0.4)]'
+                                        : 'w-2 h-2 bg-white/20 hover:bg-white/40'
+                                        }`}
+                                    aria-label={`Go to offer ${index + 1}`}
+                                />
+                            ))}
                         </div>
                     </div>
 
@@ -343,7 +366,6 @@ export const PricingPage: React.FC = () => {
                                     }
                                 `}>
 
-                                    {/* Top Light Leak / Gradient for Highlight */}
                                     {offer.highlight && (
                                         <>
                                             <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-premium-green to-transparent opacity-50"></div>
@@ -351,13 +373,11 @@ export const PricingPage: React.FC = () => {
                                         </>
                                     )}
 
-                                    {/* Large Background Icon */}
                                     <div className={`absolute -right-8 -top-8 transform rotate-12 transition-transform duration-700 group-hover:rotate-0 group-hover:scale-110 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity
                                         ${offer.color === 'blue' ? 'text-blue-500/[0.05]' : offer.color === 'purple' ? 'text-purple-500/[0.05]' : 'text-premium-green/[0.05]'}
                                     `}>
                                         <offer.icon className="w-80 h-80" strokeWidth={0.5} />
                                     </div>
-                                    {/* Default visible weaker icon */}
                                     <div className={`absolute -right-8 -top-8 transform rotate-12 transition-transform duration-700 pointer-events-none opacity-30 group-hover:opacity-0
                                         ${offer.color === 'blue' ? 'text-blue-500/[0.02]' : offer.color === 'purple' ? 'text-purple-500/[0.02]' : 'text-premium-green/[0.02]'}
                                     `}>
@@ -383,7 +403,6 @@ export const PricingPage: React.FC = () => {
                                             {offer.title}
                                         </h3>
                                         <div className="flex items-start justify-center gap-1 group-hover:scale-105 transition-transform duration-500 origin-center">
-                                            {/* Gradient Text for Price */}
                                             <span className={`text-6xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b ${offer.highlight ? 'from-white via-white to-gray-400' : 'from-gray-200 via-gray-400 to-gray-600 group-hover:from-white group-hover:to-gray-300'}`}>
                                                 {offer.price}
                                             </span>
@@ -422,7 +441,7 @@ export const PricingPage: React.FC = () => {
                                             }
                                         `}>
                                             <span className="relative z-20 flex items-center gap-2">
-                                                Choisir ce pack
+                                                {t.pricingPage.choosePack}
                                                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
                                             </span>
                                         </div>
@@ -441,44 +460,37 @@ export const PricingPage: React.FC = () => {
                             transition={{ duration: 0.8 }}
                             className="relative"
                         >
-                            {/* Ambient Background Glow for Table */}
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] h-[95%] bg-premium-green/5 rounded-full blur-[150px] pointer-events-none" />
 
                             <div className="bg-black border border-white/10 rounded-[2rem] overflow-hidden shadow-2xl relative z-10">
 
                                 <div className="p-12 text-center border-b border-white/10 bg-white/[0.02]">
-                                    <h2 className="text-4xl font-black font-display text-white mb-4">Comparatif Détaillé</h2>
-                                    <p className="text-gray-400">Une transparence totale pour un choix éclairé.</p>
+                                    <h2 className="text-4xl font-black font-display text-white mb-4">{t.pricingPage.comparison.title}</h2>
+                                    <p className="text-gray-400">{t.pricingPage.comparison.subtitle}</p>
                                 </div>
 
                                 <table className="w-full text-left border-collapse table-fixed">
                                     <thead>
                                         <tr className="bg-[#050505]">
                                             <th className="py-8 pl-8 w-1/3 align-bottom border-r border-white/5">
-                                                <span className="text-xs font-bold text-gray-500 uppercase tracking-widest">Fonctionnalités</span>
+                                                <span className="text-xs font-bold text-gray-500 uppercase tracking-widest">{t.pricingPage.comparison.features}</span>
                                             </th>
-
-                                            {/* Starter */}
                                             <th className="py-8 text-center w-1/5 align-bottom border-r border-white/5 group hover:bg-white/[0.02] transition-colors">
                                                 <div className="flex flex-col items-center gap-2">
                                                     <div className="font-bold text-white text-xl">Starter</div>
                                                     <div className="text-blue-400 font-mono text-sm">950€</div>
                                                 </div>
                                             </th>
-
-                                            {/* Business - Highlighted */}
                                             <th className="py-8 text-center w-1/5 align-bottom relative bg-premium-green/[0.05] border-r border-white/5">
                                                 <div className="absolute top-0 inset-x-0 h-1 bg-premium-green"></div>
                                                 <div className="absolute top-4 left-1/2 -translate-x-1/2 px-3 py-1 bg-premium-green/20 border border-premium-green/30 rounded-full">
-                                                    <span className="text-[10px] font-bold text-premium-green uppercase tracking-wide">Recommandé</span>
+                                                    <span className="text-[10px] font-bold text-premium-green uppercase tracking-wide">{t.pricingPage.comparison.recommended}</span>
                                                 </div>
                                                 <div className="flex flex-col items-center gap-2 pt-8">
                                                     <div className="font-bold text-white text-2xl">Business</div>
                                                     <div className="text-premium-green font-mono text-base font-bold">1 650€</div>
                                                 </div>
                                             </th>
-
-                                            {/* Empire */}
                                             <th className="py-8 text-center w-1/5 align-bottom hover:bg-white/[0.02] transition-colors">
                                                 <div className="flex flex-col items-center gap-2">
                                                     <div className="font-bold text-white text-xl">Empire</div>
@@ -491,23 +503,22 @@ export const PricingPage: React.FC = () => {
                                     <tbody className="text-sm">
                                         {/* Section 1 */}
                                         <tr className="bg-white/[0.03] border-y border-white/10">
-                                            <td colSpan={4} className="py-4 pl-8 text-xs font-bold text-gray-300 uppercase tracking-[0.2em]">Design & Expérience</td>
+                                            <td colSpan={4} className="py-4 pl-8 text-xs font-bold text-gray-300 uppercase tracking-[0.2em]">{t.pricingPage.comparison.sections.design}</td>
                                         </tr>
-
                                         <tr className="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
-                                            <td className="py-5 pl-8 text-gray-200 font-medium text-base border-r border-white/5">Maquettes Figma & UX</td>
+                                            <td className="py-5 pl-8 text-gray-200 font-medium text-base border-r border-white/5">{t.pricingPage.comparison.rows.figma}</td>
                                             <td className="text-center py-5 border-r border-white/5 text-gray-500"><Check className="w-5 h-5 mx-auto text-blue-400" /></td>
                                             <td className="text-center py-5 bg-premium-green/[0.02] border-r border-white/5"><div className="w-8 h-8 rounded-full bg-premium-green/20 flex items-center justify-center mx-auto"><Check className="w-5 h-5 text-premium-green" /></div></td>
                                             <td className="text-center py-5"><Check className="w-5 h-5 mx-auto text-purple-400" /></td>
                                         </tr>
                                         <tr className="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
-                                            <td className="py-5 pl-8 text-gray-200 font-medium text-base border-r border-white/5">Animations 60FPS</td>
+                                            <td className="py-5 pl-8 text-gray-200 font-medium text-base border-r border-white/5">{t.pricingPage.comparison.rows.animations}</td>
                                             <td className="text-center py-5 border-r border-white/5 text-gray-600 text-xs font-mono">—</td>
                                             <td className="text-center py-5 bg-premium-green/[0.02] border-r border-white/5"><div className="w-8 h-8 rounded-full bg-premium-green/20 flex items-center justify-center mx-auto"><Check className="w-5 h-5 text-premium-green" /></div></td>
                                             <td className="text-center py-5"><Check className="w-5 h-5 mx-auto text-purple-400" /></td>
                                         </tr>
                                         <tr className="hover:bg-white/[0.02] transition-colors">
-                                            <td className="py-5 pl-8 text-gray-200 font-medium text-base border-r border-white/5">Responsive 3 Écrans</td>
+                                            <td className="py-5 pl-8 text-gray-200 font-medium text-base border-r border-white/5">{t.pricingPage.comparison.rows.responsive}</td>
                                             <td className="text-center py-5 border-r border-white/5"><Check className="w-5 h-5 mx-auto text-blue-400" /></td>
                                             <td className="text-center py-5 bg-premium-green/[0.02] border-r border-white/5"><div className="w-8 h-8 rounded-full bg-premium-green/20 flex items-center justify-center mx-auto"><Check className="w-5 h-5 text-premium-green" /></div></td>
                                             <td className="text-center py-5"><Check className="w-5 h-5 mx-auto text-purple-400" /></td>
@@ -515,22 +526,22 @@ export const PricingPage: React.FC = () => {
 
                                         {/* Section 2 */}
                                         <tr className="bg-white/[0.03] border-y border-white/10">
-                                            <td colSpan={4} className="py-4 pl-8 text-xs font-bold text-gray-300 uppercase tracking-[0.2em]">Tech & Perf</td>
+                                            <td colSpan={4} className="py-4 pl-8 text-xs font-bold text-gray-300 uppercase tracking-[0.2em]">{t.pricingPage.comparison.sections.tech}</td>
                                         </tr>
                                         <tr className="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
-                                            <td className="py-5 pl-8 text-gray-200 font-medium text-base border-r border-white/5">Structure du Site</td>
-                                            <td className="text-center py-5 border-r border-white/5 text-gray-400 font-mono text-xs">Landing Page</td>
-                                            <td className="text-center py-5 bg-premium-green/[0.02] border-r border-white/5 text-white font-mono text-xs font-bold">Multi-Pages</td>
-                                            <td className="text-center py-5 text-white font-mono text-xs font-bold">Sur-Mesure</td>
+                                            <td className="py-5 pl-8 text-gray-200 font-medium text-base border-r border-white/5">{t.pricingPage.comparison.rows.structure}</td>
+                                            <td className="text-center py-5 border-r border-white/5 text-gray-400 font-mono text-xs">{t.pricingPage.comparison.values.landingPage}</td>
+                                            <td className="text-center py-5 bg-premium-green/[0.02] border-r border-white/5 text-white font-mono text-xs font-bold">{t.pricingPage.comparison.values.multiPages}</td>
+                                            <td className="text-center py-5 text-white font-mono text-xs font-bold">{t.pricingPage.comparison.values.custom}</td>
                                         </tr>
                                         <tr className="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
-                                            <td className="py-5 pl-8 text-gray-200 font-medium text-base border-r border-white/5">SEO Technique</td>
-                                            <td className="text-center py-5 border-r border-white/5 text-gray-400 font-mono text-xs">Standard</td>
-                                            <td className="text-center py-5 bg-premium-green/[0.02] border-r border-white/5 text-white font-mono text-xs font-bold">Avancé +</td>
-                                            <td className="text-center py-5 text-white font-mono text-xs font-bold">Expert + Audit</td>
+                                            <td className="py-5 pl-8 text-gray-200 font-medium text-base border-r border-white/5">{t.pricingPage.comparison.rows.seo}</td>
+                                            <td className="text-center py-5 border-r border-white/5 text-gray-400 font-mono text-xs">{t.pricingPage.comparison.values.standard}</td>
+                                            <td className="text-center py-5 bg-premium-green/[0.02] border-r border-white/5 text-white font-mono text-xs font-bold">{t.pricingPage.comparison.values.advanced}</td>
+                                            <td className="text-center py-5 text-white font-mono text-xs font-bold">{t.pricingPage.comparison.values.expert}</td>
                                         </tr>
                                         <tr className="hover:bg-white/[0.02] transition-colors">
-                                            <td className="py-5 pl-8 text-gray-200 font-medium text-base border-r border-white/5">CMS (Admin)</td>
+                                            <td className="py-5 pl-8 text-gray-200 font-medium text-base border-r border-white/5">{t.pricingPage.comparison.rows.cms}</td>
                                             <td className="text-center py-5 border-r border-white/5 text-gray-600 text-xs font-mono">—</td>
                                             <td className="text-center py-5 bg-premium-green/[0.02] border-r border-white/5"><div className="w-8 h-8 rounded-full bg-premium-green/20 flex items-center justify-center mx-auto"><Check className="w-5 h-5 text-premium-green" /></div></td>
                                             <td className="text-center py-5"><Check className="w-5 h-5 mx-auto text-purple-400" /></td>
@@ -538,13 +549,13 @@ export const PricingPage: React.FC = () => {
 
                                         {/* Section 3 */}
                                         <tr className="bg-white/[0.03] border-y border-white/10">
-                                            <td colSpan={4} className="py-4 pl-8 text-xs font-bold text-gray-300 uppercase tracking-[0.2em]">Support VIP</td>
+                                            <td colSpan={4} className="py-4 pl-8 text-xs font-bold text-gray-300 uppercase tracking-[0.2em]">{t.pricingPage.comparison.sections.support}</td>
                                         </tr>
                                         <tr className="hover:bg-white/[0.02] transition-colors">
-                                            <td className="py-5 pl-8 text-gray-200 font-medium text-base border-r border-white/5">Maintenance Incluse</td>
-                                            <td className="text-center py-5 border-r border-white/5 text-gray-400 font-mono text-xs">1 Mois</td>
-                                            <td className="text-center py-5 bg-premium-green/[0.02] border-r border-white/5 text-white font-mono text-xs font-bold">3 Mois</td>
-                                            <td className="text-center py-5 text-white font-mono text-xs font-bold">12 Mois</td>
+                                            <td className="py-5 pl-8 text-gray-200 font-medium text-base border-r border-white/5">{t.pricingPage.comparison.rows.maintenance}</td>
+                                            <td className="text-center py-5 border-r border-white/5 text-gray-400 font-mono text-xs">{t.pricingPage.comparison.values.month1}</td>
+                                            <td className="text-center py-5 bg-premium-green/[0.02] border-r border-white/5 text-white font-mono text-xs font-bold">{t.pricingPage.comparison.values.month3}</td>
+                                            <td className="text-center py-5 text-white font-mono text-xs font-bold">{t.pricingPage.comparison.values.month12}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -555,21 +566,21 @@ export const PricingPage: React.FC = () => {
                     {/* FAQ Section */}
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
                         <div className="lg:col-span-4 sticky top-32">
-                            <span className="text-premium-green text-xs font-bold uppercase tracking-widest mb-4 block">Support & Aide</span>
+                            <span className="text-premium-green text-xs font-bold uppercase tracking-widest mb-4 block">{t.pricingPage.faq.label}</span>
                             <h2 className="text-4xl font-black font-display text-white mb-6">
-                                Questions <br /> Fréquentes
+                                {t.pricingPage.faq.title} <br /> {t.pricingPage.faq.titleLine2}
                             </h2>
                             <p className="text-gray-400 leading-relaxed mb-8">
-                                Vous avez d'autres questions ? <br />
-                                Notre équipe est disponible pour y répondre directement.
+                                {t.pricingPage.faq.subtitle} <br />
+                                {t.pricingPage.faq.subtitleLine2}
                             </p>
                             <Link to="/contact" className="text-white underline decoration-premium-green decoration-2 underline-offset-4 font-bold hover:text-premium-green transition-colors">
-                                Contactez le support
+                                {t.pricingPage.faq.contactSupport}
                             </Link>
                         </div>
 
                         <div className="lg:col-span-8 space-y-4">
-                            {faqs.map((faq, i) => (
+                            {t.pricingPage.faqs.map((faq: { question: string; answer: string }, i: number) => (
                                 <motion.div
                                     key={i}
                                     initial={{ opacity: 0, x: -20 }}
