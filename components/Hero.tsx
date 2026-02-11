@@ -2,36 +2,15 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, User } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
-import { ParticleBackground } from './ParticleBackground';
+
 
 export const Hero: React.FC = () => {
   const { t } = useLanguage();
 
   return (
-    <section className="relative min-h-[75vh] sm:min-h-[85vh] w-full flex flex-col items-center justify-center overflow-hidden px-4 sm:px-6 pt-28 pb-12 sm:pb-16 sm:pt-36 bg-[#050505]">
+    <section className="relative min-h-[75vh] sm:min-h-[85vh] w-full flex flex-col items-center justify-center overflow-hidden px-4 sm:px-6 pt-28 pb-12 sm:pb-16 sm:pt-36 bg-transparent">
 
-      {/* NEW: Premium Deep Space Background */}
-      <div className="absolute inset-0 z-0">
-
-        {/* 1. Animated Gradient Orbs (The "Nebula") - CSS animations for performance */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div
-            className="absolute top-[-10%] left-[20%] w-[50vw] h-[50vw] bg-premium-green/15 rounded-full blur-[120px] animate-[float-slow_15s_ease-in-out_infinite] will-change-transform"
-          />
-          <div
-            className="absolute bottom-[-10%] right-[10%] w-[60vw] h-[60vw] bg-purple-900/20 rounded-full blur-[150px] animate-[float-slow_20s_ease-in-out_infinite_reverse] will-change-transform"
-          />
-          <div
-            className="absolute top-[30%] left-[50%] -translate-x-1/2 w-[40vw] h-[40vw] bg-blue-900/15 rounded-full blur-[100px] animate-[pulse_12s_ease-in-out_infinite] will-change-opacity"
-          />
-        </div>
-
-        {/* 2. Interactive Particles */}
-        <ParticleBackground />
-
-        {/* 3. Subtle Grid Overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_90%)] pointer-events-none"></div>
-      </div>
+      {/* Background Removed (Unified in App.tsx) */}
 
       <div className="container mx-auto max-w-5xl relative z-10 text-center flex flex-col items-center">
         <motion.div

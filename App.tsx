@@ -4,39 +4,30 @@ import { Routes, Route } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { PricingPage } from './pages/PricingPage';
 import { ContactPage } from './pages/ContactPage';
-import { PortfolioPage } from './pages/PortfolioPage';
 import { Navbar } from './components/Navbar';
 import { ParticleBackground } from './components/ParticleBackground';
 import { WhatsAppButton } from './components/WhatsAppButton';
 
 export default function App() {
   return (
-    <div className="relative min-h-screen bg-[#0a0a0a] text-white selection:bg-premium-green selection:text-black overflow-hidden font-sans">
+    <div className="relative min-h-screen bg-[#050505] text-white selection:bg-premium-green selection:text-black overflow-hidden font-sans">
+      {/* === GLOBAL BACKGROUND LAYERS (From Pricing Page Style) === */}
 
-      {/* === GLOBAL BACKGROUND LAYERS === */}
+      {/* 1. Base Gradient & Animated Orbs */}
+      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-[#050505]">
+        <div className="absolute top-[-10%] left-[20%] w-[50vw] h-[50vw] bg-premium-green/10 rounded-full blur-[120px] animate-[float-slow_15s_ease-in-out_infinite] will-change-transform" />
+        <div className="absolute bottom-[-10%] right-[10%] w-[60vw] h-[60vw] bg-purple-900/15 rounded-full blur-[150px] animate-[float-slow_20s_ease-in-out_infinite_reverse] will-change-transform" />
+        <div className="absolute top-[30%] left-[50%] -translate-x-1/2 w-[40vw] h-[40vw] bg-blue-900/10 rounded-full blur-[100px] animate-[pulse_12s_ease-in-out_infinite] will-change-opacity" />
+      </div>
 
-      {/* 1. Deep Base & Radial Vignette */}
+      {/* 2. Interactive Particles */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#1a1a1a] via-[#0a0a0a] to-[#000000] opacity-80"></div>
+        <ParticleBackground />
       </div>
 
-      {/* 2. Ambient "Liquid" Orbs - Slow Moving Blobs */}
-      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Top Left - Green/Blue Mix */}
-        <div className="absolute -top-[20%] -left-[10%] w-[50vw] h-[50vw] rounded-full bg-premium-green/5 blur-[120px] animate-[pulse_8s_ease-in-out_infinite]"></div>
+      {/* 3. Global Grid Overlay */}
+      <div className="fixed inset-0 z-0 pointer-events-none bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(circle_at_center,black_30%,transparent_100%)]"></div>
 
-        {/* Bottom Right - Deep Purple for Contrast */}
-        <div className="absolute -bottom-[20%] -right-[10%] w-[50vw] h-[50vw] rounded-full bg-purple-900/10 blur-[150px] animate-[pulse_10s_ease-in-out_infinite_reverse]"></div>
-
-        {/* Center - Subtle Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[40vw] rounded-full bg-blue-900/5 blur-[120px] animate-pulse"></div>
-      </div>
-
-      {/* 3. Tactical Grid Overlay (Subtle Tech Feel) */}
-      <div className="fixed inset-0 z-0 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03]"></div>
-      <div className="fixed inset-0 z-0 pointer-events-none bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
-
-      <ParticleBackground />
       <Navbar />
 
       <main className="relative z-10 flex flex-col">
@@ -44,7 +35,6 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/tarifs" element={<PricingPage />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/portfolio" element={<PortfolioPage />} />
         </Routes>
       </main>
 

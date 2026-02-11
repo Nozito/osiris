@@ -1,19 +1,44 @@
-/* Global styles */
+/* Global styles & Premium Tweaks */
+:root {
+  color-scheme: dark;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Smooth scrolling */
+/* Smooth scrolling & High-End Selection */
 html {
   scroll-behavior: smooth;
+  background-color: #030303; /* Deepest Black */
 }
 
-/* Selection styling */
 ::selection {
-  background-color: #00FF85;
-  color: #000;
+  background-color: rgba(0, 255, 133, 0.2); /* Premium Green Tint */
+  color: #fff;
+  text-shadow: 0 0 10px rgba(0, 255, 133, 0.5);
+}
+
+/* Custom Premium Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f1f1f;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #333;
 }
 
 /* Hide scrollbar for horizontal scroll areas on mobile */

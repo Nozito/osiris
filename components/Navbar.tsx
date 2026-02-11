@@ -29,7 +29,6 @@ export const Navbar: React.FC = () => {
   const menuItems = [
     { label: t.navbar.home, to: '/', icon: Home },
     { label: t.navbar.pricing, to: '/tarifs', icon: DollarSign },
-    { label: t.navbar.portfolio, to: '/portfolio', icon: Briefcase },
     { label: t.navbar.contact, to: '/contact', icon: Mail },
   ];
 
@@ -54,13 +53,6 @@ export const Navbar: React.FC = () => {
               className={`px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest rounded-full transition-all ${location.pathname === '/tarifs' ? 'bg-premium-green/20 text-premium-green' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
             >
               {t.navbar.pricing}
-            </Link>
-            <Link
-              to="/portfolio"
-              onClick={handleNavClick}
-              className={`px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest rounded-full transition-all ${location.pathname === '/portfolio' ? 'bg-premium-green/20 text-premium-green' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
-            >
-              Portfolio
             </Link>
           </div>
 
