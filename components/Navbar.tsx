@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
-import { Menu, X, Mail, Home, DollarSign } from 'lucide-react';
+import { Menu, X, Mail, Home, DollarSign, Users } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const [hidden, setHidden] = useState(false);
@@ -28,6 +28,7 @@ export const Navbar: React.FC = () => {
 
   const menuItems = [
     { label: t.navbar.home, to: '/', icon: Home },
+    { label: t.navbar.about, to: '/a-propos', icon: Users },
     { label: t.navbar.pricing, to: '/tarifs', icon: DollarSign },
     { label: t.navbar.contact, to: '/contact', icon: Mail },
   ];
@@ -66,12 +67,7 @@ export const Navbar: React.FC = () => {
             ))}
             {/* Audit Gratuit — Lien spécial avec badge pill */}
             <a
-              href="#audit-gratuit"
-              onClick={(e) => {
-                e.preventDefault();
-                const el = document.getElementById('audit-gratuit');
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-              }}
+              href="/#audit"
               className="relative flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-premium-green hover:text-white transition-colors duration-300 group"
             >
               <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-premium-green animate-pulse" />
@@ -183,15 +179,8 @@ export const Navbar: React.FC = () => {
                 className="w-full text-center"
               >
                 <a
-                  href="#audit-gratuit"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setMobileMenuOpen(false);
-                    setTimeout(() => {
-                      const el = document.getElementById('audit-gratuit');
-                      if (el) el.scrollIntoView({ behavior: 'smooth' });
-                    }, 300);
-                  }}
+                  href="/#audit"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="group relative inline-flex flex-col items-center gap-2 py-2"
                 >
                   <span className="inline-flex items-center gap-2 text-4xl font-bold font-display tracking-wider uppercase text-premium-green drop-shadow-[0_0_20px_rgba(0,255,133,0.4)]">

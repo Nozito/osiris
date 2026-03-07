@@ -2,6 +2,7 @@ export const en = {
     // Navbar
     navbar: {
         home: "Home",
+        about: "About",
         pricing: "Pricing",
         portfolio: "Portfolio",
         contact: "Contact",
@@ -11,16 +12,17 @@ export const en = {
     // Hero
     hero: {
         title: "Websites that perform where it counts: your results",
+        headline: "Your showcase site that turns visitors into clients.",
         subtitle: "Optimized technical performance + Premium custom design = A site that converts your visitors into clients",
         ctaPrimary: "Get my free audit",
-        ctaSecondary: "See our work",
+        ctaSecondary: "See our work ↓",
         badges: {
             speed: "Loading time <1s",
             seo: "Integrated SEO",
             custom: "100% custom-made"
         },
-        tagline: "We don't create simple websites. We build digital empires for brands that demand absolute excellence.",
-        cta: "Start your project",
+        tagline: "Two experts. One point of contact. From mockup to launch in under 3 weeks.",
+        cta: "Let's talk about your project →",
         spotsAvailable: "spots",
         available: "available",
         thisMonth: "This month",
@@ -28,10 +30,10 @@ export const en = {
 
     // Social Proof Bar
     socialProof: {
-        projects: "+40 sites delivered",
-        speed: "Average loading time: <1s",
-        score: "Google PageSpeed Score: 95+",
-        satisfaction: "100% satisfied clients"
+        projects: "Every project is handled personally by Antoine & Noah, from A to Z.",
+        speed: "Reply guaranteed within 24 business hours.",
+        score: "Two experts fully dedicated to your project.",
+        satisfaction: "Available before, during, and after launch."
     },
 
     // Performance Section
@@ -285,35 +287,35 @@ export const en = {
         offers: {
             starter: {
                 title: "Starter",
-                description: "The essentials to exist with elegance.",
+                description: "A clear base to launch your online presence and build trust from the very first visit.",
                 features: [
-                    "One-Page Site (Landing Page)",
-                    "Premium UI/UX Design",
-                    "Mobile & Tablet Responsive",
-                    "Speed Optimization",
-                    "Free Hosting (1 year)"
+                    "A clear one-page site that presents your offer and drives action",
+                    "Premium design that upgrades your brand perception in seconds",
+                    "Perfect on mobile, tablet, and desktop so you lose no prospects",
+                    "Fast loading to keep attention and support organic visibility",
+                    "1 year hosting included for a frictionless launch"
                 ]
             },
             business: {
                 title: "Business",
-                description: "For companies in full expansion.",
+                description: "The ideal format to structure your offer, reassure prospects, and generate more qualified leads.",
                 features: [
-                    "Showcase Site (up to 5 pages)",
-                    "CMS (Autonomous management)",
-                    "Advanced animations",
-                    "Optimized Technical SEO",
-                    "Analytics & Pixel Tracking"
+                    "Up to 5 pages to explain your value and convert without confusion",
+                    "Simple CMS so you can update your content independently",
+                    "Useful animations that reinforce a premium feel",
+                    "Solid technical SEO foundation to improve Google discoverability",
+                    "Performance tracking to make decisions from real data"
                 ]
             },
             empire: {
                 title: "Empire",
-                description: "Total domination of your market.",
+                description: "For ambitious projects that need a custom, scalable website built to grow with your business.",
                 features: [
-                    "E-commerce or Complex Site",
-                    "100% Custom Design",
-                    "3D & WebGL Effects",
-                    "CRM & API Integration",
-                    "Digital Strategy & Support"
+                    "Custom architecture for e-commerce or complex business requirements",
+                    "Unique art direction that truly sets you apart",
+                    "Advanced visual effects for a memorable experience without sacrificing speed",
+                    "CRM and API integrations to automate and save time",
+                    "Strategic support to convert more and sustain growth"
                 ]
             }
         },
@@ -339,9 +341,10 @@ export const en = {
     // Contact (Homepage section)
     contact: {
         sectionLabel: "Contact",
-        title: "Let's talk",
-        titleFaded: "Future.",
-        subtitle: "Do you have an ambitious project? We have the team to make it happen. Fill out the form and get a response within 24h.",
+        title: "Do you have a project?",
+        titleFaded: "We want to hear about it.",
+        subtitle: "A 30-minute call is enough to know if we can help you.",
+        reassurance: "No commitment. Reply within 24h.",
         emailDirect: "Direct Email",
         phone: "Phone",
         studio: "Studio",
@@ -354,7 +357,7 @@ export const en = {
             budget: "Estimated budget",
             message: "Message",
             messagePlaceholder: "Tell us about your project...",
-            submit: "Send my request",
+            submit: "Book my free call →",
             sendMessage: "Send us a message"
         }
     },

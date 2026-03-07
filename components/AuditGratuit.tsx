@@ -21,9 +21,10 @@ export const AuditGratuit: React.FC = () => {
 
     return (
         <section
-            id="audit-gratuit"
+            id="audit"
             className="relative w-full py-[70px] sm:py-[120px] px-4 sm:px-6 overflow-hidden scroll-mt-20"
         >
+            <span id="audit-gratuit" className="absolute -top-24" aria-hidden="true" />
             {/* Fond distinctif */}
             <div className="absolute inset-0 bg-gradient-to-b from-premium-black via-[#060f0a] to-premium-black pointer-events-none" />
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,255,133,0.06)_0%,transparent_65%)] pointer-events-none" />

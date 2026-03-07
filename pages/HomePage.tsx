@@ -1,5 +1,6 @@
 import React from 'react';
 import { Hero } from '../components/Hero';
+import { SocialProofBar } from '../components/SocialProofBar';
 import { ValueTrifecta } from '../components/ValueTrifecta';
 import { Process } from '../components/Process';
 import { Offer } from '../components/Offer';
@@ -36,6 +37,7 @@ export const HomePage: React.FC = () => {
                 }}
             />
             <Hero />
+            <SocialProofBar />
             <ValueTrifecta />
             <Process />
             <Offer />

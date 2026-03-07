@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Send, Mail, MapPin, Phone } from 'lucide-react';
+import { ArrowRight, Mail } from 'lucide-react';
 
 import { useLanguage } from '../context/LanguageContext';
 
@@ -116,8 +116,10 @@ export const Contact: React.FC = () => {
 
               <button type="button" className="w-full bg-premium-green text-black font-bold py-5 uppercase tracking-widest hover:bg-white transition-colors duration-300 flex items-center justify-center gap-2 rounded-full mt-4">
                 {t.contact.form.submit}
-                <Send className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4" />
               </button>
+
+              <p className="text-center text-xs text-gray-500 mt-3">{t.contact.reassurance}</p>
             </form>
           </motion.div>
         </div>

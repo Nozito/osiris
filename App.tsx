@@ -1,5 +1,5 @@
-import React, { Suspense, lazy } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React, { Suspense, lazy, useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { ParticleBackground } from './components/ParticleBackground';
 import { WhatsAppButton } from './components/WhatsAppButton';
@@ -10,6 +10,7 @@ const HomePage = lazy(() => import('./pages/HomePage').then(m => ({ default: m.H
 const PricingPage = lazy(() => import('./pages/PricingPage').then(m => ({ default: m.PricingPage })));
 const ContactPage = lazy(() => import('./pages/ContactPage').then(m => ({ default: m.ContactPage })));
 const LegalPage = lazy(() => import('./pages/LegalPage').then(m => ({ default: m.LegalPage })));
+const AboutPage = lazy(() => import('./pages/AboutPage').then(m => ({ default: m.AboutPage })));
 
 // Minimal loading fallback
 const PageLoader = () => (
@@ -19,6 +20,80 @@ const PageLoader = () => (
 );
 
 export default function App() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleAuditClick = (event: Event) => {
+      const link = event.currentTarget as HTMLAnchorElement;
+      const isHome = window.location.pathname === '/';
+      const target = document.querySelector('#audit') || document.querySelector('#contact');
+
+      if (isHome && target) {
+        event.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+        window.history.replaceState({}, '', '/#audit');
+        return;
+      }
+
+      if (!isHome) {
+        event.preventDefault();
+        window.location.href = '/#audit';
+        return;
+      }
+
+      // Keep default behavior only if no target and no known fallback.
+      if (!target && link.getAttribute('href') !== '/#audit') {
+        event.preventDefault();
+        window.location.href = '/#audit';
+      }
+    };
+
+    const links = Array.from(document.querySelectorAll('a[href*="audit"]')) as HTMLAnchorElement[];
+    links.forEach((link) => link.addEventListener('click', handleAuditClick));
+
+    return () => {
+      links.forEach((link) => link.removeEventListener('click', handleAuditClick));
+    };
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
+    const sections = Array.from(document.querySelectorAll('main section')) as HTMLElement[];
+    sections.forEach((section) => section.classList.add('fade-section'));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (location.pathname === '/' && location.hash === '#audit') {
+      const scrollToTarget = () => {
+        const target = document.querySelector('#audit') || document.querySelector('#contact');
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      };
+
+      const timeout = window.setTimeout(scrollToTarget, 120);
+      return () => window.clearTimeout(timeout);
+    }
+  }, [location.pathname, location.hash]);
+
   return (
     <div className="relative min-h-screen bg-[#050505] text-white overflow-hidden font-sans">
       {/* === GLOBAL BACKGROUND LAYERS === */}
@@ -47,6 +122,7 @@ export default function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/tarifs" element={<PricingPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/a-propos" element={<AboutPage />} />
             <Route path="/legal" element={<LegalPage />} />
           </Routes>
         </Suspense>

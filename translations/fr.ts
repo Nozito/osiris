@@ -2,6 +2,7 @@ export const fr = {
     // Navbar
     navbar: {
         home: "Accueil",
+        about: "À propos",
         pricing: "Tarifs",
         portfolio: "Portfolio",
         contact: "Contact",
@@ -11,16 +12,17 @@ export const fr = {
     // Hero
     hero: {
         title: "Des sites web qui performent là où ça compte : vos résultats",
+        headline: "Votre site vitrine qui transforme les visiteurs en clients.",
         subtitle: "Performance technique optimisée + Design premium sur-mesure = Un site qui convertit vos visiteurs en clients",
         ctaPrimary: "Obtenir mon audit gratuit",
-        ctaSecondary: "Voir nos réalisations",
+        ctaSecondary: "Voir nos réalisations ↓",
         badges: {
             speed: "Temps de chargement <1s",
             seo: "SEO intégré",
             custom: "100% sur-mesure"
         },
-        tagline: "Nous ne créons pas de simples sites web. Nous construisons des empires digitaux pour les marques qui exigent l'excellence absolue.",
-        cta: "Démarrer le projet",
+        tagline: "Deux experts. Un seul interlocuteur. De la maquette au lancement en moins de 3 semaines.",
+        cta: "Parlons de votre projet →",
         spotsAvailable: "places",
         available: "disponibles",
         thisMonth: "Pour ce mois",
@@ -28,10 +30,10 @@ export const fr = {
 
     // Social Proof Bar
     socialProof: {
-        projects: "+40 sites livrés",
-        speed: "Temps de chargement moyen : <1s",
-        score: "Score Google PageSpeed : 95+",
-        satisfaction: "100% clients satisfaits"
+        projects: "Chaque projet est suivi personnellement par Antoine & Noah, de A à Z.",
+        speed: "Réponse garantie sous 24h ouvrées.",
+        score: "Deux experts dédiés à 100% à votre projet.",
+        satisfaction: "Disponibles avant, pendant et après la livraison."
     },
 
     // Performance Section
@@ -285,35 +287,35 @@ export const fr = {
         offers: {
             starter: {
                 title: "Starter",
-                description: "L'essentiel pour exister avec élégance.",
+                description: "Une base claire pour lancer votre presence en ligne et inspirer confiance des la premiere visite.",
                 features: [
-                    "Site One-Page (Landing Page)",
-                    "Design UI/UX Premium",
-                    "Responsive Mobile & Tablette",
-                    "Optimisation Vitesse",
-                    "Hébergement offert (1 an)"
+                    "Une page claire qui presente votre offre et pousse a l'action",
+                    "Un design premium qui valorise votre image des les premieres secondes",
+                    "Parfait sur mobile, tablette et desktop pour ne perdre aucun prospect",
+                    "Chargement rapide pour garder l'attention et favoriser le referencement",
+                    "Hebergement inclus 1 an pour demarrer sans friction technique"
                 ]
             },
             business: {
                 title: "Business",
-                description: "Pour les entreprises en pleine expansion.",
+                description: "Le format ideal pour structurer votre offre, rassurer vos prospects et generer plus de demandes qualifiees.",
                 features: [
-                    "Site Vitrine (jusqu'à 5 pages)",
-                    "CMS (Gestion autonome)",
-                    "Animations avancées",
-                    "SEO Technique Optimisé",
-                    "Analytics & Pixel Tracking"
+                    "Jusqu'a 5 pages pour expliquer votre valeur et convertir sans confusion",
+                    "Un CMS simple pour modifier vos contenus en autonomie",
+                    "Des animations utiles qui renforcent la perception premium",
+                    "Un socle SEO technique propre pour etre mieux trouve sur Google",
+                    "Tracking des performances pour piloter vos decisions avec des donnees"
                 ]
             },
             empire: {
                 title: "Empire",
-                description: "La domination totale de votre marché.",
+                description: "Pour les projets ambitieux qui demandent un site sur-mesure, evolutif et pense pour scaler avec votre croissance.",
                 features: [
-                    "Site E-commerce ou Complexe",
-                    "Design 100% Sur-Mesure",
-                    "Effets 3D & WebGL",
-                    "Intégration CRM & API",
-                    "Stratégie Digitale & Support"
+                    "Architecture sur-mesure pour e-commerce ou besoins metier complexes",
+                    "Direction artistique unique qui vous differencie vraiment",
+                    "Effets visuels avances pour une experience memorable sans sacrifier la vitesse",
+                    "Integrations CRM et API pour automatiser et gagner du temps",
+                    "Accompagnement strategique pour convertir plus et durer"
                 ]
             }
         },
@@ -339,9 +341,10 @@ export const fr = {
     // Contact (Homepage section)
     contact: {
         sectionLabel: "Contact",
-        title: "Parlons",
-        titleFaded: "Futur.",
-        subtitle: "Vous avez un projet ambitieux ? Nous avons l'équipe pour le réaliser. Remplissez le formulaire et obtenez une réponse sous 24h.",
+        title: "Vous avez un projet ?",
+        titleFaded: "On veut en entendre parler.",
+        subtitle: "Un appel de 30 minutes suffit pour savoir si on peut vous aider.",
+        reassurance: "Sans engagement. Réponse sous 24h.",
         emailDirect: "contact@osiris-agency.fr",
         phone: "Téléphone",
         studio: "Studio",
@@ -354,7 +357,7 @@ export const fr = {
             budget: "Budget estimé",
             message: "Message",
             messagePlaceholder: "Parlez-nous de votre projet...",
-            submit: "Envoyer ma demande",
+            submit: "Réserver mon appel gratuit →",
             sendMessage: "Envoyez-nous un message"
         }
     },
