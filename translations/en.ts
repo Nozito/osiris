@@ -5,10 +5,20 @@ export const en = {
         pricing: "Pricing",
         portfolio: "Portfolio",
         contact: "Contact",
+        auditGratuit: "✦ Free Audit",
     },
 
     // Hero
     hero: {
+        title: "Websites that perform where it counts: your results",
+        subtitle: "Optimized technical performance + Premium custom design = A site that converts your visitors into clients",
+        ctaPrimary: "Get my free audit",
+        ctaSecondary: "See our work",
+        badges: {
+            speed: "Loading time <1s",
+            seo: "Integrated SEO",
+            custom: "100% custom-made"
+        },
         tagline: "We don't create simple websites. We build digital empires for brands that demand absolute excellence.",
         cta: "Start your project",
         spotsAvailable: "spots",
@@ -16,26 +26,125 @@ export const en = {
         thisMonth: "This month",
     },
 
+    // Social Proof Bar
+    socialProof: {
+        projects: "+40 sites delivered",
+        speed: "Average loading time: <1s",
+        score: "Google PageSpeed Score: 95+",
+        satisfaction: "100% satisfied clients"
+    },
+
+    // Performance Section
+    performance: {
+        sectionLabel: "Performance",
+        title: "Performance at the heart of every pixel",
+        subtitle: "A beautiful site that doesn't convert is a site that costs. At OSIRIS, every line of code is designed to generate measurable results.",
+        cards: {
+            speed: {
+                title: "Maximum loading speed",
+                description: "Ultra-fast sites (<1s) that reduce bounce rate and boost your Google ranking. Core Web Vitals optimized from conception."
+            },
+            seo: {
+                title: "Integrated technical SEO",
+                description: "Technical structure optimized for Google, semantic tags, automated sitemap. Your site is designed to rank, not just to exist."
+            },
+            conversion: {
+                title: "Boosted conversion rate",
+                description: "Action-oriented UX, smooth user journey, strategic CTAs. Every element is placed to turn your visitors into clients."
+            }
+        },
+        badge: "📈 On average, our clients see +47% conversions after redesign"
+    },
+
+    // Design Premium Section
+    designPremium: {
+        sectionLabel: "Premium Design",
+        title: "A design that sets you apart, durably",
+        subtitle: "Performance without style is just code. Style without performance is just art. You deserve both.",
+        cards: {
+            uiux: {
+                title: "Unique interface for your brand",
+                description: "100% personalized design that reflects your brand DNA. No recycled WordPress templates: each project is an original creation."
+            },
+            identity: {
+                title: "Consistent visual identity",
+                description: "From typography to micro-interactions, every detail tells your story. A memorable brand experience that builds trust."
+            },
+            experience: {
+                title: "Premium and intuitive UX",
+                description: "Smooth navigation, subtle animations, attention to detail. The user experience that distinguishes market leaders."
+            }
+        },
+        badge: "✨ Digital excellence is non-negotiable"
+    },
+
+    // Audit Section
+    audit: {
+        sectionLabel: "✦ Free & No Commitment",
+        title: "Is your website really winning you clients?",
+        subtitle: "We analyze your site for free within 24h across 4 critical areas and deliver a personalized report — no jargon.",
+        stats: "+40 sites audited  •  Response within 24h  •  €0",
+        pillars: [
+            {
+                icon: "zap",
+                title: "Performance & Speed",
+                description: "Core Web Vitals, loading time, PageSpeed score",
+                tag: "#1 Google priority"
+            },
+            {
+                icon: "search",
+                title: "Technical SEO",
+                description: "Structure, tags, indexing, traffic opportunities",
+                tag: "Visibility"
+            },
+            {
+                icon: "palette",
+                title: "Design & Experience",
+                description: "Readability, visual hierarchy, brand consistency",
+                tag: "Premium"
+            },
+            {
+                icon: "target",
+                title: "Conversion & CTA",
+                description: "Visitor journey, friction points, sales opportunities",
+                tag: "Direct ROI"
+            }
+        ],
+        processTitle: "How does it work?",
+        processSteps: [
+            { num: "01", text: "You send us your site on WhatsApp" },
+            { num: "02", text: "We analyze it within 24h" },
+            { num: "03", text: "You receive your full report" }
+        ],
+        textareaLabel: "✏️ Customize your message before sending:",
+        textareaDefault: "Hello Osiris 👋\nI'd like to get my free audit.\nMy site: ",
+        textareaPlaceholder: "Write your message here...",
+        whatsappCtaDynamic: "📲 Send on WhatsApp and get my audit →",
+        whatsappNumber: "33772328932",
+        reassurance: "⚡ Response within 24h  •  100% Free  •  No commitment",
+        transitionText: "Prefer to talk to us directly? ↓"
+    },
+
     // ValueTrifecta
     valueTrifecta: {
         sectionLabel: "Our Expertise",
         title: "The Trinity of",
         titleHighlight: "Performance",
-        subtitle: "We have banned mediocrity. Every pixel, every line of code, and every animation serves a single purpose: market domination.",
+        subtitle: "Every pixel, every line of code is built for one purpose: generating measurable results for your business.",
         arsenal: "The tactical arsenal",
         systemArchitecture: "System architecture",
         cards: {
             speed: {
-                title: "Hypersonic Speed",
-                description: "Sites optimized to the millimeter (Core Web Vitals). Instant loading. Google loves it. Your customers too."
+                title: "Speed <1s, Core Web Vitals",
+                description: "Sites optimized to the millimeter. Instant loading, Google on page one, visitors that stay."
             },
             aesthetic: {
-                title: '"Premium" Aesthetics',
-                description: "A sleek black and green design that immediately positions your brand in the high-end segment."
+                title: 'Premium Custom Design',
+                description: "A sleek, exclusive design that immediately positions your brand in the high-end segment."
             },
             conversion: {
-                title: "Maximum Conversion",
-                description: "We don't just use art, but cognitive psychology to transform visitors into buyers."
+                title: "Maximized Conversion Rate",
+                description: "Cognitive psychology and action-oriented UX to turn your visitors into buyers."
             }
         },
         services: {
@@ -62,33 +171,75 @@ export const en = {
     // Showcase
     showcase: {
         sectionLabel: "Portfolio",
-        title: "Proof by",
-        titleFaded: "Image.",
+        title: "Performance + Design,",
+        titleFaded: "The Proof.",
+        subtitle: "Projects that combine premium aesthetics and measurable results.",
+        cta: "See all our projects →",
         categories: ["All", "Real Estate", "Restaurant", "SaaS", "E-commerce", "Web3"]
+    },
+
+    // FAQ Section
+    faq: {
+        sectionLabel: "FAQ",
+        title: "Frequently Asked Questions",
+        items: [
+            {
+                question: "How much does a premium site with OSIRIS cost?",
+                answer: "Our premium showcase sites start from €2,500. Since each project is unique, we establish a personalized quote after the free audit, based on your specific needs and business objectives."
+            },
+            {
+                question: "How long to deliver my site?",
+                answer: "On average, 4 to 6 weeks for a complete premium showcase site. For a high-performance landing page, count 2 to 3 weeks. Precise timelines are defined during the strategy phase."
+            },
+            {
+                question: "Why do you offer a free audit?",
+                answer: "Because we want to show you concretely what's not working on your current site, even before discussing working together. It's our way of proving our expertise and bringing you value from the first contact."
+            },
+            {
+                question: "What's the difference with another web agency?",
+                answer: "We don't sell \"a website\", we sell results. Measurable technical performance, premium design without compromise, and post-launch strategic support. No templates, no shortcuts: only custom-made designed to convert."
+            },
+            {
+                question: "Will I be able to modify my site myself after?",
+                answer: "Absolutely. We train you on using your site and set up an intuitive CMS if necessary. You keep 100% control, and we remain available for future developments."
+            }
+        ]
+    },
+
+    // Footer CTA
+    footerCta: {
+        title: "Ready to transform your site into a conversion machine?",
+        subtitle: "Get your free audit in 2 minutes and discover how to boost your performance right now.",
+        cta: "Start my free audit now →",
+        badge: "Join the +40 companies that chose digital excellence"
     },
 
     // Process
     process: {
         sectionLabel: "Our Method",
-        title: "From Chaos to",
-        titleFaded: "Excellence.",
-        subtitle: "A surgical 4-step process to ensure your investment transforms into market domination.",
+        title: "4 Steps to",
+        titleFaded: "Performance.",
+        subtitle: "A proven process to transform your vision into measurable results.",
+        badge: "⏱️ Average delivery: 4-6 weeks for a premium showcase site",
         steps: {
             audit: {
+                number: "01",
                 title: "Audit & Strategy",
-                description: "We analyze your market, competitors, and current weaknesses to define the perfect angle of attack."
+                description: "In-depth analysis of your objectives, market, and competitors. Together we define the UX strategy and performance KPIs to achieve."
             },
             design: {
-                title: "UX/UI Design",
-                description: "High-fidelity mockups creation. We don't seek 'beautiful', we seek unforgettable and conversion."
+                number: "02",
+                title: "Premium Design & Development",
+                description: "High-fidelity mockup creation, then development with latest technologies (React, Next.js). Clean, optimized, and scalable code."
+            },
+            launch: {
+                number: "03",
+                title: "Launch & Continuous Optimization",
+                description: "SEO-optimized launch, usage training, then performance monitoring. We continuously adjust to maximize your results."
             },
             dev: {
                 title: "Dev & Performance",
                 description: "Clean code, Next.js, fluid WebGL animations. Your site will be a Ferrari: beautiful and incredibly fast."
-            },
-            launch: {
-                title: "Launch & Scale",
-                description: "Go live, immediate SEO indexing, team training. We hand you the keys to your empire."
             }
         }
     },

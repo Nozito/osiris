@@ -94,7 +94,7 @@ export const Hero: React.FC = () => {
           </p>
 
           <div className="flex flex-col md:flex-row items-center gap-4 sm:gap-8 w-full md:w-auto px-4 sm:px-0">
-            {/* Standard Button without Magnetic Effect */}
+            {/* Bouton principal existant */}
             <div className="group relative w-full md:w-auto">
               <div className="absolute inset-0 bg-premium-green blur-xl opacity-20 group-hover:opacity-50 transition-opacity duration-500 rounded-full"></div>
               <a href="#contact" className="relative bg-premium-green text-black font-bold py-3 sm:py-5 px-6 sm:px-10 border border-transparent hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-lg tracking-wider uppercase rounded-full shadow-[0_0_30px_rgba(0,255,133,0.2)] w-full md:w-auto">
@@ -102,6 +102,20 @@ export const Hero: React.FC = () => {
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
+
+            {/* Nouveau CTA Audit Gratuit */}
+            <a
+              href="#audit-gratuit"
+              onClick={(e) => {
+                e.preventDefault();
+                const el = document.getElementById('audit-gratuit');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="group relative w-full md:w-auto flex items-center justify-center gap-3 text-base sm:text-lg font-bold py-[18px] px-9 rounded-full border border-premium-green/30 bg-premium-green/[0.08] hover:bg-premium-green/[0.15] hover:border-premium-green/50 text-white transition-all duration-300 hover:-translate-y-[3px] hover:shadow-[0_12px_32px_rgba(0,255,133,0.25)]"
+            >
+              {t.hero.ctaPrimary}
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
 
             {/* Enhanced Badge with Social Proof */}
             <div className="group relative bg-white/[0.03] hover:bg-white/[0.05] backdrop-blur-xl border border-white/10 hover:border-premium-green/30 rounded-full pl-2 pr-6 py-2 flex items-center gap-4 transition-all duration-500 w-full md:w-auto justify-center md:justify-start overflow-hidden">

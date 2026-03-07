@@ -64,6 +64,21 @@ export const Navbar: React.FC = () => {
                 {item.label}
               </Link>
             ))}
+            {/* Audit Gratuit — Lien spécial avec badge pill */}
+            <a
+              href="#audit-gratuit"
+              onClick={(e) => {
+                e.preventDefault();
+                const el = document.getElementById('audit-gratuit');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="relative flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-premium-green hover:text-white transition-colors duration-300 group"
+            >
+              <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-premium-green animate-pulse" />
+              <span className="px-3 py-1 rounded-full border border-premium-green/40 bg-premium-green/10 group-hover:bg-premium-green/20 transition-colors duration-300 audit-pill-glow">
+                {t.navbar.auditGratuit}
+              </span>
+            </a>
           </div>
 
           <div className="h-6 w-[1px] bg-white/10 hidden md:block mx-2"></div>
@@ -159,6 +174,34 @@ export const Navbar: React.FC = () => {
 
             {/* Menu Links */}
             <nav className="flex-1 flex flex-col justify-center items-center space-y-8 relative z-10">
+              {/* Audit Gratuit — Premier item mobile, spécial */}
+              <motion.div
+                initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: 10, filter: "blur(5px)" }}
+                transition={{ delay: 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="w-full text-center"
+              >
+                <a
+                  href="#audit-gratuit"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setMobileMenuOpen(false);
+                    setTimeout(() => {
+                      const el = document.getElementById('audit-gratuit');
+                      if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    }, 300);
+                  }}
+                  className="group relative inline-flex flex-col items-center gap-2 py-2"
+                >
+                  <span className="inline-flex items-center gap-2 text-4xl font-bold font-display tracking-wider uppercase text-premium-green drop-shadow-[0_0_20px_rgba(0,255,133,0.4)]">
+                    {t.navbar.auditGratuit}
+                    <span className="w-2 h-2 rounded-full bg-premium-green animate-pulse" />
+                  </span>
+                  <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-premium-green to-transparent opacity-80" />
+                </a>
+              </motion.div>
+
               {menuItems.map((item, i) => (
                 <motion.div
                   key={item.to}

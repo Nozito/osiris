@@ -5,10 +5,20 @@ export const fr = {
         pricing: "Tarifs",
         portfolio: "Portfolio",
         contact: "Contact",
+        auditGratuit: "✦ Audit Gratuit",
     },
 
     // Hero
     hero: {
+        title: "Des sites web qui performent là où ça compte : vos résultats",
+        subtitle: "Performance technique optimisée + Design premium sur-mesure = Un site qui convertit vos visiteurs en clients",
+        ctaPrimary: "Obtenir mon audit gratuit",
+        ctaSecondary: "Voir nos réalisations",
+        badges: {
+            speed: "Temps de chargement <1s",
+            seo: "SEO intégré",
+            custom: "100% sur-mesure"
+        },
         tagline: "Nous ne créons pas de simples sites web. Nous construisons des empires digitaux pour les marques qui exigent l'excellence absolue.",
         cta: "Démarrer le projet",
         spotsAvailable: "places",
@@ -16,7 +26,106 @@ export const fr = {
         thisMonth: "Pour ce mois",
     },
 
-    // ValueTrifecta
+    // Social Proof Bar
+    socialProof: {
+        projects: "+40 sites livrés",
+        speed: "Temps de chargement moyen : <1s",
+        score: "Score Google PageSpeed : 95+",
+        satisfaction: "100% clients satisfaits"
+    },
+
+    // Performance Section
+    performance: {
+        sectionLabel: "Performance",
+        title: "La performance, au cœur de chaque pixel",
+        subtitle: "Un beau site qui ne convertit pas est un site qui coûte. Chez OSIRIS, chaque ligne de code est pensée pour générer des résultats mesurables.",
+        cards: {
+            speed: {
+                title: "Vitesse de chargement maximale",
+                description: "Sites ultra-rapides (<1s) qui réduisent le taux de rebond et boostent votre référencement Google. Core Web Vitals optimisés dès la conception."
+            },
+            seo: {
+                title: "SEO technique intégré",
+                description: "Structure technique optimisée pour Google, balises sémantiques, sitemap automatisé. Votre site est conçu pour ranker, pas juste pour exister."
+            },
+            conversion: {
+                title: "Taux de conversion dopé",
+                description: "UX orientée action, parcours utilisateur fluide, CTA stratégiques. Chaque élément est placé pour transformer vos visiteurs en clients."
+            }
+        },
+        badge: "📈 En moyenne, nos clients constatent +47% de conversions après refonte"
+    },
+
+    // Design Premium Section
+    designPremium: {
+        sectionLabel: "Design Premium",
+        title: "Un design qui vous démarque, durablement",
+        subtitle: "La performance sans le style, c'est du code. Le style sans la performance, c'est de l'art. Vous méritez les deux.",
+        cards: {
+            uiux: {
+                title: "Interface unique à votre image",
+                description: "Design 100% personnalisé qui reflète l'ADN de votre marque. Pas de templates WordPress recyclés : chaque projet est une création originale."
+            },
+            identity: {
+                title: "Identité visuelle cohérente",
+                description: "De la typographie aux micro-interactions, chaque détail raconte votre histoire. Une expérience de marque mémorable qui crée la confiance."
+            },
+            experience: {
+                title: "UX premium et intuitive",
+                description: "Navigation fluide, animations subtiles, attention aux détails. L'expérience utilisateur qui distingue les leaders de leur marché."
+            }
+        },
+        badge: "✨ L'excellence digitale n'est pas négociable"
+    },
+
+    // Audit Section
+    audit: {
+        sectionLabel: "✦ Offert & Sans Engagement",
+        title: "Votre site vous fait-il vraiment gagner des clients ?",
+        subtitle: "On analyse gratuitement votre site sous 24h sur 4 axes critiques et on vous livre un rapport personnalisé sans jargon.",
+        stats: "+40 sites audités  •  Réponse sous 24h  •  0€",
+        pillars: [
+            {
+                icon: "zap",
+                title: "Performance & Vitesse",
+                description: "Core Web Vitals, temps de chargement, score PageSpeed",
+                tag: "#1 priorité Google"
+            },
+            {
+                icon: "search",
+                title: "SEO Technique",
+                description: "Structure, balises, indexation, opportunités de trafic",
+                tag: "Visibilité"
+            },
+            {
+                icon: "palette",
+                title: "Design & Expérience",
+                description: "Lisibilité, hiérarchie visuelle, cohérence de l'identité",
+                tag: "Premium"
+            },
+            {
+                icon: "target",
+                title: "Conversion & CTA",
+                description: "Parcours visiteur, points de friction, opportunités de vente",
+                tag: "ROI direct"
+            }
+        ],
+        processTitle: "Comment ça marche ?",
+        processSteps: [
+            { num: "01", text: "Tu envoies ton site sur WhatsApp" },
+            { num: "02", text: "On analyse en 24h" },
+            { num: "03", text: "Tu reçois ton rapport complet" }
+        ],
+        textareaLabel: "✏️ Personnalisez votre message avant d'envoyer :",
+        textareaDefault: "Bonjour Osiris 👋\nJe souhaite obtenir mon audit gratuit.\nMon site : ",
+        textareaPlaceholder: "Écrivez votre message ici...",
+        whatsappCtaDynamic: "📲 Envoyer sur WhatsApp et recevoir mon audit →",
+        whatsappNumber: "33772328932",
+        reassurance: "⚡ Réponse sous 24h  •  100% Gratuit  •  Sans engagement",
+        transitionText: "Vous préférez nous parler directement ? ↓"
+    },
+
+    // ValueTrifecta (kept for compatibility)
     valueTrifecta: {
         sectionLabel: "Notre Expertise",
         title: "La Trinité de la",
@@ -61,34 +170,76 @@ export const fr = {
 
     // Showcase
     showcase: {
-        sectionLabel: "Portfolio",
-        title: "La Preuve par",
-        titleFaded: "l'Image.",
+        sectionLabel: "Réalisations",
+        title: "Performance + Design,",
+        titleFaded: "la Preuve.",
+        subtitle: "Des projets qui allient esthétique premium et résultats mesurables.",
+        cta: "Voir tous nos projets →",
         categories: ["Tout", "Immobilier", "Restauration", "SaaS", "E-commerce", "Web3"]
+    },
+
+    // FAQ Section
+    faq: {
+        sectionLabel: "FAQ",
+        title: "Questions fréquentes",
+        items: [
+            {
+                question: "Combien coûte un site premium avec OSIRIS ?",
+                answer: "Nos sites vitrines premium démarrent à partir de 2 500€. Chaque projet étant unique, nous établissons un devis personnalisé après l'audit gratuit, en fonction de vos besoins spécifiques et objectifs business."
+            },
+            {
+                question: "Combien de temps pour livrer mon site ?",
+                answer: "En moyenne, 4 à 6 semaines pour un site vitrine premium complet. Pour une landing page haute performance, comptez 2 à 3 semaines. Les délais précis sont définis lors de la phase de stratégie."
+            },
+            {
+                question: "Pourquoi proposez-vous un audit gratuit ?",
+                answer: "Parce qu'on veut vous montrer concrètement ce qui ne fonctionne pas sur votre site actuel, avant même de parler de travailler ensemble. C'est notre façon de prouver notre expertise et de vous apporter de la valeur dès le premier contact."
+            },
+            {
+                question: "Quelle différence avec une autre agence web ?",
+                answer: "Nous ne vendons pas \"un site\", nous vendons des résultats. Performance technique mesurable, design premium sans compromis, et accompagnement stratégique post-lancement. Pas de templates, pas de shortcuts : que du sur-mesure pensé pour convertir."
+            },
+            {
+                question: "Est-ce que je pourrai modifier mon site moi-même après ?",
+                answer: "Absolument. Nous vous formons à l'utilisation de votre site et mettons en place un CMS intuitif si nécessaire. Vous gardez 100% de contrôle, et nous restons disponibles pour les évolutions futures."
+            }
+        ]
+    },
+
+    // Footer CTA
+    footerCta: {
+        title: "Prêt à transformer votre site en machine à convertir ?",
+        subtitle: "Obtenez votre audit gratuit en 2 minutes et découvrez comment booster vos performances dès maintenant.",
+        cta: "Commencer mon audit gratuit maintenant →",
+        badge: "Rejoignez les +40 entreprises qui ont choisi l'excellence digitale"
     },
 
     // Process
     process: {
         sectionLabel: "Notre Méthode",
-        title: "Du Chaos à",
-        titleFaded: "l'Excellence.",
-        subtitle: "Un processus chirurgical en 4 étapes pour garantir que votre investissement se transforme en domination de marché.",
+        title: "4 Étapes vers",
+        titleFaded: "la Performance.",
+        subtitle: "Un process éprouvé pour transformer votre vision en résultats mesurables.",
+        badge: "⏱️ Livraison moyenne : 4-6 semaines pour un site vitrine premium",
         steps: {
             audit: {
+                number: "01",
                 title: "Audit & Stratégie",
-                description: "Nous analysons votre marché, vos concurrents et vos faiblesses actuelles pour définir l'angle d'attaque parfait."
+                description: "Analyse approfondie de vos objectifs, votre marché et vos concurrents. On définit ensemble la stratégie UX et les KPIs de performance à atteindre."
             },
             design: {
-                title: "Design UX/UI",
-                description: "Création de maquettes haute fidélité. Nous ne cherchons pas le 'beau', nous cherchons l'inoubliable et la conversion."
+                number: "02",
+                title: "Design & Développement premium",
+                description: "Création de maquettes haute-fidélité, puis développement avec les dernières technologies (React, Next.js). Code propre, optimisé et scalable."
+            },
+            launch: {
+                number: "03",
+                title: "Lancement & Optimisation continue",
+                description: "Mise en ligne optimisée SEO, formation à l'utilisation, puis suivi des performances. On ajuste en continu pour maximiser vos résultats."
             },
             dev: {
                 title: "Dev & Performance",
                 description: "Code propre, Next.js, animations WebGL fluides. Votre site sera une Ferrari : beau et incroyablement rapide."
-            },
-            launch: {
-                title: "Launch & Scale",
-                description: "Mise en ligne, indexation SEO immédiate, formation de vos équipes. Nous vous remettons les clés de votre empire."
             }
         }
     },

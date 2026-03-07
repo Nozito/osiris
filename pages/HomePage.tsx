@@ -4,6 +4,7 @@ import { ValueTrifecta } from '../components/ValueTrifecta';
 import { Process } from '../components/Process';
 import { Offer } from '../components/Offer';
 import { Contact } from '../components/Contact';
+import { AuditGratuit } from '../components/AuditGratuit';
 import { Footer } from '../components/Footer';
 import { SEOHead } from '../components/SEOHead';
 import { useLanguage } from '../context/LanguageContext';
@@ -38,6 +39,8 @@ export const HomePage: React.FC = () => {
             <ValueTrifecta />
             <Process />
             <Offer />
+            {/* Section Audit Gratuit — juste avant Contact (logique narrative) */}
+            <AuditGratuit />
             <Contact />
             <Footer />
         </>
