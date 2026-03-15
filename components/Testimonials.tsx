@@ -69,7 +69,7 @@ export const Testimonials: React.FC = () => {
               }
             }
           }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          className="grid responsive-card-grid gap-6"
         >
           {reviews.map((review, i) => (
             <motion.div

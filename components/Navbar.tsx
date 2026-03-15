@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
-import { Menu, X, Mail, Home, DollarSign, Users } from 'lucide-react';
+import { Mail, Home, DollarSign, Users, Zap, X, ArrowRight } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const [hidden, setHidden] = useState(false);
@@ -26,6 +26,10 @@ export const Navbar: React.FC = () => {
     setMobileMenuOpen(false);
   };
 
+  const handleAuditNavClick = () => {
+    setMobileMenuOpen(false);
+  };
+
   const menuItems = [
     { label: t.navbar.home, to: '/', icon: Home },
     { label: t.navbar.about, to: '/a-propos', icon: Users },
@@ -44,18 +48,18 @@ export const Navbar: React.FC = () => {
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
       >
-        <div className="pointer-events-auto relative flex items-center justify-between gap-3 px-6 py-3 rounded-full bg-[#050505]/80 backdrop-blur-md border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all duration-500 w-[95%] md:w-auto md:min-w-[480px] hover:border-white/20 hover:shadow-[0_8px_40px_rgba(0,255,133,0.15)] group">
+        <div className="pointer-events-auto relative flex items-center justify-between gap-3 px-5 md:px-6 py-3 rounded-full bg-[#050505]/80 backdrop-blur-md border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all duration-500 w-[95%] md:w-auto md:min-w-[480px] hover:border-white/20 hover:shadow-[0_8px_40px_rgba(0,255,133,0.15)] group">
 
           {/* Logo */}
           <Link to="/" onClick={handleNavClick} className="flex items-center gap-2 group/logo relative z-50">
-            <div className="text-xl font-black font-display tracking-tighter text-white relative">
+            <div className="navbar-logo text-xl font-black font-display tracking-tighter text-white relative">
               OSIRIS
               <span className="text-premium-green absolute -right-1.5 top-0 text-xs animate-pulse">.</span>
             </div>
           </Link>
 
           {/* Desktop Links (Hidden on Mobile) */}
-          <div className="hidden md:flex items-center gap-6 ml-6">
+          <div className="hidden md:flex items-center gap-6 ml-6 navbar-links">
             {menuItems.filter(item => item.to !== '/contact').map((item) => (
               <Link
                 key={item.to}
@@ -68,6 +72,7 @@ export const Navbar: React.FC = () => {
             {/* Audit Gratuit — Lien spécial avec badge pill */}
             <a
               href="/#audit"
+              onClick={handleAuditNavClick}
               className="relative flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-premium-green hover:text-white transition-colors duration-300 group"
             >
               <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-premium-green animate-pulse" />
@@ -75,36 +80,30 @@ export const Navbar: React.FC = () => {
                 {t.navbar.auditGratuit}
               </span>
             </a>
+
+            <div className="lang-switcher flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setLanguage('fr')}
+                className={`lang-btn ${language === 'fr' ? 'lang-active' : ''}`}
+              >
+                FR
+              </button>
+              <span className="lang-separator">|</span>
+              <button
+                type="button"
+                onClick={() => setLanguage('en')}
+                className={`lang-btn ${language === 'en' ? 'lang-active' : ''}`}
+              >
+                EN
+              </button>
+            </div>
           </div>
 
           <div className="h-6 w-[1px] bg-white/10 hidden md:block mx-2"></div>
 
-          {/* Desktop Language & CTA */}
+          {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            {/* Language Flags */}
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => setLanguage('fr')}
-                className={`w-5 h-5 rounded-full flex items-center justify-center overflow-hidden transition-all duration-300 hover:scale-110 ${language === 'fr'
-                  ? 'ring-1 ring-premium-green shadow-[0_0_10px_rgba(0,255,133,0.4)] opacity-100'
-                  : 'opacity-40 grayscale hover:grayscale-0 hover:opacity-100'
-                  }`}
-                aria-label="Français"
-              >
-                <img src="https://flagcdn.com/fr.svg" alt="FR" className="w-full h-full object-cover" width="20" height="20" loading="lazy" />
-              </button>
-              <button
-                onClick={() => setLanguage('en')}
-                className={`w-5 h-5 rounded-full flex items-center justify-center overflow-hidden transition-all duration-300 hover:scale-110 ${language === 'en'
-                  ? 'ring-1 ring-premium-green shadow-[0_0_10px_rgba(0,255,133,0.4)] opacity-100'
-                  : 'opacity-40 grayscale hover:grayscale-0 hover:opacity-100'
-                  }`}
-                aria-label="English"
-              >
-                <img src="https://flagcdn.com/gb.svg" alt="EN" className="w-full h-full object-cover" width="20" height="20" loading="lazy" />
-              </button>
-            </div>
-
             <Link
               to="/contact"
               className="relative px-5 py-2 rounded-full bg-white text-black text-[10px] font-black uppercase tracking-widest overflow-hidden hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(0,255,133,0.4)]"
@@ -113,155 +112,158 @@ export const Navbar: React.FC = () => {
             </Link>
           </div>
 
-          {/* Mobile Menu Toggle Button */}
+          {/* Mobile Hamburger — inside pill */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden relative z-50 w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all active:scale-95"
+            className={`hamburger md:hidden self-center ${mobileMenuOpen ? 'active' : ''}`}
             aria-label="Menu"
+            aria-expanded={mobileMenuOpen}
           >
-            <AnimatePresence mode="wait">
-              {mobileMenuOpen ? (
-                <motion.div
-                  key="close"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <X className="w-5 h-5" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="menu"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Menu className="w-5 h-5" />
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <span className="bar" />
+            <span className="bar" />
+            <span className="bar" />
           </button>
         </div>
       </motion.nav>
 
-      {/* Premium Full-Screen Mobile Menu */}
+      {/* Mobile Dropdown Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            animate={{ opacity: 1, backdropFilter: "blur(20px)" }}
-            exit={{ opacity: 0, backdropFilter: "blur(0px)", transition: { delay: 0.2 } }}
-            className="fixed inset-0 z-40 bg-[#050505]/80 md:hidden flex flex-col pt-32 px-6 pb-12 overflow-hidden"
+            key="mobile-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-[200] md:hidden"
+            onClick={() => setMobileMenuOpen(false)}
           >
-            {/* Background Effects */}
-            <div className="absolute inset-0 pointer-events-none overflow-hidden">
-              <motion.div
-                animate={{
-                  scale: [1, 1.2, 1],
-                  opacity: [0.3, 0.5, 0.3],
-                }}
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-premium-green/10 blur-[100px] rounded-full"
-              />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_0%,transparent_70%)]" />
-            </div>
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
 
-            {/* Menu Links */}
-            <nav className="flex-1 flex flex-col justify-center items-center space-y-8 relative z-10">
-              {/* Audit Gratuit — Premier item mobile, spécial */}
-              <motion.div
-                initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, y: 10, filter: "blur(5px)" }}
-                transition={{ delay: 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="w-full text-center"
-              >
-                <a
-                  href="/#audit"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="group relative inline-flex flex-col items-center gap-2 py-2"
-                >
-                  <span className="inline-flex items-center gap-2 text-4xl font-bold font-display tracking-wider uppercase text-premium-green drop-shadow-[0_0_20px_rgba(0,255,133,0.4)]">
-                    {t.navbar.auditGratuit}
-                    <span className="w-2 h-2 rounded-full bg-premium-green animate-pulse" />
-                  </span>
-                  <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-premium-green to-transparent opacity-80" />
-                </a>
-              </motion.div>
-
-              {menuItems.map((item, i) => (
-                <motion.div
-                  key={item.to}
-                  initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, y: 10, filter: "blur(5px)" }}
-                  transition={{ delay: 0.15 + i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                  className="w-full text-center"
-                >
-                  <Link
-                    to={item.to}
-                    onClick={handleNavClick}
-                    className="group relative inline-flex flex-col items-center gap-2 py-2"
-                  >
-                    <span className={`text-4xl font-bold font-display tracking-wider uppercase transition-all duration-500 relative z-10
-                      ${location.pathname === item.to
-                        ? 'text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]'
-                        : 'text-white/40 group-hover:text-white group-hover:scale-105'
-                      }
-                    `}
-                    >
-                      {item.label}
-                    </span>
-
-                    {/* Active Indicator & Hover Glow */}
-                    {location.pathname === item.to && (
-                      <motion.div
-                        layoutId="active-pill"
-                        className="absolute inset-0 -z-10 bg-premium-green/5 blur-xl rounded-full"
-                        transition={{ duration: 0.3 }}
-                      />
-                    )}
-
-                    <div className={`h-[1px] bg-gradient-to-r from-transparent via-premium-green to-transparent transition-all duration-500 ease-out
-                        ${location.pathname === item.to ? 'w-full opacity-100' : 'w-0 opacity-0 group-hover:w-full group-hover:opacity-50'}
-                    `}></div>
-                  </Link>
-                </motion.div>
-              ))}
-            </nav>
-
-            {/* Footer Actions */}
+            {/* Panel slides from top */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ delay: 0.5, duration: 0.5 }}
-              className="relative z-10 flex flex-col items-center gap-8"
+              initial={{ y: '-100%' }}
+              animate={{ y: 0 }}
+              exit={{ y: '-100%' }}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              className="absolute top-0 left-0 right-0 bg-[#040d07] border-b border-premium-green/20 shadow-[0_30px_80px_rgba(0,0,0,0.95)] pt-24 pb-8 px-5 overflow-hidden"
             >
-              {/* Language Switcher */}
-              <div className="flex items-center gap-1 p-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+              {/* Top green line */}
+              <div className="absolute inset-x-0 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-premium-green to-transparent"></div>
+              {/* Ambient glow blob */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-60 h-32 bg-premium-green/8 blur-[60px] rounded-full pointer-events-none"></div>
+
+              {/* Header — branding + close */}
+              <div className="flex items-center justify-between mb-7 px-1">
+                <div className="flex items-center gap-2.5">
+                  <span className="font-black font-display text-white tracking-tighter text-lg leading-none">
+                    OSIRIS<span className="text-premium-green text-xs">.</span>
+                  </span>
+                  <span className="h-3.5 w-px bg-white/15"></span>
+                  <span className="text-[9px] text-gray-500 uppercase tracking-[0.2em] font-bold">Menu</span>
+                </div>
                 <button
-                  onClick={() => setLanguage('fr')}
-                  aria-label="Français"
-                  className={`px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-500 ${language === 'fr' ? 'bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.2)]' : 'text-gray-500 hover:text-white'}`}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-9 h-9 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center hover:bg-white/10 hover:border-white/25 transition-all duration-200"
+                  aria-label="Fermer"
                 >
-                  FR
-                </button>
-                <button
-                  onClick={() => setLanguage('en')}
-                  aria-label="English"
-                  className={`px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-500 ${language === 'en' ? 'bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.2)]' : 'text-gray-500 hover:text-white'}`}
-                >
-                  EN
+                  <X className="w-4 h-4 text-gray-300" />
                 </button>
               </div>
 
-              {/* Contact Link */}
-              <a href="mailto:contact@osiris-agency.fr" className="text-gray-600 hover:text-premium-green transition-colors text-[10px] font-mono uppercase tracking-[0.3em] opacity-60 hover:opacity-100 hover:tracking-[0.4em] duration-300">
-                contact@osiris-agency.fr
-              </a>
+              {/* Menu items with stagger */}
+              <nav className="relative flex flex-col gap-2 mb-6">
+                {menuItems.map((item, index) => {
+                  const Icon = item.icon;
+                  const isActive = location.pathname === item.to;
+                  return (
+                    <motion.div
+                      key={item.to}
+                      initial={{ opacity: 0, x: -24 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.12 + index * 0.065, duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                      <Link
+                        to={item.to}
+                        onClick={handleNavClick}
+                        className={`group flex items-center gap-3.5 px-3.5 py-3.5 rounded-2xl border backdrop-blur-md transition-all duration-300 ${
+                          isActive
+                            ? 'bg-gradient-to-r from-premium-green/20 to-premium-green/5 border-premium-green/35 text-premium-green shadow-[0_0_30px_rgba(0,255,133,0.14)]'
+                            : 'border-white/[0.08] bg-white/[0.03] text-white/80 hover:bg-white/[0.07] hover:border-white/25 hover:text-white'
+                        }`}
+                      >
+                        <div className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-200 ${
+                          isActive ? 'bg-premium-green/25' : 'bg-white/[0.07] group-hover:bg-white/15'
+                        }`}>
+                          <Icon className={`w-[18px] h-[18px] transition-colors duration-200 ${
+                            isActive ? 'text-premium-green' : 'text-gray-400 group-hover:text-white'
+                          }`} />
+                        </div>
+                        <span className="font-semibold text-[15px] flex-1">{item.label}</span>
+                        <ArrowRight className={`w-4 h-4 transition-all duration-200 ${
+                          isActive
+                            ? 'opacity-100 text-premium-green'
+                            : 'opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0'
+                        }`} />
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+
+                {/* Audit Gratuit */}
+                <motion.div
+                  initial={{ opacity: 0, x: -24 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.12 + menuItems.length * 0.065, duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <a
+                    href="/#audit"
+                    onClick={handleAuditNavClick}
+                    className="group flex items-center gap-3.5 px-3.5 py-3.5 rounded-2xl border border-premium-green/30 bg-gradient-to-r from-premium-green/[0.16] via-premium-green/[0.08] to-transparent text-premium-green hover:border-premium-green/50 transition-all duration-300 shadow-[0_0_24px_rgba(0,255,133,0.12)]"
+                  >
+                    <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 bg-premium-green/15">
+                      <Zap className="w-[18px] h-[18px] text-premium-green" />
+                    </div>
+                    <span className="font-bold text-[15px] flex-1">{t.navbar.auditGratuit}</span>
+                    <span className="text-[9px] bg-premium-green text-black font-black px-2 py-0.5 rounded-full uppercase tracking-wider">Offert</span>
+                  </a>
+                </motion.div>
+              </nav>
+
+              {/* Bottom CTA */}
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.42, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className="mb-6"
+              >
+                <Link
+                  to="/contact"
+                  onClick={handleNavClick}
+                  className="flex items-center justify-center gap-2.5 w-full py-4 rounded-2xl bg-premium-green text-black font-black text-[13px] uppercase tracking-widest hover:bg-white transition-colors duration-300 shadow-[0_0_30px_rgba(0,255,133,0.25)]"
+                >
+                  Démarrer un projet
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </motion.div>
+
+              {/* Language switcher */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.3 }}
+                className="flex items-center justify-between pt-5 px-1 border-t border-white/[0.07]"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-[9px] text-gray-500 uppercase tracking-[0.2em] font-bold">Langue</span>
+                  <button type="button" onClick={() => setLanguage('fr')} className={`lang-btn ${language === 'fr' ? 'lang-active' : ''}`}>FR</button>
+                  <span className="lang-separator">|</span>
+                  <button type="button" onClick={() => setLanguage('en')} className={`lang-btn ${language === 'en' ? 'lang-active' : ''}`}>EN</button>
+                </div>
+                <span className="text-[9px] text-gray-600 font-mono">osiris-web.com</span>
+              </motion.div>
             </motion.div>
           </motion.div>
         )}

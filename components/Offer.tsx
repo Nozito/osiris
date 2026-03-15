@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, Zap, HelpCircle, ArrowRight, ArrowLeft, FileText, Rocket, Crown, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { Check, Zap, HelpCircle, ArrowRight, ArrowLeft, FileText, Rocket, Crown, ChevronLeft, ChevronRight, ChevronDown, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -88,139 +88,126 @@ export const Offer: React.FC = () => {
           <p className="text-gray-400 max-w-md mx-auto text-sm">{t.offer.subtitle}</p>
         </motion.div>
 
-        {/* Mobile: Carousel Container */}
-        <div className="lg:hidden relative mb-16">
-          {/* Navigation Arrows */}
-          <button
-            onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/50 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 hover:border-white/30 transition-all -translate-x-2 sm:-translate-x-4"
-            aria-label="Précédent"
-          >
-            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
-          </button>
-          <button
-            onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/50 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 hover:border-white/30 transition-all translate-x-2 sm:translate-x-4"
-            aria-label="Suivant"
-          >
-            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
-          </button>
-
-          {/* Cards Container */}
-          <div className="flex items-center justify-center h-[420px] sm:h-[480px] relative px-8 sm:px-16">
-            {offers.map((offer, index) => {
-              const position = getSlidePosition(index);
-              const isCenter = position === 'center';
-
-              return (
-                <motion.div
-                  key={index}
-                  animate={{
-                    x: position === 'left' ? '-60%' : position === 'right' ? '60%' : '0%',
-                    scale: isCenter ? 1 : 0.85,
-                    opacity: isCenter ? 1 : 0.5,
-                    zIndex: isCenter ? 10 : 1,
-                  }}
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  className={`absolute w-[280px] sm:w-[320px] p-6 sm:p-8 rounded-2xl sm:rounded-[2rem] transition-all duration-300 flex flex-col
-                    ${isCenter
-                      ? 'bg-[#0A0A0A] border border-premium-green/30 shadow-[0_0_40px_-10px_rgba(0,255,133,0.3)]'
-                      : 'bg-white/[0.03] border border-white/10 hover:bg-white/[0.06]'
-                    }
-                    ${isCenter ? 'cursor-default' : 'cursor-pointer'}
-                  `}
-                  onClick={() => !isCenter && setCurrentIndex(index)}
+        {/* Mobile: Accordion Rectangles */}
+        <div className="lg:hidden flex flex-col gap-3 mb-10">
+          {offers.map((offer, index) => {
+            const isExpanded = expandedOffer === index;
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileTap={{ scale: 0.985 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.08, duration: 0.4 }}
+                className={`rounded-2xl border overflow-hidden transition-colors duration-300
+                  ${
+                    offer.highlight
+                      ? 'bg-[#0A0A0A] border-premium-green/40 shadow-[0_0_24px_-8px_rgba(0,255,133,0.25)]'
+                      : 'bg-white/[0.03] border-white/10'
+                  }
+                `}
+              >
+                {/* Row header — tap to expand/collapse */}
+                <button
+                  onClick={() => setExpandedOffer(isExpanded ? null : index)}
+                  className="w-full px-4 py-3.5 flex items-center justify-between gap-3 text-left"
                 >
-                  {/* Badge */}
-                  <div className="flex justify-center mb-4">
-                    <div className={`px-3 py-1 rounded-full flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-wider
-                      ${isCenter
-                        ? 'bg-premium-green text-black'
-                        : 'bg-white/10 text-gray-400 border border-white/10'
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0
+                      ${
+                        offer.highlight
+                          ? 'bg-premium-green'
+                          : offer.color === 'blue' ? 'bg-blue-500/15' : 'bg-purple-500/15'
                       }`}
                     >
                       {getIcon(offer.icon)}
-                      {offer.badge}
+                    </div>
+                    <div className="min-w-0">
+                      <div className={`text-[11px] font-black uppercase tracking-widest truncate
+                        ${offer.highlight ? 'text-premium-green' : 'text-white'}`}
+                      >
+                        {offer.title}
+                      </div>
+                      <div className="text-gray-500 text-[10px] mt-0.5">{offer.badge}</div>
                     </div>
                   </div>
-
-                  {/* Card Header */}
-                  <div className="text-center mb-4">
-                    <h3 className={`text-lg font-bold mb-2 font-display uppercase tracking-wider ${isCenter ? 'text-premium-green' : 'text-white'}`}>
-                      {offer.title}
-                    </h3>
-                    <div className="flex items-start justify-center gap-0.5 mb-1">
-                      <span className="text-4xl sm:text-5xl font-black text-white tracking-tighter font-display">{offer.price}</span>
-                      <span className="text-xl mt-1 text-gray-400 font-light">€</span>
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <div className="text-right">
+                      <span className="text-lg font-black text-white font-display tabular-nums">{offer.price}</span>
+                      <span className="text-gray-500 text-[10px] ml-0.5">€</span>
                     </div>
-                    {offer.highlight && isCenter && <div className="text-[9px] text-premium-green/70 font-mono tracking-widest uppercase">Offre la plus vendue</div>}
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-gray-400 text-xs mb-4 text-center leading-relaxed line-clamp-2">
-                    {offer.description}
-                  </p>
-
-                  {/* Quick Features (only 3) */}
-                  <ul className="space-y-2 mb-4 flex-1">
-                    {offer.features.slice(0, 3).map((feature, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <div className={`mt-0.5 w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 ${isCenter ? 'bg-premium-green/20 text-premium-green' : 'bg-white/10 text-gray-500'}`}>
-                          <Check className="w-2.5 h-2.5" />
-                        </div>
-                        <span className="text-xs text-gray-400 line-clamp-1">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Buttons */}
-                  <div className="space-y-2">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setExpandedOffer(index);
-                      }}
-                      className="w-full py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-white/10 text-gray-300 hover:bg-white/5 hover:border-white/20 transition-all"
-                    >
-                      Voir plus
-                    </button>
-                    <button className={`w-full py-3 rounded-xl font-bold text-[10px] uppercase tracking-wider transition-all flex items-center justify-center gap-2
-                      ${isCenter
-                        ? 'bg-premium-green text-black hover:shadow-[0_0_20px_rgba(0,255,133,0.4)]'
-                        : 'bg-white/10 text-white hover:bg-white/20'
+                    <ChevronDown
+                      className={`w-4 h-4 text-gray-500 transition-transform duration-300 ${
+                        isExpanded ? 'rotate-180 text-premium-green' : ''
                       }`}
-                    >
-                      {t.offer.choosePack}
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
+                    />
                   </div>
-                </motion.div>
-              );
-            })}
-          </div>
+                </button>
 
-          {/* Dots Indicator */}
-          <div className="flex justify-center gap-2 mt-4">
-            {offers.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-2 h-2 rounded-full transition-all ${currentIndex === index ? 'bg-premium-green w-6' : 'bg-white/20 hover:bg-white/40'}`}
-                aria-label={`Aller à l'offre ${index + 1}`}
-              />
-            ))}
-          </div>
+                {/* Expandable detail */}
+                <AnimatePresence initial={false}>
+                  {isExpanded && (
+                    <motion.div
+                      key="content"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-4 pb-5">
+                        <div className="w-full h-[1px] bg-white/5 mb-4" />
+                        <p className="text-gray-400 text-xs leading-relaxed mb-4">
+                          {offer.description}
+                        </p>
+                        <ul className="space-y-2 mb-5">
+                          {offer.features.map((feature, i) => (
+                            <li key={i} className="flex items-start gap-2">
+                              <div className={`mt-0.5 w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0
+                                ${
+                                  offer.highlight
+                                    ? 'bg-premium-green/20 text-premium-green'
+                                    : 'bg-white/10 text-gray-400'
+                                }`}
+                              >
+                                <Check className="w-2.5 h-2.5" />
+                              </div>
+                              <span className="text-xs text-gray-300">{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <Link
+                          to="/contact"
+                          className={`w-full py-3 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all flex items-center justify-center gap-2
+                            ${
+                              offer.highlight
+                                ? 'bg-premium-green text-black hover:shadow-[0_0_20px_rgba(0,255,133,0.4)]'
+                                : 'bg-white/10 text-white hover:bg-white/20'
+                            }`}
+                        >
+                          {t.offer.choosePack}
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Desktop: Static Grid - 3 cards side by side */}
-        <div className="hidden lg:grid grid-cols-3 gap-6 mb-16">
+        <div className="pricing-container hidden lg:grid grid-cols-3 gap-6 mb-16">
           {offers.map((offer, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
+              whileTap={{ scale: 0.99 }}
               transition={{ delay: 0.1 * index, duration: 0.5 }}
-              className={`p-8 rounded-[2rem] transition-all duration-300 flex flex-col h-full group hover:-translate-y-2
+              className={`pricing-card ${offer.highlight ? 'popular' : ''} p-8 rounded-[2rem] transition-all duration-300 flex flex-col h-full group hover:-translate-y-2
                 ${offer.highlight
                   ? 'bg-[#0A0A0A] border border-premium-green/40 shadow-[0_0_60px_-15px_rgba(0,255,133,0.2)] z-10 scale-105'
                   : 'bg-white/[0.02] border border-white/10 hover:border-premium-green/30 hover:bg-white/[0.04]'
@@ -244,7 +231,7 @@ export const Offer: React.FC = () => {
                   {offer.title}
                 </h3>
                 <div className="flex items-start justify-center gap-1">
-                  <span className="text-5xl font-black text-white tracking-tighter">{offer.price}</span>
+                  <span className="price text-5xl font-black text-white tracking-tighter">{offer.price}</span>
                   <span className="text-2xl mt-2 text-gray-500 font-light">€</span>
                 </div>
                 <p className="text-gray-500 text-sm mt-3 font-medium">{offer.description}</p>
@@ -264,7 +251,7 @@ export const Offer: React.FC = () => {
               </ul>
 
               <div className="space-y-2">
-                <Link to="/contact" className="w-full py-4 rounded-xl font-bold text-xs uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-2 bg-white/5 text-white border border-white/10 hover:bg-premium-green hover:text-black hover:border-transparent hover:shadow-[0_0_30px_rgba(0,255,133,0.3)] group/btn">
+                <Link to="/contact" className="cta cta-btn w-full py-4 rounded-xl font-bold text-xs uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-2 bg-white/5 text-white border border-white/10 hover:bg-premium-green hover:text-black hover:border-transparent hover:shadow-[0_0_30px_rgba(0,255,133,0.3)] group/btn">
                   {t.offer.choosePack}
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
                 </Link>

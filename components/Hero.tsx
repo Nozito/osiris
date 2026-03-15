@@ -89,11 +89,11 @@ export const Hero: React.FC = () => {
             </div>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black font-display tracking-tight leading-tight text-white max-w-5xl mx-auto mb-4">
+          <h1 className="hero-title text-3xl sm:text-5xl md:text-6xl font-black font-display tracking-tight leading-tight text-white max-w-5xl mx-auto mb-4">
             {t.hero.headline}
           </h1>
 
-          <p className="text-sm sm:text-lg md:text-xl text-gray-300 max-w-3xl mb-6 sm:mb-8 leading-relaxed font-light border-l-2 border-premium-green/50 pl-4 sm:pl-6 text-left md:text-center md:border-l-0 md:pl-0 mx-4 sm:mx-0">
+          <p className="hero-subtitle text-sm sm:text-lg md:text-xl text-gray-300 max-w-3xl mb-6 sm:mb-8 leading-relaxed font-light border-l-2 border-premium-green/50 pl-4 sm:pl-6 text-left md:text-center md:border-l-0 md:pl-0 mx-4 sm:mx-0">
             {t.hero.tagline}
           </p>
 
@@ -102,7 +102,7 @@ export const Hero: React.FC = () => {
               {/* Bouton principal */}
               <div className="group relative w-full md:w-auto">
                 <div className="absolute inset-0 bg-premium-green blur-xl opacity-20 group-hover:opacity-50 transition-opacity duration-500 rounded-full"></div>
-                <a href="#contact" className="relative bg-premium-green text-black font-bold py-3 sm:py-5 px-6 sm:px-10 border border-transparent hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-lg tracking-wider uppercase rounded-full shadow-[0_0_30px_rgba(0,255,133,0.2)] w-full md:w-auto">
+                <a href="#contact" className="hero-cta-button relative bg-premium-green text-black font-bold py-3 sm:py-5 px-6 sm:px-10 border border-transparent hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-lg tracking-wider uppercase rounded-full shadow-[0_0_30px_rgba(0,255,133,0.2)] w-full md:w-auto">
                   {t.hero.cta}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>

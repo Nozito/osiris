@@ -28,7 +28,7 @@ export const Footer: React.FC = () => {
         </motion.div>
 
         {/* Simplified Footer Content */}
-        <div className="flex flex-col items-center justify-center gap-8 py-12 border-t border-white/5">
+        <div className="footer-main flex flex-col items-center justify-center gap-8 py-12 border-t border-white/5">
           {/* Company Info - Centered */}
           <div className="flex flex-col items-center text-center max-w-lg">
             <h4 className="text-white font-bold text-2xl mb-6 font-display">OSIRIS</h4>
@@ -45,7 +45,7 @@ export const Footer: React.FC = () => {
 
         {/* Bottom Bar - Legal Links */}
         <div className="border-t border-white/5 pt-8 mt-8">
-          <div className="flex flex-col gap-6 items-center text-center">
+          <div className="footer-bottom flex flex-col gap-6 items-center text-center">
             <p className="text-xs text-gray-600">© 2026 OSIRIS. Tous droits réservés.</p>
 
             <div className="flex flex-wrap justify-center gap-6 text-xs text-gray-500">

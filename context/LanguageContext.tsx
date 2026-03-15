@@ -9,15 +9,19 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-const STORAGE_KEY = 'osiris-language';
+const STORAGE_KEY = 'lang';
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [language, setLanguageState] = useState<Language>(() => {
         // Check localStorage for saved preference
         if (typeof window !== 'undefined') {
             const saved = localStorage.getItem(STORAGE_KEY);
+            const legacy = localStorage.getItem('osiris-language');
             if (saved === 'en' || saved === 'fr') {
                 return saved;
+            }
+            if (legacy === 'en' || legacy === 'fr') {
+                return legacy;
             }
         }
         return 'fr';

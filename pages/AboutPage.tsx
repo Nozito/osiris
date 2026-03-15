@@ -70,8 +70,8 @@ export const AboutPage: React.FC = () => {
         canonical="https://osiris-agency.fr/a-propos"
       />
 
-      <div className="relative z-10 pt-32 pb-20 px-6">
-        <div className="container mx-auto max-w-7xl space-y-20">
+      <div className="relative z-10 pt-24 sm:pt-28 pb-14 sm:pb-16 px-5 sm:px-6">
+        <div className="container mx-auto max-w-7xl space-y-12 sm:space-y-16">
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -89,7 +89,7 @@ export const AboutPage: React.FC = () => {
           </motion.section>
 
           <section>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
               {founders.map((founder, index) => (
                 <motion.article
                   key={founder.name}
@@ -97,9 +97,9 @@ export const AboutPage: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white/[0.03] border border-white/10 rounded-[2rem] p-6 sm:p-8"
+                  className="bg-white/[0.03] border border-white/10 rounded-[2rem] p-5 sm:p-7"
                 >
-                  <div className="aspect-[4/5] mb-6 overflow-hidden rounded-3xl border border-white/10 bg-black/30">
+                  <div className="aspect-[4/5] max-w-[250px] sm:max-w-[320px] md:max-w-none mb-5 sm:mb-6 mx-auto overflow-hidden rounded-3xl border border-white/10 bg-black/30">
                     <picture>
                       <source
                         type="image/webp"
@@ -128,17 +128,17 @@ export const AboutPage: React.FC = () => {
             </div>
           </section>
 
-          <section className="bg-white/[0.02] border border-white/10 rounded-[2rem] p-6 sm:p-10">
-            <h3 className="text-3xl sm:text-4xl font-display font-black text-white mb-8 text-center">
+          <section className="bg-white/[0.02] border border-white/10 rounded-[2rem] p-4 sm:p-8">
+            <h3 className="text-2xl sm:text-4xl font-display font-black text-white mb-5 sm:mb-8 text-center">
               {isFr ? 'Ce qui nous differencie' : 'What makes us different'}
             </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid responsive-card-grid gap-4 sm:gap-6">
               {differentiators.map((item) => (
-                <div key={item.title} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+                <div key={item.title} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 sm:p-6">
                   <div className="flex items-center gap-2 mb-4 text-premium-green">
                     <Hexagon className="w-5 h-5" />
-                    <h4 className="text-white font-bold text-lg">{item.title}</h4>
+                    <h4 className="text-white font-bold text-base sm:text-lg">{item.title}</h4>
                   </div>
                   <p className="text-gray-300 leading-relaxed">{item.description}</p>
                 </div>

@@ -28,7 +28,7 @@ export const DesignPremium: React.FC = () => {
     ];
 
     return (
-        <section className="relative w-full py-20 sm:py-28 px-4 sm:px-6 overflow-hidden bg-premium-black/20">
+        <section className="relative w-full py-14 sm:py-20 px-4 sm:px-6 overflow-hidden bg-premium-black/20">
             <div className="container mx-auto max-w-6xl relative z-10">
                 {/* Section Label */}
                 <motion.div
@@ -50,7 +50,7 @@ export const DesignPremium: React.FC = () => {
                 </motion.div>
 
                 {/* Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div className="grid responsive-card-grid gap-6 mb-12">
                     {cards.map((card, index) => {
                         const Icon = card.icon;
                         return (

@@ -114,7 +114,7 @@ export const Showcase: React.FC = () => {
 
         <motion.div
           layout
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 auto-rows-[280px] sm:auto-rows-[350px]"
+          className="grid responsive-card-grid showcase-grid gap-4 sm:gap-6 auto-rows-[280px] sm:auto-rows-[350px]"
         >
           <AnimatePresence>
             {filteredProjects.map((project) => (
@@ -125,7 +125,7 @@ export const Showcase: React.FC = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.4 }}
-                className={`relative group overflow-hidden rounded-[1.5rem] border border-white/10 bg-gray-900 ${project.size} shadow-2xl`}
+                className="relative group overflow-hidden rounded-[1.5rem] border border-white/10 bg-gray-900 shadow-2xl"
               >
                 {/* Before/After Slider Component */}
                 <div className="absolute inset-0 z-0">

@@ -1,6 +1,16 @@
 /* === GLOBAL STYLES === */
 :root {
   color-scheme: dark;
+  --space-xs: clamp(0.5rem, 1vw, 0.75rem);
+  --space-sm: clamp(0.75rem, 2vw, 1.25rem);
+  --space-md: clamp(1rem, 3vw, 2rem);
+  --space-lg: clamp(2rem, 5vw, 4rem);
+  --space-xl: clamp(3rem, 8vw, 7rem);
+  --font-sm: clamp(0.75rem, 2vw, 0.9rem);
+  --font-base: clamp(1rem, 2vw, 1.125rem);
+  --font-md: clamp(1.25rem, 3vw, 1.75rem);
+  --font-lg: clamp(1.75rem, 4vw, 2.5rem);
+  --font-xl: clamp(2.5rem, 6vw, 4.5rem);
 }
 
 * {
@@ -81,17 +91,95 @@ section {
 }
 
 img {
+  width: 100%;
   max-width: 100%;
   height: auto;
+  object-fit: cover;
+  display: block;
   image-rendering: high-quality;
   image-rendering: -webkit-optimize-contrast;
   backface-visibility: hidden;
   transform: translateZ(0);
 }
 
+button,
+[role="button"],
+a[class*="btn"],
+a[class*="cta"],
+.premium-cta,
+.hero-cta-button {
+  min-height: 44px;
+}
+
+.hero-title {
+  font-size: var(--font-xl);
+}
+
+.hero-subtitle {
+  font-size: var(--font-lg);
+}
+
+.navbar-logo {
+  font-size: clamp(1rem, 2.8vw, 1.25rem);
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: inherit;
+  font-family: inherit;
+  color: rgba(255, 255, 255, 0.45);
+  opacity: 0.45;
+  line-height: 1;
+}
+
+.lang-btn.lang-active {
+  color: rgba(255, 255, 255, 1);
+  opacity: 1;
+}
+
+.lang-btn:hover {
+  opacity: 1;
+}
+
+.lang-separator {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.hamburger {
+  display: none;
+}
+
+.pricing-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 0 16px;
+  overflow-x: hidden;
+}
+
+.pricing-card {
+  flex: 1 1 300px;
+  max-width: 380px;
+}
+
+.responsive-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 main section {
-  padding-top: clamp(88px, 9vw, 120px);
-  padding-bottom: clamp(88px, 9vw, 120px);
+  padding-top: clamp(64px, 7vw, 92px);
+  padding-bottom: clamp(64px, 7vw, 92px);
 }
 
 .fade-section {
@@ -199,5 +287,386 @@ img[loading="lazy"] {
     transition: none !important;
     transform: none !important;
     opacity: 1 !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .responsive-card-grid {
+    gap: var(--space-md);
+  }
+
+  .pricing-card {
+    flex: 1 1 45%;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-links {
+    display: none;
+  }
+
+  .navbar-toggle {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 10px;
+    transition: background 0.2s ease;
+    margin-left: auto;
+    align-self: center;
+    transform: translateY(5px);
+  }
+
+  .hamburger:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .bar {
+    width: 22px;
+    height: 2px;
+    background: #ffffff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    display: block;
+  }
+
+  .hamburger.active .bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .hamburger.active .bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 82%;
+    max-width: 300px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 88px 20px 40px;
+    background: rgba(5, 5, 5, 0.97);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    transition: right 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 10;
+    box-shadow: -8px 0 40px rgba(0, 0, 0, 0.7);
+    border-left: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .nav-menu.open {
+    right: 0;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .nav-links a {
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffffff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .nav-links a:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #00ff85;
+  }
+
+  .nav-links a.active-link {
+    background: rgba(0, 255, 133, 0.08);
+    color: #00ff85;
+  }
+
+  .nav-link-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    flex-shrink: 0;
+    transition: background 0.2s ease;
+  }
+
+  .nav-links a:hover .nav-link-icon {
+    background: rgba(0, 255, 133, 0.12);
+  }
+
+  .nav-links a.active-link .nav-link-icon {
+    background: rgba(0, 255, 133, 0.15);
+  }
+
+  .lang-switcher {
+    margin-top: auto;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .hero-cta-button {
+    width: 100%;
+  }
+
+  .mobile-dropdown-link {
+    font-size: clamp(0.75rem, 2.5vw, 0.85rem) !important;
+    padding: 0.35rem 0.75rem;
+  }
+
+  .mobile-dropdown-audit {
+    font-size: clamp(0.75rem, 2.5vw, 0.85rem) !important;
+    padding: 0.35rem 0.75rem;
+  }
+
+  .responsive-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pricing-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+
+  .pricing-card {
+    flex: 1 1 100%;
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 24px 20px;
+  }
+
+  .pricing-card .price {
+    font-size: 26px;
+  }
+
+  .pricing-card .cta-btn {
+    width: 100%;
+    padding: 14px;
+    text-align: center;
+    display: block;
+  }
+
+  .pricing-card.popular {
+  }
+
+  .pricing-section .pricing-nav,
+  .pricing-section .pricing-dots {
+    display: none !important;
+  }
+
+  .pricing-section .pricing-track {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  .pricing-section .pricing-card {
+    position: static !important;
+    transform: none !important;
+    opacity: 1 !important;
+    width: 100%;
+    max-width: 400px;
+    padding: clamp(1rem, 3vw, 1.5rem);
+    pointer-events: auto;
+  }
+
+  .pricing-section .pricing-card h2,
+  .pricing-section .pricing-card h3 {
+    font-size: clamp(1rem, 4vw, 1.25rem);
+  }
+
+  .pricing-section .pricing-card .price {
+    font-size: clamp(1.25rem, 5vw, 1.75rem) !important;
+  }
+
+  .pricing-section .pricing-card p,
+  .pricing-section .pricing-card li {
+    font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+  }
+
+  .pricing-section .pricing-card .cta {
+    font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+    padding: 0.6rem 1.2rem;
+    min-height: 44px;
+  }
+
+  .guarantee-section {
+    padding: 0 1.5rem;
+  }
+
+  .guarantee-grid {
+    gap: 1rem;
+  }
+
+  .guarantee-item {
+    text-align: left;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.75rem;
+  }
+
+  .guarantee-item .guarantee-icon {
+    margin-inline: 0;
+    flex-shrink: 0;
+  }
+
+  .btn-whatsapp {
+    font-size: clamp(0.75rem, 2.5vw, 0.85rem);
+    padding: 0.55rem 1.1rem;
+  }
+
+  .btn-whatsapp .btn-icon {
+    width: 15px;
+    height: 15px;
+  }
+
+  .btn-reserve {
+    font-size: clamp(0.7rem, 2.5vw, 0.8rem);
+    padding: 0.6rem 1rem;
+    min-height: 40px;
+    letter-spacing: 0.08em;
+  }
+
+  .contact-form .btn-reserve {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    letter-spacing: 0.06em;
+    font-size: 0.7rem;
+  }
+
+  .footer-main,
+  .footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .responsive-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-subtitle {
+    font-size: var(--font-md);
+  }
+
+  .buttons-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .btn-whatsapp,
+  .btn-reserve {
+    width: 100%;
+    max-width: 260px;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --space-xl: clamp(3.5rem, 7vw, 8rem);
+  }
+}
+
+@media (min-width: 2560px) {
+  :root {
+    --space-xs: clamp(0.65rem, 0.8vw, 1rem);
+    --space-sm: clamp(0.9rem, 1.2vw, 1.4rem);
+    --space-md: clamp(1.2rem, 1.8vw, 2.2rem);
+    --space-lg: clamp(2.4rem, 3.2vw, 4.5rem);
+    --space-xl: clamp(3.8rem, 5vw, 7.5rem);
+  }
+}
+
+.btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #25d366;
+  color: #fff;
+  font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+  font-weight: 600;
+  padding: 0.65rem 1.4rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.btn-whatsapp:hover {
+  background: #1ebe5d;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+}
+
+.btn-whatsapp .btn-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.btn-reserve {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  font-weight: 600;
+  padding: 0.7rem 1.6rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.btn-reserve:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+@media (min-width: 769px) {
+  .hamburger {
+    display: none;
   }
 }

@@ -8,7 +8,7 @@ export const Contact: React.FC = () => {
   const { t } = useLanguage();
 
   return (
-    <section id="contact" className="px-4 sm:px-6 py-10 sm:py-20 bg-[#0A0A0A] relative overflow-hidden scroll-mt-20 border-t border-white/5">
+    <section id="contact" className="px-4 sm:px-6 py-8 sm:py-16 bg-[#0A0A0A] relative overflow-hidden scroll-mt-20 border-t border-white/5">
       {/* Scrolling OSIRIS Marquee Band - Background */}
       <div className="absolute inset-0 flex items-center overflow-hidden pointer-events-none select-none">
         <motion.div
@@ -19,7 +19,7 @@ export const Contact: React.FC = () => {
           {[...Array(10)].map((_, i) => (
             <span
               key={i}
-              className="text-[15vw] md:text-[12vw] font-black font-display text-white/[0.02] tracking-[-0.05em] mx-8"
+              className="text-[15vw] md:text-[15vw] lg:text-[14vw] font-black font-display text-white/[0.02] tracking-[-0.05em] mx-8"
               style={{ WebkitTextStroke: '1px rgba(255,255,255,0.03)' }}
             >
               OSIRIS
@@ -67,9 +67,9 @@ export const Contact: React.FC = () => {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-white/5 backdrop-blur-xl p-4 sm:p-8 md:p-12 border border-white/10 rounded-2xl sm:rounded-[2.5rem]"
+            className="bg-white/5 backdrop-blur-xl p-3 sm:p-8 md:p-12 border border-white/10 rounded-2xl sm:rounded-[2.5rem]"
           >
-            <form className="space-y-4 sm:space-y-6">
+            <form className="contact-form space-y-4 sm:space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 <div className="space-y-2">
                   <label htmlFor="contact-name" className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.name}</label>
@@ -102,22 +102,12 @@ export const Contact: React.FC = () => {
 
               </div>
 
-              <div className="flex items-start gap-3 pt-2">
-                <input
-                  id="contact-consent"
-                  type="checkbox"
-                  required
-                  className="mt-1 w-4 h-4 rounded border-white/10 bg-black/50 text-premium-green focus:ring-premium-green focus:bg-premium-green/20"
-                />
-                <label htmlFor="contact-consent" className="text-xs text-gray-500 leading-relaxed cursor-pointer">
-                  J'accepte que mes données soient traitées conformément à la <a href="/legal#confidentialite" className="text-white hover:text-premium-green underline decoration-white/20 hover:decoration-premium-green transition-colors">politique de confidentialité</a> d'Osiris Agency.
-                </label>
+              <div className="flex justify-center mt-4">
+                <button type="button" className="btn-reserve w-full sm:w-auto sm:min-w-[320px] bg-premium-green text-black font-bold py-3 sm:py-5 text-[11px] sm:text-sm uppercase tracking-[0.08em] sm:tracking-widest hover:bg-white transition-colors duration-300 flex items-center justify-center gap-2 rounded-full">
+                <span className="truncate">{t.contact.form.submit}</span>
+                <ArrowRight className="w-4 h-4 flex-shrink-0" />
+                </button>
               </div>
-
-              <button type="button" className="w-full bg-premium-green text-black font-bold py-5 uppercase tracking-widest hover:bg-white transition-colors duration-300 flex items-center justify-center gap-2 rounded-full mt-4">
-                {t.contact.form.submit}
-                <ArrowRight className="w-4 h-4" />
-              </button>
 
               <p className="text-center text-xs text-gray-500 mt-3">{t.contact.reassurance}</p>
             </form>

@@ -12,7 +12,7 @@ export const FAQ: React.FC = () => {
     };
 
     return (
-        <section className="relative w-full py-20 sm:py-28 px-4 sm:px-6 overflow-hidden bg-premium-black/20">
+        <section className="relative w-full py-14 sm:py-20 px-4 sm:px-6 overflow-hidden bg-premium-black/20">
             <div className="container mx-auto max-w-4xl relative z-10">
                 {/* Section Label */}
                 <motion.div

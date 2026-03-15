@@ -57,7 +57,7 @@ export const ContactPage: React.FC = () => {
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.02)_0%,transparent_60%)]"></div>
             </div>
 
-            <div className="relative z-10 pt-32 pb-20 px-6">
+            <div className="relative z-10 pt-24 sm:pt-28 pb-14 sm:pb-16 px-5 sm:px-6">
                 <div className="container mx-auto max-w-7xl">
 
                     {/* Header Section */}
@@ -214,7 +214,7 @@ export const ContactPage: React.FC = () => {
                                             initial={{ opacity: 1 }}
                                             exit={{ opacity: 0, y: -20 }}
                                             onSubmit={handleSubmit}
-                                            className="space-y-8"
+                                            className="contact-form space-y-8"
                                         >
                                             <div className="flex items-center gap-4 mb-10 pb-8 border-b border-white/5">
                                                 <div className="w-10 h-10 rounded-full bg-premium-green/10 flex items-center justify-center text-premium-green shadow-[0_0_15px_rgba(0,255,133,0.2)]">
@@ -270,23 +270,11 @@ export const ContactPage: React.FC = () => {
                                                 </div>
                                             </div>
 
-                                            <div className="flex items-start gap-3">
-                                                <input
-                                                    id="cp-consent"
-                                                    type="checkbox"
-                                                    required
-                                                    className="mt-1 w-4 h-4 rounded border-white/10 bg-black/50 text-premium-green focus:ring-premium-green focus:bg-premium-green/20"
-                                                />
-                                                <label htmlFor="cp-consent" className="text-xs text-gray-500 leading-relaxed cursor-pointer">
-                                                    J'accepte que mes données soient traitées conformément à la <a href="/legal#confidentialite" className="text-white hover:text-premium-green underline decoration-white/20 hover:decoration-premium-green transition-colors">politique de confidentialité</a> d'Osiris Agency.
-                                                </label>
-                                            </div>
-
                                             <div className="pt-6">
                                                 <button
                                                     type="submit"
                                                     disabled={formStatus === 'submitting'}
-                                                    className="w-full bg-white text-black font-black py-5 uppercase tracking-[0.2em] hover:bg-premium-green transition-colors duration-300 flex items-center justify-center gap-3 rounded-xl shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
+                                                    className="btn-reserve w-full bg-white text-black font-black py-5 uppercase tracking-[0.2em] hover:bg-premium-green transition-colors duration-300 flex items-center justify-center gap-3 rounded-xl shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
                                                 >
                                                     {formStatus === 'submitting' ? (
                                                         <span className="animate-pulse flex items-center gap-2">

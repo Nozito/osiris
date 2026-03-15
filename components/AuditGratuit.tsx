@@ -1,6 +1,7 @@
 ﻿import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Zap, Search, Palette, Target } from 'lucide-react';
+import { Zap, Search, Palette, Target, MessageCircle, PhoneCall } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 
 const iconMap: Record<string, React.FC<{ className?: string }>> = {
@@ -113,22 +114,28 @@ export const AuditGratuit: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.15 }}
-                    className="mb-14"
+                    className="mb-14 relative"
                 >
+                    <div className="absolute inset-x-0 -top-10 h-24 bg-gradient-to-r from-transparent via-premium-green/10 to-transparent blur-2xl pointer-events-none" />
                     <p className="text-xs font-bold uppercase tracking-widest text-white/35 text-center mb-8">
                         {t.audit.processTitle}
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-0">
                         {t.audit.processSteps.map((step, i) => (
                             <React.Fragment key={i}>
-                                <div className="flex flex-col items-center text-center sm:flex-1">
-                                    <span className="text-3xl font-black font-display text-premium-green/30 leading-none mb-2">
+                                <motion.div
+                                    whileHover={{ y: -3 }}
+                                    transition={{ duration: 0.25 }}
+                                    className="group relative flex flex-col items-center text-center sm:flex-1 px-3 py-3 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] hover:border-premium-green/25 transition-all duration-300"
+                                >
+                                    <span className="absolute inset-0 rounded-2xl bg-gradient-to-r from-premium-green/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                    <span className="relative text-3xl font-black font-display text-premium-green/50 group-hover:text-premium-green/80 leading-none mb-2 transition-colors duration-300">
                                         {step.num}
                                     </span>
-                                    <p className="text-sm text-white/70 font-medium max-w-[140px]">{step.text}</p>
-                                </div>
+                                    <p className="relative text-sm text-white/75 group-hover:text-white font-medium max-w-[170px] transition-colors duration-300">{step.text}</p>
+                                </motion.div>
                                 {i < t.audit.processSteps.length - 1 && (
-                                    <div className="hidden sm:block w-16 border-t border-dashed border-white/15 mx-4 shrink-0" />
+                                    <div className="hidden sm:block w-16 h-[2px] bg-gradient-to-r from-premium-green/30 via-white/15 to-transparent mx-4 shrink-0" />
                                 )}
                             </React.Fragment>
                         ))}
@@ -153,13 +160,23 @@ export const AuditGratuit: React.FC = () => {
                         rows={4}
                         className="w-full min-h-[120px] bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-white/80 placeholder:text-white/25 focus:outline-none focus:border-premium-green/40 focus:bg-white/[0.06] transition-all duration-300 resize-none mb-5"
                     />
-                    <div className="flex flex-col items-center gap-4">
+                    <div className="buttons-wrapper flex flex-row flex-wrap justify-center items-center gap-4">
                         <button
                             onClick={handleWhatsApp}
-                            className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 px-9 py-[18px] rounded-full bg-premium-green text-premium-black font-bold text-base sm:text-lg hover:bg-premium-green/90 transition-all duration-300 hover:-translate-y-[3px] hover:shadow-[0_12px_40px_rgba(0,255,133,0.35)]"
+                            className="btn-whatsapp group w-full sm:w-auto"
                         >
-                            {t.audit.whatsappCtaDynamic}
+                            <MessageCircle className="btn-icon" />
+                            Envoyer sur WhatsApp
                         </button>
+                        <Link
+                            to="/contact"
+                            className="btn-reserve w-full sm:w-auto bg-white text-black border border-transparent"
+                        >
+                            <PhoneCall className="btn-icon" />
+                            Réserver mon appel
+                        </Link>
+                    </div>
+                    <div className="flex flex-col items-center gap-4 mt-4">
                         <p className="text-xs sm:text-sm text-white/40 text-center tracking-wide">
                             {t.audit.reassurance}
                         </p>

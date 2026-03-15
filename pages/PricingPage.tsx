@@ -191,7 +191,7 @@ export const PricingPage: React.FC = () => {
 
             {/* Premium Background Removed (Handled Globally in App.tsx) */}
 
-            <div className="relative z-10 pt-32 pb-20">
+            <div className="relative z-10 pt-24 sm:pt-28 pb-14 sm:pb-16">
                 <div className="container mx-auto max-w-7xl px-6">
 
                     {/* Header */}
@@ -229,7 +229,7 @@ export const PricingPage: React.FC = () => {
                     </motion.div>
 
                     {/* Mobile: Swipeable Carousel */}
-                    <div className="lg:hidden relative mb-32 flex flex-col items-center"
+                    <div className="pricing-section lg:hidden relative mb-32 flex flex-col items-center"
                         onTouchStart={(e) => {
                             const touch = e.touches[0];
                             (e.currentTarget as any)._touchStartX = touch.clientX;
@@ -253,20 +253,20 @@ export const PricingPage: React.FC = () => {
                         <button
                             onClick={prevSlide}
                             aria-label="Previous offer"
-                            className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/60 border border-white/10 flex items-center justify-center text-white backdrop-blur-md active:scale-90 transition-transform"
+                            className="pricing-nav absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/60 border border-white/10 flex items-center justify-center text-white backdrop-blur-md active:scale-90 transition-transform"
                         >
                             <ChevronLeft className="w-5 h-5" />
                         </button>
                         <button
                             onClick={nextSlide}
                             aria-label="Next offer"
-                            className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/60 border border-white/10 flex items-center justify-center text-white backdrop-blur-md active:scale-90 transition-transform"
+                            className="pricing-nav absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/60 border border-white/10 flex items-center justify-center text-white backdrop-blur-md active:scale-90 transition-transform"
                         >
                             <ChevronRight className="w-5 h-5" />
                         </button>
 
                         {/* Cards Container */}
-                        <div className="relative w-full h-[560px] flex items-center justify-center overflow-hidden">
+                        <div className="pricing-container pricing-track relative w-full h-[560px] flex items-center justify-center overflow-hidden">
                             {offers.map((offer, index) => {
                                 const position = getSlidePosition(index);
                                 const isCenter = position === 'center';
@@ -283,7 +283,7 @@ export const PricingPage: React.FC = () => {
                                             duration: 0.2,
                                             ease: [0.25, 0.1, 0.25, 1],
                                         }}
-                                        className={`absolute w-[88%] max-w-[340px] p-8 rounded-[2rem] flex flex-col h-[520px] backdrop-blur-xl will-change-transform
+                                        className={`pricing-card ${offer.highlight ? 'popular' : ''} absolute w-[88%] max-w-[340px] p-8 rounded-[2rem] flex flex-col h-[520px] backdrop-blur-xl will-change-transform
                                             ${isCenter
                                                 ? 'bg-[#0A0A0A]/90 border border-premium-green/30 shadow-[0_0_50px_-10px_rgba(0,255,133,0.15)]'
                                                 : 'bg-white/[0.03] border border-white/5'
@@ -308,7 +308,7 @@ export const PricingPage: React.FC = () => {
                                                 {offer.title}
                                             </h3>
                                             <div className="flex items-start justify-center gap-1">
-                                                <span className="text-5xl font-black text-white tracking-tighter">{offer.price}</span>
+                                                <span className="price text-5xl font-black text-white tracking-tighter">{offer.price}</span>
                                                 <span className="text-2xl mt-2 text-gray-500 font-light">€</span>
                                             </div>
                                             <p className="text-gray-500 text-xs mt-4 font-medium line-clamp-2">{offer.description}</p>
@@ -327,7 +327,7 @@ export const PricingPage: React.FC = () => {
                                             ))}
                                         </ul>
 
-                                        <Link to="/contact" className={`w-full py-4 rounded-xl font-bold text-xs uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-2
+                                        <Link to="/contact" className={`cta cta-btn w-full py-4 rounded-xl font-bold text-xs uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-2
                                             ${isCenter
                                                 ? 'bg-gradient-to-r from-premium-green to-emerald-400 text-black shadow-lg shadow-emerald-500/20'
                                                 : 'bg-white/5 text-white border border-white/10'
@@ -342,7 +342,7 @@ export const PricingPage: React.FC = () => {
                         </div>
 
                         {/* Dot Indicators */}
-                        <div className="flex items-center gap-3 mt-8">
+                        <div className="pricing-dots flex items-center gap-3 mt-8">
                             {offers.map((_, index) => (
                                 <button
                                     key={index}
@@ -358,10 +358,10 @@ export const PricingPage: React.FC = () => {
                     </div>
 
                     {/* Desktop: Premium Static Cards */}
-                    <div className="hidden lg:grid grid-cols-3 gap-8 mb-32 h-full items-stretch perspective-1000">
+                    <div className="pricing-container hidden lg:grid grid-cols-3 gap-8 mb-32 h-full items-stretch perspective-1000">
                         {offers.map((offer, index) => (
                             <TiltCard key={index} highlight={offer.highlight} color={offer.color} className="group">
-                                <div className={`relative p-10 rounded-[2.5rem] flex flex-col h-full bg-[#080808]/60 backdrop-blur-2xl border transition-all duration-500 overflow-hidden
+                                <div className={`pricing-card ${offer.highlight ? 'popular' : ''} relative p-10 rounded-[2.5rem] flex flex-col h-full bg-[#080808]/60 backdrop-blur-2xl border transition-all duration-500 overflow-hidden
                                     ${offer.highlight
                                         ? 'border-premium-green/30 shadow-[0_20px_40px_-15px_rgba(0,255,133,0.1)]'
                                         : `border-white/5 ${getBorderColorClass(offer.color)} hover:bg-white/[0.02]`
@@ -405,7 +405,7 @@ export const PricingPage: React.FC = () => {
                                             {offer.title}
                                         </h3>
                                         <div className="flex items-start justify-center gap-1 group-hover:scale-105 transition-transform duration-500 origin-center">
-                                            <span className={`text-6xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b ${offer.highlight ? 'from-white via-white to-gray-400' : 'from-gray-200 via-gray-400 to-gray-600 group-hover:from-white group-hover:to-gray-300'}`}>
+                                            <span className={`price text-6xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b ${offer.highlight ? 'from-white via-white to-gray-400' : 'from-gray-200 via-gray-400 to-gray-600 group-hover:from-white group-hover:to-gray-300'}`}>
                                                 {offer.price}
                                             </span>
                                             <span className="text-2xl mt-3 text-gray-500 font-light">€</span>
@@ -436,7 +436,7 @@ export const PricingPage: React.FC = () => {
 
                                     {/* CTA Button */}
                                     <Link to="/contact" className="relative z-10 group/btn w-full">
-                                        <div className={`w-full py-5 rounded-2xl font-bold text-xs uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-2 border overflow-hidden relative shadow-lg
+                                        <div className={`cta cta-btn w-full py-5 rounded-2xl font-bold text-xs uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-2 border overflow-hidden relative shadow-lg
                                             ${offer.highlight
                                                 ? 'bg-gradient-to-r from-premium-green to-emerald-500 text-black border-transparent hover:shadow-[0_0_40px_rgba(0,255,133,0.3)] hover:scale-[1.02]'
                                                 : `bg-white/5 text-white border-white/10 hover:text-white hover:border-transparent ${offer.color === 'blue' ? 'hover:bg-blue-600 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]' : offer.color === 'purple' ? 'hover:bg-purple-600 hover:shadow-[0_0_30px_rgba(168,85,247,0.3)]' : 'hover:bg-premium-green hover:text-black hover:shadow-[0_0_30px_rgba(0,255,133,0.3)]'}`

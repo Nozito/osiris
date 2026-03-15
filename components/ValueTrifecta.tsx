@@ -373,7 +373,7 @@ export const ValueTrifecta: React.FC = () => {
   ];
 
   return (
-    <section id="expertise" className="relative px-4 sm:px-6 py-12 sm:py-20 bg-[#050505] overflow-hidden scroll-mt-20 selection:bg-premium-green selection:text-black">
+    <section id="expertise" className="relative px-4 sm:px-6 py-10 sm:py-16 bg-[#050505] overflow-hidden scroll-mt-20 selection:bg-premium-green selection:text-black">
       {/* Ambient Background Elements */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-premium-green/5 blur-[120px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/3 mix-blend-screen" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-900/10 blur-[120px] rounded-full pointer-events-none translate-y-1/3 -translate-x-1/3 mix-blend-screen" />
@@ -460,7 +460,7 @@ export const ValueTrifecta: React.FC = () => {
               }
             }
           }}
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-12 sm:mb-24"
+          className="grid responsive-card-grid gap-4 sm:gap-6 mb-12 sm:mb-24"
         >
           {cards.map((card, index) => (
             <motion.div

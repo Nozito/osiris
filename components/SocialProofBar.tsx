@@ -14,9 +14,9 @@ export const SocialProofBar: React.FC = () => {
     ];
 
     return (
-        <section className="relative w-full py-8 px-4 sm:px-6 overflow-hidden bg-premium-black/30 border-y border-white/5">
+        <section className="guarantee-section relative w-full py-8 px-4 sm:px-6 overflow-hidden bg-premium-black/30 border-y border-white/5">
             <div className="container mx-auto max-w-6xl">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+            <div className="guarantee-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
                     {proofs.map((proof, index) => {
                         const Icon = proof.icon;
                         return (
@@ -26,9 +26,9 @@ export const SocialProofBar: React.FC = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                                className="flex items-center gap-3 justify-center sm:justify-start"
+                                className="guarantee-item flex items-center gap-3 justify-start"
                             >
-                                <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-premium-green/10 border border-premium-green/20 flex items-center justify-center">
+                                <div className="guarantee-icon flex-shrink-0 w-10 h-10 rounded-xl bg-premium-green/10 border border-premium-green/20 flex items-center justify-center">
                                     <Icon className="w-5 h-5 text-premium-green" />
                                 </div>
                                 <p className="text-sm sm:text-base text-white/80 font-medium">

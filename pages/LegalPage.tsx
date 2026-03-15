@@ -25,7 +25,7 @@ export const LegalPage: React.FC = () => {
                 canonical="https://osiris-web.com/legal"
             />
 
-            <section className="min-h-screen pt-32 pb-20 px-6 relative bg-[#050505]">
+            <section className="min-h-screen pt-24 sm:pt-28 pb-14 sm:pb-16 px-5 sm:px-6 relative bg-[#050505]">
                 {/* Background Details */}
                 <div className="fixed inset-0 pointer-events-none">
                     <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-premium-green/5 blur-[120px] rounded-full" />
@@ -48,7 +48,7 @@ export const LegalPage: React.FC = () => {
                         </p>
                     </motion.div>
 
-                    <div className="space-y-20">
+                    <div className="space-y-12 sm:space-y-16">
                         {/* SECTION 2: CGV */}
                         <div id="cgv" className="scroll-mt-32">
                             <h2 className="text-3xl font-bold text-white mb-8 border-b border-white/10 pb-4 font-display">2. Conditions Générales de Vente (CGV)</h2>
