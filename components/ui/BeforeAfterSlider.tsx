@@ -100,7 +100,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
 
       {/* Slider Handle */}
       <div
-        className="absolute top-0 bottom-0 w-1 bg-premium-green cursor-ew-resize z-20 shadow-[0_0_20px_rgba(0,255,133,0.5)]"
+        className="absolute top-0 bottom-0 w-1 bg-premium-green cursor-ew-resize z-20 shadow-[0_0_20px_rgba(37,99,235,0.5)]"
         style={{ left: `${sliderPosition}%` }}
       >
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-premium-green rounded-full flex items-center justify-center shadow-lg border-2 border-white cursor-ew-resize active:scale-90 transition-transform">

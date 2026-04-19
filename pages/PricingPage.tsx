@@ -1,12 +1,643 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, useMotionTemplate, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { Check, ArrowRight, HelpCircle, ChevronLeft, ChevronRight, Rocket, Zap, Crown } from 'lucide-react';
+import { Check, ArrowRight, HelpCircle, ChevronLeft, ChevronRight, Rocket, Zap, Crown, Calculator, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Footer } from '../components/Footer';
 import { SEOHead } from '../components/SEOHead';
 import { useLanguage } from '../context/LanguageContext';
 
-// --- 3D Tilt Card Component (Refined) ---
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CONFIGURATEUR DE DEVIS INTERACTIF
+// ─────────────────────────────────────────────────────────────────────────────
+
+const SITE_TYPES = [
+    { id: 'vitrine-simple',   label: 'Site vitrine simple',    sublabel: '1–3 pages / landing', price: 950  },
+    { id: 'vitrine-standard', label: 'Site vitrine standard',  sublabel: '3–5 pages',           price: 1650 },
+    { id: 'vitrine-premium',  label: 'Site vitrine premium',   sublabel: '6–10 pages',          price: 2950 },
+];
+
+const UPGRADE_BUSINESS_OPTIONS = [
+    { id: 'up-anim-useful',  label: 'Animations utiles',                        price: 200 },
+    { id: 'up-seo-clean',    label: 'Socle SEO propre',                         price: 250 },
+    { id: 'up-calls',        label: 'Calls réguliers durant la création',       price: 150 },
+    { id: 'up-revisions-2',  label: '+2 rounds de révisions supplémentaires',   price: 100 },
+    { id: 'up-support-30',   label: 'Support étendu à 30 jours',                price: 100 },
+];
+
+const UPGRADE_EMPIRE_OPTIONS = [
+    { id: 'up-anim-adv',     label: 'Animations avancées',                           price: 350 },
+    { id: 'up-seo-adv',      label: 'SEO avancé',                                    price: 450 },
+    { id: 'up-revisions-ul', label: "Révisions illimitées jusqu'à mise en ligne",    price: 300 },
+    { id: 'up-support-60',   label: 'Support étendu à 60 jours',                     price: 200 },
+];
+
+const UNIVERSAL_OPTIONS = [
+    { id: 'form',        label: 'Formulaire de contact avancé',        price: 100 },
+    { id: 'blog',        label: 'Blog / actualités',                   price: 200 },
+    { id: 'gallery',     label: 'Galerie photos/vidéos',               price: 150 },
+    { id: 'booking',     label: 'Système de réservation en ligne',     price: 350 },
+    { id: 'account',     label: 'Espace client / connexion',           price: 500 },
+    { id: 'multilang',   label: 'Multi-langue (par langue ajoutée)',   price: 300 },
+    { id: 'whatsapp',    label: 'Widget WhatsApp / Chat',              price: 80  },
+    { id: 'maps',        label: 'Intégration Google Maps + avis',      price: 100 },
+    { id: 'chatbot',     label: 'Chatbot IA',                          price: 400 },
+];
+
+const DEADLINES = [
+    { id: 'standard', label: 'Standard',           sublabel: '3 à 7 semaines',       rate: 0    },
+    { id: 'express',  label: 'Express',             sublabel: '1 à 2 semaines',       rate: 0.30 },
+    { id: 'urgent',   label: 'Urgent',              sublabel: 'Moins de 7 jours',     rate: 0.60 },
+];
+
+function calcExtraPages(n: number): number {
+    let total = 0;
+    const tiers = [ { up: 3, price: 100 }, { up: 9, price: 80 }, { up: Infinity, price: 60 } ];
+    let remaining = n, pagesSeen = 0;
+    for (const tier of tiers) {
+        if (remaining <= 0) break;
+        const inTier = Math.min(remaining, tier.up - pagesSeen);
+        total += inTier * tier.price;
+        remaining -= inTier;
+        pagesSeen += inTier;
+    }
+    return total;
+}
+
+function AnimatedPrice({ value }: { value: number }) {
+    const [displayed, setDisplayed] = useState(value);
+    const rafRef = useRef<number>(0);
+
+    useEffect(() => {
+        const start = displayed;
+        const end = value;
+        const duration = 400;
+        const startTime = performance.now();
+        const animate = (now: number) => {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            setDisplayed(Math.round(start + (end - start) * eased));
+            if (progress < 1) rafRef.current = requestAnimationFrame(animate);
+        };
+        rafRef.current = requestAnimationFrame(animate);
+        return () => cancelAnimationFrame(rafRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [value]);
+
+    return <>{displayed.toLocaleString('fr-FR')}</>;
+}
+
+const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSiteType = '' }) => {
+    const [step, setStep] = useState(initialSiteType ? 2 : 1);
+    const [siteType, setSiteType] = useState<string>(initialSiteType);
+    const [extraPages, setExtraPages] = useState(0);
+    const [selectedUpgrades, setSelectedUpgrades] = useState<Set<string>>(new Set());
+    const [selectedUniversal, setSelectedUniversal] = useState<Set<string>>(new Set());
+    const [wantsUnlimited, setWantsUnlimited] = useState(false);
+    const [deadline, setDeadline] = useState<string>('standard');
+
+    const handleSiteTypeChange = (id: string) => {
+        setSiteType(id);
+        setSelectedUpgrades(new Set());
+    };
+    const [form, setForm] = useState({ firstName: '', lastName: '', email: '', phone: '', message: '' });
+    const [animating, setAnimating] = useState(false);
+    const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
+
+    const basePrice = SITE_TYPES.find(s => s.id === siteType)?.price ?? 0;
+    const extraPagesPrice = calcExtraPages(extraPages);
+    const upgradesPrice = Array.from(selectedUpgrades).reduce((acc, id) => {
+        const opt = [...UPGRADE_BUSINESS_OPTIONS, ...UPGRADE_EMPIRE_OPTIONS].find(o => o.id === id);
+        return acc + (opt?.price ?? 0);
+    }, 0);
+    const universalPrice = Array.from(selectedUniversal).reduce((acc, id) => {
+        return acc + (UNIVERSAL_OPTIONS.find(o => o.id === id)?.price ?? 0);
+    }, 0);
+    const subtotalHT = basePrice + extraPagesPrice + upgradesPrice + universalPrice;
+    const deadlineRate = DEADLINES.find(d => d.id === deadline)?.rate ?? 0;
+    const deadlineSurcharge = Math.round(subtotalHT * deadlineRate);
+    const totalHT = subtotalHT + deadlineSurcharge;
+    const tva = Math.round(totalHT * 0.20);
+    const totalTTC = totalHT + tva;
+
+    const navigate = useCallback((next: number) => {
+        let target = next;
+        // Skip step 3 (upgrades) for Empire and E-commerce — forward and backward
+        if (next === 3 && siteType !== 'vitrine-simple' && siteType !== 'vitrine-standard') {
+            target = next > step ? 4 : 2;
+        }
+        setDirection(target > step ? 'forward' : 'backward');
+        setAnimating(true);
+        setTimeout(() => {
+            setStep(target);
+            setAnimating(false);
+        }, 200);
+    }, [step, siteType]);
+
+    const toggleUpgrade = (id: string) => {
+        setSelectedUpgrades(prev => {
+            const n = new Set(prev);
+            n.has(id) ? n.delete(id) : n.add(id);
+            return n;
+        });
+    };
+
+    const toggleUniversal = (id: string) => {
+        setSelectedUniversal(prev => {
+            const n = new Set(prev);
+            n.has(id) ? n.delete(id) : n.add(id);
+            return n;
+        });
+    };
+
+    const buildMailto = () => {
+        const siteLabel = SITE_TYPES.find(s => s.id === siteType)?.label ?? '';
+        const deadlineLabel = DEADLINES.find(d => d.id === deadline)?.label ?? '';
+        const allUpgrades = [...UPGRADE_BUSINESS_OPTIONS, ...UPGRADE_EMPIRE_OPTIONS];
+        const upgradesList = Array.from(selectedUpgrades).map(id => allUpgrades.find(o => o.id === id)?.label).join(', ');
+        const universalList = Array.from(selectedUniversal).map(id => UNIVERSAL_OPTIONS.find(o => o.id === id)?.label).join(', ');
+        const subject = encodeURIComponent(`Devis Osiris — ${siteLabel}`);
+        const body = encodeURIComponent(
+            `Bonjour,\n\nVoici ma demande de devis configurée sur osiris-web.com :\n\n`+
+            `Prénom : ${form.firstName}\nNom : ${form.lastName}\nEmail : ${form.email}\nTéléphone : ${form.phone}\n\n`+
+            `Offre de base : ${siteLabel}\nPages supplémentaires : ${extraPages}\n`+
+            `Upgrades : ${upgradesList || 'Aucun'}\nOptions : ${universalList || 'Aucune'}\n`+
+            (wantsUnlimited ? `Modifications illimitées : +19,90 €/mois\n` : '')+
+            `Délai : ${deadlineLabel}\n\nSous-total HT : ${subtotalHT.toLocaleString('fr-FR')} €\n`+
+            (deadlineSurcharge > 0 ? `Supplément délai : +${deadlineSurcharge.toLocaleString('fr-FR')} €\n` : '')+
+            `Total HT : ${totalHT.toLocaleString('fr-FR')} €\nTVA 20% : ${tva.toLocaleString('fr-FR')} €\n`+
+            `Total TTC estimé : ${totalTTC.toLocaleString('fr-FR')} €\n\n`+
+            `Message :\n${form.message}\n\nCordialement,\n${form.firstName} ${form.lastName}`
+        );
+        return `mailto:contact@osiris-agency.fr?subject=${subject}&body=${body}`;
+    };
+
+    const STEPS = ['Offre', 'Pages', 'Upgrade', 'Options', 'Délai', 'Récap'];
+
+    const canNext = () => {
+        if (step === 1) return siteType !== '';
+        if (step === 5) return deadline !== '';
+        return true;
+    };
+
+    return (
+        <div className="relative w-full">
+            {/* Progress bar */}
+            <div className="flex items-center justify-center gap-0 mb-10">
+                {STEPS.map((label, i) => {
+                    const num = i + 1;
+                    const isDone = step > num;
+                    const isActive = step === num;
+                    return (
+                        <React.Fragment key={num}>
+                            <div className="flex flex-col items-center gap-1.5">
+                                <button
+                                    onClick={() => num < step && navigate(num)}
+                                    disabled={num > step}
+                                    className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 border focus:outline-none
+                                        ${isDone ? 'bg-[#2563EB] border-[#2563EB] text-white shadow-[0_0_12px_rgba(37,99,235,0.5)] cursor-pointer'
+                                            : isActive ? 'bg-[#2563EB] border-[#2563EB] text-white shadow-[0_0_20px_rgba(37,99,235,0.6)]'
+                                            : 'bg-transparent border-white/15 text-white/30 cursor-default'}`}
+                                >
+                                    {isDone ? '✓' : num}
+                                </button>
+                                <span className={`hidden sm:block text-[10px] uppercase tracking-widest font-bold transition-colors duration-300 ${isActive ? 'text-[#2563EB]' : isDone ? 'text-white/50' : 'text-white/20'}`}>
+                                    {label}
+                                </span>
+                            </div>
+                            {i < STEPS.length - 1 && (
+                                <div className="relative h-[2px] w-8 sm:w-16 mx-1 mb-5 bg-white/10 overflow-hidden">
+                                    <div
+                                        className="absolute inset-y-0 left-0 bg-[#2563EB] transition-all duration-500"
+                                        style={{ width: step > num ? '100%' : '0%' }}
+                                    />
+                                </div>
+                            )}
+                        </React.Fragment>
+                    );
+                })}
+            </div>
+
+            {/* Main layout */}
+            <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
+
+                {/* Step content */}
+                <div
+                    className="flex-1 min-w-0"
+                    style={{
+                        opacity: animating ? 0 : 1,
+                        transform: animating ? `translateX(${direction === 'forward' ? '-20px' : '20px'})` : 'translateX(0)',
+                        transition: animating ? 'opacity 200ms ease-in, transform 200ms ease-in' : 'opacity 300ms ease-out, transform 300ms ease-out',
+                    }}
+                >
+
+                    {/* STEP 1 — Choix de l'offre */}
+                    {step === 1 && (
+                        <div>
+                            <h3 className="text-lg font-bold text-white font-display mb-6 uppercase tracking-widest">
+                                Choix de l'offre
+                            </h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                {SITE_TYPES.map(type => (
+                                    <button
+                                        key={type.id}
+                                        onClick={() => handleSiteTypeChange(type.id)}
+                                        className={`text-left p-5 rounded-2xl border transition-all duration-250 focus:outline-none
+                                            ${siteType === type.id
+                                                ? 'border-[#2563EB] bg-[rgba(37,99,235,0.12)] shadow-[0_0_20px_rgba(37,99,235,0.25)]'
+                                                : 'border-white/8 bg-white/[0.03] hover:border-white/15 hover:bg-white/[0.06]'
+                                            }`}
+                                    >
+                                        <div className="flex justify-between items-start gap-3">
+                                            <div>
+                                                <p className="text-white font-bold font-display text-sm mb-1">{type.label}</p>
+                                                <p className="text-white/50 text-xs">{type.sublabel}</p>
+                                            </div>
+                                            <span className={`font-black text-lg font-display shrink-0 ${siteType === type.id ? 'text-[#60A5FA]' : 'text-white/40'}`}>
+                                                {type.price.toLocaleString('fr-FR')} €
+                                            </span>
+                                        </div>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* STEP 2 — Pages supplémentaires */}
+                    {step === 2 && (
+                        <div>
+                            <h3 className="text-lg font-bold text-white font-display mb-2 uppercase tracking-widest">
+                                Pages supplémentaires
+                            </h3>
+                            <p className="text-white/40 text-xs mb-8">Pages 1–3 : 100€ · Pages 4–9 : 80€ · Pages 10+ : 60€</p>
+                            <div className="flex items-center gap-6 justify-center">
+                                <button
+                                    onClick={() => setExtraPages(p => Math.max(0, p - 1))}
+                                    className="w-12 h-12 rounded-xl border border-white/10 bg-white/5 text-white text-xl font-bold hover:bg-white/10 hover:border-white/20 transition-all duration-200 active:scale-95"
+                                >−</button>
+                                <div className="text-center min-w-[80px]">
+                                    <span className="text-5xl font-black font-display text-white">{extraPages}</span>
+                                    <p className="text-white/40 text-xs mt-1">page{extraPages > 1 ? 's' : ''}</p>
+                                </div>
+                                <button
+                                    onClick={() => setExtraPages(p => Math.min(20, p + 1))}
+                                    className="w-12 h-12 rounded-xl border border-white/10 bg-white/5 text-white text-xl font-bold hover:bg-white/10 hover:border-white/20 transition-all duration-200 active:scale-95"
+                                >+</button>
+                            </div>
+                            {extraPages > 0 && (
+                                <p className="text-center text-[#60A5FA] text-sm font-bold mt-6">
+                                    + {calcExtraPages(extraPages).toLocaleString('fr-FR')} €
+                                </p>
+                            )}
+                            <div className="mt-8 flex gap-2 justify-center">
+                                {[0,1,2,3,5,8,10,15,20].map(v => (
+                                    <button
+                                        key={v}
+                                        onClick={() => setExtraPages(v)}
+                                        className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-all duration-200
+                                            ${extraPages === v
+                                                ? 'bg-[#2563EB]/20 border-[#2563EB]/60 text-[#60A5FA]'
+                                                : 'bg-white/[0.03] border-white/10 text-white/40 hover:text-white/70 hover:border-white/20'}`}
+                                    >
+                                        {v}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* STEP 3 — Upgrade d'offre */}
+                    {step === 3 && (
+                        <div>
+                            <h3 className="text-lg font-bold text-white font-display mb-2 uppercase tracking-widest">
+                                Mise à niveau de l'offre
+                            </h3>
+                            <p className="text-white/40 text-xs mb-6">Ajoutez des fonctionnalités du niveau supérieur à la carte.</p>
+
+                            {/* Business options — visible only for Starter */}
+                            {siteType === 'vitrine-simple' && (
+                                <div className="mb-6">
+                                    <p className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-3 flex items-center gap-2">
+                                        <span className="w-2 h-2 rounded-full bg-blue-400 inline-block"></span>
+                                        Options Business
+                                    </p>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        {UPGRADE_BUSINESS_OPTIONS.map(opt => {
+                                            const checked = selectedUpgrades.has(opt.id);
+                                            return (
+                                                <button key={opt.id} onClick={() => toggleUpgrade(opt.id)}
+                                                    className={`text-left p-4 rounded-xl border transition-all duration-250 flex items-center gap-3 focus:outline-none
+                                                        ${checked ? 'border-[#2563EB] bg-[rgba(37,99,235,0.12)] shadow-[0_0_14px_rgba(37,99,235,0.2)]' : 'border-white/8 bg-white/[0.03] hover:border-white/15 hover:bg-white/[0.06]'}`}>
+                                                    <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0 transition-all duration-200 ${checked ? 'bg-[#2563EB] border-[#2563EB]' : 'border-white/20 bg-transparent'}`}>
+                                                        {checked && <Check className="w-3 h-3 text-white" />}
+                                                    </div>
+                                                    <div className="flex-1 min-w-0">
+                                                        <p className={`text-sm font-bold truncate ${checked ? 'text-white' : 'text-white/70'}`}>{opt.label}</p>
+                                                    </div>
+                                                    <span className={`text-sm font-black font-display shrink-0 ${checked ? 'text-[#60A5FA]' : 'text-white/30'}`}>+{opt.price} €</span>
+                                                </button>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Empire options — visible for Starter and Business */}
+                            {(siteType === 'vitrine-simple' || siteType === 'vitrine-standard') && (
+                                <div>
+                                    <p className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-3 flex items-center gap-2">
+                                        <span className="w-2 h-2 rounded-full bg-purple-400 inline-block"></span>
+                                        Options Empire
+                                    </p>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        {UPGRADE_EMPIRE_OPTIONS.map(opt => {
+                                            const checked = selectedUpgrades.has(opt.id);
+                                            return (
+                                                <button key={opt.id} onClick={() => toggleUpgrade(opt.id)}
+                                                    className={`text-left p-4 rounded-xl border transition-all duration-250 flex items-center gap-3 focus:outline-none
+                                                        ${checked ? 'border-purple-500/60 bg-purple-500/10 shadow-[0_0_14px_rgba(168,85,247,0.2)]' : 'border-white/8 bg-white/[0.03] hover:border-white/15 hover:bg-white/[0.06]'}`}>
+                                                    <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0 transition-all duration-200 ${checked ? 'bg-purple-500 border-purple-500' : 'border-white/20 bg-transparent'}`}>
+                                                        {checked && <Check className="w-3 h-3 text-white" />}
+                                                    </div>
+                                                    <div className="flex-1 min-w-0">
+                                                        <p className={`text-sm font-bold truncate ${checked ? 'text-white' : 'text-white/70'}`}>{opt.label}</p>
+                                                    </div>
+                                                    <span className={`text-sm font-black font-display shrink-0 ${checked ? 'text-purple-400' : 'text-white/30'}`}>+{opt.price} €</span>
+                                                </button>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                    {/* STEP 4 — Fonctionnalités additionnelles */}
+                    {step === 4 && (
+                        <div>
+                            <h3 className="text-lg font-bold text-white font-display mb-2 uppercase tracking-widest">
+                                Fonctionnalités additionnelles
+                            </h3>
+                            <p className="text-white/40 text-xs mb-6">Disponibles pour tous les niveaux.</p>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                {UNIVERSAL_OPTIONS.map(opt => {
+                                    const checked = selectedUniversal.has(opt.id);
+                                    return (
+                                        <button key={opt.id} onClick={() => toggleUniversal(opt.id)}
+                                            className={`text-left p-4 rounded-xl border transition-all duration-250 flex items-center gap-3 focus:outline-none
+                                                ${checked ? 'border-[#2563EB] bg-[rgba(37,99,235,0.12)] shadow-[0_0_14px_rgba(37,99,235,0.2)]' : 'border-white/8 bg-white/[0.03] hover:border-white/15 hover:bg-white/[0.06]'}`}>
+                                            <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0 transition-all duration-200 ${checked ? 'bg-[#2563EB] border-[#2563EB]' : 'border-white/20 bg-transparent'}`}>
+                                                {checked && <Check className="w-3 h-3 text-white" />}
+                                            </div>
+                                            <div className="flex-1 min-w-0">
+                                                <p className={`text-sm font-bold truncate ${checked ? 'text-white' : 'text-white/70'}`}>{opt.label}</p>
+                                            </div>
+                                            <span className={`text-sm font-black font-display shrink-0 ${checked ? 'text-[#60A5FA]' : 'text-white/30'}`}>+{opt.price} €</span>
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                            {/* Modifications illimitées — option mensuelle séparée */}
+                            <div className="mt-4">
+                                <button onClick={() => setWantsUnlimited(p => !p)}
+                                    className={`w-full text-left p-4 rounded-xl border transition-all duration-250 flex items-center gap-3 focus:outline-none
+                                        ${wantsUnlimited ? 'border-amber-400/60 bg-amber-400/[0.08] shadow-[0_0_14px_rgba(251,191,36,0.15)]' : 'border-white/8 bg-white/[0.03] hover:border-white/15 hover:bg-white/[0.06]'}`}>
+                                    <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0 transition-all duration-200 ${wantsUnlimited ? 'bg-amber-400 border-amber-400' : 'border-white/20 bg-transparent'}`}>
+                                        {wantsUnlimited && <Check className="w-3 h-3 text-black" />}
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                        <p className={`text-sm font-bold ${wantsUnlimited ? 'text-white' : 'text-white/70'}`}>Modifications illimitées</p>
+                                        <p className="text-white/30 text-xs mt-0.5">Engagement 3 mois minimum</p>
+                                    </div>
+                                    <span className={`text-sm font-black font-display shrink-0 ${wantsUnlimited ? 'text-amber-400' : 'text-white/30'}`}>+19,90 €/mois</span>
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* STEP 5 — Délai */}
+                    {step === 5 && (
+                        <div>
+                            <h3 className="text-lg font-bold text-white font-display mb-6 uppercase tracking-widest">
+                                Délai de livraison
+                            </h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                {DEADLINES.map(d => (
+                                    <button
+                                        key={d.id}
+                                        onClick={() => setDeadline(d.id)}
+                                        className={`text-left p-5 rounded-2xl border transition-all duration-250 focus:outline-none
+                                            ${deadline === d.id
+                                                ? 'border-[#2563EB] bg-[rgba(37,99,235,0.12)] shadow-[0_0_20px_rgba(37,99,235,0.25)]'
+                                                : 'border-white/8 bg-white/[0.03] hover:border-white/15 hover:bg-white/[0.06]'}`}
+                                    >
+                                        <p className="text-white font-bold font-display text-sm mb-1">{d.label}</p>
+                                        <p className="text-white/50 text-xs mb-3">{d.sublabel}</p>
+                                        <span className={`text-sm font-black font-display ${deadline === d.id ? 'text-[#60A5FA]' : 'text-white/40'}`}>
+                                            {d.rate === 0 ? 'Inclus' : `+${Math.round(d.rate * 100)}%`}
+                                        </span>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* STEP 6 — Récapitulatif + formulaire */}
+                    {step === 6 && (
+                        <div>
+                            <h3 className="text-lg font-bold text-white font-display mb-6 uppercase tracking-widest">
+                                Récapitulatif & Contact
+                            </h3>
+
+                            {/* Recap list */}
+                            <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-5 mb-6 space-y-2">
+                                <div className="flex justify-between text-sm">
+                                    <span className="text-white/60">Offre de base</span>
+                                    <span className="text-white font-bold">{SITE_TYPES.find(s => s.id === siteType)?.label ?? '—'} — {basePrice.toLocaleString('fr-FR')} €</span>
+                                </div>
+                                {extraPages > 0 && (
+                                    <div className="flex justify-between text-sm">
+                                        <span className="text-white/60">{extraPages} page{extraPages > 1 ? 's' : ''} supp.</span>
+                                        <span className="text-white font-bold">+{extraPagesPrice.toLocaleString('fr-FR')} €</span>
+                                    </div>
+                                )}
+                                {Array.from(selectedUpgrades).map(id => {
+                                    const opt = [...UPGRADE_BUSINESS_OPTIONS, ...UPGRADE_EMPIRE_OPTIONS].find(o => o.id === id);
+                                    return opt ? (
+                                        <div key={id} className="flex justify-between text-sm">
+                                            <span className="text-white/60">{opt.label}</span>
+                                            <span className="text-white font-bold">+{opt.price} €</span>
+                                        </div>
+                                    ) : null;
+                                })}
+                                {Array.from(selectedUniversal).map(id => {
+                                    const opt = UNIVERSAL_OPTIONS.find(o => o.id === id);
+                                    return opt ? (
+                                        <div key={id} className="flex justify-between text-sm">
+                                            <span className="text-white/60">{opt.label}</span>
+                                            <span className="text-white font-bold">+{opt.price} €</span>
+                                        </div>
+                                    ) : null;
+                                })}
+                                {wantsUnlimited && (
+                                    <div className="flex justify-between text-sm">
+                                        <span className="text-amber-400/80">Modifications illimitées</span>
+                                        <span className="text-amber-400 font-bold">+19,90 €/mois</span>
+                                    </div>
+                                )}
+                                <div className="border-t border-white/8 pt-3 mt-3 space-y-1.5">
+                                    <div className="flex justify-between text-sm">
+                                        <span className="text-white/60">Sous-total HT</span>
+                                        <span className="text-white font-bold">{subtotalHT.toLocaleString('fr-FR')} €</span>
+                                    </div>
+                                    {deadlineSurcharge > 0 && (
+                                        <div className="flex justify-between text-sm">
+                                            <span className="text-white/60">Supplément délai ({DEADLINES.find(d=>d.id===deadline)?.label})</span>
+                                            <span className="text-[#60A5FA] font-bold">+{deadlineSurcharge.toLocaleString('fr-FR')} €</span>
+                                        </div>
+                                    )}
+                                    <div className="flex justify-between text-sm">
+                                        <span className="text-white/60">Total HT</span>
+                                        <span className="text-white font-bold">{totalHT.toLocaleString('fr-FR')} €</span>
+                                    </div>
+                                    <div className="flex justify-between text-sm">
+                                        <span className="text-white/60">TVA 20%</span>
+                                        <span className="text-white/60">{tva.toLocaleString('fr-FR')} €</span>
+                                    </div>
+                                    <div className="flex justify-between text-base">
+                                        <span className="text-white font-bold">Total TTC estimé</span>
+                                        <span className="text-[#2563EB] font-black font-display text-lg">{totalTTC.toLocaleString('fr-FR')} €</span>
+                                    </div>
+                                </div>
+                                <p className="text-white/25 text-[10px] pt-2">Estimation indicative — devis personnalisé gratuit sous 24h</p>
+                            </div>
+
+                            {/* Contact form */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                                {[
+                                    { key: 'firstName', label: 'Prénom', type: 'text' },
+                                    { key: 'lastName',  label: 'Nom',    type: 'text' },
+                                    { key: 'email',     label: 'Email',  type: 'email' },
+                                    { key: 'phone',     label: 'Téléphone', type: 'tel' },
+                                ].map(f => (
+                                    <input
+                                        key={f.key}
+                                        type={f.type}
+                                        placeholder={f.label}
+                                        value={(form as any)[f.key]}
+                                        onChange={e => setForm(prev => ({ ...prev, [f.key]: e.target.value }))}
+                                        className="w-full h-12 px-4 rounded-xl bg-white/[0.04] border border-white/10 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#2563EB] focus:shadow-[0_0_0_3px_rgba(37,99,235,0.15)] transition-all duration-200"
+                                    />
+                                ))}
+                            </div>
+                            <textarea
+                                placeholder="Message libre..."
+                                value={form.message}
+                                onChange={e => setForm(prev => ({ ...prev, message: e.target.value }))}
+                                rows={4}
+                                className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#2563EB] focus:shadow-[0_0_0_3px_rgba(37,99,235,0.15)] transition-all duration-200 resize-none mb-5"
+                            />
+                            <a
+                                href={buildMailto()}
+                                className="w-full h-12 flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] text-white text-sm font-bold uppercase tracking-widest hover:brightness-110 hover:shadow-[0_0_24px_rgba(37,99,235,0.4)] transition-all duration-200"
+                            >
+                                Envoyer ma demande
+                                <ArrowRight className="w-4 h-4" />
+                            </a>
+                        </div>
+                    )}
+
+                    {/* Navigation buttons */}
+                    <div className="flex items-center justify-between mt-8 gap-4">
+                        <button
+                            onClick={() => navigate(step - 1)}
+                            disabled={step === 1}
+                            className={`h-12 px-6 rounded-xl text-sm font-bold uppercase tracking-wider border transition-all duration-200
+                                ${step === 1
+                                    ? 'opacity-0 pointer-events-none'
+                                    : 'bg-white/5 border-white/10 text-white hover:bg-white/10 hover:border-white/20'}`}
+                        >
+                            ← Précédent
+                        </button>
+                        {step < 6 && (
+                            <button
+                                onClick={() => navigate(step + 1)}
+                                disabled={!canNext()}
+                                className={`h-12 px-8 rounded-xl text-sm font-bold uppercase tracking-wider transition-all duration-200 flex items-center gap-2
+                                    ${canNext()
+                                        ? 'bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] text-white hover:brightness-110 hover:shadow-[0_0_24px_rgba(37,99,235,0.4)]'
+                                        : 'bg-white/5 border border-white/10 text-white/30 cursor-not-allowed'}`}
+                            >
+                                Suivant →
+                            </button>
+                        )}
+                    </div>
+                </div>
+
+                {/* Sticky price sidebar */}
+                <div className="lg:sticky lg:top-28 w-full lg:w-72 shrink-0">
+                    <div className="rounded-2xl border border-[#2563EB]/20 bg-[#111318] p-6 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+                        <p className="text-white/40 text-[10px] uppercase tracking-widest font-bold mb-3">Total estimé</p>
+                        <div className="flex items-baseline gap-1.5 mb-1">
+                            <span className="text-4xl font-black font-display text-[#2563EB]">
+                                <AnimatedPrice value={totalHT} />
+                            </span>
+                            <span className="text-white/40 text-sm font-light">€ HT</span>
+                        </div>
+                        <p className="text-white/25 text-xs mb-5">soit {totalTTC.toLocaleString('fr-FR')} € TTC (TVA 20%)</p>
+
+                        {/* Breakdown */}
+                        <div className="space-y-2 text-xs border-t border-white/8 pt-4">
+                            {basePrice > 0 && (
+                                <div className="flex justify-between text-white/50">
+                                    <span>{SITE_TYPES.find(s=>s.id===siteType)?.label}</span>
+                                    <span>{basePrice.toLocaleString('fr-FR')} €</span>
+                                </div>
+                            )}
+                            {extraPages > 0 && (
+                                <div className="flex justify-between text-white/50">
+                                    <span>+{extraPages} page{extraPages > 1 ? 's' : ''}</span>
+                                    <span>+{extraPagesPrice.toLocaleString('fr-FR')} €</span>
+                                </div>
+                            )}
+                            {selectedUpgrades.size > 0 && (
+                                <div className="flex justify-between text-white/50">
+                                    <span>{selectedUpgrades.size} upgrade{selectedUpgrades.size > 1 ? 's' : ''}</span>
+                                    <span>+{upgradesPrice.toLocaleString('fr-FR')} €</span>
+                                </div>
+                            )}
+                            {selectedUniversal.size > 0 && (
+                                <div className="flex justify-between text-white/50">
+                                    <span>{selectedUniversal.size} option{selectedUniversal.size > 1 ? 's' : ''}</span>
+                                    <span>+{universalPrice.toLocaleString('fr-FR')} €</span>
+                                </div>
+                            )}
+                            {wantsUnlimited && (
+                                <div className="flex justify-between text-amber-400/70">
+                                    <span>Modifs illimitées</span>
+                                    <span>+19,90 €/mois</span>
+                                </div>
+                            )}
+                            {deadlineSurcharge > 0 && (
+                                <div className="flex justify-between text-[#60A5FA]/70">
+                                    <span>Supplément délai</span>
+                                    <span>+{deadlineSurcharge.toLocaleString('fr-FR')} €</span>
+                                </div>
+                            )}
+                        </div>
+
+                        <p className="text-white/20 text-[10px] leading-relaxed mt-4">
+                            Estimation indicative — devis personnalisé gratuit
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+
 const TiltCard = ({ children, className, highlight, color = "green" }: { key?: React.Key, children: React.ReactNode, className?: string, highlight?: boolean, color?: string }) => {
     const x = useMotionValue(0);
     const y = useMotionValue(0);
@@ -41,8 +672,8 @@ const TiltCard = ({ children, className, highlight, color = "green" }: { key?: R
         switch (c) {
             case 'blue': return 'rgba(59, 130, 246,';
             case 'purple': return 'rgba(168, 85, 247,';
-            case 'green': return 'rgba(0, 255, 133,';
-            default: return 'rgba(0, 255, 133,';
+            case 'green': return 'rgba(37, 99, 235,';
+            default: return 'rgba(37, 99, 235,';
         }
     };
 
@@ -84,6 +715,13 @@ const TiltCard = ({ children, className, highlight, color = "green" }: { key?: R
 export const PricingPage: React.FC = () => {
     const { t, language } = useLanguage();
     const [currentIndex, setCurrentIndex] = useState(1);
+    const [selectedPlan, setSelectedPlan] = useState<string>('');
+    const scrollToConfigurator = useCallback((siteTypeId: string) => {
+        setSelectedPlan(siteTypeId);
+        setTimeout(() => {
+            document.getElementById('configurateur')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50);
+    }, []);
 
     const offers = [
         {
@@ -93,7 +731,9 @@ export const PricingPage: React.FC = () => {
             features: t.offer.offers.starter.features,
             highlight: false,
             icon: Rocket,
-            color: "blue"
+            color: "blue",
+            newFrom: 0,
+            siteTypeId: 'vitrine-simple'
         },
         {
             title: "Business",
@@ -102,7 +742,9 @@ export const PricingPage: React.FC = () => {
             features: t.offer.offers.business.features,
             highlight: true,
             icon: Zap,
-            color: "green"
+            color: "amber",
+            newFrom: 1,
+            siteTypeId: 'vitrine-standard'
         },
         {
             title: "Empire",
@@ -111,7 +753,9 @@ export const PricingPage: React.FC = () => {
             features: t.offer.offers.empire.features,
             highlight: false,
             icon: Crown,
-            color: "purple"
+            color: "purple",
+            newFrom: 1,
+            siteTypeId: 'vitrine-premium'
         }
     ];
 
@@ -152,15 +796,42 @@ export const PricingPage: React.FC = () => {
 
     const getBorderColorClass = (color: string) => {
         switch (color) {
-            case 'blue': return 'group-hover:border-blue-500/40';
-            case 'purple': return 'group-hover:border-purple-500/40';
-            case 'green': return 'group-hover:border-premium-green/40';
-            default: return 'group-hover:border-white/10';
+            case 'blue':   return 'border-blue-500/40';
+            case 'amber':  return 'border-amber-400/40';
+            case 'purple': return 'border-purple-500/40';
+            default:       return 'border-white/10';
+        }
+    };
+
+    const getGlowClass = (color: string) => {
+        switch (color) {
+            case 'blue':   return 'shadow-[0_20px_40px_-15px_rgba(59,130,246,0.2)]';
+            case 'amber':  return 'shadow-[0_20px_40px_-15px_rgba(251,191,36,0.2)]';
+            case 'purple': return 'shadow-[0_20px_40px_-15px_rgba(168,85,247,0.2)]';
+            default:       return '';
+        }
+    };
+
+    const getTopLineClass = (color: string) => {
+        switch (color) {
+            case 'blue':   return 'bg-gradient-to-r from-transparent via-blue-500 to-transparent';
+            case 'amber':  return 'bg-gradient-to-r from-transparent via-amber-400 to-transparent';
+            case 'purple': return 'bg-gradient-to-r from-transparent via-purple-500 to-transparent';
+            default:       return '';
+        }
+    };
+
+    const getTopGradClass = (color: string) => {
+        switch (color) {
+            case 'blue':   return 'bg-gradient-to-b from-blue-500/10 to-transparent';
+            case 'amber':  return 'bg-gradient-to-b from-amber-400/10 to-transparent';
+            case 'purple': return 'bg-gradient-to-b from-purple-500/10 to-transparent';
+            default:       return '';
         }
     };
 
     return (
-        <div className="min-h-screen bg-transparent selection:bg-premium-green selection:text-black font-sans overflow-x-hidden">
+        <div className="min-h-screen bg-transparent selection:bg-premium-green selection:text-white font-sans overflow-x-hidden">
             <SEOHead
                 title={language === 'fr'
                     ? 'Tarifs & Offres - Osiris | Agence Web Premium'
@@ -199,7 +870,7 @@ export const PricingPage: React.FC = () => {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="text-center mb-24 md:mb-32"
+                        className="text-center mb-12 md:mb-16"
                     >
                         <Link to="/" className="inline-flex items-center gap-2 text-gray-500 hover:text-white transition-colors mb-8 text-xs font-mono uppercase tracking-widest group">
                             <span className="transform group-hover:-translate-x-1 transition-transform inline-block">
@@ -209,15 +880,15 @@ export const PricingPage: React.FC = () => {
                         </Link>
 
                         <div className="flex items-center justify-center gap-2 mb-8">
-                            <span className="px-4 py-1.5 rounded-full bg-premium-green/5 text-premium-green text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] border border-premium-green/10 shadow-[0_0_25px_-5px_rgba(0,255,133,0.3)] backdrop-blur-md">
+                            <span className="px-4 py-1.5 rounded-full bg-premium-green/5 text-premium-green text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] border border-premium-green/10 shadow-[0_0_25px_-5px_rgba(37,99,235,0.3)] backdrop-blur-md">
                                 {t.pricingPage.sectionLabel}
                             </span>
                         </div>
 
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black font-display text-white mb-8 tracking-tighter relative inline-block">
-                            {t.pricingPage.title} <span className="relative inline-block">
-                                <span className="absolute -inset-2 blur-2xl bg-premium-green/20 animate-pulse"></span>
-                                <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-white via-premium-green to-emerald-400 animate-gradient-x">{t.pricingPage.titleHighlight}</span>
+                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black font-display mb-8 tracking-tighter relative inline-block">
+                            <span className="absolute -inset-4 blur-3xl bg-premium-green/15 animate-pulse pointer-events-none rounded-full"></span>
+                            <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-white via-premium-green to-blue-400 animate-gradient-x">
+                                {t.pricingPage.title} {t.pricingPage.titleHighlight}
                             </span>
                         </h1>
 
@@ -229,7 +900,7 @@ export const PricingPage: React.FC = () => {
                     </motion.div>
 
                     {/* Mobile: Swipeable Carousel */}
-                    <div className="pricing-section lg:hidden relative mb-32 flex flex-col items-center"
+                    <div className="pricing-section lg:hidden relative mb-12 flex flex-col items-center"
                         onTouchStart={(e) => {
                             const touch = e.touches[0];
                             (e.currentTarget as any)._touchStartX = touch.clientX;
@@ -285,7 +956,7 @@ export const PricingPage: React.FC = () => {
                                         }}
                                         className={`pricing-card ${offer.highlight ? 'popular' : ''} absolute w-[88%] max-w-[340px] p-8 rounded-[2rem] flex flex-col h-[520px] backdrop-blur-xl will-change-transform
                                             ${isCenter
-                                                ? 'bg-[#0A0A0A]/90 border border-premium-green/30 shadow-[0_0_50px_-10px_rgba(0,255,133,0.15)]'
+                                                ? `bg-[#0A0A0A]/90 border ${getBorderColorClass(offer.color)} ${getGlowClass(offer.color)}`
                                                 : 'bg-white/[0.03] border border-white/5'
                                             }
                                         `}
@@ -294,7 +965,9 @@ export const PricingPage: React.FC = () => {
                                         <div className="flex justify-center mb-6">
                                             <div className={`px-4 py-1.5 rounded-full flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider border
                                                 ${isCenter
-                                                    ? 'bg-premium-green/10 text-premium-green border-premium-green/20'
+                                                    ? offer.color === 'blue'  ? 'bg-blue-500/10   text-blue-400   border-blue-500/30'
+                                                    : offer.color === 'amber' ? 'bg-amber-400/10  text-amber-400  border-amber-400/30'
+                                                                               : 'bg-purple-500/10 text-purple-400 border-purple-500/30'
                                                     : 'bg-white/5 text-gray-400 border-white/10'
                                                 }`}
                                             >
@@ -308,34 +981,42 @@ export const PricingPage: React.FC = () => {
                                                 {offer.title}
                                             </h3>
                                             <div className="flex items-start justify-center gap-1">
-                                                <span className="price text-5xl font-black text-white tracking-tighter">{offer.price}</span>
-                                                <span className="text-2xl mt-2 text-gray-500 font-light">€</span>
+                                                <span className="price text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-[#c8c8c8] to-[#787878]">{offer.price}</span>
+                                                <span className="text-2xl mt-2 text-gray-400 font-light">€</span>
                                             </div>
                                             <p className="text-gray-500 text-xs mt-4 font-medium line-clamp-2">{offer.description}</p>
                                         </div>
 
-                                        <div className={`w-full h-[1px] mb-6 ${isCenter ? 'bg-gradient-to-r from-transparent via-premium-green/30 to-transparent' : 'bg-white/5'}`}></div>
+                                        <div className={`w-full h-[1px] mb-6 ${isCenter
+                                            ? offer.color === 'blue'  ? 'bg-gradient-to-r from-transparent via-blue-500/30 to-transparent'
+                                            : offer.color === 'amber' ? 'bg-gradient-to-r from-transparent via-amber-400/30 to-transparent'
+                                                                       : 'bg-gradient-to-r from-transparent via-purple-500/30 to-transparent'
+                                            : 'bg-white/5'}`}></div>
 
-                                        <ul className="space-y-4 mb-8 flex-1 overflow-y-auto custom-scrollbar">
-                                            {offer.features.map((feature, i) => (
-                                                <li key={i} className="flex items-start gap-3">
-                                                    <div className={`mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${isCenter ? 'bg-premium-green/20 text-premium-green' : 'bg-white/10 text-gray-500'}`}>
-                                                        <Check className="w-3 h-3" />
-                                                    </div>
-                                                    <span className={`text-sm ${isCenter ? 'text-gray-200' : 'text-gray-500'}`}>{feature}</span>
-                                                </li>
-                                            ))}
+                                        <ul className="space-y-3 mb-8 flex-1 overflow-y-auto custom-scrollbar">
+                                            {(offer.features as string[]).map((feature, i) => {
+                                                const isInherited = i < (offer.newFrom ?? 0);
+                                                const accentBg = offer.color === 'blue' ? 'bg-blue-500/15 text-blue-400' : offer.color === 'amber' ? 'bg-amber-400/15 text-amber-400' : 'bg-purple-500/15 text-purple-400';
+                                                return (
+                                                    <li key={i} className="flex items-start gap-2.5">
+                                                        <div className={`mt-0.5 w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 ${isInherited ? 'bg-amber-400/15 text-amber-400' : isCenter ? accentBg : 'bg-white/10 text-gray-500'}`}>
+                                                            {isInherited ? <Check className="w-2.5 h-2.5" /> : <Sparkles className="w-2.5 h-2.5" />}
+                                                        </div>
+                                                        <span className={`text-xs leading-relaxed ${isInherited ? 'text-amber-400 font-semibold' : isCenter ? 'text-gray-200 font-medium' : 'text-gray-500'}`}>{feature}</span>
+                                                    </li>
+                                                );
+                                            })}
                                         </ul>
 
-                                        <Link to="/contact" className={`cta cta-btn w-full py-4 rounded-xl font-bold text-xs uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-2
+                                        <button onClick={() => scrollToConfigurator(offer.siteTypeId)} className={`cta cta-btn w-full py-4 rounded-xl font-bold text-xs uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-2
                                             ${isCenter
-                                                ? 'bg-gradient-to-r from-premium-green to-emerald-400 text-black shadow-lg shadow-emerald-500/20'
+                                                ? 'bg-gradient-to-r from-premium-green to-blue-600 text-white shadow-lg shadow-blue-600/20'
                                                 : 'bg-white/5 text-white border border-white/10'
                                             }
                                         `}>
-                                            {t.pricingPage.choosePack}
+                                            Choisir cette offre
                                             <ArrowRight className="w-4 h-4" />
-                                        </Link>
+                                        </button>
                                     </motion.div>
                                 );
                             })}
@@ -348,7 +1029,7 @@ export const PricingPage: React.FC = () => {
                                     key={index}
                                     onClick={() => setCurrentIndex(index)}
                                     className={`rounded-full transition-all duration-500 ${index === currentIndex
-                                        ? 'w-8 h-2 bg-premium-green shadow-[0_0_10px_rgba(0,255,133,0.4)]'
+                                        ? 'w-8 h-2 bg-premium-green shadow-[0_0_10px_rgba(37,99,235,0.4)]'
                                         : 'w-2 h-2 bg-white/20 hover:bg-white/40'
                                         }`}
                                     aria-label={`Go to offer ${index + 1}`}
@@ -358,41 +1039,35 @@ export const PricingPage: React.FC = () => {
                     </div>
 
                     {/* Desktop: Premium Static Cards */}
-                    <div className="pricing-container hidden lg:grid grid-cols-3 gap-8 mb-32 h-full items-stretch perspective-1000">
+                    <div className="pricing-container hidden lg:grid grid-cols-3 gap-6 mb-12 items-stretch perspective-1000 overflow-visible">
                         {offers.map((offer, index) => (
                             <TiltCard key={index} highlight={offer.highlight} color={offer.color} className="group">
-                                <div className={`pricing-card ${offer.highlight ? 'popular' : ''} relative p-10 rounded-[2.5rem] flex flex-col h-full bg-[#080808]/60 backdrop-blur-2xl border transition-all duration-500 overflow-hidden
-                                    ${offer.highlight
-                                        ? 'border-premium-green/30 shadow-[0_20px_40px_-15px_rgba(0,255,133,0.1)]'
-                                        : `border-white/5 ${getBorderColorClass(offer.color)} hover:bg-white/[0.02]`
-                                    }
+                                <div className={`pricing-card ${offer.highlight ? 'popular' : ''} relative p-7 rounded-[2rem] flex flex-col h-full bg-[#080808]/60 backdrop-blur-2xl border transition-all duration-500 overflow-hidden
+                                    ${getBorderColorClass(offer.color)} ${getGlowClass(offer.color)} hover:bg-white/[0.03]
                                 `}>
 
-                                    {offer.highlight && (
-                                        <>
-                                            <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-premium-green to-transparent opacity-50"></div>
-                                            <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-premium-green/10 to-transparent opacity-40 pointer-events-none"></div>
-                                        </>
-                                    )}
+                                    <>
+                                        <div className={`absolute top-0 left-0 right-0 h-[1px] opacity-50 ${getTopLineClass(offer.color)}`}></div>
+                                        <div className={`absolute top-0 inset-x-0 h-32 opacity-40 pointer-events-none ${getTopGradClass(offer.color)}`}></div>
+                                    </>
 
                                     <div className={`absolute -right-8 -top-8 transform rotate-12 transition-transform duration-700 group-hover:rotate-0 group-hover:scale-110 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity
-                                        ${offer.color === 'blue' ? 'text-blue-500/[0.05]' : offer.color === 'purple' ? 'text-purple-500/[0.05]' : 'text-premium-green/[0.05]'}
+                                        ${offer.color === 'blue' ? 'text-blue-500/[0.05]' : offer.color === 'purple' ? 'text-purple-500/[0.05]' : 'text-amber-400/[0.05]'}
                                     `}>
                                         <offer.icon className="w-80 h-80" strokeWidth={0.5} />
                                     </div>
                                     <div className={`absolute -right-8 -top-8 transform rotate-12 transition-transform duration-700 pointer-events-none opacity-30 group-hover:opacity-0
-                                        ${offer.color === 'blue' ? 'text-blue-500/[0.02]' : offer.color === 'purple' ? 'text-purple-500/[0.02]' : 'text-premium-green/[0.02]'}
+                                        ${offer.color === 'blue' ? 'text-blue-500/[0.02]' : offer.color === 'purple' ? 'text-purple-500/[0.02]' : 'text-amber-400/[0.02]'}
                                     `}>
                                         <offer.icon className="w-80 h-80" strokeWidth={0.5} />
                                     </div>
 
                                     {/* Badge */}
-                                    <div className="flex justify-center mb-8 relative z-10">
-                                        <div className={`px-5 py-2 rounded-full flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider transition-all duration-300 border
-                                            ${offer.highlight
-                                                ? 'bg-premium-green/10 text-premium-green border-premium-green/20 shadow-[0_0_15px_rgba(0,255,133,0.1)]'
-                                                : `bg-white/5 text-gray-400 border-white/10 group-hover:bg-white/10 group-hover:text-white ${offer.color === 'blue' ? 'group-hover:border-blue-500/30' : offer.color === 'purple' ? 'group-hover:border-purple-500/30' : 'group-hover:border-premium-green/30'}`
-                                            }
+                                    <div className="flex justify-center mb-5 relative z-10">
+                                        <div className={`px-5 py-2 rounded-full flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider border
+                                            ${offer.color === 'blue'   ? 'bg-blue-500/10   text-blue-400   border-blue-500/30'
+                                            : offer.color === 'amber' ? 'bg-amber-400/10  text-amber-400  border-amber-400/30'
+                                                                       : 'bg-purple-500/10 text-purple-400 border-purple-500/30'}
                                         `}>
                                             <offer.icon className="w-3.5 h-3.5" />
                                             {getBadge(offer.title)}
@@ -400,60 +1075,100 @@ export const PricingPage: React.FC = () => {
                                     </div>
 
                                     {/* Title & Price */}
-                                    <div className="mb-10 text-center relative z-10">
-                                        <h3 className={`text-xl font-bold font-display uppercase tracking-widest mb-4 transition-colors duration-300 ${offer.highlight ? 'text-white' : 'text-gray-300 group-hover:text-white'}`}>
+                                    <div className="mb-6 text-center relative z-10">
+                                        <h3 className={`text-xl font-bold font-display uppercase tracking-widest mb-4 transition-colors duration-300 ${offer.highlight ? 'text-white' : 'text-gray-100 group-hover:text-white'}`}>
                                             {offer.title}
                                         </h3>
                                         <div className="flex items-start justify-center gap-1 group-hover:scale-105 transition-transform duration-500 origin-center">
-                                            <span className={`price text-6xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b ${offer.highlight ? 'from-white via-white to-gray-400' : 'from-gray-200 via-gray-400 to-gray-600 group-hover:from-white group-hover:to-gray-300'}`}>
+                                            <span className="price text-6xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white via-[#c8c8c8] to-[#787878]">
                                                 {offer.price}
                                             </span>
-                                            <span className="text-2xl mt-3 text-gray-500 font-light">€</span>
+                                            <span className="text-2xl mt-3 text-gray-400 font-light">€</span>
                                         </div>
-                                        <p className="text-gray-500 text-sm mt-5 font-medium px-2 leading-relaxed">{offer.description}</p>
+                                        <p className="text-gray-400 text-sm mt-5 font-medium px-2 leading-relaxed">{offer.description}</p>
                                     </div>
 
-                                    <div className={`w-full h-[1px] mb-10 transition-all duration-500 relative z-10
-                                         ${offer.color === 'blue' ? 'bg-gradient-to-r from-transparent via-blue-500/10 to-transparent group-hover:via-blue-500/30' : offer.color === 'purple' ? 'bg-gradient-to-r from-transparent via-purple-500/10 to-transparent group-hover:via-purple-500/30' : 'bg-gradient-to-r from-transparent via-premium-green/10 to-transparent group-hover:via-premium-green/30'}
+                                    <div className={`w-full h-[1px] mb-6 transition-all duration-500 relative z-10
+                                         ${offer.color === 'blue' ? 'bg-gradient-to-r from-transparent via-blue-500/20 to-transparent group-hover:via-blue-500/40' : offer.color === 'purple' ? 'bg-gradient-to-r from-transparent via-purple-500/20 to-transparent group-hover:via-purple-500/40' : 'bg-gradient-to-r from-transparent via-amber-400/20 to-transparent group-hover:via-amber-400/40'}
                                     `}></div>
 
                                     {/* Features */}
-                                    <ul className="space-y-5 mb-10 flex-1 relative z-10">
-                                        {offer.features.map((feature, i) => (
-                                            <li key={i} className="flex items-start gap-4 group/item">
-                                                <div className={`mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300
-                                                    ${offer.highlight
-                                                        ? 'bg-premium-green/20 text-premium-green group-hover/item:bg-premium-green group-hover/item:text-black'
-                                                        : `bg-white/5 text-gray-500 group-hover/item:text-white ${offer.color === 'blue' ? 'group-hover/item:bg-blue-500/20 group-hover/item:text-blue-400' : offer.color === 'purple' ? 'group-hover/item:bg-purple-500/20 group-hover/item:text-purple-400' : 'group-hover/item:bg-premium-green/20 group-hover/item:text-premium-green'}`
-                                                    }
-                                                `}>
-                                                    <Check className="w-3 h-3" />
-                                                </div>
-                                                <span className="text-sm text-gray-400 group-hover/item:text-gray-200 transition-colors duration-300 font-medium">{feature}</span>
-                                            </li>
-                                        ))}
+                                    <ul className="space-y-2.5 mb-6 flex-1 relative z-10">
+                                        {(offer.features as string[]).map((feature, i) => {
+                                            const isInherited = i < (offer.newFrom ?? 0);
+                                            return (
+                                                <li key={i} className="flex items-start gap-3 group/item">
+                                                    <div className={`mt-0.5 w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300
+                                                        ${isInherited
+                                                            ? 'bg-amber-400/15 text-amber-400'
+                                                            : offer.color === 'blue'   ? 'bg-blue-500/15   text-blue-400   group-hover/item:bg-blue-500/30'
+                                                            : offer.color === 'amber'  ? 'bg-amber-400/15  text-amber-400  group-hover/item:bg-amber-400/30'
+                                                                                       : 'bg-purple-500/15 text-purple-400 group-hover/item:bg-purple-500/30'
+                                                        }
+                                                    `}>
+                                                        {isInherited ? <Check className="w-2.5 h-2.5" /> : <Sparkles className="w-2.5 h-2.5" />}
+                                                    </div>
+                                                    <span className={`text-xs leading-relaxed transition-colors duration-300 ${isInherited ? 'text-amber-400 font-semibold' : 'text-gray-300 font-medium group-hover/item:text-white'}`}>{feature}</span>
+                                                </li>
+                                            );
+                                        })}
                                     </ul>
 
                                     {/* CTA Button */}
-                                    <Link to="/contact" className="relative z-10 group/btn w-full">
+                                    <button onClick={() => scrollToConfigurator(offer.siteTypeId)} className="relative z-10 group/btn w-full">
                                         <div className={`cta cta-btn w-full py-5 rounded-2xl font-bold text-xs uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-2 border overflow-hidden relative shadow-lg
-                                            ${offer.highlight
-                                                ? 'bg-gradient-to-r from-premium-green to-emerald-500 text-black border-transparent hover:shadow-[0_0_40px_rgba(0,255,133,0.3)] hover:scale-[1.02]'
-                                                : `bg-white/5 text-white border-white/10 hover:text-white hover:border-transparent ${offer.color === 'blue' ? 'hover:bg-blue-600 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]' : offer.color === 'purple' ? 'hover:bg-purple-600 hover:shadow-[0_0_30px_rgba(168,85,247,0.3)]' : 'hover:bg-premium-green hover:text-black hover:shadow-[0_0_30px_rgba(0,255,133,0.3)]'}`
+                                            ${offer.color === 'blue'
+                                                ? 'bg-blue-600/20   border-blue-500/40   text-blue-300   hover:bg-blue-600   hover:text-white hover:border-transparent hover:shadow-[0_0_30px_rgba(59,130,246,0.35)]'
+                                                : offer.color === 'amber'
+                                                    ? 'bg-amber-400/20  border-amber-400/40  text-amber-300  hover:bg-amber-500  hover:text-black hover:border-transparent hover:shadow-[0_0_30px_rgba(251,191,36,0.35)]'
+                                                    : 'bg-purple-600/20 border-purple-500/40 text-purple-300 hover:bg-purple-600 hover:text-white hover:border-transparent hover:shadow-[0_0_30px_rgba(168,85,247,0.35)]'
                                             }
                                         `}>
                                             <span className="relative z-20 flex items-center gap-2">
-                                                {t.pricingPage.choosePack}
+                                                Choisir cette offre
                                                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
                                             </span>
                                         </div>
-                                    </Link>
+                                    </button>
                                 </div>
                             </TiltCard>
                         ))}
                     </div>
 
+                    {/* Secondary CTA */}
+                    <div className="flex justify-center mt-4 mb-10">
+                        <button
+                            onClick={() => scrollToConfigurator('')}
+                            className="flex items-center gap-2 text-white/40 hover:text-premium-green transition-colors text-sm font-medium"
+                        >
+                            <Calculator className="w-4 h-4" />
+                            <span className="underline decoration-dotted underline-offset-4">Configurer mon devis sur-mesure</span>
+                        </button>
+                    </div>
 
+                    {/* ── Configurateur de devis ── */}
+                    <motion.div
+                        id="configurateur"
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: '-80px' }}
+                        transition={{ duration: 0.7 }}
+                        className="mb-32"
+                    >
+                        <div className="text-center mb-12">
+                            <span className="text-premium-green text-[10px] font-bold uppercase tracking-[0.2em] mb-4 block">Configurateur</span>
+                            <h2 className="text-3xl sm:text-5xl font-black font-display text-white mb-4 tracking-tight flex items-center justify-center gap-4">
+                                <Calculator className="w-8 h-8 text-premium-green" />
+                                Estimez votre projet
+                            </h2>
+                            <p className="text-gray-400 max-w-xl mx-auto">
+                                Configurez votre site en 6 étapes et obtenez une estimation instantanée. Devis détaillé gratuit sous 24h.
+                            </p>
+                        </div>
+                        <div className="rounded-[2.5rem] border border-white/[0.08] bg-[#080C12]/80 backdrop-blur-xl p-6 sm:p-10 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]">
+                            <QuoteConfigurator key={selectedPlan} initialSiteType={selectedPlan} />
+                        </div>
+                    </motion.div>
 
                     {/* FAQ Section */}
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
@@ -483,7 +1198,7 @@ export const PricingPage: React.FC = () => {
                                 >
                                     <div className="absolute inset-0 bg-gradient-to-r from-premium-green/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                     <h4 className="text-white font-bold mb-3 flex items-start gap-4 text-lg relative z-10">
-                                        <div className="mt-1 w-6 h-6 rounded-full bg-premium-green/10 flex items-center justify-center flex-shrink-0 group-hover:bg-premium-green group-hover:text-black transition-colors duration-300 shadow-[0_0_10px_rgba(0,255,133,0.1)] group-hover:shadow-[0_0_15px_rgba(0,255,133,0.5)]">
+                                        <div className="mt-1 w-6 h-6 rounded-full bg-premium-green/10 flex items-center justify-center flex-shrink-0 group-hover:bg-premium-green group-hover:text-white transition-colors duration-300 shadow-[0_0_10px_rgba(37,99,235,0.1)] group-hover:shadow-[0_0_15px_rgba(37,99,235,0.5)]">
                                             <HelpCircle className="w-3.5 h-3.5" />
                                         </div>
                                         {faq.question}

@@ -1,6 +1,6 @@
-﻿import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Zap, Search, Palette, Target, MessageCircle, PhoneCall } from 'lucide-react';
+﻿import React, { useState, useRef } from 'react';
+import { motion, useInView, useAnimation } from 'framer-motion';
+import { Zap, Search, Palette, Target, MessageCircle, PhoneCall, Send, Clock, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -11,188 +11,277 @@ const iconMap: Record<string, React.FC<{ className?: string }>> = {
     target: Target,
 };
 
+// Step icons for the process timeline
+const stepIcons = [Send, Clock, FileText, MessageCircle];
+
 export const AuditGratuit: React.FC = () => {
     const { t } = useLanguage();
     const [message, setMessage] = useState(t.audit.textareaDefault);
+
+    // Refs for the process section scroll animation
+    const processRef = useRef<HTMLDivElement>(null);
+    const isProcessInView = useInView(processRef, { once: true, margin: '-80px' });
 
     const handleWhatsApp = () => {
         const encoded = encodeURIComponent(message);
         window.open(`https://wa.me/${t.audit.whatsappNumber}?text=${encoded}`, '_blank', 'noopener,noreferrer');
     };
 
+    const allSteps = [
+        ...t.audit.processSteps,
+        { num: '📲', text: 'WhatsApp' }
+    ];
+
     return (
         <section
             id="audit"
-            className="relative w-full py-[70px] sm:py-[120px] px-4 sm:px-6 overflow-hidden scroll-mt-20"
+            className="relative w-full py-20 sm:py-28 lg:py-36 px-4 sm:px-6 overflow-hidden scroll-mt-20"
         >
             <span id="audit-gratuit" className="absolute -top-24" aria-hidden="true" />
-            {/* Fond distinctif */}
-            <div className="absolute inset-0 bg-gradient-to-b from-premium-black via-[#060f0a] to-premium-black pointer-events-none" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,255,133,0.06)_0%,transparent_65%)] pointer-events-none" />
 
-            <div className="container mx-auto max-w-[800px] relative z-10">
+            {/* Background */}
+            <div className="absolute inset-0 bg-[#111318] pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(37,99,235,0.07)_0%,transparent_100%)] pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-                {/* === BLOC 1 : ACCROCHE === */}
+            <div className="container mx-auto max-w-6xl relative z-10">
+
+                {/* === HEADER === */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 24 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                    className="flex justify-center mb-6"
+                    transition={{ duration: 0.55 }}
+                    className="text-center mb-16 sm:mb-20"
                 >
-                    <span className="inline-block px-4 py-1.5 rounded-full bg-premium-green/10 border border-premium-green/30 text-premium-green text-xs font-bold uppercase tracking-widest">
+                    <span className="inline-block px-4 py-1.5 rounded-full bg-premium-green/10 border border-premium-green/30 text-premium-green text-xs font-bold uppercase tracking-widest mb-5">
                         {t.audit.sectionLabel}
                     </span>
+                    <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white mb-5 leading-[1.05]">
+                        {t.audit.title}
+                    </h2>
                 </motion.div>
 
-                <motion.h2
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.1 }}
-                    className="font-display text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white text-center mb-4"
-                >
-                    {t.audit.title}
-                </motion.h2>
+                {/* === TWO-COLUMN LAYOUT: pillars + CTA === */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-20 sm:mb-24 items-start">
 
-                <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.15 }}
-                    className="text-base sm:text-lg text-white/65 text-center max-w-xl mx-auto mb-4"
-                >
-                    {t.audit.subtitle}
-                </motion.p>
-
-                {/* Stats de réassurance */}
-                <motion.p
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="text-xs sm:text-sm text-white/40 text-center tracking-wide mb-14"
-                >
-                    {t.audit.stats}
-                </motion.p>
-
-                {/* === BLOC 2 : 4 CARDS === */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-14">
-                    {t.audit.pillars.map((pillar, index) => {
-                        const Icon = iconMap[pillar.icon] ?? Zap;
-                        return (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 24 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: index * 0.09 }}
-                                className="flex items-start gap-4 p-5 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-premium-green/25 hover:bg-white/[0.06] hover:-translate-y-1 transition-all duration-300"
-                            >
-                                <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-premium-green/10 border border-premium-green/20 flex items-center justify-center">
-                                    <Icon className="w-5 h-5 text-premium-green" />
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                    <div className="flex items-center gap-2 flex-wrap mb-1">
-                                        <h3 className="text-sm font-bold text-white">{pillar.title}</h3>
+                    {/* LEFT: 4 pillar cards */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {t.audit.pillars.map((pillar, index) => {
+                            const Icon = iconMap[pillar.icon] ?? Zap;
+                            return (
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, y: 28 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5, delay: index * 0.08 }}
+                                    className="flex flex-col gap-3 p-5 rounded-2xl bg-white/[0.03] border border-white/[0.08] hover:border-premium-green/30 hover:bg-white/[0.055] hover:-translate-y-1 transition-all duration-300 group"
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-premium-green/10 border border-premium-green/20 flex items-center justify-center group-hover:bg-premium-green/20 transition-colors duration-300">
+                                            <Icon className="w-4.5 h-4.5 text-premium-green" />
+                                        </div>
                                         {pillar.tag && (
-                                            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-premium-green/10 text-premium-green border border-premium-green/20">
+                                            <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-premium-green/10 text-premium-green border border-premium-green/20 uppercase tracking-wider">
                                                 {pillar.tag}
                                             </span>
                                         )}
                                     </div>
-                                    <p className="text-xs text-white/55 leading-relaxed">{pillar.description}</p>
-                                </div>
-                            </motion.div>
-                        );
-                    })}
-                </div>
-
-                {/* === BLOC 3 : PROCESSUS 3 ÉTAPES === */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.15 }}
-                    className="mb-14 relative"
-                >
-                    <div className="absolute inset-x-0 -top-10 h-24 bg-gradient-to-r from-transparent via-premium-green/10 to-transparent blur-2xl pointer-events-none" />
-                    <p className="text-xs font-bold uppercase tracking-widest text-white/35 text-center mb-8">
-                        {t.audit.processTitle}
-                    </p>
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-0">
-                        {t.audit.processSteps.map((step, i) => (
-                            <React.Fragment key={i}>
-                                <motion.div
-                                    whileHover={{ y: -3 }}
-                                    transition={{ duration: 0.25 }}
-                                    className="group relative flex flex-col items-center text-center sm:flex-1 px-3 py-3 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] hover:border-premium-green/25 transition-all duration-300"
-                                >
-                                    <span className="absolute inset-0 rounded-2xl bg-gradient-to-r from-premium-green/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                    <span className="relative text-3xl font-black font-display text-premium-green/50 group-hover:text-premium-green/80 leading-none mb-2 transition-colors duration-300">
-                                        {step.num}
-                                    </span>
-                                    <p className="relative text-sm text-white/75 group-hover:text-white font-medium max-w-[170px] transition-colors duration-300">{step.text}</p>
+                                    <div>
+                                        <h3 className="text-sm font-bold text-white mb-1">{pillar.title}</h3>
+                                        <p className="text-xs text-white/50 leading-relaxed">{pillar.description}</p>
+                                    </div>
                                 </motion.div>
-                                {i < t.audit.processSteps.length - 1 && (
-                                    <div className="hidden sm:block w-16 h-[2px] bg-gradient-to-r from-premium-green/30 via-white/15 to-transparent mx-4 shrink-0" />
-                                )}
-                            </React.Fragment>
-                        ))}
+                            );
+                        })}
                     </div>
-                </motion.div>
 
-                {/* === BLOC 4 : TEXTAREA + BOUTON WHATSAPP === */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                    className="bg-white/[0.03] border border-white/10 rounded-3xl p-6 sm:p-8 mb-10"
-                >
-                    <label className="block text-sm text-white/60 mb-3 font-medium">
-                        {t.audit.textareaLabel}
-                    </label>
-                    <textarea
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        placeholder={t.audit.textareaPlaceholder}
-                        rows={4}
-                        className="w-full min-h-[120px] bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-white/80 placeholder:text-white/25 focus:outline-none focus:border-premium-green/40 focus:bg-white/[0.06] transition-all duration-300 resize-none mb-5"
-                    />
-                    <div className="buttons-wrapper flex flex-row flex-wrap justify-center items-center gap-4">
-                        <button
-                            onClick={handleWhatsApp}
-                            className="btn-whatsapp group w-full sm:w-auto"
-                        >
-                            <MessageCircle className="btn-icon" />
-                            Envoyer sur WhatsApp
-                        </button>
-                        <Link
-                            to="/contact"
-                            className="btn-reserve w-full sm:w-auto bg-white text-black border border-transparent"
-                        >
-                            <PhoneCall className="btn-icon" />
-                            Réserver mon appel
-                        </Link>
-                    </div>
-                    <div className="flex flex-col items-center gap-4 mt-4">
-                        <p className="text-xs sm:text-sm text-white/40 text-center tracking-wide">
+                    {/* RIGHT: Textarea + WhatsApp CTA */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.15 }}
+                        className="bg-white/[0.03] border border-white/10 rounded-3xl p-6 sm:p-8 flex flex-col"
+                    >
+                        <label className="block text-sm font-semibold text-white/70 mb-3">
+                            {t.audit.textareaLabel}
+                        </label>
+                        <textarea
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            placeholder={t.audit.textareaPlaceholder}
+                            rows={5}
+                            className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-white/80 placeholder:text-white/25 focus:outline-none focus:border-premium-green/40 focus:bg-white/[0.06] transition-all duration-300 resize-none mb-6 flex-1"
+                        />
+                        <div className="flex flex-col gap-3">
+                            <button
+                                onClick={handleWhatsApp}
+                                className="btn-whatsapp group w-full justify-center"
+                            >
+                                <MessageCircle className="btn-icon" />
+                                Envoyer sur WhatsApp
+                            </button>
+                            <Link
+                                to="/contact"
+                                className="btn-reserve w-full justify-center bg-white/[0.05] text-white border border-white/10 hover:bg-white/10 hover:border-white/25"
+                            >
+                                <PhoneCall className="btn-icon" />
+                                Réserver mon appel
+                            </Link>
+                        </div>
+                        <p className="text-xs text-white/35 text-center mt-5 tracking-wide">
                             {t.audit.reassurance}
                         </p>
+                    </motion.div>
+                </div>
+
+                {/* === PROCESSUS : Comment ça marche ? — Animated timeline === */}
+                <motion.div
+                    ref={processRef}
+                    initial={{ opacity: 0, y: 32 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-60px' }}
+                    transition={{ duration: 0.6 }}
+                    className="relative"
+                >
+                    {/* Section label */}
+                    <div className="text-center mb-10 sm:mb-14">
+                        <span className="text-xs font-bold uppercase tracking-[0.25em] text-white/35 block mb-4">
+                            {t.audit.processTitle}
+                        </span>
+                        <p className="text-white font-semibold text-sm sm:text-base max-w-xl mx-auto leading-relaxed mb-3">
+                            {t.audit.subtitle}
+                        </p>
+                        <p className="text-white font-bold text-xs sm:text-sm tracking-widest uppercase">
+                            {t.audit.stats}
+                        </p>
                     </div>
+
+                    {/* Progress bar + steps */}
+                    <div className="relative max-w-3xl mx-auto">
+
+                        {/* === DESKTOP: flex row with per-segment connectors === */}
+                        <div className="hidden sm:flex items-start justify-center">
+                            {allSteps.map((step, i) => {
+                                const StepIcon = i === allSteps.length - 1 ? MessageCircle : stepIcons[i];
+                                const isLast = i === allSteps.length - 1;
+                                const nodeDelay = 0.4 + i * 0.35;
+                                const barDelay = nodeDelay + 0.25;
+
+                                return (
+                                    <React.Fragment key={i}>
+                                        {/* Step node */}
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={isProcessInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                                            transition={{ duration: 0.45, delay: nodeDelay }}
+                                            className="flex flex-col items-center text-center gap-3 flex-none w-[22%]"
+                                        >
+                                            <motion.div
+                                                initial={{ scale: 0.5, opacity: 0 }}
+                                                animate={isProcessInView ? { scale: 1, opacity: 1 } : { scale: 0.5, opacity: 0 }}
+                                                transition={{ duration: 0.4, delay: nodeDelay + 0.1, type: 'spring', stiffness: 200 }}
+                                                className={`relative w-14 h-14 rounded-2xl flex items-center justify-center z-10 transition-all duration-300 ${
+                                                    isLast
+                                                        ? 'bg-[#25D366] shadow-[0_0_24px_rgba(37,211,102,0.35)]'
+                                                        : 'bg-premium-green/15 border border-premium-green/30 shadow-[0_0_20px_rgba(37,99,235,0.15)]'
+                                                }`}
+                                            >
+                                                {isLast ? (
+                                                    <StepIcon className="w-6 h-6 text-white" />
+                                                ) : (
+                                                    <>
+                                                        <StepIcon className="w-5 h-5 text-premium-green" />
+                                                        <span className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-premium-green text-white text-[9px] font-black flex items-center justify-center leading-none">
+                                                            {step.num}
+                                                        </span>
+                                                    </>
+                                                )}
+                                            </motion.div>
+                                            <p className={`text-xs sm:text-sm font-medium leading-snug max-w-[120px] ${
+                                                isLast ? 'text-[#25D366] font-bold' : 'text-white/70'
+                                            }`}>
+                                                {isLast ? 'Tu reçois ton audit via WhatsApp' : step.text}
+                                            </p>
+                                        </motion.div>
+
+                                        {/* Connector segment (between nodes only) */}
+                                        {!isLast && (
+                                            <div className="flex-1 mt-7 mx-2 h-[2px] bg-white/[0.07] rounded-full overflow-hidden flex-shrink-0 self-start">
+                                                <motion.div
+                                                    className={`h-full rounded-full ${
+                                                        i === allSteps.length - 2
+                                                            ? 'bg-gradient-to-r from-premium-green to-[#25D366]'
+                                                            : 'bg-premium-green'
+                                                    }`}
+                                                    initial={{ width: '0%' }}
+                                                    animate={isProcessInView ? { width: '100%' } : { width: '0%' }}
+                                                    transition={{ duration: 0.5, ease: 'easeInOut', delay: barDelay }}
+                                                />
+                                            </div>
+                                        )}
+                                    </React.Fragment>
+                                );
+                            })}
+                        </div>
+
+                        {/* === MOBILE: 2x2 grid, no connectors === */}
+                        <div className="sm:hidden grid grid-cols-2 gap-6">
+                            {allSteps.map((step, i) => {
+                                const StepIcon = i === allSteps.length - 1 ? MessageCircle : stepIcons[i];
+                                const isLast = i === allSteps.length - 1;
+                                const delay = 0.4 + i * 0.28;
+                                return (
+                                    <motion.div
+                                        key={i}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={isProcessInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                                        transition={{ duration: 0.45, delay }}
+                                        className="flex flex-col items-center text-center gap-3"
+                                    >
+                                        <div className={`relative w-14 h-14 rounded-2xl flex items-center justify-center ${
+                                            isLast ? 'bg-[#25D366] shadow-[0_0_24px_rgba(37,211,102,0.35)]' : 'bg-premium-green/15 border border-premium-green/30'
+                                        }`}>
+                                            {isLast ? (
+                                                <StepIcon className="w-6 h-6 text-white" />
+                                            ) : (
+                                                <>
+                                                    <StepIcon className="w-5 h-5 text-premium-green" />
+                                                    <span className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-premium-green text-white text-[9px] font-black flex items-center justify-center leading-none">{step.num}</span>
+                                                </>
+                                            )}
+                                        </div>
+                                        <p className={`text-xs font-medium leading-snug max-w-[130px] ${
+                                            isLast ? 'text-[#25D366] font-bold' : 'text-white/70'
+                                        }`}>
+                                            {isLast ? 'Tu reçois ton audit via WhatsApp' : step.text}
+                                        </p>
+                                    </motion.div>
+                                );
+                            })}
+                        </div>
+                    </div>
+
+                    {/* CTA under process */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={isProcessInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+                        transition={{ duration: 0.5, delay: 1.8 }}
+                        className="flex justify-center mt-10 sm:mt-12"
+                    >
+                        <button
+                            onClick={handleWhatsApp}
+                            className="btn-whatsapp"
+                        >
+                            <MessageCircle className="btn-icon" />
+                            Démarrer mon audit gratuit →
+                        </button>
+                    </motion.div>
                 </motion.div>
 
-                {/* Transition vers la section Contact */}
-                <motion.p
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                    className="text-sm text-white/30 text-center tracking-wide"
-                >
-                    {t.audit.transitionText}
-                </motion.p>
             </div>
         </section>
     );

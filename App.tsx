@@ -1,5 +1,6 @@
 import React, { Suspense, lazy, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { useScroll, useSpring, motion } from 'framer-motion';
 import { Navbar } from './components/Navbar';
 import { ParticleBackground } from './components/ParticleBackground';
 import { WhatsAppButton } from './components/WhatsAppButton';
@@ -21,6 +22,8 @@ const PageLoader = () => (
 
 export default function App() {
   const location = useLocation();
+  const { scrollYProgress } = useScroll();
+  const scaleY = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
   useEffect(() => {
     const handleAuditClick = (event: Event) => {
@@ -95,11 +98,11 @@ export default function App() {
   }, [location.pathname, location.hash]);
 
   return (
-    <div className="relative min-h-screen bg-[#050505] text-white overflow-hidden font-sans">
+    <div className="relative min-h-screen bg-[#0B0B0B] text-white overflow-hidden font-sans">
       {/* === GLOBAL BACKGROUND LAYERS === */}
 
       {/* 1. Base Gradient & Animated Orbs */}
-      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-[#050505]">
+      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-[#0B0B0B]">
         <div className="absolute top-[-10%] left-[20%] w-[50vw] h-[50vw] bg-premium-green/10 rounded-full blur-[120px] animate-[float-slow_15s_ease-in-out_infinite] will-change-transform" />
         <div className="absolute bottom-[-10%] right-[10%] w-[60vw] h-[60vw] bg-purple-900/15 rounded-full blur-[150px] animate-[float-slow_20s_ease-in-out_infinite_reverse] will-change-transform" />
         <div className="absolute top-[30%] left-[50%] -translate-x-1/2 w-[40vw] h-[40vw] bg-blue-900/10 rounded-full blur-[100px] animate-[pulse_12s_ease-in-out_infinite] will-change-opacity" />
@@ -115,6 +118,16 @@ export default function App() {
 
       <ScrollToTop />
       <Navbar />
+
+      {/* Global Scroll Progress Bar */}
+      <motion.div
+        className="fixed right-0 top-0 bottom-0 w-[2px] bg-white/5 origin-top z-50 hidden lg:block pointer-events-none"
+      >
+        <motion.div
+          className="absolute top-0 w-full bg-premium-green shadow-[0_0_12px_rgba(37,99,235,0.6)]"
+          style={{ scaleY, originY: 0, height: '100%' }}
+        />
+      </motion.div>
 
       <main className="relative z-10 flex flex-col">
         <Suspense fallback={<PageLoader />}>

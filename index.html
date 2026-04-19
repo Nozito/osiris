@@ -70,11 +70,11 @@
 
   <!-- Fonts with display=swap -->
   <link rel="preload" as="style" crossorigin
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet"
     media="print" onload="this.media='all'" />
   <noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
   </noscript>
 
   <!-- JSON-LD: Organization Schema -->
@@ -155,9 +155,9 @@
 
   <style>
     body {
-      background-color: #0a0a0a;
-      color: white;
-      font-family: 'Inter', sans-serif;
+      background-color: #0B0B0B;
+      color: #F0F4FF;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       overflow-x: hidden;
     }
 
@@ -167,24 +167,24 @@
     }
 
     ::-webkit-scrollbar-track {
-      background: #141414;
+      background: #111318;
     }
 
     ::-webkit-scrollbar-thumb {
-      background: #333;
+      background: #1C2130;
       border-radius: 4px;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-      background: #00FF85;
+      background: #2563EB;
     }
 
     .neon-text {
-      text-shadow: 0 0 10px rgba(0, 255, 133, 0.5);
+      text-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
     }
 
     .neon-border {
-      box-shadow: 0 0 15px rgba(0, 255, 133, 0.2);
+      box-shadow: 0 0 15px rgba(37, 99, 235, 0.2);
     }
 
     /* Premium Brushed Metal Background - Textured */
@@ -225,15 +225,19 @@
         extend: {
           colors: {
             premium: {
-              black: '#141414',
-              green: '#00FF85',
+              black: '#0B0B0B',
+              green: '#2563EB',
               glass: 'rgba(255, 255, 255, 0.05)',
               glassBorder: 'rgba(255, 255, 255, 0.1)',
+              blue: '#2563EB',
+              surface: '#111318',
+              surface2: '#161A22',
+              surface3: '#1C2130',
             }
           },
           fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            display: ['Satoshi', 'Inter', 'sans-serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Space Grotesk', 'Plus Jakarta Sans', 'sans-serif'],
           },
           animation: {
             shimmer: 'shimmer 8s linear infinite',

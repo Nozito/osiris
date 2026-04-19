@@ -102,7 +102,7 @@ export const Showcase: React.FC = () => {
                 onClick={() => setFilterIndex(index)}
                 className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider border transition-all duration-300 whitespace-nowrap flex-shrink-0
                   ${filterIndex === index
-                    ? 'bg-premium-green text-black border-premium-green'
+                    ? 'bg-premium-green text-white border-premium-green'
                     : 'bg-white/5 text-gray-400 border-white/5 hover:border-white/20 hover:text-white'
                   }`}
               >
@@ -140,7 +140,7 @@ export const Showcase: React.FC = () => {
                 <div className="absolute inset-0 p-4 sm:p-8 flex flex-col justify-end pointer-events-none bg-gradient-to-t from-premium-black/90 via-premium-black/20 to-transparent">
                   <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 mb-2">
-                      <span className="inline-block px-3 py-1 bg-premium-green/90 text-black text-[10px] font-bold uppercase tracking-widest rounded-full shadow-[0_0_10px_rgba(0,255,133,0.4)]">
+                      <span className="inline-block px-3 py-1 bg-premium-green/90 text-white text-[10px] font-bold uppercase tracking-widest rounded-full shadow-[0_0_10px_rgba(37,99,235,0.4)]">
                         {categories[project.categoryKey]}
                       </span>
                     </div>

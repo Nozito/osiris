@@ -41,7 +41,7 @@ export const FooterCTA: React.FC = () => {
                             onClick={handleCTAClick}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="inline-flex items-center gap-3 px-10 py-5 rounded-xl bg-premium-green text-premium-black font-bold text-lg hover:bg-premium-green/90 transition-all duration-300 group mb-8"
+                            className="inline-flex items-center gap-3 px-10 py-5 rounded-xl bg-premium-green text-white font-bold text-lg hover:bg-blue-700 transition-all duration-300 group mb-8"
                         >
                             {t.footerCta.cta}
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

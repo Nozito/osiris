@@ -152,7 +152,7 @@ export const AboutPage: React.FC = () => {
             </h3>
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 bg-premium-green text-black font-black uppercase tracking-wider px-8 py-4 rounded-full hover:scale-105 transition-transform"
+              className="inline-flex items-center gap-2 bg-premium-green text-white font-black uppercase tracking-wider px-8 py-4 rounded-full hover:scale-105 transition-transform"
             >
               {isFr ? 'Demarrer mon projet →' : 'Start my project →'}
               <ArrowRight className="w-4 h-4" />

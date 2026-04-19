@@ -48,7 +48,7 @@ export const Navbar: React.FC = () => {
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
       >
-        <div className="pointer-events-auto relative flex items-center justify-between gap-3 px-5 md:px-6 py-3 rounded-full bg-[#050505]/80 backdrop-blur-md border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all duration-500 w-[95%] md:w-auto md:min-w-[480px] hover:border-white/20 hover:shadow-[0_8px_40px_rgba(0,255,133,0.15)] group">
+        <div className="pointer-events-auto relative flex items-center justify-between gap-3 px-5 md:px-6 py-3 rounded-full bg-[#0B0B0B]/80 backdrop-blur-md border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all duration-500 w-[95%] md:w-auto md:min-w-[480px] hover:border-white/20 hover:shadow-[0_8px_40px_rgba(37,99,235,0.15)] group">
 
           {/* Logo */}
           <Link to="/" onClick={handleNavClick} className="flex items-center gap-2 group/logo relative z-50">
@@ -106,7 +106,7 @@ export const Navbar: React.FC = () => {
           <div className="hidden md:flex items-center gap-4">
             <Link
               to="/contact"
-              className="relative px-5 py-2 rounded-full bg-white text-black text-[10px] font-black uppercase tracking-widest overflow-hidden hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(0,255,133,0.4)]"
+              className="relative px-5 py-2 rounded-full bg-white text-black text-[10px] font-black uppercase tracking-widest overflow-hidden hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(37,99,235,0.4)]"
             >
               <span className="relative z-10">{t.navbar.contact}</span>
             </Link>
@@ -148,7 +148,7 @@ export const Navbar: React.FC = () => {
               exit={{ y: '-100%' }}
               transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
               onClick={(e) => e.stopPropagation()}
-              className="absolute top-0 left-0 right-0 bg-[#040d07] border-b border-premium-green/20 shadow-[0_30px_80px_rgba(0,0,0,0.95)] pt-24 pb-8 px-5 overflow-hidden"
+              className="absolute top-0 left-0 right-0 bg-[#0B0F1A] border-b border-premium-green/20 shadow-[0_30px_80px_rgba(0,0,0,0.95)] pt-24 pb-8 px-5 overflow-hidden"
             >
               {/* Top green line */}
               <div className="absolute inset-x-0 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-premium-green to-transparent"></div>
@@ -190,7 +190,7 @@ export const Navbar: React.FC = () => {
                         onClick={handleNavClick}
                         className={`group flex items-center gap-3.5 px-3.5 py-3.5 rounded-2xl border backdrop-blur-md transition-all duration-300 ${
                           isActive
-                            ? 'bg-gradient-to-r from-premium-green/20 to-premium-green/5 border-premium-green/35 text-premium-green shadow-[0_0_30px_rgba(0,255,133,0.14)]'
+                            ? 'bg-gradient-to-r from-premium-green/20 to-premium-green/5 border-premium-green/35 text-premium-green shadow-[0_0_30px_rgba(37,99,235,0.14)]'
                             : 'border-white/[0.08] bg-white/[0.03] text-white/80 hover:bg-white/[0.07] hover:border-white/25 hover:text-white'
                         }`}
                       >
@@ -221,13 +221,13 @@ export const Navbar: React.FC = () => {
                   <a
                     href="/#audit"
                     onClick={handleAuditNavClick}
-                    className="group flex items-center gap-3.5 px-3.5 py-3.5 rounded-2xl border border-premium-green/30 bg-gradient-to-r from-premium-green/[0.16] via-premium-green/[0.08] to-transparent text-premium-green hover:border-premium-green/50 transition-all duration-300 shadow-[0_0_24px_rgba(0,255,133,0.12)]"
+                    className="group flex items-center gap-3.5 px-3.5 py-3.5 rounded-2xl border border-premium-green/30 bg-gradient-to-r from-premium-green/[0.16] via-premium-green/[0.08] to-transparent text-premium-green hover:border-premium-green/50 transition-all duration-300 shadow-[0_0_24px_rgba(37,99,235,0.12)]"
                   >
                     <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 bg-premium-green/15">
                       <Zap className="w-[18px] h-[18px] text-premium-green" />
                     </div>
                     <span className="font-bold text-[15px] flex-1">{t.navbar.auditGratuit}</span>
-                    <span className="text-[9px] bg-premium-green text-black font-black px-2 py-0.5 rounded-full uppercase tracking-wider">Offert</span>
+                    <span className="text-[9px] bg-premium-green text-white font-black px-2 py-0.5 rounded-full uppercase tracking-wider">Offert</span>
                   </a>
                 </motion.div>
               </nav>
@@ -242,7 +242,7 @@ export const Navbar: React.FC = () => {
                 <Link
                   to="/contact"
                   onClick={handleNavClick}
-                  className="flex items-center justify-center gap-2.5 w-full py-4 rounded-2xl bg-premium-green text-black font-black text-[13px] uppercase tracking-widest hover:bg-white transition-colors duration-300 shadow-[0_0_30px_rgba(0,255,133,0.25)]"
+                  className="flex items-center justify-center gap-2.5 w-full py-4 rounded-2xl bg-premium-green text-white font-black text-[13px] uppercase tracking-widest hover:bg-blue-700 transition-colors duration-300 shadow-[0_0_30px_rgba(37,99,235,0.25)]"
                 >
                   Démarrer un projet
                   <ArrowRight className="w-4 h-4" />

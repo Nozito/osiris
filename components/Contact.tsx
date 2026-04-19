@@ -8,7 +8,7 @@ export const Contact: React.FC = () => {
   const { t } = useLanguage();
 
   return (
-    <section id="contact" className="px-4 sm:px-6 py-8 sm:py-16 bg-[#0A0A0A] relative overflow-hidden scroll-mt-20 border-t border-white/5">
+    <section id="contact" className="px-4 sm:px-6 py-6 sm:py-10 bg-[#0B0B0B] relative overflow-hidden scroll-mt-20 border-t border-white/5">
       {/* Scrolling OSIRIS Marquee Band - Background */}
       <div className="absolute inset-0 flex items-center overflow-hidden pointer-events-none select-none">
         <motion.div
@@ -19,8 +19,8 @@ export const Contact: React.FC = () => {
           {[...Array(10)].map((_, i) => (
             <span
               key={i}
-              className="text-[15vw] md:text-[15vw] lg:text-[14vw] font-black font-display text-white/[0.02] tracking-[-0.05em] mx-8"
-              style={{ WebkitTextStroke: '1px rgba(255,255,255,0.03)' }}
+              className="text-[15vw] md:text-[15vw] lg:text-[14vw] font-black font-display text-white/[0.06] tracking-[-0.05em] mx-8"
+              style={{ WebkitTextStroke: '1px rgba(255,255,255,0.10)' }}
             >
               OSIRIS
             </span>
@@ -103,7 +103,7 @@ export const Contact: React.FC = () => {
               </div>
 
               <div className="flex justify-center mt-4">
-                <button type="button" className="btn-reserve w-full sm:w-auto sm:min-w-[320px] bg-premium-green text-black font-bold py-3 sm:py-5 text-[11px] sm:text-sm uppercase tracking-[0.08em] sm:tracking-widest hover:bg-white transition-colors duration-300 flex items-center justify-center gap-2 rounded-full">
+                <button type="button" className="btn-reserve w-full sm:w-auto sm:min-w-[320px] bg-premium-green text-white font-bold py-3 sm:py-5 text-[11px] sm:text-sm uppercase tracking-[0.08em] sm:tracking-widest hover:bg-blue-700 transition-colors duration-300 flex items-center justify-center gap-2 rounded-full">
                 <span className="truncate">{t.contact.form.submit}</span>
                 <ArrowRight className="w-4 h-4 flex-shrink-0" />
                 </button>

@@ -287,35 +287,48 @@ export const fr = {
         offers: {
             starter: {
                 title: "Starter",
-                description: "Une base claire pour lancer votre presence en ligne et inspirer confiance des la premiere visite.",
+                description: "Une base solide pour lancer votre présence en ligne et inspirer confiance dès la première visite.",
                 features: [
-                    "Une page claire qui presente votre offre et pousse a l'action",
-                    "Un design premium qui valorise votre image des les premieres secondes",
-                    "Parfait sur mobile, tablette et desktop pour ne perdre aucun prospect",
-                    "Chargement rapide pour garder l'attention et favoriser le referencement",
-                    "Hebergement inclus 1 an pour demarrer sans friction technique"
+                    "1 à 3 pages 100% custom",
+                    "Design premium responsive (mobile, tablette, desktop)",
+                    "Animations basiques (fade, apparition au scroll)",
+                    "Performance optimisée (chargement rapide)",
+                    "SEO : balises de base (title, meta, H1-H6)",
+                    "1 call de lancement avec l'équipe",
+                    "3 rounds de révisions inclus (rounds sup. payants)",
+                    "Support après livraison : 14 jours",
+                    "1h de modifications offertes par mois, à vie",
+                    "Option : Modifications illimitées → +19,90 €/mois (engagement 3 mois)"
                 ]
             },
             business: {
                 title: "Business",
-                description: "Le format ideal pour structurer votre offre, rassurer vos prospects et generer plus de demandes qualifiees.",
+                description: "Le format idéal pour structurer votre offre, rassurer vos prospects et générer plus de demandes qualifiées.",
                 features: [
-                    "Jusqu'a 5 pages pour expliquer votre valeur et convertir sans confusion",
-                    "Un CMS simple pour modifier vos contenus en autonomie",
-                    "Des animations utiles qui renforcent la perception premium",
-                    "Un socle SEO technique propre pour etre mieux trouve sur Google",
-                    "Tracking des performances pour piloter vos decisions avec des donnees"
+                    "Tout le Starter inclus ✓",
+                    "Jusqu'à 5 pages 100% custom",
+                    "Animations utiles (transitions, hover, scroll)",
+                    "Socle SEO propre (structure technique, vitesse, balises avancées)",
+                    "Calls réguliers durant toute la création",
+                    "5 rounds de révisions inclus (rounds sup. payants)",
+                    "Support après livraison : 30 jours",
+                    "1h de modifications offertes par mois, à vie",
+                    "Option : Modifications illimitées → +19,90 €/mois (engagement 3 mois)"
                 ]
             },
             empire: {
                 title: "Empire",
-                description: "Pour les projets ambitieux qui demandent un site sur-mesure, evolutif et pense pour scaler avec votre croissance.",
+                description: "Pour les projets ambitieux qui demandent un site sur-mesure, évolutif et pensé pour scaler avec votre croissance.",
                 features: [
-                    "Architecture sur-mesure pour e-commerce ou besoins metier complexes",
-                    "Direction artistique unique qui vous differencie vraiment",
-                    "Effets visuels avances pour une experience memorable sans sacrifier la vitesse",
-                    "Integrations CRM et API pour automatiser et gagner du temps",
-                    "Accompagnement strategique pour convertir plus et durer"
+                    "Tout le Business inclus ✓",
+                    "Jusqu'à 10 pages 100% custom",
+                    "Animations avancées (parallax, effets scroll complexes, micro-interactions)",
+                    "SEO avancé (audit, plan de contenu, optimisation pousssée)",
+                    "Calls illimités jusqu'à la mise en ligne",
+                    "Révisions illimitées jusqu'à la mise en ligne",
+                    "Support après livraison : 60 jours",
+                    "1h de modifications offertes par mois, à vie",
+                    "Option : Modifications illimitées → +19,90 €/mois (engagement 3 mois)"
                 ]
             }
         },

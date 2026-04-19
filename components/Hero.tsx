@@ -55,7 +55,7 @@ export const Hero: React.FC = () => {
                   className="relative inline-block bg-clip-text text-transparent bg-[linear-gradient(180deg,#ffffff_0%,#e0eafc_15%,#c0d6f0_30%,#6b7b8a_45%,#2a2a2a_50%,#6b7b8a_55%,#c0d6f0_70%,#e0eafc_85%,#ffffff_100%)] px-4 mx-[-16px]"
                   style={{
                     filter: 'drop-shadow(0 0 30px rgba(255,255,255,0.3)) drop-shadow(0 4px 8px rgba(0,0,0,0.8))',
-                    textShadow: '0 0 60px rgba(0,255,133,0.3), 0 0 120px rgba(0,255,133,0.15)',
+                    textShadow: '0 0 60px rgba(37,99,235,0.3), 0 0 120px rgba(37,99,235,0.15)',
                     transform: 'translateZ(0)'
                   }}
                 >
@@ -72,7 +72,7 @@ export const Hero: React.FC = () => {
 
                 {/* Green Tint Overlay - Subtle Color Wash */}
                 <span
-                  className="absolute inset-0 bg-clip-text text-transparent bg-[linear-gradient(180deg,rgba(0,255,133,0.1)_0%,transparent_30%,transparent_70%,rgba(0,255,133,0.1)_100%)] pointer-events-none px-4 mx-[-16px] animate-[pulse_4s_ease-in-out_infinite]"
+                  className="absolute inset-0 bg-clip-text text-transparent bg-[linear-gradient(180deg,rgba(37,99,235,0.1)_0%,transparent_30%,transparent_70%,rgba(37,99,235,0.1)_100%)] pointer-events-none px-4 mx-[-16px] animate-[pulse_4s_ease-in-out_infinite]"
                   aria-hidden="true"
                 >
                   OSIRIS
@@ -102,7 +102,7 @@ export const Hero: React.FC = () => {
               {/* Bouton principal */}
               <div className="group relative w-full md:w-auto">
                 <div className="absolute inset-0 bg-premium-green blur-xl opacity-20 group-hover:opacity-50 transition-opacity duration-500 rounded-full"></div>
-                <a href="#contact" className="hero-cta-button relative bg-premium-green text-black font-bold py-3 sm:py-5 px-6 sm:px-10 border border-transparent hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-lg tracking-wider uppercase rounded-full shadow-[0_0_30px_rgba(0,255,133,0.2)] w-full md:w-auto">
+                <a href="#contact" className="hero-cta-button relative bg-premium-green text-white font-bold py-3 sm:py-5 px-6 sm:px-10 border border-transparent hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-lg tracking-wider uppercase rounded-full shadow-[0_0_30px_rgba(37,99,235,0.2)] w-full md:w-auto">
                   {t.hero.cta}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
@@ -122,8 +122,8 @@ export const Hero: React.FC = () => {
                 <div className="w-8 h-8 rounded-full bg-zinc-700 border-[3px] border-black flex items-center justify-center shadow-lg transform group-hover:translate-x-0 transition-transform duration-300">
                   <User className="w-3.5 h-3.5 text-gray-400" />
                 </div>
-                <div className="w-8 h-8 rounded-full bg-premium-green/10 border-[3px] border-black flex items-center justify-center backdrop-blur-sm shadow-[0_0_15px_rgba(0,255,133,0.3)] transform group-hover:translate-x-1 transition-transform duration-300">
-                  <div className="w-2 h-2 bg-premium-green rounded-full animate-pulse shadow-[0_0_10px_#00FF85]"></div>
+                <div className="w-8 h-8 rounded-full bg-premium-green/10 border-[3px] border-black flex items-center justify-center backdrop-blur-sm shadow-[0_0_15px_rgba(37,99,235,0.3)] transform group-hover:translate-x-1 transition-transform duration-300">
+                  <div className="w-2 h-2 bg-premium-green rounded-full animate-pulse shadow-[0_0_10px_#2563EB]"></div>
                 </div>
               </div>
 

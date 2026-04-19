@@ -109,7 +109,7 @@ export const ParticleBackground: React.FC = () => {
         // Draw simple circle (much faster than diamond + shadow)
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0, 255, 133, ${currentAlpha})`;
+        ctx.fillStyle = `rgba(37, 99, 235, ${currentAlpha})`;
         ctx.fill();
 
         // Draw connections (optimized: only check forward)
@@ -126,7 +126,7 @@ export const ParticleBackground: React.FC = () => {
               ctx.beginPath();
               ctx.moveTo(p.x, p.y);
               ctx.lineTo(p2.x, p2.y);
-              ctx.strokeStyle = `rgba(0, 255, 133, ${opacity})`;
+              ctx.strokeStyle = `rgba(37, 99, 235, ${opacity})`;
               ctx.lineWidth = 0.5;
               ctx.stroke();
             }

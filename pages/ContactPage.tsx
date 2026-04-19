@@ -21,7 +21,7 @@ export const ContactPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#050505] selection:bg-premium-green selection:text-black overflow-hidden font-sans">
+        <div className="min-h-screen bg-[#0B0B0B] selection:bg-premium-green selection:text-white overflow-hidden font-sans">
             <SEOHead
                 title={language === 'fr'
                     ? 'Contact - Osiris | Agence Web Premium'
@@ -196,14 +196,14 @@ export const ContactPage: React.FC = () => {
                                             exit={{ opacity: 0, scale: 0.9 }}
                                             className="min-h-[400px] flex flex-col items-center justify-center text-center"
                                         >
-                                            <div className="w-24 h-24 bg-premium-green/10 rounded-full flex items-center justify-center text-premium-green mb-8 animate-[pulse_2s_infinite] shadow-[0_0_30px_rgba(0,255,133,0.2)]">
+                                            <div className="w-24 h-24 bg-premium-green/10 rounded-full flex items-center justify-center text-premium-green mb-8 animate-[pulse_2s_infinite] shadow-[0_0_30px_rgba(37,99,235,0.2)]">
                                                 <CheckCircle2 className="w-12 h-12" />
                                             </div>
                                             <h3 className="text-3xl md:text-4xl font-bold text-white font-display mb-4">{t.contactPage.successTitle}</h3>
                                             <p className="text-gray-400 mb-10 max-w-sm text-lg font-light leading-relaxed">{t.contactPage.successMessage}</p>
                                             <button
                                                 onClick={() => setFormStatus('idle')}
-                                                className="px-8 py-3 rounded-full border border-premium-green/30 text-premium-green font-bold text-xs uppercase tracking-widest hover:bg-premium-green hover:text-black transition-all duration-300"
+                                                className="px-8 py-3 rounded-full border border-premium-green/30 text-premium-green font-bold text-xs uppercase tracking-widest hover:bg-premium-green hover:text-white transition-all duration-300"
                                             >
                                                 {t.contactPage.sendAnother}
                                             </button>
@@ -217,7 +217,7 @@ export const ContactPage: React.FC = () => {
                                             className="contact-form space-y-8"
                                         >
                                             <div className="flex items-center gap-4 mb-10 pb-8 border-b border-white/5">
-                                                <div className="w-10 h-10 rounded-full bg-premium-green/10 flex items-center justify-center text-premium-green shadow-[0_0_15px_rgba(0,255,133,0.2)]">
+                                                <div className="w-10 h-10 rounded-full bg-premium-green/10 flex items-center justify-center text-premium-green shadow-[0_0_15px_rgba(37,99,235,0.2)]">
                                                     <MessageSquare className="w-5 h-5" />
                                                 </div>
                                                 <h3 className="text-2xl font-bold text-white font-display uppercase tracking-wide">{t.contactPage.formTitle}</h3>
@@ -227,14 +227,14 @@ export const ContactPage: React.FC = () => {
                                                 <div className="space-y-2 group relative">
                                                     <label htmlFor="cp-name" className="text-[10px] uppercase tracking-widest text-gray-500 font-bold ml-1 mb-1 block group-focus-within:text-premium-green transition-colors duration-300">{t.contactPage.labelName}</label>
                                                     <div className="relative">
-                                                        <input id="cp-name" required type="text" className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none focus:shadow-[0_0_20px_rgba(0,255,133,0.05)] transition-all duration-300 text-sm md:text-base font-medium" placeholder="Ex: John Doe" />
+                                                        <input id="cp-name" required type="text" className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none focus:shadow-[0_0_20px_rgba(37,99,235,0.05)] transition-all duration-300 text-sm md:text-base font-medium" placeholder="Ex: John Doe" />
                                                         <div className="absolute inset-0 rounded-xl border border-transparent group-focus-within:border-premium-green/20 pointer-events-none transition-all duration-500 scale-105 opacity-0 group-focus-within:opacity-100 group-focus-within:scale-100"></div>
                                                     </div>
                                                 </div>
                                                 <div className="space-y-2 group relative">
                                                     <label htmlFor="cp-company" className="text-[10px] uppercase tracking-widest text-gray-500 font-bold ml-1 mb-1 block group-focus-within:text-premium-green transition-colors duration-300">{t.contactPage.labelCompany}</label>
                                                     <div className="relative">
-                                                        <input id="cp-company" type="text" className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none focus:shadow-[0_0_20px_rgba(0,255,133,0.05)] transition-all duration-300 text-sm md:text-base font-medium" placeholder="Ex: Studio Osiris" />
+                                                        <input id="cp-company" type="text" className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none focus:shadow-[0_0_20px_rgba(37,99,235,0.05)] transition-all duration-300 text-sm md:text-base font-medium" placeholder="Ex: Studio Osiris" />
                                                         <div className="absolute inset-0 rounded-xl border border-transparent group-focus-within:border-premium-green/20 pointer-events-none transition-all duration-500 scale-105 opacity-0 group-focus-within:opacity-100 group-focus-within:scale-100"></div>
                                                     </div>
                                                 </div>
@@ -243,7 +243,7 @@ export const ContactPage: React.FC = () => {
                                             <div className="space-y-2 group relative">
                                                 <label htmlFor="cp-email" className="text-[10px] uppercase tracking-widest text-gray-500 font-bold ml-1 mb-1 block group-focus-within:text-premium-green transition-colors duration-300">{t.contactPage.labelEmail}</label>
                                                 <div className="relative">
-                                                    <input id="cp-email" required type="email" className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none focus:shadow-[0_0_20px_rgba(0,255,133,0.05)] transition-all duration-300 text-sm md:text-base font-medium" placeholder="Ex: john@osiris.com" />
+                                                    <input id="cp-email" required type="email" className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none focus:shadow-[0_0_20px_rgba(37,99,235,0.05)] transition-all duration-300 text-sm md:text-base font-medium" placeholder="Ex: john@osiris.com" />
                                                     <Mail className="absolute right-5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600 group-focus-within:text-premium-green transition-colors duration-300" />
                                                 </div>
                                             </div>
@@ -251,7 +251,7 @@ export const ContactPage: React.FC = () => {
                                             <div className="space-y-2 group relative">
                                                 <label htmlFor="cp-budget" className="text-[10px] uppercase tracking-widest text-gray-500 font-bold ml-1 mb-1 block group-focus-within:text-premium-green transition-colors duration-300">{t.contactPage.labelBudget}</label>
                                                 <div className="relative">
-                                                    <select id="cp-budget" aria-label="Budget" className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 text-white focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none focus:shadow-[0_0_20px_rgba(0,255,133,0.05)] transition-all duration-300 text-sm md:text-base font-medium appearance-none cursor-pointer">
+                                                    <select id="cp-budget" aria-label="Budget" className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 text-white focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none focus:shadow-[0_0_20px_rgba(37,99,235,0.05)] transition-all duration-300 text-sm md:text-base font-medium appearance-none cursor-pointer">
                                                         {t.contactPage.budgetOptions.map((option: string, i: number) => (
                                                             <option key={i} className="bg-[#111] text-gray-200 py-2">{option}</option>
                                                         ))}
@@ -265,7 +265,7 @@ export const ContactPage: React.FC = () => {
                                             <div className="space-y-2 group relative">
                                                 <label htmlFor="cp-message" className="text-[10px] uppercase tracking-widest text-gray-500 font-bold ml-1 mb-1 block group-focus-within:text-premium-green transition-colors duration-300">{t.contactPage.labelMessage}</label>
                                                 <div className="relative">
-                                                    <textarea id="cp-message" required rows={5} className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none focus:shadow-[0_0_20px_rgba(0,255,133,0.05)] transition-all duration-300 text-sm md:text-base font-medium resize-none leading-relaxed" placeholder={t.contactPage.messagePlaceholder}></textarea>
+                                                    <textarea id="cp-message" required rows={5} className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none focus:shadow-[0_0_20px_rgba(37,99,235,0.05)] transition-all duration-300 text-sm md:text-base font-medium resize-none leading-relaxed" placeholder={t.contactPage.messagePlaceholder}></textarea>
                                                     <div className="absolute inset-0 rounded-xl border border-transparent group-focus-within:border-premium-green/20 pointer-events-none transition-all duration-500 scale-105 opacity-0 group-focus-within:opacity-100 group-focus-within:scale-100"></div>
                                                 </div>
                                             </div>
@@ -274,7 +274,7 @@ export const ContactPage: React.FC = () => {
                                                 <button
                                                     type="submit"
                                                     disabled={formStatus === 'submitting'}
-                                                    className="btn-reserve w-full bg-white text-black font-black py-5 uppercase tracking-[0.2em] hover:bg-premium-green transition-colors duration-300 flex items-center justify-center gap-3 rounded-xl shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
+                                                    className="btn-reserve w-full bg-premium-green text-white font-black py-5 uppercase tracking-[0.2em] hover:bg-blue-700 transition-colors duration-300 flex items-center justify-center gap-3 rounded-xl shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
                                                 >
                                                     {formStatus === 'submitting' ? (
                                                         <span className="animate-pulse flex items-center gap-2">

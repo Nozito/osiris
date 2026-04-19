@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, Zap, HelpCircle, ArrowRight, ArrowLeft, FileText, Rocket, Crown, ChevronLeft, ChevronRight, ChevronDown, X } from 'lucide-react';
+import { Check, Zap, HelpCircle, ArrowRight, ArrowLeft, FileText, Rocket, Crown, ChevronLeft, ChevronRight, ChevronDown, X, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -20,7 +20,8 @@ export const Offer: React.FC = () => {
       icon: "rocket",
       gradient: "from-blue-500/20 to-transparent",
       badge: "Lancement",
-      color: "blue"
+      color: "blue",
+      newFrom: 0
     },
     {
       title: t.offer.offers.business.title,
@@ -29,9 +30,10 @@ export const Offer: React.FC = () => {
       features: t.offer.offers.business.features,
       highlight: true,
       icon: "zap",
-      gradient: "from-premium-green/20 to-transparent",
+      gradient: "from-amber-400/20 to-transparent",
       badge: t.offer.recommended,
-      color: "green"
+      color: "amber",
+      newFrom: 1
     },
     {
       title: t.offer.offers.empire.title,
@@ -42,17 +44,36 @@ export const Offer: React.FC = () => {
       icon: "crown",
       gradient: "from-purple-500/20 to-transparent",
       badge: "Domination",
-      color: "purple"
+      color: "purple",
+      newFrom: 1
     }
   ];
 
   const getIcon = (name: string) => {
     switch (name) {
       case 'rocket': return <Rocket className="w-4 h-4 text-blue-400" />;
-      case 'zap': return <Zap className="w-4 h-4 fill-black text-black" />;
+      case 'zap': return <Zap className="w-4 h-4" />;
       case 'crown': return <Crown className="w-4 h-4 text-purple-400" />;
       default: return null;
     }
+  };
+
+  const getBorderColor = (color: string) => {
+    if (color === 'blue') return 'border-blue-500/40 shadow-[0_0_40px_-15px_rgba(59,130,246,0.25)]';
+    if (color === 'amber') return 'border-amber-400/40 shadow-[0_0_40px_-15px_rgba(251,191,36,0.25)]';
+    return 'border-purple-500/40 shadow-[0_0_40px_-15px_rgba(168,85,247,0.25)]';
+  };
+
+  const getAccentBg = (color: string) => {
+    if (color === 'blue') return 'bg-blue-500/15 text-blue-400';
+    if (color === 'amber') return 'bg-amber-400/15 text-amber-400';
+    return 'bg-purple-500/15 text-purple-400';
+  };
+
+  const getAccentText = (color: string) => {
+    if (color === 'blue') return 'group-hover:text-blue-400';
+    if (color === 'amber') return 'group-hover:text-amber-400';
+    return 'group-hover:text-purple-400';
   };
 
   const nextSlide = () => {
@@ -100,13 +121,7 @@ export const Offer: React.FC = () => {
                 whileTap={{ scale: 0.985 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08, duration: 0.4 }}
-                className={`rounded-2xl border overflow-hidden transition-colors duration-300
-                  ${
-                    offer.highlight
-                      ? 'bg-[#0A0A0A] border-premium-green/40 shadow-[0_0_24px_-8px_rgba(0,255,133,0.25)]'
-                      : 'bg-white/[0.03] border-white/10'
-                  }
-                `}
+                className={`bg-[#0A0A0A] rounded-2xl border overflow-hidden transition-colors duration-300 ${getBorderColor(offer.color)}`}
               >
                 {/* Row header — tap to expand/collapse */}
                 <button
@@ -114,19 +129,11 @@ export const Offer: React.FC = () => {
                   className="w-full px-4 py-3.5 flex items-center justify-between gap-3 text-left"
                 >
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0
-                      ${
-                        offer.highlight
-                          ? 'bg-premium-green'
-                          : offer.color === 'blue' ? 'bg-blue-500/15' : 'bg-purple-500/15'
-                      }`}
-                    >
+                    <div className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 ${getAccentBg(offer.color)}`}>
                       {getIcon(offer.icon)}
                     </div>
                     <div className="min-w-0">
-                      <div className={`text-[11px] font-black uppercase tracking-widest truncate
-                        ${offer.highlight ? 'text-premium-green' : 'text-white'}`}
-                      >
+                      <div className={`text-[11px] font-black uppercase tracking-widest truncate ${offer.color === 'blue' ? 'text-blue-400' : offer.color === 'amber' ? 'text-amber-400' : 'text-purple-400'}`}>
                         {offer.title}
                       </div>
                       <div className="text-gray-500 text-[10px] mt-0.5">{offer.badge}</div>
@@ -162,29 +169,25 @@ export const Offer: React.FC = () => {
                           {offer.description}
                         </p>
                         <ul className="space-y-2 mb-5">
-                          {offer.features.map((feature, i) => (
-                            <li key={i} className="flex items-start gap-2">
-                              <div className={`mt-0.5 w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0
-                                ${
-                                  offer.highlight
-                                    ? 'bg-premium-green/20 text-premium-green'
-                                    : 'bg-white/10 text-gray-400'
-                                }`}
-                              >
-                                <Check className="w-2.5 h-2.5" />
-                              </div>
-                              <span className="text-xs text-gray-300">{feature}</span>
-                            </li>
-                          ))}
+                          {offer.features.map((feature, i) => {
+                            const isInherited = i < (offer.newFrom ?? 0);
+                            return (
+                              <li key={i} className="flex items-start gap-2">
+                                <div className={`mt-0.5 w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 ${isInherited ? 'bg-amber-400/15 text-amber-400' : getAccentBg(offer.color)}`}>
+                                  {isInherited ? <Check className="w-2.5 h-2.5" /> : <Sparkles className="w-2.5 h-2.5" />}
+                                </div>
+                                <span className={`text-xs ${isInherited ? 'text-amber-400 font-medium' : 'text-gray-300'}`}>{feature}</span>
+                              </li>
+                            );
+                          })}
                         </ul>
                         <Link
                           to="/contact"
-                          className={`w-full py-3 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all flex items-center justify-center gap-2
-                            ${
-                              offer.highlight
-                                ? 'bg-premium-green text-black hover:shadow-[0_0_20px_rgba(0,255,133,0.4)]'
-                                : 'bg-white/10 text-white hover:bg-white/20'
-                            }`}
+                          className={`w-full py-3 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all flex items-center justify-center gap-2 border ${
+                            offer.color === 'blue' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20 hover:bg-blue-500 hover:text-white hover:border-transparent' :
+                            offer.color === 'amber' ? 'bg-amber-400/10 text-amber-400 border-amber-400/20 hover:bg-amber-400 hover:text-black hover:border-transparent' :
+                            'bg-purple-500/10 text-purple-400 border-purple-500/20 hover:bg-purple-500 hover:text-white hover:border-transparent'
+                          }`}
                         >
                           {t.offer.choosePack}
                           <ArrowRight className="w-3.5 h-3.5" />
@@ -207,27 +210,17 @@ export const Offer: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               whileTap={{ scale: 0.99 }}
               transition={{ delay: 0.1 * index, duration: 0.5 }}
-              className={`pricing-card ${offer.highlight ? 'popular' : ''} p-8 rounded-[2rem] transition-all duration-300 flex flex-col h-full group hover:-translate-y-2
-                ${offer.highlight
-                  ? 'bg-[#0A0A0A] border border-premium-green/40 shadow-[0_0_60px_-15px_rgba(0,255,133,0.2)] z-10 scale-105'
-                  : 'bg-white/[0.02] border border-white/10 hover:border-premium-green/30 hover:bg-white/[0.04]'
-                }
-              `}
+              className={`pricing-card ${offer.highlight ? 'popular' : ''} p-8 rounded-[2rem] transition-all duration-300 flex flex-col h-full group hover:-translate-y-2 bg-[#0A0A0A] border ${getBorderColor(offer.color)} ${offer.highlight ? 'z-10 scale-105' : ''}`}
             >
               <div className="flex justify-center mb-6">
-                <div className={`px-4 py-1.5 rounded-full flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider transition-all
-                  ${offer.highlight
-                    ? 'bg-premium-green text-black border-transparent shadow-lg shadow-premium-green/20'
-                    : 'bg-white/5 text-gray-400 border border-white/10 group-hover:bg-premium-green group-hover:text-black group-hover:border-transparent'
-                  }
-                `}>
+                <div className={`px-4 py-1.5 rounded-full flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider transition-all border ${getAccentBg(offer.color)} ${offer.color === 'blue' ? 'border-blue-500/20' : offer.color === 'amber' ? 'border-amber-400/20' : 'border-purple-500/20'}`}>
                   {getIcon(offer.icon)}
                   {offer.badge}
                 </div>
               </div>
 
               <div className="mb-6 text-center">
-                <h3 className="text-xl font-bold font-display uppercase tracking-widest mb-3 text-white group-hover:text-premium-green transition-colors">
+                <h3 className={`text-xl font-bold font-display uppercase tracking-widest mb-3 text-white transition-colors ${getAccentText(offer.color)}`}>
                   {offer.title}
                 </h3>
                 <div className="flex items-start justify-center gap-1">
@@ -237,21 +230,28 @@ export const Offer: React.FC = () => {
                 <p className="text-gray-500 text-sm mt-3 font-medium">{offer.description}</p>
               </div>
 
-              <div className="w-full h-[1px] mb-6 bg-white/5 group-hover:bg-premium-green/20 transition-colors"></div>
+              <div className={`w-full h-[1px] mb-6 transition-colors ${offer.color === 'blue' ? 'bg-blue-500/20' : offer.color === 'amber' ? 'bg-amber-400/20' : 'bg-purple-500/20'}`}></div>
 
               <ul className="space-y-3 mb-8 flex-1">
-                {offer.features.slice(0, 4).map((feature, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <div className="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 bg-white/10 text-gray-500 group-hover:bg-premium-green/20 group-hover:text-premium-green transition-colors">
-                      <Check className="w-3 h-3" />
-                    </div>
-                    <span className="text-sm text-gray-400">{feature}</span>
-                  </li>
-                ))}
+                {offer.features.slice(0, 4).map((feature, i) => {
+                  const isInherited = i < (offer.newFrom ?? 0);
+                  return (
+                    <li key={i} className="flex items-start gap-3">
+                      <div className={`mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${isInherited ? 'bg-amber-400/15 text-amber-400' : getAccentBg(offer.color)}`}>
+                        {isInherited ? <Check className="w-3 h-3" /> : <Sparkles className="w-3 h-3" />}
+                      </div>
+                      <span className={`text-sm ${isInherited ? 'text-amber-400 font-medium' : 'text-gray-400'}`}>{feature}</span>
+                    </li>
+                  );
+                })}
               </ul>
 
               <div className="space-y-2">
-                <Link to="/contact" className="cta cta-btn w-full py-4 rounded-xl font-bold text-xs uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-2 bg-white/5 text-white border border-white/10 hover:bg-premium-green hover:text-black hover:border-transparent hover:shadow-[0_0_30px_rgba(0,255,133,0.3)] group/btn">
+                <Link to="/contact" className={`cta cta-btn w-full py-4 rounded-xl font-bold text-xs uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-2 border group/btn ${
+                  offer.color === 'blue' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20 hover:bg-blue-500 hover:text-white hover:border-transparent hover:shadow-[0_0_25px_rgba(59,130,246,0.3)]' :
+                  offer.color === 'amber' ? 'bg-amber-400/10 text-amber-400 border-amber-400/20 hover:bg-amber-400 hover:text-black hover:border-transparent hover:shadow-[0_0_25px_rgba(251,191,36,0.3)]' :
+                  'bg-purple-500/10 text-purple-400 border-purple-500/20 hover:bg-purple-500 hover:text-white hover:border-transparent hover:shadow-[0_0_25px_rgba(168,85,247,0.3)]'
+                }`}>
                   {t.offer.choosePack}
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
                 </Link>
@@ -266,14 +266,14 @@ export const Offer: React.FC = () => {
           <div className="flex p-1.5 gap-1.5 mt-6 bg-black/20 rounded-full border border-white/5">
             <button
               onClick={() => setActiveTab('faq')}
-              className={`py-2.5 px-6 text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all rounded-full ${activeTab === 'faq' ? 'bg-premium-green text-black' : 'text-gray-500 hover:text-white hover:bg-white/5'}`}
+              className={`py-2.5 px-6 text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all rounded-full ${activeTab === 'faq' ? 'bg-premium-green text-white' : 'text-gray-500 hover:text-white hover:bg-white/5'}`}
             >
               <HelpCircle className="w-3 h-3" />
               {t.offer.faq}
             </button>
             <button
               onClick={() => setActiveTab('quote')}
-              className={`py-2.5 px-6 text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all rounded-full ${activeTab === 'quote' ? 'bg-premium-green text-black' : 'text-gray-500 hover:text-white hover:bg-white/5'}`}
+              className={`py-2.5 px-6 text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all rounded-full ${activeTab === 'quote' ? 'bg-premium-green text-white' : 'text-gray-500 hover:text-white hover:bg-white/5'}`}
             >
               <FileText className="w-3 h-3" />
               {t.offer.quote}
@@ -358,18 +358,13 @@ export const Offer: React.FC = () => {
               {expandedOffer !== null && (
                 <>
                   <div className="flex justify-center mb-4">
-                    <div className={`px-4 py-1.5 rounded-full flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider
-                      ${offers[expandedOffer].highlight
-                        ? 'bg-premium-green text-black'
-                        : 'bg-white/10 text-gray-400'
-                      }`}
-                    >
+                    <div className={`px-4 py-1.5 rounded-full flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider border ${getAccentBg(offers[expandedOffer].color)} ${offers[expandedOffer].color === 'blue' ? 'border-blue-500/20' : offers[expandedOffer].color === 'amber' ? 'border-amber-400/20' : 'border-purple-500/20'}`}>
                       {getIcon(offers[expandedOffer].icon)}
                       {offers[expandedOffer].badge}
                     </div>
                   </div>
 
-                  <h3 className={`text-2xl font-bold mb-2 font-display text-center uppercase tracking-wider ${offers[expandedOffer].highlight ? 'text-premium-green' : 'text-white'}`}>
+                  <h3 className={`text-2xl font-bold mb-2 font-display text-center uppercase tracking-wider ${offers[expandedOffer].color === 'blue' ? 'text-blue-400' : offers[expandedOffer].color === 'amber' ? 'text-amber-400' : 'text-purple-400'}`}>
                     {offers[expandedOffer].title}
                   </h3>
 
@@ -385,22 +380,24 @@ export const Offer: React.FC = () => {
                   <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent mb-6"></div>
 
                   <ul className="space-y-3 mb-8">
-                    {offers[expandedOffer].features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <div className={`mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${offers[expandedOffer].highlight ? 'bg-premium-green/20 text-premium-green' : 'bg-white/10 text-gray-400'}`}>
-                          <Check className="w-3 h-3" />
-                        </div>
-                        <span className="text-sm text-gray-300">{feature}</span>
-                      </li>
-                    ))}
+                    {offers[expandedOffer].features.map((feature, i) => {
+                      const isInherited = i < (offers[expandedOffer].newFrom ?? 0);
+                      return (
+                        <li key={i} className="flex items-start gap-3">
+                          <div className={`mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${isInherited ? 'bg-amber-400/15 text-amber-400' : getAccentBg(offers[expandedOffer].color)}`}>
+                            {isInherited ? <Check className="w-3 h-3" /> : <Sparkles className="w-3 h-3" />}
+                          </div>
+                          <span className={`text-sm ${isInherited ? 'text-amber-400 font-medium' : 'text-gray-300'}`}>{feature}</span>
+                        </li>
+                      );
+                    })}
                   </ul>
 
-                  <button className={`w-full py-4 rounded-xl font-bold text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2
-                    ${offers[expandedOffer].highlight
-                      ? 'bg-premium-green text-black hover:shadow-[0_0_30px_rgba(0,255,133,0.4)]'
-                      : 'bg-white text-black hover:bg-premium-green'
-                    }`}
-                  >
+                  <button className={`w-full py-4 rounded-xl font-bold text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 border ${
+                    offers[expandedOffer].color === 'blue' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20 hover:bg-blue-500 hover:text-white hover:border-transparent hover:shadow-[0_0_25px_rgba(59,130,246,0.3)]' :
+                    offers[expandedOffer].color === 'amber' ? 'bg-amber-400/10 text-amber-400 border-amber-400/20 hover:bg-amber-400 hover:text-black hover:border-transparent hover:shadow-[0_0_25px_rgba(251,191,36,0.3)]' :
+                    'bg-purple-500/10 text-purple-400 border-purple-500/20 hover:bg-purple-500 hover:text-white hover:border-transparent hover:shadow-[0_0_25px_rgba(168,85,247,0.3)]'
+                  }`}>
                     {t.offer.choosePack}
                     <ArrowRight className="w-4 h-4" />
                   </button>

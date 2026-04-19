@@ -1,3 +1,49 @@
+/* === BORDER SPIN ANIMATION (Process section) === */
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes border-spin {
+  to { --border-angle: 360deg; }
+}
+
+.border-spin-anim {
+  position: relative;
+}
+
+.border-spin-anim::after {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--border-angle),
+    transparent 72%,
+    rgba(37, 99, 235, 0.75) 82%,
+    rgba(147, 197, 253, 0.95) 88%,
+    rgba(37, 99, 235, 0.75) 94%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  padding: 1.5px;
+  animation: border-spin 3s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* Pause animation on group hover — applies to all children with border-spin-anim */
+.group:hover .border-spin-anim::after,
+.border-spin-anim:hover::after {
+  opacity: 0;
+}
+
 /* === GLOBAL STYLES === */
 :root {
   color-scheme: dark;
@@ -27,7 +73,7 @@ html {
 }
 
 ::selection {
-  background-color: rgba(0, 255, 133, 0.2);
+  background-color: rgba(37, 99, 235, 0.2);
   color: #fff;
 }
 
@@ -157,7 +203,6 @@ a[class*="cta"],
   justify-content: center;
   gap: 20px;
   padding: 0 16px;
-  overflow-x: hidden;
 }
 
 .pricing-card {
@@ -214,10 +259,10 @@ main section {
 /* === AUDIT PILL GLOW ANIMATION === */
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 6px rgba(0, 255, 133, 0.3), inset 0 0 6px rgba(0, 255, 133, 0.05);
+    box-shadow: 0 0 6px rgba(37, 99, 235, 0.3), inset 0 0 6px rgba(37, 99, 235, 0.05);
   }
   50% {
-    box-shadow: 0 0 18px rgba(0, 255, 133, 0.6), inset 0 0 10px rgba(0, 255, 133, 0.12);
+    box-shadow: 0 0 18px rgba(37, 99, 235, 0.6), inset 0 0 10px rgba(37, 99, 235, 0.12);
   }
 }
 
@@ -266,6 +311,16 @@ img[loading="lazy"] {
 
 .animate-shimmer {
   animation: shimmer 8s ease-in-out infinite;
+}
+
+@keyframes gradient-x {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 3s ease infinite;
 }
 
 [class*="blur-["] {
@@ -397,12 +452,12 @@ img[loading="lazy"] {
 
   .nav-links a:hover {
     background: rgba(255, 255, 255, 0.05);
-    color: #00ff85;
+    color: #2563EB;
   }
 
   .nav-links a.active-link {
-    background: rgba(0, 255, 133, 0.08);
-    color: #00ff85;
+    background: rgba(37, 99, 235, 0.08);
+    color: #2563EB;
   }
 
   .nav-link-icon {
@@ -418,11 +473,11 @@ img[loading="lazy"] {
   }
 
   .nav-links a:hover .nav-link-icon {
-    background: rgba(0, 255, 133, 0.12);
+    background: rgba(37, 99, 235, 0.12);
   }
 
   .nav-links a.active-link .nav-link-icon {
-    background: rgba(0, 255, 133, 0.15);
+    background: rgba(37, 99, 235, 0.15);
   }
 
   .lang-switcher {

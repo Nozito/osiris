@@ -25,7 +25,7 @@ export const LegalPage: React.FC = () => {
                 canonical="https://osiris-web.com/legal"
             />
 
-            <section className="min-h-screen pt-24 sm:pt-28 pb-14 sm:pb-16 px-5 sm:px-6 relative bg-[#050505]">
+            <section className="min-h-screen pt-24 sm:pt-28 pb-14 sm:pb-16 px-5 sm:px-6 relative bg-[#0B0B0B]">
                 {/* Background Details */}
                 <div className="fixed inset-0 pointer-events-none">
                     <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-premium-green/5 blur-[120px] rounded-full" />

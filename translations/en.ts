@@ -287,35 +287,48 @@ export const en = {
         offers: {
             starter: {
                 title: "Starter",
-                description: "A clear base to launch your online presence and build trust from the very first visit.",
+                description: "A solid foundation to launch your online presence and build trust from the very first visit.",
                 features: [
-                    "A clear one-page site that presents your offer and drives action",
-                    "Premium design that upgrades your brand perception in seconds",
-                    "Perfect on mobile, tablet, and desktop so you lose no prospects",
-                    "Fast loading to keep attention and support organic visibility",
-                    "1 year hosting included for a frictionless launch"
+                    "1 to 3 pages, 100% custom",
+                    "Premium responsive design (mobile, tablet, desktop)",
+                    "Basic animations (fade, scroll reveal)",
+                    "Optimised performance (fast loading)",
+                    "SEO: basic meta tags (title, meta, H1-H6)",
+                    "1 kick-off call with the team",
+                    "3 revision rounds included (extra rounds billed)",
+                    "Post-delivery support: 14 days",
+                    "1h of monthly edits included, for life",
+                    "Option: Unlimited edits \u2192 +€19.90/month (3-month commitment)"
                 ]
             },
             business: {
                 title: "Business",
                 description: "The ideal format to structure your offer, reassure prospects, and generate more qualified leads.",
                 features: [
-                    "Up to 5 pages to explain your value and convert without confusion",
-                    "Simple CMS so you can update your content independently",
-                    "Useful animations that reinforce a premium feel",
-                    "Solid technical SEO foundation to improve Google discoverability",
-                    "Performance tracking to make decisions from real data"
+                    "Everything in Starter ✓",
+                    "Up to 5 pages, 100% custom",
+                    "Useful animations (transitions, hover, scroll)",
+                    "Clean SEO foundation (technical structure, speed, advanced tags)",
+                    "Regular calls throughout the build",
+                    "5 revision rounds included (extra rounds billed)",
+                    "Post-delivery support: 30 days",
+                    "1h of monthly edits included, for life",
+                    "Option: Unlimited edits \u2192 +€19.90/month (3-month commitment)"
                 ]
             },
             empire: {
                 title: "Empire",
                 description: "For ambitious projects that need a custom, scalable website built to grow with your business.",
                 features: [
-                    "Custom architecture for e-commerce or complex business requirements",
-                    "Unique art direction that truly sets you apart",
-                    "Advanced visual effects for a memorable experience without sacrificing speed",
-                    "CRM and API integrations to automate and save time",
-                    "Strategic support to convert more and sustain growth"
+                    "Everything in Business ✓",
+                    "Up to 10 pages, 100% custom",
+                    "Advanced animations (parallax, complex scroll effects, micro-interactions)",
+                    "Advanced SEO (audit, content plan, deep optimisation)",
+                    "Unlimited calls until go-live",
+                    "Unlimited revisions until go-live",
+                    "Post-delivery support: 60 days",
+                    "1h of monthly edits included, for life",
+                    "Option: Unlimited edits \u2192 +€19.90/month (3-month commitment)"
                 ]
             }
         },
