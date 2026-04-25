@@ -22,7 +22,7 @@ export const en = {
             custom: "100% custom-made"
         },
         tagline: "Two experts. One point of contact. From mockup to launch in under 3 weeks.",
-        cta: "Let's talk about your project →",
+        cta: "Let's talk about your project",
         spotsAvailable: "spots",
         available: "available",
         thisMonth: "This month",

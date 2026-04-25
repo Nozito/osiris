@@ -98,43 +98,13 @@ export const Hero: React.FC = () => {
           </p>
 
           <div className="flex flex-col items-center gap-4 sm:gap-5 w-full px-4 sm:px-0">
-            <div className="flex flex-col md:flex-row items-center gap-4 sm:gap-8 w-full md:w-auto">
-              {/* Bouton principal */}
-              <div className="group relative w-full md:w-auto">
-                <div className="absolute inset-0 bg-premium-green blur-xl opacity-20 group-hover:opacity-50 transition-opacity duration-500 rounded-full"></div>
-                <a href="#contact" className="hero-cta-button relative bg-premium-green text-white font-bold py-3 sm:py-5 px-6 sm:px-10 border border-transparent hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-lg tracking-wider uppercase rounded-full shadow-[0_0_30px_rgba(37,99,235,0.2)] w-full md:w-auto">
-                  {t.hero.cta}
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </a>
-              </div>
-
-              {/* Enhanced Badge with Social Proof */}
-              <div className="group relative bg-white/[0.03] hover:bg-white/[0.05] backdrop-blur-xl border border-white/10 hover:border-premium-green/30 rounded-full pl-2 pr-6 py-2 flex items-center gap-4 transition-all duration-500 w-full md:w-auto justify-center md:justify-start overflow-hidden">
-
-              {/* Shimmer Effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] pointer-events-none"></div>
-
-              {/* Avatars Stack */}
-              <div className="flex -space-x-3 relative z-10">
-                <div className="w-8 h-8 rounded-full bg-zinc-800 border-[3px] border-black flex items-center justify-center shadow-lg transform group-hover:-translate-x-1 transition-transform duration-300">
-                  <User className="w-3.5 h-3.5 text-gray-500" />
-                </div>
-                <div className="w-8 h-8 rounded-full bg-zinc-700 border-[3px] border-black flex items-center justify-center shadow-lg transform group-hover:translate-x-0 transition-transform duration-300">
-                  <User className="w-3.5 h-3.5 text-gray-400" />
-                </div>
-                <div className="w-8 h-8 rounded-full bg-premium-green/10 border-[3px] border-black flex items-center justify-center backdrop-blur-sm shadow-[0_0_15px_rgba(37,99,235,0.3)] transform group-hover:translate-x-1 transition-transform duration-300">
-                  <div className="w-2 h-2 bg-premium-green rounded-full animate-pulse shadow-[0_0_10px_#2563EB]"></div>
-                </div>
-              </div>
-
-              {/* Text Content */}
-              <div className="flex flex-col text-left z-10">
-                <span className="block text-white font-bold leading-none text-xs uppercase tracking-wider mb-0.5 group-hover:text-premium-green transition-colors duration-300">
-                  2 {t.hero.spotsAvailable} <span className="opacity-50 mx-1 text-gray-600">|</span> {t.hero.available}
-                </span>
-                <span className="text-[10px] uppercase tracking-[0.2em] text-gray-500 font-semibold group-hover:text-white transition-colors duration-300">{t.hero.thisMonth}</span>
-              </div>
-              </div>
+            {/* Bouton principal */}
+            <div className="group relative w-full md:w-auto">
+              <div className="absolute inset-0 bg-premium-green blur-xl opacity-20 group-hover:opacity-50 transition-opacity duration-500 rounded-full"></div>
+              <a href="#contact" className="hero-cta-button relative bg-premium-green text-white font-bold py-3 sm:py-5 px-6 sm:px-10 border border-transparent hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-lg tracking-wider uppercase rounded-full shadow-[0_0_30px_rgba(37,99,235,0.2)] w-full md:w-auto">
+                {t.hero.cta}
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </a>
             </div>
 
             {/* CTA secondaire vers les realisations */}

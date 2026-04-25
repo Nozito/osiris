@@ -98,11 +98,11 @@ export default function App() {
   }, [location.pathname, location.hash]);
 
   return (
-    <div className="relative min-h-screen bg-[#0B0B0B] text-white overflow-hidden font-sans">
+    <div className="relative min-h-screen bg-[#0B0B0B] text-white overflow-hidden font-sans" id="app-root">
       {/* === GLOBAL BACKGROUND LAYERS === */}
 
       {/* 1. Base Gradient & Animated Orbs */}
-      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-[#0B0B0B]">
+      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-[#0B0B0B]" id="app-bg-fixed">
         <div className="absolute top-[-10%] left-[20%] w-[50vw] h-[50vw] bg-premium-green/10 rounded-full blur-[120px] animate-[float-slow_15s_ease-in-out_infinite] will-change-transform" />
         <div className="absolute bottom-[-10%] right-[10%] w-[60vw] h-[60vw] bg-purple-900/15 rounded-full blur-[150px] animate-[float-slow_20s_ease-in-out_infinite_reverse] will-change-transform" />
         <div className="absolute top-[30%] left-[50%] -translate-x-1/2 w-[40vw] h-[40vw] bg-blue-900/10 rounded-full blur-[100px] animate-[pulse_12s_ease-in-out_infinite] will-change-opacity" />

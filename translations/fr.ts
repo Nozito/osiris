@@ -22,7 +22,7 @@ export const fr = {
             custom: "100% sur-mesure"
         },
         tagline: "Deux experts. Un seul interlocuteur. De la maquette au lancement en moins de 3 semaines.",
-        cta: "Parlons de votre projet →",
+        cta: "Parlons de votre projet",
         spotsAvailable: "places",
         available: "disponibles",
         thisMonth: "Pour ce mois",

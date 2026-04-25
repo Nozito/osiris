@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { Footer } from '../components/Footer';
 import { SEOHead } from '../components/SEOHead';
 import { useLanguage } from '../context/LanguageContext';
+import emailjs from '@emailjs/browser';
+import jsPDF from 'jspdf';
 
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -104,6 +106,7 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
     const [form, setForm] = useState({ firstName: '', lastName: '', email: '', phone: '', message: '' });
     const [animating, setAnimating] = useState(false);
     const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
+    const [sendStatus, setSendStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
     const basePrice = SITE_TYPES.find(s => s.id === siteType)?.price ?? 0;
     const extraPagesPrice = calcExtraPages(extraPages);
@@ -151,26 +154,206 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
         });
     };
 
-    const buildMailto = () => {
+    const buildSummary = () => {
         const siteLabel = SITE_TYPES.find(s => s.id === siteType)?.label ?? '';
         const deadlineLabel = DEADLINES.find(d => d.id === deadline)?.label ?? '';
         const allUpgrades = [...UPGRADE_BUSINESS_OPTIONS, ...UPGRADE_EMPIRE_OPTIONS];
-        const upgradesList = Array.from(selectedUpgrades).map(id => allUpgrades.find(o => o.id === id)?.label).join(', ');
-        const universalList = Array.from(selectedUniversal).map(id => UNIVERSAL_OPTIONS.find(o => o.id === id)?.label).join(', ');
-        const subject = encodeURIComponent(`Devis Osiris — ${siteLabel}`);
-        const body = encodeURIComponent(
-            `Bonjour,\n\nVoici ma demande de devis configurée sur osiris-web.com :\n\n`+
-            `Prénom : ${form.firstName}\nNom : ${form.lastName}\nEmail : ${form.email}\nTéléphone : ${form.phone}\n\n`+
-            `Offre de base : ${siteLabel}\nPages supplémentaires : ${extraPages}\n`+
-            `Upgrades : ${upgradesList || 'Aucun'}\nOptions : ${universalList || 'Aucune'}\n`+
-            (wantsUnlimited ? `Modifications illimitées : +19,90 €/mois\n` : '')+
-            `Délai : ${deadlineLabel}\n\nSous-total HT : ${subtotalHT.toLocaleString('fr-FR')} €\n`+
-            (deadlineSurcharge > 0 ? `Supplément délai : +${deadlineSurcharge.toLocaleString('fr-FR')} €\n` : '')+
-            `Total HT : ${totalHT.toLocaleString('fr-FR')} €\nTVA 20% : ${tva.toLocaleString('fr-FR')} €\n`+
-            `Total TTC estimé : ${totalTTC.toLocaleString('fr-FR')} €\n\n`+
-            `Message :\n${form.message}\n\nCordialement,\n${form.firstName} ${form.lastName}`
-        );
-        return `mailto:contact@osiris-agency.fr?subject=${subject}&body=${body}`;
+        const upgradesList = Array.from(selectedUpgrades).map(id => allUpgrades.find(o => o.id === id)?.label).filter(Boolean).join(', ') || 'Aucun';
+        const universalList = Array.from(selectedUniversal).map(id => UNIVERSAL_OPTIONS.find(o => o.id === id)?.label).filter(Boolean).join(', ') || 'Aucune';
+        return { siteLabel, deadlineLabel, upgradesList, universalList };
+    };
+
+    const generatePDF = () => {
+        const { siteLabel, deadlineLabel, upgradesList, universalList } = buildSummary();
+        const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+        const W = 210;
+        const margin = 20;
+        let y = 20;
+        const lineH = 7;
+
+        // Header
+        doc.setFillColor(37, 99, 235);
+        doc.rect(0, 0, W, 28, 'F');
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(22);
+        doc.setTextColor(255, 255, 255);
+        doc.text('OSIRIS', margin, 17);
+        doc.setFontSize(10);
+        doc.setFont('helvetica', 'normal');
+        doc.text('Récapitulatif de devis', W - margin, 17, { align: 'right' });
+        y = 38;
+
+        // Date
+        doc.setTextColor(120, 120, 120);
+        doc.setFontSize(9);
+        doc.text(`Généré le ${new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' })}`, margin, y);
+        y += 10;
+
+        // Client block
+        doc.setFillColor(248, 248, 248);
+        doc.roundedRect(margin, y, W - margin * 2, 32, 3, 3, 'F');
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(10);
+        doc.setTextColor(37, 99, 235);
+        doc.text('INFORMATIONS CLIENT', margin + 5, y + 8);
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor(30, 30, 30);
+        doc.setFontSize(9);
+        doc.text(`${form.firstName} ${form.lastName}`, margin + 5, y + 16);
+        doc.text(`Email : ${form.email}`, margin + 5, y + 22);
+        doc.text(`Téléphone : ${form.phone || '—'}`, margin + 5, y + 28);
+        y += 40;
+
+        // Configuration
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(10);
+        doc.setTextColor(37, 99, 235);
+        doc.text('CONFIGURATION', margin, y);
+        y += 5;
+        doc.setDrawColor(37, 99, 235);
+        doc.setLineWidth(0.4);
+        doc.line(margin, y, W - margin, y);
+        y += 6;
+
+        const configRows: [string, string][] = [
+            ['Offre de base', siteLabel],
+            ['Pages supplémentaires', extraPages > 0 ? `+${extraPages}` : '0'],
+            ['Upgrades', upgradesList],
+            ['Options', universalList],
+            ['Modifications illimitées', wantsUnlimited ? 'Oui — +19,90 €/mois' : 'Non'],
+            ['Délai souhaité', deadlineLabel],
+        ];
+
+        doc.setFontSize(9);
+        configRows.forEach(([label, val], i) => {
+            if (i % 2 === 0) { doc.setFillColor(248, 248, 248); doc.rect(margin, y - 4, W - margin * 2, lineH, 'F'); }
+            doc.setFont('helvetica', 'normal'); doc.setTextColor(90, 90, 90);
+            doc.text(label, margin + 3, y + 1);
+            doc.setFont('helvetica', 'bold'); doc.setTextColor(20, 20, 20);
+            const valLines = doc.splitTextToSize(val, 80);
+            doc.text(valLines[0], W - margin - 3, y + 1, { align: 'right' });
+            y += lineH;
+        });
+        y += 6;
+
+        // Pricing
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(10);
+        doc.setTextColor(37, 99, 235);
+        doc.text('TARIFICATION', margin, y);
+        y += 5;
+        doc.line(margin, y, W - margin, y);
+        y += 6;
+
+        const priceRows: [string, string][] = [
+            ['Sous-total HT', `${subtotalHT.toLocaleString('fr-FR')} €`],
+            ...(deadlineSurcharge > 0 ? [[`Supplément délai (${deadlineLabel})`, `+${deadlineSurcharge.toLocaleString('fr-FR')} €`] as [string, string]] : []),
+            ['Total HT', `${totalHT.toLocaleString('fr-FR')} €`],
+            ['TVA 20%', `${tva.toLocaleString('fr-FR')} €`],
+        ];
+
+        doc.setFontSize(9);
+        priceRows.forEach(([label, val], i) => {
+            if (i % 2 === 0) { doc.setFillColor(248, 248, 248); doc.rect(margin, y - 4, W - margin * 2, lineH, 'F'); }
+            doc.setFont('helvetica', 'normal'); doc.setTextColor(90, 90, 90);
+            doc.text(label, margin + 3, y + 1);
+            doc.setFont('helvetica', 'bold'); doc.setTextColor(20, 20, 20);
+            doc.text(val, W - margin - 3, y + 1, { align: 'right' });
+            y += lineH;
+        });
+
+        y += 3;
+        doc.setFillColor(37, 99, 235);
+        doc.roundedRect(margin, y - 3, W - margin * 2, 11, 2, 2, 'F');
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(11);
+        doc.setTextColor(255, 255, 255);
+        doc.text('TOTAL TTC ESTIMÉ', margin + 5, y + 4);
+        doc.text(`${totalTTC.toLocaleString('fr-FR')} €`, W - margin - 5, y + 4, { align: 'right' });
+        y += 16;
+
+        if (form.message) {
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(10);
+            doc.setTextColor(37, 99, 235);
+            doc.text('MESSAGE', margin, y);
+            y += 5;
+            doc.setDrawColor(37, 99, 235);
+            doc.line(margin, y, W - margin, y);
+            y += 6;
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(9);
+            doc.setTextColor(50, 50, 50);
+            const msgLines = doc.splitTextToSize(form.message, W - margin * 2 - 6);
+            doc.text(msgLines, margin + 3, y);
+        }
+
+        doc.setFontSize(8);
+        doc.setTextColor(180, 180, 180);
+        doc.text('Estimation indicative — Devis personnalisé gratuit sous 24h | contact@osiris-agency.fr', W / 2, 285, { align: 'center' });
+
+        return doc;
+    };
+
+    const handleSendQuote = async () => {
+        if (sendStatus === 'sending') return;
+        setSendStatus('sending');
+        const { siteLabel, deadlineLabel, upgradesList, universalList } = buildSummary();
+
+        // 1. Generate & auto-download PDF
+        try {
+            const doc = generatePDF();
+            doc.save(`Devis_Osiris_${form.firstName}_${form.lastName}_${new Date().toISOString().slice(0, 10)}.pdf`);
+        } catch (pdfErr) {
+            console.error('PDF error:', pdfErr);
+        }
+
+        // 2. Send email via EmailJS (or fallback to mailto)
+        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+        const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+        const emailjsConfigured = serviceId && templateId && publicKey &&
+            serviceId !== 'service_xxxxxxx' && templateId !== 'template_xxxxxxx';
+
+        if (emailjsConfigured) {
+            try {
+                await emailjs.send(serviceId, templateId, {
+                    to_email: 'antoine@osiris-agency.fr',
+                    date: new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' }),
+                    first_name: form.firstName,
+                    last_name: form.lastName,
+                    client_email: form.email,
+                    phone: form.phone || '—',
+                    site_type: siteLabel,
+                    base_price: `${(SITE_TYPES.find(s => s.id === siteType)?.price ?? 0).toLocaleString('fr-FR')} €`,
+                    extra_pages: extraPages > 0 ? `+${extraPages}` : '0',
+                    upgrades: upgradesList,
+                    options: universalList,
+                    unlimited_mods: wantsUnlimited ? 'Oui — +19,90 €/mois' : 'Non',
+                    deadline: deadlineLabel,
+                    subtotal_ht: `${subtotalHT.toLocaleString('fr-FR')} €`,
+                    deadline_surcharge: deadlineSurcharge > 0 ? `+${deadlineSurcharge.toLocaleString('fr-FR')} €` : '0 €',
+                    total_ht: `${totalHT.toLocaleString('fr-FR')} €`,
+                    tva: `${tva.toLocaleString('fr-FR')} €`,
+                    total_ttc: `${totalTTC.toLocaleString('fr-FR')} €`,
+                    message: form.message || '—',
+                    reply_to: form.email,
+                }, { publicKey });
+                setSendStatus('success');
+            } catch (err) {
+                console.error('EmailJS error:', err);
+                setSendStatus('error');
+            }
+        } else {
+            // Fallback: ouvre le client mail avec les infos pré-remplies
+            const body = encodeURIComponent(
+                `Prénom : ${form.firstName}\nNom : ${form.lastName}\nEmail : ${form.email}\nTéléphone : ${form.phone}\n\n` +
+                `Offre : ${siteLabel}\nUpgrades : ${upgradesList}\nOptions : ${universalList}\nDélai : ${deadlineLabel}\n\n` +
+                `Total TTC : ${totalTTC.toLocaleString('fr-FR')} €\n\nMessage : ${form.message}`
+            );
+            window.location.href = `mailto:antoine@osiris-agency.fr?subject=${encodeURIComponent(`Devis Osiris — ${siteLabel}`)}&body=${body}`;
+            setSendStatus('success');
+        }
     };
 
     const STEPS = ['Offre', 'Pages', 'Upgrade', 'Options', 'Délai', 'Récap'];
@@ -539,11 +722,30 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                                 className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#2563EB] focus:shadow-[0_0_0_3px_rgba(37,99,235,0.15)] transition-all duration-200 resize-none mb-5"
                             />
                             <a
-                                href={buildMailto()}
-                                className="w-full h-12 flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] text-white text-sm font-bold uppercase tracking-widest hover:brightness-110 hover:shadow-[0_0_24px_rgba(37,99,235,0.4)] transition-all duration-200"
+                                href={buildSummary().siteLabel ? '#' : undefined}
+                                onClick={e => { e.preventDefault(); if (form.firstName && form.email) handleSendQuote(); }}
+                                className={`w-full h-12 flex items-center justify-center gap-2 rounded-xl text-white text-sm font-bold uppercase tracking-widest transition-all duration-200 ${
+                                    sendStatus === 'sending'
+                                        ? 'bg-[#2563EB]/60 cursor-wait'
+                                        : sendStatus === 'success'
+                                        ? 'bg-emerald-600 hover:bg-emerald-500'
+                                        : sendStatus === 'error'
+                                        ? 'bg-red-600 hover:bg-red-500'
+                                        : 'bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] hover:brightness-110 hover:shadow-[0_0_24px_rgba(37,99,235,0.4)]'
+                                }`}
                             >
-                                Envoyer ma demande
-                                <ArrowRight className="w-4 h-4" />
+                                {sendStatus === 'sending' && (
+                                    <><span className="animate-pulse">Envoi en cours…</span></>
+                                )}
+                                {sendStatus === 'success' && (
+                                    <><Check className="w-4 h-4" /> Envoyé — PDF téléchargé !</>
+                                )}
+                                {sendStatus === 'error' && (
+                                    <>Erreur — réessayez</>
+                                )}
+                                {sendStatus === 'idle' && (
+                                    <>Envoyer ma demande & télécharger le PDF<ArrowRight className="w-4 h-4" /></>
+                                )}
                             </a>
                         </div>
                     )}
@@ -1135,17 +1337,6 @@ export const PricingPage: React.FC = () => {
                         ))}
                     </div>
 
-                    {/* Secondary CTA */}
-                    <div className="flex justify-center mt-4 mb-10">
-                        <button
-                            onClick={() => scrollToConfigurator('')}
-                            className="flex items-center gap-2 text-white/40 hover:text-premium-green transition-colors text-sm font-medium"
-                        >
-                            <Calculator className="w-4 h-4" />
-                            <span className="underline decoration-dotted underline-offset-4">Configurer mon devis sur-mesure</span>
-                        </button>
-                    </div>
-
                     {/* ── Configurateur de devis ── */}
                     <motion.div
                         id="configurateur"
@@ -1156,7 +1347,7 @@ export const PricingPage: React.FC = () => {
                         className="mb-32"
                     >
                         <div className="text-center mb-12">
-                            <span className="text-premium-green text-[10px] font-bold uppercase tracking-[0.2em] mb-4 block">Configurateur</span>
+                            <span className="text-premium-green text-2xl sm:text-3xl font-black uppercase tracking-[0.15em] mb-4 block">Configurateur</span>
                             <h2 className="text-3xl sm:text-5xl font-black font-display text-white mb-4 tracking-tight flex items-center justify-center gap-4">
                                 <Calculator className="w-8 h-8 text-premium-green" />
                                 Estimez votre projet

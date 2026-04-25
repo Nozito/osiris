@@ -725,3 +725,47 @@ img[loading="lazy"] {
     display: none;
   }
 }
+
+/* === ABOUT PAGE RESPONSIVE === */
+@media (max-width: 640px) {
+  /* Founder cards: stack photo on top, full width */
+  .about-founder-photo {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+  }
+
+  /* Stats bar: shrink text */
+  .about-stats-value {
+    font-size: 1.25rem;
+  }
+}
+
+/* === CONTACT PAGE RESPONSIVE === */
+@media (max-width: 640px) {
+  /* Reduce contact page header on very small screens */
+  .contact-page-title {
+    font-size: clamp(1.6rem, 7vw, 2.5rem);
+  }
+
+  /* Contact info cards: tighten */
+  .contact-info-card {
+    padding: 0.875rem;
+  }
+}
+
+/* === GLOBAL MOBILE POLISH === */
+@media (max-width: 768px) {
+  /* Ensure all page wrappers don't overflow */
+  .page-wrapper,
+  [class*="max-w-6xl"],
+  [class*="max-w-7xl"] {
+    overflow-x: hidden;
+  }
+
+  /* Tighter section spacing on mobile */
+  main section {
+    padding-top: clamp(40px, 5vw, 64px);
+    padding-bottom: clamp(40px, 5vw, 64px);
+  }
+}
+

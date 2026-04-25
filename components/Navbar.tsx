@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { Mail, Home, DollarSign, Users, Zap, X, ArrowRight } from 'lucide-react';
 
@@ -9,6 +9,7 @@ export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
   const location = useLocation();
+  const navigate = useNavigate();
   const { language, setLanguage, t } = useLanguage();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -26,8 +27,17 @@ export const Navbar: React.FC = () => {
     setMobileMenuOpen(false);
   };
 
-  const handleAuditNavClick = () => {
+  const handleAuditNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
     setMobileMenuOpen(false);
+    if (location.pathname === '/') {
+      const target = document.querySelector('#audit');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      navigate('/', { state: { scrollToAudit: true } });
+    }
   };
 
   const menuItems = [

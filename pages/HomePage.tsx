@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Hero } from '../components/Hero';
 import { SocialProofBar } from '../components/SocialProofBar';
-import { ValueTrifecta } from '../components/ValueTrifecta';
+import { ProcessTimeline } from '../components/ProcessTimeline';
 import { Process } from '../components/Process';
 import { Offer } from '../components/Offer';
 import { Contact } from '../components/Contact';
@@ -12,6 +13,24 @@ import { useLanguage } from '../context/LanguageContext';
 
 export const HomePage: React.FC = () => {
     const { language } = useLanguage();
+    const location = useLocation();
+
+    useEffect(() => {
+        if ((location.state as { scrollToAudit?: boolean } | null)?.scrollToAudit) {
+            // Clear the state so back-navigation doesn't re-trigger
+            window.history.replaceState({}, '');
+            const tryScroll = () => {
+                const target = document.querySelector('#audit');
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    // Element not yet in DOM (lazy-loaded section), retry
+                    requestAnimationFrame(tryScroll);
+                }
+            };
+            requestAnimationFrame(tryScroll);
+        }
+    }, [location.state]);
 
     return (
         <>
@@ -38,7 +57,7 @@ export const HomePage: React.FC = () => {
             />
             <Hero />
             <SocialProofBar />
-            <ValueTrifecta />
+            <ProcessTimeline />
             <Process />
             <Offer />
             {/* Section Audit Gratuit — juste avant Contact (logique narrative) */}
