@@ -216,11 +216,10 @@ export const en = {
         badge: "Join the +40 companies that chose digital excellence"
     },
 
-    // Process
     process: {
         sectionLabel: "Our Method",
         title: "4 Steps to",
-        titleFaded: "Performance.",
+        titleFaded: "Performance",
         subtitle: "A proven process to transform your vision into measurable results.",
         badge: "⏱️ Average delivery: 4-6 weeks for a premium showcase site",
         steps: {

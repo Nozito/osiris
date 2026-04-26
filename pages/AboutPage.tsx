@@ -88,7 +88,7 @@ export const AboutPage: React.FC = () => {
             <div className="inline-flex items-center gap-2 mb-3 px-3 py-1 rounded-full border border-premium-green/30 bg-premium-green/10">
               <span className="w-1.5 h-1.5 rounded-full bg-premium-green animate-pulse" />
               <span className="text-premium-green text-[10px] font-black uppercase tracking-[0.2em]">
-                {isFr ? 'Agence fondée en 2024' : 'Founded in 2024'}
+                {isFr ? 'Agence fondée en 2025' : 'Founded in 2025'}
               </span>
             </div>
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-black font-display tracking-tight text-white mb-3 leading-tight">

@@ -216,11 +216,10 @@ export const fr = {
         badge: "Rejoignez les +40 entreprises qui ont choisi l'excellence digitale"
     },
 
-    // Process
     process: {
         sectionLabel: "Notre Méthode",
         title: "4 Étapes vers",
-        titleFaded: "la Performance.",
+        titleFaded: "la Performance",
         subtitle: "Un process éprouvé pour transformer votre vision en résultats mesurables.",
         badge: "⏱️ Livraison moyenne : 4-6 semaines pour un site vitrine premium",
         steps: {

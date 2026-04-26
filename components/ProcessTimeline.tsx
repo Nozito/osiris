@@ -798,12 +798,12 @@ export const ProcessTimeline: React.FC = () => {
       <section className="os-tl" ref={sectionRef}>
 
         <div className="os-tl-hdr">
-          <div className="os-tl-tag" id="osTlTag">// Process</div>
+          <div className="os-tl-tag" id="osTlTag" style={{ display: 'none' }}></div>
           <h2 className="os-tl-title" id="osTlTitle">
             Comment on crée<br /><em>votre site web</em>
           </h2>
           <p className="os-tl-sub" id="osTlSub">
-            De l'idée à la mise en ligne — simple, rapide, transparent.
+            De l'idée à la mise en ligne — simple, rapide, transparent
           </p>
         </div>
 
