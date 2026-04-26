@@ -94,7 +94,7 @@ export const AboutPage: React.FC = () => {
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-black font-display tracking-tight text-white mb-3 leading-tight">
               {isFr ? "L'agence derriere votre projet" : 'The agency behind your project'}
             </h1>
-            <p className="text-gray-400 mx-auto" style={{ fontSize: '18px', lineHeight: '1.7', maxWidth: '640px' }}>
+            <p className="text-gray-400 mx-auto" style={{ fontSize: 'clamp(14px, 4vw, 18px)', lineHeight: '1.7', maxWidth: '640px' }}>
               {isFr
                 ? 'Pas une agence anonyme. Deux passionnes avec un seul objectif : faire de votre site votre meilleur commercial.'
                 : 'Not an anonymous agency. Two passionate experts with one goal: make your website your best salesperson.'}
@@ -107,7 +107,7 @@ export const AboutPage: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.15 }}
               className="flex items-center border border-white/8 rounded-full bg-white/[0.02] overflow-hidden mx-auto"
-              style={{ maxWidth: '560px', height: '52px', paddingInline: '32px', marginBottom: '64px', width: 'fit-content' }}
+              style={{ maxWidth: '560px', paddingInline: 'clamp(12px, 3.5vw, 32px)', paddingBlock: 'clamp(10px, 1.8vw, 14px)', marginBottom: 'clamp(32px, 7vw, 64px)', width: 'fit-content' }}
             >
               {[
                 { value: '+30', label: isFr ? 'projets livrés' : 'projects' },
@@ -115,10 +115,10 @@ export const AboutPage: React.FC = () => {
                 { value: '100%', label: isFr ? 'satisfaction' : 'satisfaction' },
               ].map((stat, i) => (
                 <React.Fragment key={i}>
-                  {i > 0 && <div className="w-px self-stretch bg-white/10 flex-shrink-0" style={{ margin: '0 32px' }} />}
-                  <div className="flex items-center gap-2">
-                    <span className="font-black font-display leading-none" style={{ color: '#C9A84C', fontSize: '15px', textShadow: '0 0 12px rgba(201,168,76,0.7), 0 0 28px rgba(201,168,76,0.35)' }}>{stat.value}</span>
-                    <span className="text-gray-500 uppercase tracking-widest font-semibold" style={{ fontSize: '13px' }}>{stat.label}</span>
+                  {i > 0 && <div className="w-px self-stretch bg-white/10 flex-shrink-0" style={{ marginInline: 'clamp(10px, 2.5vw, 32px)' }} />}
+                  <div className="flex flex-col items-center gap-0.5">
+                    <span className="font-black font-display leading-none" style={{ color: '#C9A84C', fontSize: 'clamp(11px, 3.5vw, 15px)', textShadow: '0 0 12px rgba(201,168,76,0.7), 0 0 28px rgba(201,168,76,0.35)' }}>{stat.value}</span>
+                    <span className="text-gray-500 uppercase font-semibold" style={{ fontSize: 'clamp(8px, 2.2vw, 13px)', letterSpacing: 'clamp(0.04em, 0.3vw, 0.16em)' }}>{stat.label}</span>
                   </div>
                 </React.Fragment>
               ))}
@@ -142,7 +142,7 @@ export const AboutPage: React.FC = () => {
                   <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-premium-green/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
 
                   {/* Photo — full-width, tall */}
-                  <div className="relative overflow-hidden" style={{ height: '320px' }}>
+                  <div className="about-founder-photo relative overflow-hidden" style={{ height: '320px' }}>
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/70 z-[1] pointer-events-none" />
                     <picture>
                       <source type="image/webp" srcSet={`${founder.imageWebp} 1200w`} sizes="(max-width: 768px) 100vw, 50vw" />

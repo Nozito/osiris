@@ -85,20 +85,34 @@ export default function App() {
 
   useEffect(() => {
     if (location.pathname === '/' && location.hash === '#audit') {
-      const scrollToTarget = () => {
-        const target = document.querySelector('#audit') || document.querySelector('#contact');
+      // Only scroll if this was a deliberate navigation (state flag set by Navbar),
+      // not a page refresh where the hash happens to be in the URL.
+      if (!location.state?.scrollToAudit) {
+        // Clean the hash without scrolling
+        window.history.replaceState({}, '', '/');
+        return;
+      }
+
+      let frameId: number;
+      let attempts = 0;
+      const MAX_ATTEMPTS = 120; // ~2s at 60fps
+
+      const tryScroll = () => {
+        const target = document.querySelector('#audit');
         if (target) {
           target.scrollIntoView({ behavior: 'smooth' });
+        } else if (attempts++ < MAX_ATTEMPTS) {
+          frameId = requestAnimationFrame(tryScroll);
         }
       };
 
-      const timeout = window.setTimeout(scrollToTarget, 120);
-      return () => window.clearTimeout(timeout);
+      frameId = requestAnimationFrame(tryScroll);
+      return () => cancelAnimationFrame(frameId);
     }
   }, [location.pathname, location.hash]);
 
   return (
-    <div className="relative min-h-screen bg-[#0B0B0B] text-white overflow-hidden font-sans" id="app-root">
+    <div className="relative min-h-screen bg-[#0B0B0B] text-white overflow-x-hidden font-sans" id="app-root">
       {/* === GLOBAL BACKGROUND LAYERS === */}
 
       {/* 1. Base Gradient & Animated Orbs */}

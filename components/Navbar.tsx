@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
-import { Mail, Home, DollarSign, Users, Zap, X, ArrowRight } from 'lucide-react';
+import { Mail, Home, DollarSign, Users, X, ArrowRight } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const [hidden, setHidden] = useState(false);
@@ -36,7 +36,7 @@ export const Navbar: React.FC = () => {
         target.scrollIntoView({ behavior: 'smooth' });
       }
     } else {
-      navigate('/', { state: { scrollToAudit: true } });
+      navigate('/#audit', { state: { scrollToAudit: true } });
     }
   };
 
@@ -144,136 +144,151 @@ export const Navbar: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
+            transition={{ duration: 0.3 }}
             className="fixed inset-0 z-[200] md:hidden"
             onClick={() => setMobileMenuOpen(false)}
           >
             {/* Backdrop */}
-            <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-xl" />
 
             {/* Panel slides from top */}
             <motion.div
-              initial={{ y: '-100%' }}
+              initial={{ y: '-105%' }}
               animate={{ y: 0 }}
-              exit={{ y: '-100%' }}
-              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              exit={{ y: '-105%' }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               onClick={(e) => e.stopPropagation()}
-              className="absolute top-0 left-0 right-0 bg-[#0B0F1A] border-b border-premium-green/20 shadow-[0_30px_80px_rgba(0,0,0,0.95)] pt-24 pb-8 px-5 overflow-hidden"
+              className="absolute top-0 left-0 right-0 overflow-hidden"
+              style={{
+                background: 'linear-gradient(180deg, rgba(3,4,10,0.97) 0%, rgba(5,7,16,0.93) 100%)',
+                backdropFilter: 'blur(48px) saturate(2)',
+                WebkitBackdropFilter: 'blur(48px) saturate(2)',
+                borderBottom: '1px solid rgba(255,255,255,0.06)',
+                boxShadow: '0 40px 100px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.03)',
+              }}
             >
-              {/* Top green line */}
-              <div className="absolute inset-x-0 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-premium-green to-transparent"></div>
-              {/* Ambient glow blob */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-60 h-32 bg-premium-green/8 blur-[60px] rounded-full pointer-events-none"></div>
+              {/* Top accent line — gradient vert */}
+              <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-premium-green to-transparent opacity-80" />
+              {/* Ambient glow haut-centre */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-56 rounded-full pointer-events-none" style={{ background: 'radial-gradient(ellipse, rgba(37,99,235,0.12) 0%, transparent 70%)' }} />
+              {/* Glow vert bas-gauche */}
+              <div className="absolute bottom-10 -left-8 w-48 h-48 rounded-full pointer-events-none" style={{ background: 'radial-gradient(ellipse, rgba(34,197,94,0.07) 0%, transparent 70%)' }} />
 
-              {/* Header — branding + close */}
-              <div className="flex items-center justify-between mb-7 px-1">
-                <div className="flex items-center gap-2.5">
-                  <span className="font-black font-display text-white tracking-tighter text-lg leading-none">
-                    OSIRIS<span className="text-premium-green text-xs">.</span>
-                  </span>
-                  <span className="h-3.5 w-px bg-white/15"></span>
-                  <span className="text-[9px] text-gray-500 uppercase tracking-[0.2em] font-bold">Menu</span>
+              <div className="pt-24 pb-7 px-5">
+
+                {/* Header */}
+                <div className="flex items-center justify-between mb-8">
+                  <div>
+                    <span className="font-black font-display text-white tracking-tighter text-xl leading-none block">
+                      OSIRIS<span className="text-premium-green">.</span>
+                    </span>
+                    <span className="text-[10px] text-white/30 uppercase tracking-[0.22em] font-semibold mt-0.5 block">Navigation</span>
+                  </div>
+                  <button
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="w-10 h-10 rounded-2xl bg-white/[0.05] border border-white/10 flex items-center justify-center hover:bg-white/10 hover:border-white/25 hover:scale-105 transition-all duration-200 active:scale-95"
+                    aria-label="Fermer"
+                  >
+                    <X className="w-4 h-4 text-white/60" />
+                  </button>
                 </div>
-                <button
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="w-9 h-9 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center hover:bg-white/10 hover:border-white/25 transition-all duration-200"
-                  aria-label="Fermer"
-                >
-                  <X className="w-4 h-4 text-gray-300" />
-                </button>
-              </div>
 
-              {/* Menu items with stagger */}
-              <nav className="relative flex flex-col gap-2 mb-6">
-                {menuItems.map((item, index) => {
-                  const Icon = item.icon;
-                  const isActive = location.pathname === item.to;
-                  return (
-                    <motion.div
-                      key={item.to}
-                      initial={{ opacity: 0, x: -24 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.12 + index * 0.065, duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                    >
-                      <Link
-                        to={item.to}
-                        onClick={handleNavClick}
-                        className={`group flex items-center gap-3.5 px-3.5 py-3.5 rounded-2xl border backdrop-blur-md transition-all duration-300 ${
-                          isActive
-                            ? 'bg-gradient-to-r from-premium-green/20 to-premium-green/5 border-premium-green/35 text-premium-green shadow-[0_0_30px_rgba(37,99,235,0.14)]'
-                            : 'border-white/[0.08] bg-white/[0.03] text-white/80 hover:bg-white/[0.07] hover:border-white/25 hover:text-white'
-                        }`}
+                {/* Menu items */}
+                <nav className="flex flex-col mb-5">
+                  {menuItems.map((item, index) => {
+                    const isActive = location.pathname === item.to;
+                    return (
+                      <motion.div
+                        key={item.to}
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.04 + index * 0.03, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                       >
-                        <div className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-200 ${
-                          isActive ? 'bg-premium-green/25' : 'bg-white/[0.07] group-hover:bg-white/15'
-                        }`}>
-                          <Icon className={`w-[18px] h-[18px] transition-colors duration-200 ${
-                            isActive ? 'text-premium-green' : 'text-gray-400 group-hover:text-white'
-                          }`} />
-                        </div>
-                        <span className="font-semibold text-[15px] flex-1">{item.label}</span>
-                        <ArrowRight className={`w-4 h-4 transition-all duration-200 ${
-                          isActive
-                            ? 'opacity-100 text-premium-green'
-                            : 'opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0'
-                        }`} />
-                      </Link>
-                    </motion.div>
-                  );
-                })}
+                        <Link
+                          to={item.to}
+                          onClick={handleNavClick}
+                          className={`group relative flex justify-center items-center py-4 transition-all duration-300 active:scale-[0.98] ${
+                            isActive ? 'text-white' : 'text-white/45 hover:text-white'
+                          }`}
+                        >
+                          <span className={`font-bold text-[22px] tracking-tight transition-colors duration-200 ${
+                            isActive ? 'text-white' : ''
+                          }`}>{item.label}</span>
+                          {isActive && (
+                            <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-6 h-[2px] rounded-full bg-premium-green shadow-[0_0_8px_rgba(34,197,94,0.7)]" />
+                          )}
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
+                </nav>
+
+                {/* Divider */}
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="flex-1 h-px bg-white/[0.06]" />
+                  <span className="text-[9px] text-white/20 uppercase tracking-[0.2em] font-bold">Offre</span>
+                  <div className="flex-1 h-px bg-white/[0.06]" />
+                </div>
 
                 {/* Audit Gratuit */}
                 <motion.div
-                  initial={{ opacity: 0, x: -24 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.12 + menuItems.length * 0.065, duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.04 + menuItems.length * 0.03, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  className="mb-5"
                 >
                   <a
                     href="/#audit"
                     onClick={handleAuditNavClick}
-                    className="group flex items-center gap-3.5 px-3.5 py-3.5 rounded-2xl border border-premium-green/30 bg-gradient-to-r from-premium-green/[0.16] via-premium-green/[0.08] to-transparent text-premium-green hover:border-premium-green/50 transition-all duration-300 shadow-[0_0_24px_rgba(37,99,235,0.12)]"
+                    className="group flex flex-col items-center py-4 active:scale-[0.98] transition-all duration-300"
                   >
-                    <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 bg-premium-green/15">
-                      <Zap className="w-[18px] h-[18px] text-premium-green" />
-                    </div>
-                    <span className="font-bold text-[15px] flex-1">{t.navbar.auditGratuit}</span>
-                    <span className="text-[9px] bg-premium-green text-white font-black px-2 py-0.5 rounded-full uppercase tracking-wider">Offert</span>
+                    <div className="text-[10px] text-premium-green/60 uppercase tracking-[0.18em] font-bold mb-1">Sans engagement</div>
+                    <div className="text-premium-green font-bold text-[22px] tracking-tight mb-2">{t.navbar.auditGratuit}</div>
+                    <span className="text-[9px] bg-premium-green text-black font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-[0_0_16px_rgba(34,197,94,0.4)]">
+                      Offert
+                    </span>
                   </a>
                 </motion.div>
-              </nav>
 
-              {/* Bottom CTA */}
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.42, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="mb-6"
-              >
-                <Link
-                  to="/contact"
-                  onClick={handleNavClick}
-                  className="flex items-center justify-center gap-2.5 w-full py-4 rounded-2xl bg-premium-green text-white font-black text-[13px] uppercase tracking-widest hover:bg-blue-700 transition-colors duration-300 shadow-[0_0_30px_rgba(37,99,235,0.25)]"
+                {/* CTA principal */}
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.18, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  className="mb-6"
                 >
-                  Démarrer un projet
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </motion.div>
+                  <Link
+                    to="/contact"
+                    onClick={handleNavClick}
+                    className="group relative flex items-center justify-center gap-2.5 w-full py-4 rounded-2xl overflow-hidden font-black text-[13px] uppercase tracking-widest text-white transition-all duration-300 active:scale-[0.98]"
+                    style={{ background: 'linear-gradient(135deg, #1d4ed8 0%, #2563eb 50%, #3b82f6 100%)', boxShadow: '0 8px 32px rgba(37,99,235,0.35), 0 1px 0 rgba(255,255,255,0.1) inset' }}
+                  >
+                    <span className="relative z-10">Démarrer un projet</span>
+                    <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+                    {/* Hover shimmer */}
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)' }} />
+                  </Link>
+                </motion.div>
 
-              {/* Language switcher */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.3 }}
-                className="flex items-center justify-between pt-5 px-1 border-t border-white/[0.07]"
-              >
-                <div className="flex items-center gap-3">
-                  <span className="text-[9px] text-gray-500 uppercase tracking-[0.2em] font-bold">Langue</span>
-                  <button type="button" onClick={() => setLanguage('fr')} className={`lang-btn ${language === 'fr' ? 'lang-active' : ''}`}>FR</button>
-                  <span className="lang-separator">|</span>
-                  <button type="button" onClick={() => setLanguage('en')} className={`lang-btn ${language === 'en' ? 'lang-active' : ''}`}>EN</button>
-                </div>
-                <span className="text-[9px] text-gray-600 font-mono">osiris-web.com</span>
-              </motion.div>
+                {/* Footer */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.24, duration: 0.25 }}
+                  className="flex items-center justify-between pt-4 border-t border-white/[0.05]"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-1.5 h-1.5 rounded-full bg-premium-green animate-pulse shadow-[0_0_6px_rgba(34,197,94,0.8)]" />
+                    <span className="text-[10px] text-white/25 font-medium">Disponible maintenant</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button type="button" onClick={() => setLanguage('fr')} className={`lang-btn ${language === 'fr' ? 'lang-active' : ''}`}>FR</button>
+                    <span className="lang-separator">|</span>
+                    <button type="button" onClick={() => setLanguage('en')} className={`lang-btn ${language === 'en' ? 'lang-active' : ''}`}>EN</button>
+                  </div>
+                </motion.div>
+
+              </div>
             </motion.div>
           </motion.div>
         )}

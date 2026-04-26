@@ -101,20 +101,18 @@ const CSS = `
   }
   .os-tl-sub.vis { opacity: 1; transform: translateY(0); }
 
+  /* ── Vertical layout hidden by default (shown in mobile media query) ── */
+  .os-tl-vert { display: none; }
+
   /* ── Track ── */
   .os-tl-wrap {
     width: 100%;
-    overflow-x: auto;
-    padding: 0 72px;
-    scrollbar-width: none;
-    /* fade edges */
-    mask-image: linear-gradient(90deg, transparent 0%, black 4%, black 96%, transparent 100%);
-    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 4%, black 96%, transparent 100%);
+    overflow-x: hidden;
+    padding: 0 48px;
   }
-  .os-tl-wrap::-webkit-scrollbar { display: none; }
   .os-tl-track {
     position: relative;
-    min-width: 960px;
+    min-width: 880px;
     height: 500px;
   }
 
@@ -455,16 +453,186 @@ const CSS = `
     transform: translateY(-1px);
   }
 
-  @media (max-width: 860px) {
-    .os-tl-wrap { padding: 0 24px; }
-    .os-tl-pill-desc, .os-tl-status, .os-tl-dur { display: none; }
+  /* ─────────────────────────────────────
+     MOBILE + TABLET VERTICAL TIMELINE (≤ 1024px)
+     ───────────────────────────────────── */
+  @media (max-width: 1024px) {
+    /* Hide the horizontal scroll track entirely */
+    .os-tl-wrap { display: none !important; }
+
+    /* ── Outer container ── */
+    .os-tl-vert {
+      display: flex;
+      flex-direction: column;
+      padding: 0 10px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Background vertical line — centred */
+    .os-tl-vert::before {
+      content: '';
+      position: absolute;
+      left: 50%; top: 0; bottom: 0;
+      width: 2px;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.06);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Animated fill overlay on the center line */
+    .os-tl-vert-fill-track {
+      position: absolute;
+      left: 50%; top: 0;
+      width: 2px;
+      height: 0%;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, #1e3a6e 0%, #2563eb 40%, #3b82f6 70%, #93c5fd 100%);
+      box-shadow: 0 0 14px rgba(59,130,246,0.6), 0 0 4px rgba(59,130,246,0.9);
+      border-radius: 0 0 2px 2px;
+      transition: height 0.85s cubic-bezier(0.45,0,0.55,1);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* ── Step row: 3-column grid  left | center-node | right ── */
+    .os-tl-vert-step {
+      display: grid;
+      grid-template-columns: 1fr 48px 1fr;
+      align-items: center;
+      min-height: 90px;
+      padding: 10px 0;
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    /* Slide from the side on entry */
+    .os-tl-vert-step-right { transform: translateX(28px); }
+    .os-tl-vert-step-left  { transform: translateX(-28px); }
+    .os-tl-vert-step.vis   { opacity: 1; transform: translateX(0); }
+
+    /* ── Icon node centred on line ── */
+    .os-tl-vert-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 3;
+    }
+    .os-tl-vert-node {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0d1117, #141c2e);
+      border: 1.5px solid rgba(59,130,246,0.45);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      box-shadow:
+        0 0 0 5px rgba(37,99,235,0.09),
+        0 0 18px rgba(37,99,235,0.35),
+        0 4px 16px rgba(0,0,0,0.7);
+      flex-shrink: 0;
+    }
+
+    /* ── Card sides ── */
+    .os-tl-vert-side {
+      display: flex;
+      align-items: center;
+    }
+    .os-tl-vert-side-left  { justify-content: flex-end;   padding-right: 10px; }
+    .os-tl-vert-side-right { justify-content: flex-start;  padding-left: 10px; }
+
+    /* ── Info card ── */
+    .os-tl-vert-card {
+      width: 100%;
+      background: rgba(10,13,24,0.88);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 12px;
+      padding: 13px 14px 12px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.04);
+      position: relative;
+      overflow: hidden;
+    }
+    /* Blue accent bar — left for right-side cards, right for left-side cards */
+    .os-tl-vert-step-right .os-tl-vert-card::before {
+      content: '';
+      position: absolute; left: 0; top: 18%; bottom: 18%;
+      width: 2.5px;
+      background: linear-gradient(180deg, #3b82f6, #1d4ed8);
+      border-radius: 0 2px 2px 0;
+    }
+    .os-tl-vert-step-left .os-tl-vert-card::before {
+      content: '';
+      position: absolute; right: 0; top: 18%; bottom: 18%;
+      width: 2.5px;
+      background: linear-gradient(180deg, #3b82f6, #1d4ed8);
+      border-radius: 2px 0 0 2px;
+    }
+
+    /* Short connector between node and card edge */
+    .os-tl-vert-connector {
+      display: none; /* handled by padding gaps */
+    }
+
+    /* ── Text inside cards ── */
+    .os-tl-vert-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px; font-weight: 700;
+      color: #93c5fd;
+      letter-spacing: 0.03em;
+      line-height: 1.2;
+      margin-bottom: 5px;
+    }
+    .os-tl-vert-desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.55;
+      margin-bottom: 7px;
+    }
+    .os-tl-vert-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .os-tl-vert-status {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: rgba(96,165,250,0.65);
+      letter-spacing: 0.06em;
+    }
+    .os-tl-vert-dur {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: rgba(255,255,255,0.28);
+      letter-spacing: 0.04em;
+    }
+    .os-tl-vert-chk {
+      margin-left: auto;
+      width: 17px; height: 17px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      box-shadow: 0 0 10px rgba(37,99,235,0.75);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .os-tl-vert-chk svg {
+      width: 9px; height: 9px;
+      stroke: #fff; fill: none;
+      stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+    }
   }
 `;
 
 export const ProcessTimeline: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const vertRef = useRef<HTMLDivElement>(null);
   const animatedRef = useRef(false);
+  const vertAnimatedRef = useRef(false);
 
   const buildTrack = () => {
     const track = trackRef.current;
@@ -571,6 +739,7 @@ export const ProcessTimeline: React.FC = () => {
   useEffect(() => {
     buildTrack();
 
+    // ── Horizontal animation (desktop) ──
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (!entry.isIntersecting || animatedRef.current) return;
@@ -582,11 +751,41 @@ export const ProcessTimeline: React.FC = () => {
 
     if (sectionRef.current) obs.observe(sectionRef.current);
 
+    // ── Vertical animation (mobile) ──
+    const vertObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting || vertAnimatedRef.current) return;
+        if (window.innerWidth > 1024) return;
+        vertAnimatedRef.current = true;
+        vertObs.disconnect();
+
+        const vert = vertRef.current;
+        if (!vert) return;
+        const fill = vert.querySelector('.os-tl-vert-fill-track') as HTMLElement | null;
+        const steps = Array.from(vert.querySelectorAll('.os-tl-vert-step')) as HTMLElement[];
+        const cta = document.querySelector('#osTlCta') as HTMLElement | null;
+        const totalSteps = steps.length;
+
+        steps.forEach((step, i) => {
+          const delay = 400 + i * 560;
+          setTimeout(() => {
+            step.classList.add('vis');
+            if (fill) fill.style.height = `${((i + 1) / totalSteps) * 100}%`;
+            // Show CTA at the same time as the last step
+            if (i === totalSteps - 1 && cta) cta.classList.add('vis');
+          }, delay);
+        });
+      });
+    }, { threshold: 0.05 });
+
+    if (vertRef.current) vertObs.observe(vertRef.current);
+
     const handleResize = () => buildTrack();
     window.addEventListener('resize', handleResize);
 
     return () => {
       obs.disconnect();
+      vertObs.disconnect();
       window.removeEventListener('resize', handleResize);
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -624,6 +823,48 @@ export const ProcessTimeline: React.FC = () => {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* ── MOBILE VERTICAL TIMELINE ── */}
+        <div className="os-tl-vert" ref={vertRef}>
+          {/* Animated center fill line */}
+          <div className="os-tl-vert-fill-track" />
+
+          {OS_STEPS.map((s, i) => {
+            const isRight = i % 2 === 0; // even → card on right, odd → card on left
+            const sideClass = isRight ? 'os-tl-vert-step-right' : 'os-tl-vert-step-left';
+            const card = (
+              <div className="os-tl-vert-card">
+                <div className="os-tl-vert-name">{s.name}</div>
+                <div className="os-tl-vert-desc">{s.desc}</div>
+                <div className="os-tl-vert-meta">
+                  <span className="os-tl-vert-status">{s.status}</span>
+                  <span className="os-tl-vert-dur">{s.dur}</span>
+                  {s.done && (
+                    <div className="os-tl-vert-chk">
+                      <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+            return (
+              <div className={`os-tl-vert-step ${sideClass}`} key={i}>
+                {/* Left cell */}
+                <div className="os-tl-vert-side os-tl-vert-side-left">
+                  {!isRight && card}
+                </div>
+                {/* Center node */}
+                <div className="os-tl-vert-center">
+                  <div className="os-tl-vert-node">{s.icon}</div>
+                </div>
+                {/* Right cell */}
+                <div className="os-tl-vert-side os-tl-vert-side-right">
+                  {isRight && card}
+                </div>
+              </div>
+            );
+          })}
         </div>
 
         <div className="os-tl-cta" id="osTlCta">

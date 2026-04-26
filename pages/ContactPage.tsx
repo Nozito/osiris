@@ -59,7 +59,7 @@ export const ContactPage: React.FC = () => {
                             {t.common.backToHome}
                         </Link>
 
-                        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
                             <div>
                                 <div className="inline-flex items-center gap-2 mb-3 px-3 py-1 rounded-full border border-premium-green/30 bg-premium-green/10">
                                     <span className="w-1.5 h-1.5 rounded-full bg-premium-green animate-pulse" />
@@ -72,7 +72,7 @@ export const ContactPage: React.FC = () => {
                                     </span>
                                 </h1>
                             </div>
-                            <p className="text-gray-400 text-sm leading-relaxed sm:text-right sm:max-w-xs border-l-2 sm:border-l-0 sm:border-r-2 border-premium-green/30 pl-4 sm:pl-0 sm:pr-4">
+                            <p className="text-gray-400 text-sm leading-relaxed sm:text-right sm:max-w-xs border-l-2 sm:border-l-0 sm:border-r-2 border-premium-green/30 pl-3 sm:pl-0 sm:pr-4 text-xs sm:text-sm">
                                 {t.contactPage.subtitle}<br />
                                 <span className="text-white font-medium">{t.contactPage.subtitleHighlight}</span>
                             </p>
@@ -82,42 +82,45 @@ export const ContactPage: React.FC = () => {
                     {/* Main Grid */}
                     <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
 
-                        {/* Left: Info Cards */}
+                        {/* Left: Info Cards — order-2 on mobile (form first) */}
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.2, duration: 0.6 }}
-                            className="lg:col-span-2 flex flex-col gap-4"
+                            className="lg:col-span-2 order-2 lg:order-1 grid grid-cols-1 sm:grid-cols-1 gap-3 lg:flex lg:flex-col lg:gap-4"
                         >
-                            <div className="group p-5 rounded-2xl bg-white/[0.03] border border-white/8 hover:border-premium-green/30 hover:bg-white/[0.05] transition-all duration-300">
-                                <div className="flex items-start gap-4">
-                                    <div className="w-11 h-11 rounded-xl bg-premium-green/10 flex items-center justify-center text-premium-green border border-premium-green/20 group-hover:scale-110 group-hover:bg-premium-green/15 transition-all duration-300 flex-shrink-0">
-                                        <Mail className="w-4 h-4" />
+                            {/* Email + Disponibilité side by side on mobile */}
+                            <div className="grid grid-cols-2 lg:grid-cols-1 gap-3 lg:gap-4">
+                                <div className="group p-4 lg:p-5 rounded-2xl bg-white/[0.03] border border-white/8 hover:border-premium-green/30 hover:bg-white/[0.05] transition-all duration-300">
+                                    <div className="flex flex-col sm:flex-row items-start gap-3 lg:gap-4">
+                                        <div className="w-9 h-9 lg:w-11 lg:h-11 rounded-xl bg-premium-green/10 flex items-center justify-center text-premium-green border border-premium-green/20 group-hover:scale-110 group-hover:bg-premium-green/15 transition-all duration-300 flex-shrink-0">
+                                            <Mail className="w-4 h-4" />
+                                        </div>
+                                        <div className="min-w-0">
+                                            <p className="text-gray-500 text-[10px] uppercase tracking-widest font-bold mb-0.5">{t.contactPage.emailDesc}</p>
+                                            <h3 className="text-white font-bold text-xs sm:text-sm truncate">
+                                                <a href="mailto:contact@osiris-agency.fr" className="hover:text-premium-green transition-colors">{t.contactPage.emailTitle}</a>
+                                            </h3>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <p className="text-gray-500 text-[10px] uppercase tracking-widest font-bold mb-0.5">{t.contactPage.emailDesc}</p>
-                                        <h3 className="text-white font-bold text-sm">
-                                            <a href="mailto:contact@osiris-agency.fr" className="hover:text-premium-green transition-colors">{t.contactPage.emailTitle}</a>
-                                        </h3>
+                                </div>
+
+                                <div className="group p-4 lg:p-5 rounded-2xl bg-white/[0.03] border border-white/8 hover:border-premium-green/30 hover:bg-white/[0.05] transition-all duration-300">
+                                    <div className="flex flex-col sm:flex-row items-start gap-3 lg:gap-4">
+                                        <div className="w-9 h-9 lg:w-11 lg:h-11 rounded-xl bg-premium-green/10 flex items-center justify-center text-premium-green border border-premium-green/20 group-hover:scale-110 group-hover:bg-premium-green/15 transition-all duration-300 flex-shrink-0">
+                                            <Clock className="w-4 h-4" />
+                                        </div>
+                                        <div className="min-w-0">
+                                            <p className="text-gray-500 text-[10px] uppercase tracking-widest font-bold mb-0.5">{t.contactPage.availabilityDesc}</p>
+                                            <h3 className="text-white font-bold text-xs sm:text-sm mb-0.5">{t.contactPage.availabilityTitle}</h3>
+                                            <p className="text-white font-mono text-[10px] sm:text-xs">{t.contactPage.availabilityHours}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="group p-5 rounded-2xl bg-white/[0.03] border border-white/8 hover:border-premium-green/30 hover:bg-white/[0.05] transition-all duration-300">
-                                <div className="flex items-start gap-4">
-                                    <div className="w-11 h-11 rounded-xl bg-premium-green/10 flex items-center justify-center text-premium-green border border-premium-green/20 group-hover:scale-110 group-hover:bg-premium-green/15 transition-all duration-300 flex-shrink-0">
-                                        <Clock className="w-4 h-4" />
-                                    </div>
-                                    <div>
-                                        <p className="text-gray-500 text-[10px] uppercase tracking-widest font-bold mb-0.5">{t.contactPage.availabilityDesc}</p>
-                                        <h3 className="text-white font-bold text-sm mb-1">{t.contactPage.availabilityTitle}</h3>
-                                        <p className="text-white font-mono text-xs">{t.contactPage.availabilityHours}</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Trust badge — right below Disponibilité */}
-                            <div className="p-5 rounded-2xl border border-premium-green/25 bg-gradient-to-br from-premium-green/8 via-premium-green/4 to-transparent relative overflow-hidden">
+                            {/* Trust badge */}
+                            <div className="p-4 sm:p-5 rounded-2xl border border-premium-green/25 bg-gradient-to-br from-premium-green/8 via-premium-green/4 to-transparent relative overflow-hidden">
                                 <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-premium-green/40 to-transparent" />
                                 <div className="flex items-start gap-3">
                                     <div className="w-9 h-9 rounded-xl bg-premium-green/15 flex items-center justify-center text-premium-green flex-shrink-0 mt-0.5 border border-premium-green/20">
@@ -135,8 +138,8 @@ export const ContactPage: React.FC = () => {
                             </div>
                         </motion.div>
 
-                        {/* Right: Form */}
-                        <div className="lg:col-span-3 relative">
+                        {/* Right: Form — order-1 on mobile (appears first) */}
+                        <div className="lg:col-span-3 relative order-1 lg:order-2">
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-tr from-premium-green/8 via-transparent to-blue-500/8 blur-[60px] rounded-full pointer-events-none" />
 
                             <motion.div

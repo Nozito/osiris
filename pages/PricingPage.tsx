@@ -48,8 +48,8 @@ const UNIVERSAL_OPTIONS = [
 
 const DEADLINES = [
     { id: 'standard', label: 'Standard',           sublabel: '3 à 7 semaines',       rate: 0    },
-    { id: 'express',  label: 'Express',             sublabel: '1 à 2 semaines',       rate: 0.30 },
-    { id: 'urgent',   label: 'Urgent',              sublabel: 'Moins de 7 jours',     rate: 0.60 },
+    { id: 'express',  label: 'Express',             sublabel: '1 à 2 semaines',       rate: 0.20 },
+    { id: 'urgent',   label: 'Urgent',              sublabel: 'Moins de 7 jours',     rate: 0.45 },
 ];
 
 function calcExtraPages(n: number): number {
@@ -366,8 +366,30 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
 
     return (
         <div className="relative w-full">
+            {/* Mobile price strip — visible only on mobile */}
+            <div className="lg:hidden flex items-center justify-between bg-[#0d1117] border border-[#2563EB]/25 rounded-2xl px-4 py-3 mb-5">
+                <div>
+                    <p className="text-white/40 text-[9px] uppercase tracking-widest font-bold leading-none mb-0.5">Total estimé</p>
+                    <div className="flex items-baseline gap-1">
+                        <span className="text-xl font-black font-display text-[#2563EB]">
+                            <AnimatedPrice value={totalHT} />
+                        </span>
+                        <span className="text-white/40 text-xs">€ HT</span>
+                    </div>
+                    <p className="text-white/25 text-[10px] mt-0.5">{totalTTC.toLocaleString('fr-FR')} € TTC</p>
+                </div>
+                <div className="text-right">
+                    <p className="text-white/30 text-[9px] uppercase tracking-widest font-bold mb-1">Étape {step}/6</p>
+                    <div className="flex gap-0.5">
+                        {[1,2,3,4,5,6].map(n => (
+                            <div key={n} className={`h-1 w-5 rounded-full transition-all duration-300 ${n <= step ? 'bg-[#2563EB]' : 'bg-white/10'}`} />
+                        ))}
+                    </div>
+                </div>
+            </div>
+
             {/* Progress bar */}
-            <div className="flex items-center justify-center gap-0 mb-10">
+            <div className="flex items-center justify-center gap-0 mb-8">
                 {STEPS.map((label, i) => {
                     const num = i + 1;
                     const isDone = step > num;
@@ -378,7 +400,7 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                                 <button
                                     onClick={() => num < step && navigate(num)}
                                     disabled={num > step}
-                                    className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 border focus:outline-none
+                                    className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-[11px] font-bold transition-all duration-300 border focus:outline-none
                                         ${isDone ? 'bg-[#2563EB] border-[#2563EB] text-white shadow-[0_0_12px_rgba(37,99,235,0.5)] cursor-pointer'
                                             : isActive ? 'bg-[#2563EB] border-[#2563EB] text-white shadow-[0_0_20px_rgba(37,99,235,0.6)]'
                                             : 'bg-transparent border-white/15 text-white/30 cursor-default'}`}
@@ -390,7 +412,7 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                                 </span>
                             </div>
                             {i < STEPS.length - 1 && (
-                                <div className="relative h-[2px] w-8 sm:w-16 mx-1 mb-5 bg-white/10 overflow-hidden">
+                                <div className="relative h-[2px] w-3 sm:w-16 mx-0.5 sm:mx-1 mb-5 bg-white/10 overflow-hidden">
                                     <div
                                         className="absolute inset-y-0 left-0 bg-[#2563EB] transition-all duration-500"
                                         style={{ width: step > num ? '100%' : '0%' }}
@@ -418,29 +440,26 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                     {/* STEP 1 — Choix de l'offre */}
                     {step === 1 && (
                         <div>
-                            <h3 className="text-lg font-bold text-white font-display mb-6 uppercase tracking-widest">
+                            <h3 className="text-lg font-bold text-white font-display mb-2 uppercase tracking-widest text-center">
                                 Choix de l'offre
                             </h3>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <p className="text-white/40 text-xs mb-7 text-center">Sélectionnez le type de site qui correspond à votre projet.</p>
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                 {SITE_TYPES.map(type => (
                                     <button
                                         key={type.id}
                                         onClick={() => handleSiteTypeChange(type.id)}
-                                        className={`text-left p-5 rounded-2xl border transition-all duration-250 focus:outline-none
+                                        className={`p-5 rounded-2xl border transition-all duration-250 focus:outline-none text-center
                                             ${siteType === type.id
                                                 ? 'border-[#2563EB] bg-[rgba(37,99,235,0.12)] shadow-[0_0_20px_rgba(37,99,235,0.25)]'
                                                 : 'border-white/8 bg-white/[0.03] hover:border-white/15 hover:bg-white/[0.06]'
                                             }`}
                                     >
-                                        <div className="flex justify-between items-start gap-3">
-                                            <div>
-                                                <p className="text-white font-bold font-display text-sm mb-1">{type.label}</p>
-                                                <p className="text-white/50 text-xs">{type.sublabel}</p>
-                                            </div>
-                                            <span className={`font-black text-lg font-display shrink-0 ${siteType === type.id ? 'text-[#60A5FA]' : 'text-white/40'}`}>
-                                                {type.price.toLocaleString('fr-FR')} €
-                                            </span>
-                                        </div>
+                                        <p className="text-white font-bold font-display text-sm mb-1">{type.label}</p>
+                                        <p className="text-white/50 text-xs mb-3">{type.sublabel}</p>
+                                        <span className={`font-black text-xl font-display ${siteType === type.id ? 'text-[#60A5FA]' : 'text-white/40'}`}>
+                                            {type.price.toLocaleString('fr-FR')} €
+                                        </span>
                                     </button>
                                 ))}
                             </div>
@@ -450,10 +469,10 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                     {/* STEP 2 — Pages supplémentaires */}
                     {step === 2 && (
                         <div>
-                            <h3 className="text-lg font-bold text-white font-display mb-2 uppercase tracking-widest">
+                            <h3 className="text-lg font-bold text-white font-display mb-2 uppercase tracking-widest text-center">
                                 Pages supplémentaires
                             </h3>
-                            <p className="text-white/40 text-xs mb-8">Pages 1–3 : 100€ · Pages 4–9 : 80€ · Pages 10+ : 60€</p>
+                            <p className="text-white/40 text-xs mb-8 text-center">Pages 1–3 : 100€ · Pages 4–9 : 80€ · Pages 10+ : 60€</p>
                             <div className="flex items-center gap-6 justify-center">
                                 <button
                                     onClick={() => setExtraPages(p => Math.max(0, p - 1))}
@@ -473,7 +492,7 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                                     + {calcExtraPages(extraPages).toLocaleString('fr-FR')} €
                                 </p>
                             )}
-                            <div className="mt-8 flex gap-2 justify-center">
+                            <div className="mt-8 flex flex-wrap gap-2 justify-center">
                                 {[0,1,2,3,5,8,10,15,20].map(v => (
                                     <button
                                         key={v}
@@ -493,15 +512,15 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                     {/* STEP 3 — Upgrade d'offre */}
                     {step === 3 && (
                         <div>
-                            <h3 className="text-lg font-bold text-white font-display mb-2 uppercase tracking-widest">
+                            <h3 className="text-lg font-bold text-white font-display mb-2 uppercase tracking-widest text-center">
                                 Mise à niveau de l'offre
                             </h3>
-                            <p className="text-white/40 text-xs mb-6">Ajoutez des fonctionnalités du niveau supérieur à la carte.</p>
+                            <p className="text-white/40 text-xs mb-6 text-center">Ajoutez des fonctionnalités du niveau supérieur à la carte.</p>
 
                             {/* Business options — visible only for Starter */}
                             {siteType === 'vitrine-simple' && (
                                 <div className="mb-6">
-                                    <p className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-3 flex items-center gap-2">
+                                    <p className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-3 flex items-center justify-center gap-2">
                                         <span className="w-2 h-2 rounded-full bg-blue-400 inline-block"></span>
                                         Options Business
                                     </p>
@@ -529,7 +548,7 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                             {/* Empire options — visible for Starter and Business */}
                             {(siteType === 'vitrine-simple' || siteType === 'vitrine-standard') && (
                                 <div>
-                                    <p className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-3 flex items-center gap-2">
+                                    <p className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-3 flex items-center justify-center gap-2">
                                         <span className="w-2 h-2 rounded-full bg-purple-400 inline-block"></span>
                                         Options Empire
                                     </p>
@@ -559,10 +578,10 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                     {/* STEP 4 — Fonctionnalités additionnelles */}
                     {step === 4 && (
                         <div>
-                            <h3 className="text-lg font-bold text-white font-display mb-2 uppercase tracking-widest">
+                            <h3 className="text-lg font-bold text-white font-display mb-2 uppercase tracking-widest text-center">
                                 Fonctionnalités additionnelles
                             </h3>
-                            <p className="text-white/40 text-xs mb-6">Disponibles pour tous les niveaux.</p>
+                            <p className="text-white/40 text-xs mb-6 text-center">Disponibles pour tous les niveaux.</p>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 {UNIVERSAL_OPTIONS.map(opt => {
                                     const checked = selectedUniversal.has(opt.id);
@@ -602,15 +621,16 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                     {/* STEP 5 — Délai */}
                     {step === 5 && (
                         <div>
-                            <h3 className="text-lg font-bold text-white font-display mb-6 uppercase tracking-widest">
+                            <h3 className="text-lg font-bold text-white font-display mb-2 uppercase tracking-widest text-center">
                                 Délai de livraison
                             </h3>
-                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <p className="text-white/40 text-xs mb-7 text-center">Choisissez le délai de réalisation de votre projet.</p>
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-xs sm:max-w-none mx-auto">
                                 {DEADLINES.map(d => (
                                     <button
                                         key={d.id}
                                         onClick={() => setDeadline(d.id)}
-                                        className={`text-left p-5 rounded-2xl border transition-all duration-250 focus:outline-none
+                                        className={`p-5 rounded-2xl border transition-all duration-250 focus:outline-none text-center
                                             ${deadline === d.id
                                                 ? 'border-[#2563EB] bg-[rgba(37,99,235,0.12)] shadow-[0_0_20px_rgba(37,99,235,0.25)]'
                                                 : 'border-white/8 bg-white/[0.03] hover:border-white/15 hover:bg-white/[0.06]'}`}
@@ -629,68 +649,68 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                     {/* STEP 6 — Récapitulatif + formulaire */}
                     {step === 6 && (
                         <div>
-                            <h3 className="text-lg font-bold text-white font-display mb-6 uppercase tracking-widest">
+                            <h3 className="text-lg font-bold text-white font-display mb-6 uppercase tracking-widest text-center">
                                 Récapitulatif & Contact
                             </h3>
 
                             {/* Recap list */}
-                            <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-5 mb-6 space-y-2">
-                                <div className="flex justify-between text-sm">
-                                    <span className="text-white/60">Offre de base</span>
-                                    <span className="text-white font-bold">{SITE_TYPES.find(s => s.id === siteType)?.label ?? '—'} — {basePrice.toLocaleString('fr-FR')} €</span>
+                            <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-4 sm:p-5 mb-6 space-y-2">
+                                <div className="flex items-baseline justify-between gap-2 text-sm">
+                                    <span className="text-white/60 shrink-0">Offre de base</span>
+                                    <span className="text-white font-bold text-right">{SITE_TYPES.find(s => s.id === siteType)?.label ?? '—'} — {basePrice.toLocaleString('fr-FR')} €</span>
                                 </div>
                                 {extraPages > 0 && (
-                                    <div className="flex justify-between text-sm">
-                                        <span className="text-white/60">{extraPages} page{extraPages > 1 ? 's' : ''} supp.</span>
-                                        <span className="text-white font-bold">+{extraPagesPrice.toLocaleString('fr-FR')} €</span>
+                                    <div className="flex items-baseline justify-between gap-2 text-sm">
+                                        <span className="text-white/60 shrink-0">{extraPages} page{extraPages > 1 ? 's' : ''} supp.</span>
+                                        <span className="text-white font-bold shrink-0">+{extraPagesPrice.toLocaleString('fr-FR')} €</span>
                                     </div>
                                 )}
                                 {Array.from(selectedUpgrades).map(id => {
                                     const opt = [...UPGRADE_BUSINESS_OPTIONS, ...UPGRADE_EMPIRE_OPTIONS].find(o => o.id === id);
                                     return opt ? (
-                                        <div key={id} className="flex justify-between text-sm">
-                                            <span className="text-white/60">{opt.label}</span>
-                                            <span className="text-white font-bold">+{opt.price} €</span>
+                                        <div key={id} className="flex items-baseline justify-between gap-2 text-sm">
+                                            <span className="text-white/60 min-w-0 truncate">{opt.label}</span>
+                                            <span className="text-white font-bold shrink-0">+{opt.price} €</span>
                                         </div>
                                     ) : null;
                                 })}
                                 {Array.from(selectedUniversal).map(id => {
                                     const opt = UNIVERSAL_OPTIONS.find(o => o.id === id);
                                     return opt ? (
-                                        <div key={id} className="flex justify-between text-sm">
-                                            <span className="text-white/60">{opt.label}</span>
-                                            <span className="text-white font-bold">+{opt.price} €</span>
+                                        <div key={id} className="flex items-baseline justify-between gap-2 text-sm">
+                                            <span className="text-white/60 min-w-0 truncate">{opt.label}</span>
+                                            <span className="text-white font-bold shrink-0">+{opt.price} €</span>
                                         </div>
                                     ) : null;
                                 })}
                                 {wantsUnlimited && (
-                                    <div className="flex justify-between text-sm">
-                                        <span className="text-amber-400/80">Modifications illimitées</span>
-                                        <span className="text-amber-400 font-bold">+19,90 €/mois</span>
+                                    <div className="flex items-baseline justify-between gap-2 text-sm">
+                                        <span className="text-amber-400/80 shrink-0">Modifs illimitées</span>
+                                        <span className="text-amber-400 font-bold shrink-0">+19,90 €/mois</span>
                                     </div>
                                 )}
                                 <div className="border-t border-white/8 pt-3 mt-3 space-y-1.5">
-                                    <div className="flex justify-between text-sm">
-                                        <span className="text-white/60">Sous-total HT</span>
-                                        <span className="text-white font-bold">{subtotalHT.toLocaleString('fr-FR')} €</span>
+                                    <div className="flex items-baseline justify-between gap-2 text-sm">
+                                        <span className="text-white/60 shrink-0">Sous-total HT</span>
+                                        <span className="text-white font-bold shrink-0">{subtotalHT.toLocaleString('fr-FR')} €</span>
                                     </div>
                                     {deadlineSurcharge > 0 && (
-                                        <div className="flex justify-between text-sm">
-                                            <span className="text-white/60">Supplément délai ({DEADLINES.find(d=>d.id===deadline)?.label})</span>
-                                            <span className="text-[#60A5FA] font-bold">+{deadlineSurcharge.toLocaleString('fr-FR')} €</span>
+                                        <div className="flex items-baseline justify-between gap-2 text-sm">
+                                            <span className="text-white/60 shrink-0">Supplément délai ({DEADLINES.find(d=>d.id===deadline)?.label})</span>
+                                            <span className="text-[#60A5FA] font-bold shrink-0">+{deadlineSurcharge.toLocaleString('fr-FR')} €</span>
                                         </div>
                                     )}
-                                    <div className="flex justify-between text-sm">
-                                        <span className="text-white/60">Total HT</span>
-                                        <span className="text-white font-bold">{totalHT.toLocaleString('fr-FR')} €</span>
+                                    <div className="flex items-baseline justify-between gap-2 text-sm">
+                                        <span className="text-white/60 shrink-0">Total HT</span>
+                                        <span className="text-white font-bold shrink-0">{totalHT.toLocaleString('fr-FR')} €</span>
                                     </div>
-                                    <div className="flex justify-between text-sm">
-                                        <span className="text-white/60">TVA 20%</span>
-                                        <span className="text-white/60">{tva.toLocaleString('fr-FR')} €</span>
+                                    <div className="flex items-baseline justify-between gap-2 text-sm">
+                                        <span className="text-white/60 shrink-0">TVA 20%</span>
+                                        <span className="text-white/60 shrink-0">{tva.toLocaleString('fr-FR')} €</span>
                                     </div>
-                                    <div className="flex justify-between text-base">
-                                        <span className="text-white font-bold">Total TTC estimé</span>
-                                        <span className="text-[#2563EB] font-black font-display text-lg">{totalTTC.toLocaleString('fr-FR')} €</span>
+                                    <div className="flex items-baseline justify-between gap-2">
+                                        <span className="text-white font-bold shrink-0">Total TTC estimé</span>
+                                        <span className="text-[#2563EB] font-black font-display text-lg shrink-0">{totalTTC.toLocaleString('fr-FR')} €</span>
                                     </div>
                                 </div>
                                 <p className="text-white/25 text-[10px] pt-2">Estimation indicative — devis personnalisé gratuit sous 24h</p>
@@ -724,7 +744,7 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                             <a
                                 href={buildSummary().siteLabel ? '#' : undefined}
                                 onClick={e => { e.preventDefault(); if (form.firstName && form.email) handleSendQuote(); }}
-                                className={`w-full h-12 flex items-center justify-center gap-2 rounded-xl text-white text-sm font-bold uppercase tracking-widest transition-all duration-200 ${
+                                className={`w-full min-h-[3rem] py-3 px-4 flex items-center justify-center gap-2 rounded-xl text-white text-xs sm:text-sm font-bold uppercase tracking-wider sm:tracking-widest transition-all duration-200 ${
                                     sendStatus === 'sending'
                                         ? 'bg-[#2563EB]/60 cursor-wait'
                                         : sendStatus === 'success'
@@ -751,34 +771,34 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                     )}
 
                     {/* Navigation buttons */}
-                    <div className="flex items-center justify-between mt-8 gap-4">
+                    <div className="flex items-center justify-center mt-8 gap-3">
                         <button
                             onClick={() => navigate(step - 1)}
                             disabled={step === 1}
-                            className={`h-12 px-6 rounded-xl text-sm font-bold uppercase tracking-wider border transition-all duration-200
+                            className={`w-36 h-12 rounded-xl text-sm font-bold uppercase tracking-wider border transition-all duration-200
                                 ${step === 1
                                     ? 'opacity-0 pointer-events-none'
-                                    : 'bg-white/5 border-white/10 text-white hover:bg-white/10 hover:border-white/20'}`}
+                                    : 'bg-white/5 border-white/15 text-white hover:bg-white/10 hover:border-white/25'}`}
                         >
-                            ← Précédent
+                            Précédent
                         </button>
                         {step < 6 && (
                             <button
                                 onClick={() => navigate(step + 1)}
                                 disabled={!canNext()}
-                                className={`h-12 px-8 rounded-xl text-sm font-bold uppercase tracking-wider transition-all duration-200 flex items-center gap-2
+                                className={`w-36 h-12 rounded-xl text-sm font-bold uppercase tracking-wider border transition-all duration-200
                                     ${canNext()
-                                        ? 'bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] text-white hover:brightness-110 hover:shadow-[0_0_24px_rgba(37,99,235,0.4)]'
-                                        : 'bg-white/5 border border-white/10 text-white/30 cursor-not-allowed'}`}
+                                        ? 'bg-white/5 border-white/15 text-white hover:bg-white/10 hover:border-white/25'
+                                        : 'bg-white/[0.02] border-white/5 text-white/25 cursor-not-allowed'}`}
                             >
-                                Suivant →
+                                Suivant
                             </button>
                         )}
                     </div>
                 </div>
 
-                {/* Sticky price sidebar */}
-                <div className="lg:sticky lg:top-28 w-full lg:w-72 shrink-0">
+                {/* Sticky price sidebar — desktop only */}
+                <div className="hidden lg:block lg:sticky lg:top-28 w-full lg:w-72 shrink-0">
                     <div className="rounded-2xl border border-[#2563EB]/20 bg-[#111318] p-6 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
                         <p className="text-white/40 text-[10px] uppercase tracking-widest font-bold mb-3">Total estimé</p>
                         <div className="flex items-baseline gap-1.5 mb-1">
@@ -917,6 +937,7 @@ const TiltCard = ({ children, className, highlight, color = "green" }: { key?: R
 export const PricingPage: React.FC = () => {
     const { t, language } = useLanguage();
     const [currentIndex, setCurrentIndex] = useState(1);
+    const [expandedCard, setExpandedCard] = useState<string | null>(null);
     const [selectedPlan, setSelectedPlan] = useState<string>('');
     const scrollToConfigurator = useCallback((siteTypeId: string) => {
         setSelectedPlan(siteTypeId);
@@ -960,22 +981,6 @@ export const PricingPage: React.FC = () => {
             siteTypeId: 'vitrine-premium'
         }
     ];
-
-    const nextSlide = () => {
-        setCurrentIndex((prev) => (prev + 1) % offers.length);
-    };
-
-    const prevSlide = () => {
-        setCurrentIndex((prev) => (prev - 1 + offers.length) % offers.length);
-    };
-
-    const getSlidePosition = (index: number) => {
-        const diff = index - currentIndex;
-        if (diff === 0) return 'center';
-        if (diff === 1 || diff === -2) return 'right';
-        if (diff === -1 || diff === 2) return 'left';
-        return 'hidden';
-    };
 
     const getIcon = (title: string, color?: string) => {
         const colorClass = color === 'blue' ? 'text-blue-400' : color === 'purple' ? 'text-purple-400' : 'text-premium-green';
@@ -1101,240 +1106,158 @@ export const PricingPage: React.FC = () => {
                         </p>
                     </motion.div>
 
-                    {/* Mobile: Swipeable Carousel */}
-                    <div className="pricing-section lg:hidden relative mb-12 flex flex-col items-center"
-                        onTouchStart={(e) => {
-                            const touch = e.touches[0];
-                            (e.currentTarget as any)._touchStartX = touch.clientX;
-                            (e.currentTarget as any)._touchStartY = touch.clientY;
-                        }}
-                        onTouchEnd={(e) => {
-                            const startX = (e.currentTarget as any)._touchStartX;
-                            const startY = (e.currentTarget as any)._touchStartY;
-                            if (startX == null) return;
-                            const touch = e.changedTouches[0];
-                            const diffX = touch.clientX - startX;
-                            const diffY = touch.clientY - startY;
-                            // Only trigger if horizontal swipe is dominant
-                            if (Math.abs(diffX) > 30 && Math.abs(diffX) > Math.abs(diffY) * 1.2) {
-                                if (diffX < 0) nextSlide();
-                                else prevSlide();
-                            }
-                        }}
-                    >
-                        {/* Navigation Arrows */}
-                        <button
-                            onClick={prevSlide}
-                            aria-label="Previous offer"
-                            className="pricing-nav absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/60 border border-white/10 flex items-center justify-center text-white backdrop-blur-md active:scale-90 transition-transform"
-                        >
-                            <ChevronLeft className="w-5 h-5" />
-                        </button>
-                        <button
-                            onClick={nextSlide}
-                            aria-label="Next offer"
-                            className="pricing-nav absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/60 border border-white/10 flex items-center justify-center text-white backdrop-blur-md active:scale-90 transition-transform"
-                        >
-                            <ChevronRight className="w-5 h-5" />
-                        </button>
+                    {/* ── Unified Pricing Cards Grid ── */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-14 md:items-stretch">
+                        {offers.map((offer, index) => {
+                            const isExpanded = expandedCard === offer.title;
+                            const compactFeatures = (offer.features as string[]).slice(0, 3);
+                            const extraFeatures = (offer.features as string[]).slice(3);
+                            return (
+                                <TiltCard key={index} highlight={offer.highlight} color={offer.color} className="group">
+                                    <div className={`relative p-6 lg:p-7 rounded-[2rem] flex flex-col h-full bg-[#080808]/60 backdrop-blur-2xl border transition-all duration-500 overflow-hidden
+                                        ${getBorderColorClass(offer.color)} ${getGlowClass(offer.color)} hover:bg-white/[0.03]
+                                    `}>
+                                        {/* Top decorations */}
+                                        <div className={`absolute top-0 left-0 right-0 h-[1px] opacity-50 ${getTopLineClass(offer.color)}`} />
+                                        <div className={`absolute top-0 inset-x-0 h-28 lg:h-32 opacity-40 pointer-events-none ${getTopGradClass(offer.color)}`} />
 
-                        {/* Cards Container */}
-                        <div className="pricing-container pricing-track relative w-full h-[560px] flex items-center justify-center overflow-hidden">
-                            {offers.map((offer, index) => {
-                                const position = getSlidePosition(index);
-                                const isCenter = position === 'center';
-                                return (
-                                    <motion.div
-                                        key={offer.title}
-                                        animate={{
-                                            x: position === 'left' ? '-105%' : position === 'right' ? '105%' : '0%',
-                                            scale: isCenter ? 1 : 0.88,
-                                            opacity: isCenter ? 1 : 0.3,
-                                            zIndex: isCenter ? 10 : 1,
-                                        }}
-                                        transition={{
-                                            duration: 0.2,
-                                            ease: [0.25, 0.1, 0.25, 1],
-                                        }}
-                                        className={`pricing-card ${offer.highlight ? 'popular' : ''} absolute w-[88%] max-w-[340px] p-8 rounded-[2rem] flex flex-col h-[520px] backdrop-blur-xl will-change-transform
-                                            ${isCenter
-                                                ? `bg-[#0A0A0A]/90 border ${getBorderColorClass(offer.color)} ${getGlowClass(offer.color)}`
-                                                : 'bg-white/[0.03] border border-white/5'
-                                            }
-                                        `}
-                                        onClick={() => !isCenter && setCurrentIndex(index)}
-                                    >
-                                        <div className="flex justify-center mb-6">
-                                            <div className={`px-4 py-1.5 rounded-full flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider border
-                                                ${isCenter
-                                                    ? offer.color === 'blue'  ? 'bg-blue-500/10   text-blue-400   border-blue-500/30'
-                                                    : offer.color === 'amber' ? 'bg-amber-400/10  text-amber-400  border-amber-400/30'
-                                                                               : 'bg-purple-500/10 text-purple-400 border-purple-500/30'
-                                                    : 'bg-white/5 text-gray-400 border-white/10'
-                                                }`}
-                                            >
-                                                {getIcon(offer.title, offer.color)}
+                                        {/* Desktop background icon */}
+                                        <div className={`hidden lg:block absolute -right-8 -top-8 transform rotate-12 transition-transform duration-700 group-hover:rotate-0 group-hover:scale-110 pointer-events-none opacity-0 group-hover:opacity-100
+                                            ${offer.color === 'blue' ? 'text-blue-500/[0.05]' : offer.color === 'amber' ? 'text-amber-400/[0.05]' : 'text-purple-500/[0.05]'}
+                                        `}>
+                                            <offer.icon className="w-80 h-80" strokeWidth={0.5} />
+                                        </div>
+
+                                        {/* Badge */}
+                                        <div className="flex justify-center mb-4 lg:mb-5 relative z-10">
+                                            <div className={`px-4 lg:px-5 py-1.5 lg:py-2 rounded-full flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider border
+                                                ${offer.color === 'blue'   ? 'bg-blue-500/10 text-blue-400 border-blue-500/30'
+                                                : offer.color === 'amber' ? 'bg-amber-400/10 text-amber-400 border-amber-400/30'
+                                                                           : 'bg-purple-500/10 text-purple-400 border-purple-500/30'}
+                                            `}>
+                                                <offer.icon className="w-3.5 h-3.5" />
                                                 {getBadge(offer.title)}
                                             </div>
                                         </div>
 
-                                        <div className="mb-6 text-center">
-                                            <h3 className={`text-2xl font-bold font-display uppercase tracking-widest mb-4 ${isCenter ? 'text-white' : 'text-gray-400'}`}>
+                                        {/* Title & Price */}
+                                        <div className="mb-5 lg:mb-6 text-center relative z-10">
+                                            <h3 className="text-xl font-black font-display uppercase tracking-widest mb-3 lg:mb-4 text-white group-hover:text-white transition-colors">
                                                 {offer.title}
                                             </h3>
-                                            <div className="flex items-start justify-center gap-1">
-                                                <span className="price text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-[#c8c8c8] to-[#787878]">{offer.price}</span>
-                                                <span className="text-2xl mt-2 text-gray-400 font-light">€</span>
+                                            <div className="flex items-start justify-center gap-1 group-hover:scale-105 transition-transform duration-500 origin-center">
+                                                <span className="text-5xl lg:text-6xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white via-[#c8c8c8] to-[#787878]">
+                                                    {offer.price}
+                                                </span>
+                                                <span className="text-xl lg:text-2xl mt-2 lg:mt-3 text-gray-400 font-light">€</span>
                                             </div>
-                                            <p className="text-gray-500 text-xs mt-4 font-medium line-clamp-2">{offer.description}</p>
+                                            <p className="text-gray-400 text-xs lg:text-sm mt-3 lg:mt-5 leading-relaxed px-1 lg:px-2">{offer.description}</p>
                                         </div>
 
-                                        <div className={`w-full h-[1px] mb-6 ${isCenter
-                                            ? offer.color === 'blue'  ? 'bg-gradient-to-r from-transparent via-blue-500/30 to-transparent'
-                                            : offer.color === 'amber' ? 'bg-gradient-to-r from-transparent via-amber-400/30 to-transparent'
-                                                                       : 'bg-gradient-to-r from-transparent via-purple-500/30 to-transparent'
-                                            : 'bg-white/5'}`}></div>
+                                        {/* Separator */}
+                                        <div className={`w-full h-px mb-5 lg:mb-6 relative z-10 transition-all duration-500
+                                            ${offer.color === 'blue'   ? 'bg-gradient-to-r from-transparent via-blue-500/30 to-transparent group-hover:via-blue-500/50'
+                                            : offer.color === 'amber' ? 'bg-gradient-to-r from-transparent via-amber-400/30 to-transparent group-hover:via-amber-400/50'
+                                                                       : 'bg-gradient-to-r from-transparent via-purple-500/30 to-transparent group-hover:via-purple-500/50'}
+                                        `} />
 
-                                        <ul className="space-y-3 mb-8 flex-1 overflow-y-auto custom-scrollbar">
-                                            {(offer.features as string[]).map((feature, i) => {
+                                        {/* Mobile: compact features (3 max) */}
+                                        <ul className="lg:hidden space-y-2.5 relative z-10 mb-0">
+                                            {compactFeatures.map((feature, i) => {
                                                 const isInherited = i < (offer.newFrom ?? 0);
-                                                const accentBg = offer.color === 'blue' ? 'bg-blue-500/15 text-blue-400' : offer.color === 'amber' ? 'bg-amber-400/15 text-amber-400' : 'bg-purple-500/15 text-purple-400';
                                                 return (
                                                     <li key={i} className="flex items-start gap-2.5">
-                                                        <div className={`mt-0.5 w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 ${isInherited ? 'bg-amber-400/15 text-amber-400' : isCenter ? accentBg : 'bg-white/10 text-gray-500'}`}>
+                                                        <div className={`mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center
+                                                            ${isInherited ? 'bg-amber-400/15 text-amber-400'
+                                                            : offer.color === 'blue'   ? 'bg-blue-500/15 text-blue-400'
+                                                            : offer.color === 'amber'  ? 'bg-amber-400/15 text-amber-400'
+                                                                                       : 'bg-purple-500/15 text-purple-400'}
+                                                        `}>
                                                             {isInherited ? <Check className="w-2.5 h-2.5" /> : <Sparkles className="w-2.5 h-2.5" />}
                                                         </div>
-                                                        <span className={`text-xs leading-relaxed ${isInherited ? 'text-amber-400 font-semibold' : isCenter ? 'text-gray-200 font-medium' : 'text-gray-500'}`}>{feature}</span>
+                                                        <span className={`text-xs leading-relaxed ${isInherited ? 'text-amber-400 font-semibold' : 'text-gray-300'}`}>{feature}</span>
                                                     </li>
                                                 );
                                             })}
                                         </ul>
 
-                                        <button onClick={() => scrollToConfigurator(offer.siteTypeId)} className={`cta cta-btn w-full py-4 rounded-xl font-bold text-xs uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-2
-                                            ${isCenter
-                                                ? 'bg-gradient-to-r from-premium-green to-blue-600 text-white shadow-lg shadow-blue-600/20'
-                                                : 'bg-white/5 text-white border border-white/10'
-                                            }
-                                        `}>
+                                        {/* Mobile: expanded features */}
+                                        {isExpanded && extraFeatures.length > 0 && (
+                                            <ul className="lg:hidden space-y-2.5 mt-2.5 relative z-10">
+                                                {extraFeatures.map((feature, i) => {
+                                                    const realIndex = i + 3;
+                                                    const isInherited = realIndex < (offer.newFrom ?? 0);
+                                                    return (
+                                                        <li key={i} className="flex items-start gap-2.5">
+                                                            <div className={`mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center
+                                                                ${isInherited ? 'bg-amber-400/15 text-amber-400'
+                                                                : offer.color === 'blue'   ? 'bg-blue-500/15 text-blue-400'
+                                                                : offer.color === 'amber'  ? 'bg-amber-400/15 text-amber-400'
+                                                                                           : 'bg-purple-500/15 text-purple-400'}
+                                                            `}>
+                                                                {isInherited ? <Check className="w-2.5 h-2.5" /> : <Sparkles className="w-2.5 h-2.5" />}
+                                                            </div>
+                                                            <span className={`text-xs leading-relaxed ${isInherited ? 'text-amber-400 font-semibold' : 'text-gray-300'}`}>{feature}</span>
+                                                        </li>
+                                                    );
+                                                })}
+                                            </ul>
+                                        )}
+
+                                        {/* Mobile: + d'infos toggle */}
+                                        {extraFeatures.length > 0 && (
+                                            <button
+                                                onClick={() => setExpandedCard(isExpanded ? null : offer.title)}
+                                                className={`lg:hidden relative z-10 mt-3 mb-5 text-[11px] font-bold flex items-center gap-1 transition-colors duration-200
+                                                    ${offer.color === 'blue'   ? 'text-blue-400 hover:text-blue-300'
+                                                    : offer.color === 'amber' ? 'text-amber-400 hover:text-amber-300'
+                                                                               : 'text-purple-400 hover:text-purple-300'}
+                                                `}
+                                            >
+                                                {isExpanded ? '− Réduire' : `+ ${extraFeatures.length} infos supplémentaires`}
+                                            </button>
+                                        )}
+                                        {!isExpanded && <div className="lg:hidden mt-5" />}
+
+                                        {/* Desktop: all features */}
+                                        <ul className="hidden lg:block space-y-2.5 mb-6 flex-1 relative z-10">
+                                            {(offer.features as string[]).map((feature, i) => {
+                                                const isInherited = i < (offer.newFrom ?? 0);
+                                                return (
+                                                    <li key={i} className="flex items-start gap-3 group/item">
+                                                        <div className={`mt-0.5 w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300
+                                                            ${isInherited
+                                                                ? 'bg-amber-400/15 text-amber-400'
+                                                                : offer.color === 'blue'   ? 'bg-blue-500/15   text-blue-400   group-hover/item:bg-blue-500/30'
+                                                                : offer.color === 'amber'  ? 'bg-amber-400/15  text-amber-400  group-hover/item:bg-amber-400/30'
+                                                                                           : 'bg-purple-500/15 text-purple-400 group-hover/item:bg-purple-500/30'}
+                                                        `}>
+                                                            {isInherited ? <Check className="w-2.5 h-2.5" /> : <Sparkles className="w-2.5 h-2.5" />}
+                                                        </div>
+                                                        <span className={`text-xs leading-relaxed transition-colors duration-300 ${isInherited ? 'text-amber-400 font-semibold' : 'text-gray-300 font-medium group-hover/item:text-white'}`}>{feature}</span>
+                                                    </li>
+                                                );
+                                            })}
+                                        </ul>
+
+                                        {/* CTA */}
+                                        <button
+                                            onClick={() => scrollToConfigurator(offer.siteTypeId)}
+                                            className={`relative z-10 mt-auto w-full py-4 lg:py-5 rounded-2xl font-bold text-xs uppercase tracking-[0.15em] flex items-center justify-center gap-2 border transition-all duration-300
+                                                ${offer.color === 'blue'
+                                                    ? 'bg-blue-600/20 border-blue-500/40 text-blue-300 hover:bg-blue-600 hover:text-white hover:border-transparent hover:shadow-[0_0_30px_rgba(59,130,246,0.35)]'
+                                                    : offer.color === 'amber'
+                                                        ? 'bg-amber-400/20 border-amber-400/40 text-amber-300 hover:bg-amber-500 hover:text-black hover:border-transparent hover:shadow-[0_0_30px_rgba(251,191,36,0.35)]'
+                                                        : 'bg-purple-600/20 border-purple-500/40 text-purple-300 hover:bg-purple-600 hover:text-white hover:border-transparent hover:shadow-[0_0_30px_rgba(168,85,247,0.35)]'}
+                                            `}
+                                        >
                                             Choisir cette offre
-                                            <ArrowRight className="w-4 h-4" />
+                                            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" />
                                         </button>
-                                    </motion.div>
-                                );
-                            })}
-                        </div>
-
-                        {/* Dot Indicators */}
-                        <div className="pricing-dots flex items-center gap-3 mt-8">
-                            {offers.map((_, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => setCurrentIndex(index)}
-                                    className={`rounded-full transition-all duration-500 ${index === currentIndex
-                                        ? 'w-8 h-2 bg-premium-green shadow-[0_0_10px_rgba(37,99,235,0.4)]'
-                                        : 'w-2 h-2 bg-white/20 hover:bg-white/40'
-                                        }`}
-                                    aria-label={`Go to offer ${index + 1}`}
-                                />
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Desktop: Premium Static Cards */}
-                    <div className="pricing-container hidden lg:grid grid-cols-3 gap-6 mb-12 items-stretch perspective-1000 overflow-visible">
-                        {offers.map((offer, index) => (
-                            <TiltCard key={index} highlight={offer.highlight} color={offer.color} className="group">
-                                <div className={`pricing-card ${offer.highlight ? 'popular' : ''} relative p-7 rounded-[2rem] flex flex-col h-full bg-[#080808]/60 backdrop-blur-2xl border transition-all duration-500 overflow-hidden
-                                    ${getBorderColorClass(offer.color)} ${getGlowClass(offer.color)} hover:bg-white/[0.03]
-                                `}>
-
-                                    <>
-                                        <div className={`absolute top-0 left-0 right-0 h-[1px] opacity-50 ${getTopLineClass(offer.color)}`}></div>
-                                        <div className={`absolute top-0 inset-x-0 h-32 opacity-40 pointer-events-none ${getTopGradClass(offer.color)}`}></div>
-                                    </>
-
-                                    <div className={`absolute -right-8 -top-8 transform rotate-12 transition-transform duration-700 group-hover:rotate-0 group-hover:scale-110 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity
-                                        ${offer.color === 'blue' ? 'text-blue-500/[0.05]' : offer.color === 'purple' ? 'text-purple-500/[0.05]' : 'text-amber-400/[0.05]'}
-                                    `}>
-                                        <offer.icon className="w-80 h-80" strokeWidth={0.5} />
                                     </div>
-                                    <div className={`absolute -right-8 -top-8 transform rotate-12 transition-transform duration-700 pointer-events-none opacity-30 group-hover:opacity-0
-                                        ${offer.color === 'blue' ? 'text-blue-500/[0.02]' : offer.color === 'purple' ? 'text-purple-500/[0.02]' : 'text-amber-400/[0.02]'}
-                                    `}>
-                                        <offer.icon className="w-80 h-80" strokeWidth={0.5} />
-                                    </div>
-
-                                    {/* Badge */}
-                                    <div className="flex justify-center mb-5 relative z-10">
-                                        <div className={`px-5 py-2 rounded-full flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider border
-                                            ${offer.color === 'blue'   ? 'bg-blue-500/10   text-blue-400   border-blue-500/30'
-                                            : offer.color === 'amber' ? 'bg-amber-400/10  text-amber-400  border-amber-400/30'
-                                                                       : 'bg-purple-500/10 text-purple-400 border-purple-500/30'}
-                                        `}>
-                                            <offer.icon className="w-3.5 h-3.5" />
-                                            {getBadge(offer.title)}
-                                        </div>
-                                    </div>
-
-                                    {/* Title & Price */}
-                                    <div className="mb-6 text-center relative z-10">
-                                        <h3 className={`text-xl font-bold font-display uppercase tracking-widest mb-4 transition-colors duration-300 ${offer.highlight ? 'text-white' : 'text-gray-100 group-hover:text-white'}`}>
-                                            {offer.title}
-                                        </h3>
-                                        <div className="flex items-start justify-center gap-1 group-hover:scale-105 transition-transform duration-500 origin-center">
-                                            <span className="price text-6xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white via-[#c8c8c8] to-[#787878]">
-                                                {offer.price}
-                                            </span>
-                                            <span className="text-2xl mt-3 text-gray-400 font-light">€</span>
-                                        </div>
-                                        <p className="text-gray-400 text-sm mt-5 font-medium px-2 leading-relaxed">{offer.description}</p>
-                                    </div>
-
-                                    <div className={`w-full h-[1px] mb-6 transition-all duration-500 relative z-10
-                                         ${offer.color === 'blue' ? 'bg-gradient-to-r from-transparent via-blue-500/20 to-transparent group-hover:via-blue-500/40' : offer.color === 'purple' ? 'bg-gradient-to-r from-transparent via-purple-500/20 to-transparent group-hover:via-purple-500/40' : 'bg-gradient-to-r from-transparent via-amber-400/20 to-transparent group-hover:via-amber-400/40'}
-                                    `}></div>
-
-                                    {/* Features */}
-                                    <ul className="space-y-2.5 mb-6 flex-1 relative z-10">
-                                        {(offer.features as string[]).map((feature, i) => {
-                                            const isInherited = i < (offer.newFrom ?? 0);
-                                            return (
-                                                <li key={i} className="flex items-start gap-3 group/item">
-                                                    <div className={`mt-0.5 w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300
-                                                        ${isInherited
-                                                            ? 'bg-amber-400/15 text-amber-400'
-                                                            : offer.color === 'blue'   ? 'bg-blue-500/15   text-blue-400   group-hover/item:bg-blue-500/30'
-                                                            : offer.color === 'amber'  ? 'bg-amber-400/15  text-amber-400  group-hover/item:bg-amber-400/30'
-                                                                                       : 'bg-purple-500/15 text-purple-400 group-hover/item:bg-purple-500/30'
-                                                        }
-                                                    `}>
-                                                        {isInherited ? <Check className="w-2.5 h-2.5" /> : <Sparkles className="w-2.5 h-2.5" />}
-                                                    </div>
-                                                    <span className={`text-xs leading-relaxed transition-colors duration-300 ${isInherited ? 'text-amber-400 font-semibold' : 'text-gray-300 font-medium group-hover/item:text-white'}`}>{feature}</span>
-                                                </li>
-                                            );
-                                        })}
-                                    </ul>
-
-                                    {/* CTA Button */}
-                                    <button onClick={() => scrollToConfigurator(offer.siteTypeId)} className="relative z-10 group/btn w-full">
-                                        <div className={`cta cta-btn w-full py-5 rounded-2xl font-bold text-xs uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-2 border overflow-hidden relative shadow-lg
-                                            ${offer.color === 'blue'
-                                                ? 'bg-blue-600/20   border-blue-500/40   text-blue-300   hover:bg-blue-600   hover:text-white hover:border-transparent hover:shadow-[0_0_30px_rgba(59,130,246,0.35)]'
-                                                : offer.color === 'amber'
-                                                    ? 'bg-amber-400/20  border-amber-400/40  text-amber-300  hover:bg-amber-500  hover:text-black hover:border-transparent hover:shadow-[0_0_30px_rgba(251,191,36,0.35)]'
-                                                    : 'bg-purple-600/20 border-purple-500/40 text-purple-300 hover:bg-purple-600 hover:text-white hover:border-transparent hover:shadow-[0_0_30px_rgba(168,85,247,0.35)]'
-                                            }
-                                        `}>
-                                            <span className="relative z-20 flex items-center gap-2">
-                                                Choisir cette offre
-                                                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
-                                            </span>
-                                        </div>
-                                    </button>
-                                </div>
-                            </TiltCard>
-                        ))}
+                                </TiltCard>
+                            );
+                        })}
                     </div>
 
                     {/* ── Configurateur de devis ── */}

@@ -70,6 +70,12 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 ::selection {
@@ -755,17 +761,33 @@ img[loading="lazy"] {
 
 /* === GLOBAL MOBILE POLISH === */
 @media (max-width: 768px) {
-  /* Ensure all page wrappers don't overflow */
-  .page-wrapper,
-  [class*="max-w-6xl"],
-  [class*="max-w-7xl"] {
-    overflow-x: hidden;
-  }
-
   /* Tighter section spacing on mobile */
   main section {
     padding-top: clamp(40px, 5vw, 64px);
     padding-bottom: clamp(40px, 5vw, 64px);
+  }
+}
+
+/* === MOBILE SPECIFIC (≤ 480px) === */
+@media (max-width: 480px) {
+  /* AuditGratuit: single column for pillar cards */
+  .audit-pillars-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* FooterCTA: tighter header margin */
+  .footer-cta-title {
+    font-size: clamp(1.4rem, 7vw, 1.875rem);
+  }
+
+  /* Testimonials: full width review cards */
+  .responsive-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* About founder photo: shorter on tiny screens */
+  .about-founder-photo {
+    height: 240px !important;
   }
 }
 

@@ -94,7 +94,7 @@ export const Showcase: React.FC = () => {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap"
+            className="flex flex-wrap gap-2 pb-2"
           >
             {categories.map((cat, index) => (
               <button

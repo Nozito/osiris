@@ -1,5 +1,5 @@
 ﻿import React, { useState, useRef } from 'react';
-import { motion, useInView, useAnimation } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { Zap, Search, Palette, Target, MessageCircle, PhoneCall, Send, Clock, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
@@ -35,7 +35,7 @@ export const AuditGratuit: React.FC = () => {
     return (
         <section
             id="audit"
-            className="relative w-full py-20 sm:py-28 lg:py-36 px-4 sm:px-6 overflow-hidden scroll-mt-20"
+            className="relative w-full py-20 sm:py-28 lg:py-36 px-4 sm:px-6 overflow-hidden scroll-mt-28"
         >
             <span id="audit-gratuit" className="absolute -top-24" aria-hidden="true" />
 
@@ -66,8 +66,8 @@ export const AuditGratuit: React.FC = () => {
                 {/* === TWO-COLUMN LAYOUT: pillars + CTA === */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-20 sm:mb-24 items-start">
 
-                    {/* LEFT: 4 pillar cards */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {/* LEFT: 4 pillar cards — styled like Process cards */}
+                    <div className="grid grid-cols-2 gap-3 sm:gap-4">
                         {t.audit.pillars.map((pillar, index) => {
                             const Icon = iconMap[pillar.icon] ?? Zap;
                             return (
@@ -77,21 +77,24 @@ export const AuditGratuit: React.FC = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.5, delay: index * 0.08 }}
-                                    className="flex flex-col gap-3 p-5 rounded-2xl bg-white/[0.03] border border-white/[0.08] hover:border-premium-green/30 hover:bg-white/[0.055] hover:-translate-y-1 transition-all duration-300 group"
+                                    className="group relative"
                                 >
-                                    <div className="flex items-center gap-3">
-                                        <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-premium-green/10 border border-premium-green/20 flex items-center justify-center group-hover:bg-premium-green/20 transition-colors duration-300">
-                                            <Icon className="w-4.5 h-4.5 text-premium-green" />
+                                    <div className="border-spin-anim bg-gradient-to-br from-white/[0.07] to-white/[0.01] backdrop-blur-sm border border-white/10 p-4 sm:p-5 rounded-2xl hover:bg-white/[0.08] hover:border-premium-green/40 hover:-translate-y-1 hover:shadow-[0_0_40px_-15px_rgba(37,99,235,0.2)] transition-all duration-300 h-full flex flex-col justify-between">
+                                        {/* Header Row */}
+                                        <div className="flex items-center gap-2 sm:gap-3 mb-3">
+                                            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-black/50 border border-white/10 flex items-center justify-center group-hover:text-premium-green group-hover:bg-premium-green/10 group-hover:border-premium-green/50 group-hover:scale-110 transition-all duration-300 flex-shrink-0">
+                                                <Icon className="w-4 h-4 sm:w-[18px] sm:h-[18px] text-premium-green" />
+                                            </div>
+                                            {pillar.tag && (
+                                                <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-premium-green/10 text-premium-green border border-premium-green/20 uppercase tracking-wider">
+                                                    {pillar.tag}
+                                                </span>
+                                            )}
                                         </div>
-                                        {pillar.tag && (
-                                            <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-premium-green/10 text-premium-green border border-premium-green/20 uppercase tracking-wider">
-                                                {pillar.tag}
-                                            </span>
-                                        )}
-                                    </div>
-                                    <div>
-                                        <h3 className="text-sm font-bold text-white mb-1">{pillar.title}</h3>
-                                        <p className="text-xs text-white/50 leading-relaxed">{pillar.description}</p>
+                                        <div>
+                                            <h3 className="text-xs sm:text-sm font-bold text-white mb-1 group-hover:text-premium-green transition-colors leading-tight">{pillar.title}</h3>
+                                            <p className="text-[11px] sm:text-xs text-white/50 leading-relaxed group-hover:text-white/60 transition-colors">{pillar.description}</p>
+                                        </div>
                                     </div>
                                 </motion.div>
                             );
@@ -114,9 +117,9 @@ export const AuditGratuit: React.FC = () => {
                             onChange={(e) => setMessage(e.target.value)}
                             placeholder={t.audit.textareaPlaceholder}
                             rows={5}
-                            className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-white/80 placeholder:text-white/25 focus:outline-none focus:border-premium-green/40 focus:bg-white/[0.06] transition-all duration-300 resize-none mb-6 flex-1"
+                            className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-white/80 placeholder:text-white/25 focus:outline-none focus:border-premium-green/40 focus:bg-white/[0.06] transition-all duration-300 resize-none mb-6 scrollbar-hide"
                         />
-                        <div className="flex flex-col gap-3">
+                        <div className="flex flex-col gap-3 items-center">
                             <button
                                 onClick={handleWhatsApp}
                                 className="btn-whatsapp group w-full justify-center"
@@ -210,7 +213,7 @@ export const AuditGratuit: React.FC = () => {
 
                                         {/* Connector segment (between nodes only) */}
                                         {!isLast && (
-                                            <div className="flex-1 mt-7 mx-2 h-[2px] bg-white/[0.07] rounded-full overflow-hidden flex-shrink-0 self-start">
+                                            <div className="grow mt-7 mx-2 h-[2px] bg-white/[0.07] rounded-full overflow-hidden">
                                                 <motion.div
                                                     className={`h-full rounded-full ${
                                                         i === allSteps.length - 2

@@ -558,12 +558,12 @@ export const ValueTrifecta: React.FC = () => {
 
           {/* Mobile View: Tabs */}
           <div className="lg:hidden">
-            <div className="flex p-1 bg-white/5 rounded-xl mb-8 overflow-x-auto no-scrollbar">
+            <div className="flex flex-wrap gap-1 p-1 bg-white/5 rounded-xl mb-8">
               {services.map((service) => (
                 <button
                   key={service.id}
                   onClick={() => setActiveTab(service.id)}
-                  className={`flex-1 py-3 px-2 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wide transition-all whitespace-nowrap
+                  className={`flex-none py-3 px-3 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wide transition-all whitespace-nowrap
                     ${activeTab === service.id
                       ? 'bg-premium-green text-white shadow-lg shadow-premium-green/20'
                       : 'text-gray-400 hover:text-white hover:bg-white/5'
