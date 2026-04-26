@@ -1,11 +1,10 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, useMotionTemplate, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { Check, ArrowRight, HelpCircle, ChevronLeft, ChevronRight, Rocket, Zap, Crown, Calculator, Sparkles } from 'lucide-react';
+import { Check, ArrowRight, HelpCircle, ChevronLeft, ChevronRight, Rocket, Zap, Crown, Calculator, Sparkles, FileText, Clock, ClipboardList } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Footer } from '../components/Footer';
 import { SEOHead } from '../components/SEOHead';
 import { useLanguage } from '../context/LanguageContext';
-import emailjs from '@emailjs/browser';
 import jsPDF from 'jspdf';
 
 
@@ -308,55 +307,48 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
             console.error('PDF error:', pdfErr);
         }
 
-        // 2. Send email via EmailJS (or fallback to mailto)
-        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-        const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-        const emailjsConfigured = serviceId && templateId && publicKey &&
-            serviceId !== 'service_xxxxxxx' && templateId !== 'template_xxxxxxx';
-
-        if (emailjsConfigured) {
-            try {
-                await emailjs.send(serviceId, templateId, {
-                    to_email: 'antoine@osiris-agency.fr',
-                    date: new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' }),
-                    first_name: form.firstName,
-                    last_name: form.lastName,
-                    client_email: form.email,
-                    phone: form.phone || '—',
-                    site_type: siteLabel,
-                    base_price: `${(SITE_TYPES.find(s => s.id === siteType)?.price ?? 0).toLocaleString('fr-FR')} €`,
-                    extra_pages: extraPages > 0 ? `+${extraPages}` : '0',
-                    upgrades: upgradesList,
-                    options: universalList,
-                    unlimited_mods: wantsUnlimited ? 'Oui — +19,90 €/mois' : 'Non',
-                    deadline: deadlineLabel,
-                    subtotal_ht: `${subtotalHT.toLocaleString('fr-FR')} €`,
-                    deadline_surcharge: deadlineSurcharge > 0 ? `+${deadlineSurcharge.toLocaleString('fr-FR')} €` : '0 €',
-                    total_ht: `${totalHT.toLocaleString('fr-FR')} €`,
-                    tva: `${tva.toLocaleString('fr-FR')} €`,
-                    total_ttc: `${totalTTC.toLocaleString('fr-FR')} €`,
-                    message: form.message || '—',
-                    reply_to: form.email,
-                }, { publicKey });
-                setSendStatus('success');
-            } catch (err) {
-                console.error('EmailJS error:', err);
-                setSendStatus('error');
-            }
-        } else {
-            // Fallback: ouvre le client mail avec les infos pré-remplies
-            const body = encodeURIComponent(
-                `Prénom : ${form.firstName}\nNom : ${form.lastName}\nEmail : ${form.email}\nTéléphone : ${form.phone}\n\n` +
-                `Offre : ${siteLabel}\nUpgrades : ${upgradesList}\nOptions : ${universalList}\nDélai : ${deadlineLabel}\n\n` +
-                `Total TTC : ${totalTTC.toLocaleString('fr-FR')} €\n\nMessage : ${form.message}`
-            );
-            window.location.href = `mailto:antoine@osiris-agency.fr?subject=${encodeURIComponent(`Devis Osiris — ${siteLabel}`)}&body=${body}`;
+        // 2. Send emails via Resend (Netlify Function)
+        try {
+            const res = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    type:               'quote',
+                    firstName:          form.firstName,
+                    lastName:           form.lastName,
+                    email:              form.email,
+                    phone:              form.phone || '—',
+                    message:            form.message || '—',
+                    siteLabel,
+                    extraPages,
+                    upgradesList,
+                    universalList,
+                    wantsUnlimited,
+                    deadlineLabel,
+                    subtotalHT:         subtotalHT.toLocaleString('fr-FR'),
+                    deadlineSurcharge,
+                    deadlineSurchargeStr: deadlineSurcharge.toLocaleString('fr-FR'),
+                    totalHT:            totalHT.toLocaleString('fr-FR'),
+                    tva:                tva.toLocaleString('fr-FR'),
+                    totalTTC:           totalTTC.toLocaleString('fr-FR'),
+                }),
+            });
+            if (!res.ok) throw new Error('send failed');
             setSendStatus('success');
+        } catch (err) {
+            console.error('send-email error:', err);
+            setSendStatus('error');
         }
     };
 
-    const STEPS = ['Offre', 'Pages', 'Upgrade', 'Options', 'Délai', 'Récap'];
+    const STEPS = [
+        { label: 'Offre',   icon: Rocket },
+        { label: 'Pages',   icon: FileText },
+        { label: 'Upgrade', icon: Zap },
+        { label: 'Options', icon: Sparkles },
+        { label: 'Délai',   icon: Clock },
+        { label: 'Récap',   icon: ClipboardList },
+    ];
 
     const canNext = () => {
         if (step === 1) return siteType !== '';
@@ -390,7 +382,7 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
 
             {/* Progress bar */}
             <div className="flex items-center justify-center gap-0 mb-8">
-                {STEPS.map((label, i) => {
+                {STEPS.map(({ label, icon: StepIcon }, i) => {
                     const num = i + 1;
                     const isDone = step > num;
                     const isActive = step === num;
@@ -400,12 +392,12 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                                 <button
                                     onClick={() => num < step && navigate(num)}
                                     disabled={num > step}
-                                    className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-[11px] font-bold transition-all duration-300 border focus:outline-none
+                                    className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-all duration-300 border focus:outline-none
                                         ${isDone ? 'bg-[#2563EB] border-[#2563EB] text-white shadow-[0_0_12px_rgba(37,99,235,0.5)] cursor-pointer'
                                             : isActive ? 'bg-[#2563EB] border-[#2563EB] text-white shadow-[0_0_20px_rgba(37,99,235,0.6)]'
                                             : 'bg-transparent border-white/15 text-white/30 cursor-default'}`}
                                 >
-                                    {isDone ? '✓' : num}
+                                    {isDone ? <Check className="w-3.5 h-3.5" /> : <StepIcon className="w-3.5 h-3.5" />}
                                 </button>
                                 <span className={`hidden sm:block text-[10px] uppercase tracking-widest font-bold transition-colors duration-300 ${isActive ? 'text-[#2563EB]' : isDone ? 'text-white/50' : 'text-white/20'}`}>
                                     {label}

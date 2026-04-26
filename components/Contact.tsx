@@ -1,11 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Mail } from 'lucide-react';
+import { ArrowRight, Mail, CheckCircle2 } from 'lucide-react';
 
 import { useLanguage } from '../context/LanguageContext';
 
 export const Contact: React.FC = () => {
   const { t } = useLanguage();
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (status === 'sending') return;
+    setStatus('sending');
+
+    const fd = new FormData(e.currentTarget);
+    try {
+      const res = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'contact',
+          name:    fd.get('name')    as string,
+          company: fd.get('company') as string,
+          email:   fd.get('email')   as string,
+          budget:  fd.get('budget')  as string,
+          message: fd.get('message') as string,
+        }),
+      });
+      if (!res.ok) throw new Error('send failed');
+      setStatus('success');
+    } catch {
+      setStatus('error');
+    }
+  };
 
   return (
     <section id="contact" className="px-4 sm:px-6 py-6 sm:py-10 bg-[#0B0B0B] relative overflow-hidden scroll-mt-20 border-t border-white/5">
@@ -69,26 +96,26 @@ export const Contact: React.FC = () => {
             viewport={{ once: true }}
             className="bg-white/5 backdrop-blur-xl p-3 sm:p-8 md:p-12 border border-white/10 rounded-2xl sm:rounded-[2.5rem]"
           >
-            <form className="contact-form space-y-4 sm:space-y-6">
+            <form className="contact-form space-y-4 sm:space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 <div className="space-y-2">
                   <label htmlFor="contact-name" className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.name}</label>
-                  <input id="contact-name" type="text" className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl" placeholder="John Doe" />
+                  <input id="contact-name" name="name" type="text" required className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl" placeholder="John Doe" />
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="contact-company" className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.company}</label>
-                  <input id="contact-company" type="text" className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl" placeholder="Company Ltd" />
+                  <input id="contact-company" name="company" type="text" className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl" placeholder="Company Ltd" />
                 </div>
               </div>
 
               <div className="space-y-2">
                 <label htmlFor="contact-email" className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.email}</label>
-                <input id="contact-email" type="email" className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl" placeholder="john@company.com" />
+                <input id="contact-email" name="email" type="email" required className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl" placeholder="john@company.com" />
               </div>
 
               <div className="space-y-2">
                 <label htmlFor="contact-budget" className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.budget}</label>
-                <select id="contact-budget" aria-label="Budget" className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors appearance-none rounded-xl sm:rounded-2xl">
+                <select id="contact-budget" name="budget" aria-label="Budget" className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors appearance-none rounded-xl sm:rounded-2xl">
                   <option>1k€ - 3k€</option>
                   <option>3k€ - 10k€</option>
                   <option>10k€ +</option>
@@ -97,16 +124,35 @@ export const Contact: React.FC = () => {
 
               <div className="space-y-2">
                 <label htmlFor="contact-message" className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.message}</label>
-                <textarea id="contact-message" rows={4} className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl" placeholder={t.contact.form.messagePlaceholder}></textarea>
-
-
+                <textarea id="contact-message" name="message" required rows={4} className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl" placeholder={t.contact.form.messagePlaceholder}></textarea>
               </div>
 
+              {status === 'error' && (
+                <p className="text-red-400 text-xs text-center">Une erreur est survenue — réessayez ou contactez-nous directement.</p>
+              )}
+
               <div className="flex justify-center mt-4">
-                <button type="button" className="btn-reserve w-full sm:w-auto sm:min-w-[320px] bg-premium-green text-white font-bold py-3 sm:py-5 text-[11px] sm:text-sm uppercase tracking-[0.08em] sm:tracking-widest hover:bg-blue-700 transition-colors duration-300 flex items-center justify-center gap-2 rounded-full">
-                <span className="truncate">{t.contact.form.submit}</span>
-                <ArrowRight className="w-4 h-4 flex-shrink-0" />
-                </button>
+                {status === 'success' ? (
+                  <div className="flex items-center gap-2 text-premium-green font-bold text-sm">
+                    <CheckCircle2 className="w-5 h-5" />
+                    Message envoyé — on vous répond sous 24h !
+                  </div>
+                ) : (
+                  <button
+                    type="submit"
+                    disabled={status === 'sending'}
+                    className="btn-reserve w-full sm:w-auto sm:min-w-[320px] bg-premium-green text-white font-bold py-3 sm:py-5 text-[11px] sm:text-sm uppercase tracking-[0.08em] sm:tracking-widest hover:bg-blue-700 transition-colors duration-300 flex items-center justify-center gap-2 rounded-full disabled:opacity-60 disabled:cursor-not-allowed"
+                  >
+                    {status === 'sending' ? (
+                      <span className="animate-pulse">{t.contact.form.submit}…</span>
+                    ) : (
+                      <>
+                        <span className="truncate">{t.contact.form.submit}</span>
+                        <ArrowRight className="w-4 h-4 flex-shrink-0" />
+                      </>
+                    )}
+                  </button>
+                )}
               </div>
 
               <p className="text-center text-xs text-gray-500 mt-3">{t.contact.reassurance}</p>

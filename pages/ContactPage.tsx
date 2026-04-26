@@ -8,14 +8,32 @@ import { useLanguage } from '../context/LanguageContext';
 
 export const ContactPage: React.FC = () => {
     const { t, language } = useLanguage();
-    const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+    const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        if (formStatus === 'submitting') return;
         setFormStatus('submitting');
-        setTimeout(() => {
+
+        const fd = new FormData(e.currentTarget);
+        try {
+            const res = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    type:    'contact',
+                    name:    fd.get('name')    as string,
+                    company: fd.get('company') as string,
+                    email:   fd.get('email')   as string,
+                    budget:  fd.get('budget')  as string,
+                    message: fd.get('message') as string,
+                }),
+            });
+            if (!res.ok) throw new Error('send failed');
             setFormStatus('success');
-        }, 1500);
+        } catch {
+            setFormStatus('error');
+        }
     };
 
     return (
@@ -192,7 +210,7 @@ export const ContactPage: React.FC = () => {
                                                 <div className="space-y-1.5 group">
                                                     <label htmlFor="cp-name" className="text-[10px] uppercase tracking-widest text-gray-400 font-bold block group-focus-within:text-premium-green transition-colors duration-200">{t.contactPage.labelName}</label>
                                                     <input
-                                                        id="cp-name" required type="text"
+                                                        id="cp-name" name="name" required type="text"
                                                         className="w-full bg-white/[0.03] border border-white/10 rounded-lg px-3.5 py-2.5 text-white text-sm placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none transition-all duration-200 font-medium"
                                                         placeholder="Ex: John Doe"
                                                     />
@@ -200,7 +218,7 @@ export const ContactPage: React.FC = () => {
                                                 <div className="space-y-1.5 group">
                                                     <label htmlFor="cp-company" className="text-[10px] uppercase tracking-widest text-gray-400 font-bold block group-focus-within:text-premium-green transition-colors duration-200">{t.contactPage.labelCompany}</label>
                                                     <input
-                                                        id="cp-company" type="text"
+                                                        id="cp-company" name="company" type="text"
                                                         className="w-full bg-white/[0.03] border border-white/10 rounded-lg px-3.5 py-2.5 text-white text-sm placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none transition-all duration-200 font-medium"
                                                         placeholder="Ex: Studio Osiris"
                                                     />
@@ -212,7 +230,7 @@ export const ContactPage: React.FC = () => {
                                                 <label htmlFor="cp-email" className="text-[10px] uppercase tracking-widest text-gray-400 font-bold block group-focus-within:text-premium-green transition-colors duration-200">{t.contactPage.labelEmail}</label>
                                                 <div className="relative">
                                                     <input
-                                                        id="cp-email" required type="email"
+                                                        id="cp-email" name="email" required type="email"
                                                         className="w-full bg-white/[0.03] border border-white/10 rounded-lg px-3.5 py-2.5 pr-10 text-white text-sm placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none transition-all duration-200 font-medium"
                                                         placeholder="Ex: john@osiris.com"
                                                     />
@@ -225,7 +243,7 @@ export const ContactPage: React.FC = () => {
                                                 <label htmlFor="cp-budget" className="text-[10px] uppercase tracking-widest text-gray-400 font-bold block group-focus-within:text-premium-green transition-colors duration-200">{t.contactPage.labelBudget}</label>
                                                 <div className="relative">
                                                     <select
-                                                        id="cp-budget" aria-label="Budget"
+                                                        id="cp-budget" name="budget" aria-label="Budget"
                                                         className="w-full bg-white/[0.03] border border-white/10 rounded-lg px-3.5 py-2.5 text-white text-sm focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none transition-all duration-200 font-medium appearance-none cursor-pointer"
                                                     >
                                                         {t.contactPage.budgetOptions.map((option: string, i: number) => (
@@ -240,11 +258,15 @@ export const ContactPage: React.FC = () => {
                                             <div className="space-y-1.5 group">
                                                 <label htmlFor="cp-message" className="text-[10px] uppercase tracking-widest text-gray-500 font-bold block group-focus-within:text-premium-green transition-colors duration-200">{t.contactPage.labelMessage}</label>
                                                 <textarea
-                                                    id="cp-message" required rows={4}
+                                                    id="cp-message" name="message" required rows={4}
                                                     className="w-full bg-white/[0.03] border border-white/10 rounded-lg px-3.5 py-2.5 text-white text-sm placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none transition-all duration-200 font-medium resize-none leading-relaxed"
                                                     placeholder={t.contactPage.messagePlaceholder}
                                                 />
                                             </div>
+
+                                            {formStatus === 'error' && (
+                                                <p className="text-red-400 text-xs text-center pt-1">Une erreur est survenue — réessayez ou écrivez-nous directement.</p>
+                                            )}
 
                                             {/* Submit */}
                                             <div className="pt-2">
