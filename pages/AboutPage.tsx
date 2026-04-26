@@ -118,7 +118,7 @@ export const AboutPage: React.FC = () => {
                   {i > 0 && <div className="w-px self-stretch bg-white/10 flex-shrink-0" style={{ marginInline: 'clamp(10px, 2.5vw, 32px)' }} />}
                   <div className="flex flex-col items-center gap-0.5">
                     <span className="font-black font-display leading-none" style={{ color: '#C9A84C', fontSize: 'clamp(11px, 3.5vw, 15px)', textShadow: '0 0 12px rgba(201,168,76,0.7), 0 0 28px rgba(201,168,76,0.35)' }}>{stat.value}</span>
-                    <span className="text-gray-500 uppercase font-semibold" style={{ fontSize: 'clamp(8px, 2.2vw, 13px)', letterSpacing: 'clamp(0.04em, 0.3vw, 0.16em)' }}>{stat.label}</span>
+                    <span className="text-gray-400 uppercase font-semibold" style={{ fontSize: 'clamp(8px, 2.2vw, 13px)', letterSpacing: 'clamp(0.04em, 0.3vw, 0.16em)' }}>{stat.label}</span>
                   </div>
                 </React.Fragment>
               ))}
@@ -209,7 +209,7 @@ export const AboutPage: React.FC = () => {
                     </div>
                     <div className="min-w-0">
                       <h4 className="text-white font-semibold mb-1.5" style={{ fontSize: '14px' }}>{item.title}</h4>
-                      <p className="text-gray-500" style={{ fontSize: '13px', lineHeight: '1.5' }}>{item.description}</p>
+                      <p className="text-gray-400" style={{ fontSize: '13px', lineHeight: '1.5' }}>{item.description}</p>
                     </div>
                   </motion.div>
                 );
@@ -231,7 +231,7 @@ export const AboutPage: React.FC = () => {
               <h3 className="font-display font-bold text-white" style={{ fontSize: 'clamp(22px, 4vw, 28px)' }}>
                 {isFr ? 'Vous voulez travailler avec nous ?' : 'Do you want to work with us?'}
               </h3>
-              <p className="text-gray-500 mx-auto" style={{ fontSize: '15px', marginTop: '8px', maxWidth: '400px' }}>
+              <p className="text-gray-400 mx-auto" style={{ fontSize: '15px', marginTop: '8px', maxWidth: '400px' }}>
                 {isFr ? 'Réponse sous 24h. Premier appel gratuit.' : 'Reply within 24h. First call is free.'}
               </p>
               <Link

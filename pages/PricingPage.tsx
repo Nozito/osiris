@@ -376,10 +376,10 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                         </span>
                         <span className="text-white/40 text-xs">€ HT</span>
                     </div>
-                    <p className="text-white/25 text-[10px] mt-0.5">{totalTTC.toLocaleString('fr-FR')} € TTC</p>
+                    <p className="text-white/50 text-[10px] mt-0.5">{totalTTC.toLocaleString('fr-FR')} € TTC</p>
                 </div>
                 <div className="text-right">
-                    <p className="text-white/30 text-[9px] uppercase tracking-widest font-bold mb-1">Étape {step}/6</p>
+                    <p className="text-white/50 text-[9px] uppercase tracking-widest font-bold mb-1">Étape {step}/6</p>
                     <div className="flex gap-0.5">
                         {[1,2,3,4,5,6].map(n => (
                             <div key={n} className={`h-1 w-5 rounded-full transition-all duration-300 ${n <= step ? 'bg-[#2563EB]' : 'bg-white/10'}`} />
@@ -443,7 +443,7 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                             <h3 className="text-lg font-bold text-white font-display mb-2 uppercase tracking-widest text-center">
                                 Choix de l'offre
                             </h3>
-                            <p className="text-white/40 text-xs mb-7 text-center">Sélectionnez le type de site qui correspond à votre projet.</p>
+                            <p className="text-white/60 text-xs mb-7 text-center">Sélectionnez le type de site qui correspond à votre projet.</p>
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                 {SITE_TYPES.map(type => (
                                     <button
@@ -472,7 +472,7 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                             <h3 className="text-lg font-bold text-white font-display mb-2 uppercase tracking-widest text-center">
                                 Pages supplémentaires
                             </h3>
-                            <p className="text-white/40 text-xs mb-8 text-center">Pages 1–3 : 100€ · Pages 4–9 : 80€ · Pages 10+ : 60€</p>
+                            <p className="text-white/60 text-xs mb-8 text-center">Pages 1–3 : 100€ · Pages 4–9 : 80€ · Pages 10+ : 60€</p>
                             <div className="flex items-center gap-6 justify-center">
                                 <button
                                     onClick={() => setExtraPages(p => Math.max(0, p - 1))}
@@ -515,7 +515,7 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                             <h3 className="text-lg font-bold text-white font-display mb-2 uppercase tracking-widest text-center">
                                 Mise à niveau de l'offre
                             </h3>
-                            <p className="text-white/40 text-xs mb-6 text-center">Ajoutez des fonctionnalités du niveau supérieur à la carte.</p>
+                            <p className="text-white/60 text-xs mb-6 text-center">Ajoutez des fonctionnalités du niveau supérieur à la carte.</p>
 
                             {/* Business options — visible only for Starter */}
                             {siteType === 'vitrine-simple' && (
@@ -537,7 +537,7 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                                                     <div className="flex-1 min-w-0">
                                                         <p className={`text-sm font-bold truncate ${checked ? 'text-white' : 'text-white/70'}`}>{opt.label}</p>
                                                     </div>
-                                                    <span className={`text-sm font-black font-display shrink-0 ${checked ? 'text-[#60A5FA]' : 'text-white/30'}`}>+{opt.price} €</span>
+                                                    <span className={`text-sm font-black font-display shrink-0 ${checked ? 'text-[#60A5FA]' : 'text-white/50'}`}>+{opt.price} €</span>
                                                 </button>
                                             );
                                         })}
@@ -565,7 +565,7 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                                                     <div className="flex-1 min-w-0">
                                                         <p className={`text-sm font-bold truncate ${checked ? 'text-white' : 'text-white/70'}`}>{opt.label}</p>
                                                     </div>
-                                                    <span className={`text-sm font-black font-display shrink-0 ${checked ? 'text-purple-400' : 'text-white/30'}`}>+{opt.price} €</span>
+                                                    <span className={`text-sm font-black font-display shrink-0 ${checked ? 'text-purple-400' : 'text-white/50'}`}>+{opt.price} €</span>
                                                 </button>
                                             );
                                         })}
@@ -581,7 +581,7 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                             <h3 className="text-lg font-bold text-white font-display mb-2 uppercase tracking-widest text-center">
                                 Fonctionnalités additionnelles
                             </h3>
-                            <p className="text-white/40 text-xs mb-6 text-center">Disponibles pour tous les niveaux.</p>
+                            <p className="text-white/60 text-xs mb-6 text-center">Disponibles pour tous les niveaux.</p>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 {UNIVERSAL_OPTIONS.map(opt => {
                                     const checked = selectedUniversal.has(opt.id);
@@ -595,7 +595,7 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                                             <div className="flex-1 min-w-0">
                                                 <p className={`text-sm font-bold truncate ${checked ? 'text-white' : 'text-white/70'}`}>{opt.label}</p>
                                             </div>
-                                            <span className={`text-sm font-black font-display shrink-0 ${checked ? 'text-[#60A5FA]' : 'text-white/30'}`}>+{opt.price} €</span>
+                                            <span className={`text-sm font-black font-display shrink-0 ${checked ? 'text-[#60A5FA]' : 'text-white/50'}`}>+{opt.price} €</span>
                                         </button>
                                     );
                                 })}
@@ -610,9 +610,9 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <p className={`text-sm font-bold ${wantsUnlimited ? 'text-white' : 'text-white/70'}`}>Modifications illimitées</p>
-                                        <p className="text-white/30 text-xs mt-0.5">Engagement 3 mois minimum</p>
+                                        <p className="text-white/50 text-xs mt-0.5">Engagement 3 mois minimum</p>
                                     </div>
-                                    <span className={`text-sm font-black font-display shrink-0 ${wantsUnlimited ? 'text-amber-400' : 'text-white/30'}`}>+19,90 €/mois</span>
+                                    <span className={`text-sm font-black font-display shrink-0 ${wantsUnlimited ? 'text-amber-400' : 'text-white/50'}`}>+19,90 €/mois</span>
                                 </button>
                             </div>
                         </div>
@@ -624,7 +624,7 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                             <h3 className="text-lg font-bold text-white font-display mb-2 uppercase tracking-widest text-center">
                                 Délai de livraison
                             </h3>
-                            <p className="text-white/40 text-xs mb-7 text-center">Choisissez le délai de réalisation de votre projet.</p>
+                            <p className="text-white/60 text-xs mb-7 text-center">Choisissez le délai de réalisation de votre projet.</p>
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-xs sm:max-w-none mx-auto">
                                 {DEADLINES.map(d => (
                                     <button
@@ -713,7 +713,7 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                                         <span className="text-[#2563EB] font-black font-display text-lg shrink-0">{totalTTC.toLocaleString('fr-FR')} €</span>
                                     </div>
                                 </div>
-                                <p className="text-white/25 text-[10px] pt-2">Estimation indicative — devis personnalisé gratuit sous 24h</p>
+                                <p className="text-white/50 text-[10px] pt-2">Estimation indicative — devis personnalisé gratuit sous 24h</p>
                             </div>
 
                             {/* Contact form */}
@@ -807,7 +807,7 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                             </span>
                             <span className="text-white/40 text-sm font-light">€ HT</span>
                         </div>
-                        <p className="text-white/25 text-xs mb-5">soit {totalTTC.toLocaleString('fr-FR')} € TTC (TVA 20%)</p>
+                        <p className="text-white/50 text-xs mb-5">soit {totalTTC.toLocaleString('fr-FR')} € TTC (TVA 20%)</p>
 
                         {/* Breakdown */}
                         <div className="space-y-2 text-xs border-t border-white/8 pt-4">
@@ -849,7 +849,7 @@ const QuoteConfigurator: React.FC<{ initialSiteType?: string }> = ({ initialSite
                             )}
                         </div>
 
-                        <p className="text-white/20 text-[10px] leading-relaxed mt-4">
+                        <p className="text-white/50 text-[10px] leading-relaxed mt-4">
                             Estimation indicative — devis personnalisé gratuit
                         </p>
                     </div>
@@ -1142,9 +1142,9 @@ export const PricingPage: React.FC = () => {
 
                                         {/* Title & Price */}
                                         <div className="mb-5 lg:mb-6 text-center relative z-10">
-                                            <h3 className="text-xl font-black font-display uppercase tracking-widest mb-3 lg:mb-4 text-white group-hover:text-white transition-colors">
+                                            <h2 className="text-xl font-black font-display uppercase tracking-widest mb-3 lg:mb-4 text-white group-hover:text-white transition-colors">
                                                 {offer.title}
-                                            </h3>
+                                            </h2>
                                             <div className="flex items-start justify-center gap-1 group-hover:scale-105 transition-transform duration-500 origin-center">
                                                 <span className="text-5xl lg:text-6xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white via-[#c8c8c8] to-[#787878]">
                                                     {offer.price}
@@ -1311,12 +1311,12 @@ export const PricingPage: React.FC = () => {
                                     className="bg-white/[0.02] border border-white/5 rounded-2xl p-8 hover:border-premium-green/20 transition-all duration-300 group hover:translate-x-2 backdrop-blur-md relative overflow-hidden"
                                 >
                                     <div className="absolute inset-0 bg-gradient-to-r from-premium-green/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                                    <h4 className="text-white font-bold mb-3 flex items-start gap-4 text-lg relative z-10">
+                                    <h3 className="text-white font-bold mb-3 flex items-start gap-4 text-lg relative z-10">
                                         <div className="mt-1 w-6 h-6 rounded-full bg-premium-green/10 flex items-center justify-center flex-shrink-0 group-hover:bg-premium-green group-hover:text-white transition-colors duration-300 shadow-[0_0_10px_rgba(37,99,235,0.1)] group-hover:shadow-[0_0_15px_rgba(37,99,235,0.5)]">
                                             <HelpCircle className="w-3.5 h-3.5" />
                                         </div>
                                         {faq.question}
-                                    </h4>
+                                    </h3>
                                     <p className="text-gray-400 text-sm leading-relaxed pl-10 relative z-10">
                                         {faq.answer}
                                     </p>

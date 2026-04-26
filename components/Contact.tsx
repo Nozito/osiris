@@ -55,7 +55,7 @@ export const Contact: React.FC = () => {
                   <Mail className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="text-white font-bold mb-1">{t.contact.emailDirect}</h4>
+                  <h3 className="text-white font-bold mb-1">{t.contact.emailDirect}</h3>
                   {/* Additional info removed since email is now the title */}
                 </div>
               </div>

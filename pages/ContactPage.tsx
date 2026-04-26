@@ -97,7 +97,7 @@ export const ContactPage: React.FC = () => {
                                             <Mail className="w-4 h-4" />
                                         </div>
                                         <div className="min-w-0">
-                                            <p className="text-gray-500 text-[10px] uppercase tracking-widest font-bold mb-0.5">{t.contactPage.emailDesc}</p>
+                                            <p className="text-gray-400 text-[10px] uppercase tracking-widest font-bold mb-0.5">{t.contactPage.emailDesc}</p>
                                             <h3 className="text-white font-bold text-xs sm:text-sm truncate">
                                                 <a href="mailto:contact@osiris-agency.fr" className="hover:text-premium-green transition-colors">{t.contactPage.emailTitle}</a>
                                             </h3>
@@ -111,7 +111,7 @@ export const ContactPage: React.FC = () => {
                                             <Clock className="w-4 h-4" />
                                         </div>
                                         <div className="min-w-0">
-                                            <p className="text-gray-500 text-[10px] uppercase tracking-widest font-bold mb-0.5">{t.contactPage.availabilityDesc}</p>
+                                            <p className="text-gray-400 text-[10px] uppercase tracking-widest font-bold mb-0.5">{t.contactPage.availabilityDesc}</p>
                                             <h3 className="text-white font-bold text-xs sm:text-sm mb-0.5">{t.contactPage.availabilityTitle}</h3>
                                             <p className="text-white font-mono text-[10px] sm:text-xs">{t.contactPage.availabilityHours}</p>
                                         </div>
@@ -190,7 +190,7 @@ export const ContactPage: React.FC = () => {
                                             {/* Name + Company row */}
                                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                 <div className="space-y-1.5 group">
-                                                    <label htmlFor="cp-name" className="text-[10px] uppercase tracking-widest text-gray-500 font-bold block group-focus-within:text-premium-green transition-colors duration-200">{t.contactPage.labelName}</label>
+                                                    <label htmlFor="cp-name" className="text-[10px] uppercase tracking-widest text-gray-400 font-bold block group-focus-within:text-premium-green transition-colors duration-200">{t.contactPage.labelName}</label>
                                                     <input
                                                         id="cp-name" required type="text"
                                                         className="w-full bg-white/[0.03] border border-white/10 rounded-lg px-3.5 py-2.5 text-white text-sm placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none transition-all duration-200 font-medium"
@@ -198,7 +198,7 @@ export const ContactPage: React.FC = () => {
                                                     />
                                                 </div>
                                                 <div className="space-y-1.5 group">
-                                                    <label htmlFor="cp-company" className="text-[10px] uppercase tracking-widest text-gray-500 font-bold block group-focus-within:text-premium-green transition-colors duration-200">{t.contactPage.labelCompany}</label>
+                                                    <label htmlFor="cp-company" className="text-[10px] uppercase tracking-widest text-gray-400 font-bold block group-focus-within:text-premium-green transition-colors duration-200">{t.contactPage.labelCompany}</label>
                                                     <input
                                                         id="cp-company" type="text"
                                                         className="w-full bg-white/[0.03] border border-white/10 rounded-lg px-3.5 py-2.5 text-white text-sm placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none transition-all duration-200 font-medium"
@@ -209,7 +209,7 @@ export const ContactPage: React.FC = () => {
 
                                             {/* Email */}
                                             <div className="space-y-1.5 group">
-                                                <label htmlFor="cp-email" className="text-[10px] uppercase tracking-widest text-gray-500 font-bold block group-focus-within:text-premium-green transition-colors duration-200">{t.contactPage.labelEmail}</label>
+                                                <label htmlFor="cp-email" className="text-[10px] uppercase tracking-widest text-gray-400 font-bold block group-focus-within:text-premium-green transition-colors duration-200">{t.contactPage.labelEmail}</label>
                                                 <div className="relative">
                                                     <input
                                                         id="cp-email" required type="email"
@@ -222,7 +222,7 @@ export const ContactPage: React.FC = () => {
 
                                             {/* Budget */}
                                             <div className="space-y-1.5 group">
-                                                <label htmlFor="cp-budget" className="text-[10px] uppercase tracking-widest text-gray-500 font-bold block group-focus-within:text-premium-green transition-colors duration-200">{t.contactPage.labelBudget}</label>
+                                                <label htmlFor="cp-budget" className="text-[10px] uppercase tracking-widest text-gray-400 font-bold block group-focus-within:text-premium-green transition-colors duration-200">{t.contactPage.labelBudget}</label>
                                                 <div className="relative">
                                                     <select
                                                         id="cp-budget" aria-label="Budget"

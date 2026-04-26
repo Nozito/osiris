@@ -31,7 +31,7 @@ export const Footer: React.FC = () => {
         <div className="footer-main flex flex-col items-center justify-center gap-2 py-4 border-t border-white/5">
           {/* Company Info - Centered */}
           <div className="flex flex-col items-center text-center max-w-lg">
-            <h4 className="text-white font-bold text-2xl mb-3 font-display">OSIRIS</h4>
+            <h2 className="text-white font-bold text-2xl mb-3 font-display">OSIRIS</h2>
             <p className="text-gray-400 text-sm leading-relaxed mb-3">
               {t.footer.companyDesc}
             </p>

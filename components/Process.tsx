@@ -81,7 +81,7 @@ export const Process: React.FC = () => {
                   {step.title}
                 </h3>
 
-                <p className="text-gray-500 text-[11px] sm:text-xs lg:text-sm leading-relaxed group-hover:text-gray-400 transition-colors line-clamp-3 lg:line-clamp-none">
+                <p className="text-gray-400 text-[11px] sm:text-xs lg:text-sm leading-relaxed transition-colors line-clamp-3 lg:line-clamp-none">
                   {step.desc}
                 </p>
               </div>
