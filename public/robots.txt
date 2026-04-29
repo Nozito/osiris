@@ -1,14 +1,24 @@
 User-agent: *
 Allow: /
 Disallow: /api/
-Disallow: /_next/
-Disallow: /admin/
 
-# Crawl-delay
-Crawl-delay: 1
+User-agent: GPTBot
+Allow: /
 
-# Sitemap
-Sitemap: https://osiris-web.com/sitemap.xml
+User-agent: ClaudeBot
+Allow: /
 
-# Host
-Host: https://osiris-web.com
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+Sitemap: https://osiris-agency.fr/sitemap.xml
+Host: https://osiris-agency.fr
