@@ -296,8 +296,7 @@ export const fr = {
                     "1 call de lancement avec l'équipe",
                     "3 rounds de révisions inclus (rounds sup. payants)",
                     "Support après livraison : 14 jours",
-                    "1h de modifications offertes par mois, à vie",
-                    "Option : Modifications illimitées → +19,90 €/mois (engagement 3 mois)"
+                    "1h de modifications offertes par mois, à vie"
                 ]
             },
             business: {
@@ -311,8 +310,7 @@ export const fr = {
                     "Calls réguliers durant toute la création",
                     "5 rounds de révisions inclus (rounds sup. payants)",
                     "Support après livraison : 30 jours",
-                    "1h de modifications offertes par mois, à vie",
-                    "Option : Modifications illimitées → +19,90 €/mois (engagement 3 mois)"
+                    "1h de modifications offertes par mois, à vie"
                 ]
             },
             empire: {
@@ -326,8 +324,7 @@ export const fr = {
                     "Calls illimités jusqu'à la mise en ligne",
                     "Révisions illimitées jusqu'à la mise en ligne",
                     "Support après livraison : 60 jours",
-                    "1h de modifications offertes par mois, à vie",
-                    "Option : Modifications illimitées → +19,90 €/mois (engagement 3 mois)"
+                    "1h de modifications offertes par mois, à vie"
                 ]
             }
         },
@@ -367,6 +364,8 @@ export const fr = {
             company: "Entreprise",
             email: "Email",
             budget: "Budget estimé",
+            budgetOptions: ["Starter — 950 €", "Business — 1 650 €", "Empire — 2 950 €", "Montant personnalisé"],
+            budgetCustomPlaceholder: "Ex : 2 000 €",
             message: "Message",
             messagePlaceholder: "Parlez-nous de votre projet...",
             submit: "Réserver mon appel gratuit →",
@@ -453,7 +452,7 @@ export const fr = {
             { question: "Le paiement peut-il être échelonné ?", answer: "Oui. 50% d'acompte au lancement du projet, et les 50% restants à la livraison finale." },
             { question: "Que comprend l'hébergement offert ?", answer: "Hébergement haute performance pendant 1 an, certificat SSL inclus, et support technique de base." },
             { question: "Puis-je modifier mon site après livraison ?", answer: "Absolument. Avec le CMS inclus (packs Business et Empire), vous gérez votre contenu en autonomie." },
-            { question: "Proposez-vous de la maintenance ?", answer: "Oui, nous proposons des forfaits de maintenance mensuelle pour garantir la sécurité et les mises à jour." }
+            { question: "Proposez-vous de la maintenance ?", answer: "Oui, nous proposons 4 formules de maintenance : 1 mois sans engagement (69,90 €/mois), 3 mois minimum (49,90 €/mois), 6 mois minimum (39,90 €/mois) et 12 mois minimum (29,90 €/mois). Mises à jour, corrections et modifications de contenu incluses." }
         ],
         customCta: {
             title: "Un projet spécifique ?",
@@ -488,7 +487,8 @@ export const fr = {
         labelCompany: "Entreprise",
         labelEmail: "Email professionnel",
         labelBudget: "Budget estimé",
-        budgetOptions: ["Moins de 5k€", "5k€ - 15k€", "15k€ - 50k€", "Plus de 50k€"],
+        budgetOptions: ["Starter — 950 €", "Business — 1 650 €", "Empire — 2 950 €", "Montant personnalisé"],
+        budgetCustomPlaceholder: "Ex : 2 000 €",
         labelMessage: "Message",
         messagePlaceholder: "Décrivez votre projet...",
         submitButton: "Lancer le projet",

@@ -9,6 +9,7 @@ import { useLanguage } from '../context/LanguageContext';
 export const ContactPage: React.FC = () => {
     const { t, language } = useLanguage();
     const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+    const [budgetSel, setBudgetSel] = useState('');
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -243,15 +244,27 @@ export const ContactPage: React.FC = () => {
                                                 <label htmlFor="cp-budget" className="text-[10px] uppercase tracking-widest text-gray-400 font-bold block group-focus-within:text-premium-green transition-colors duration-200">{t.contactPage.labelBudget}</label>
                                                 <div className="relative">
                                                     <select
-                                                        id="cp-budget" name="budget" aria-label="Budget"
+                                                        id="cp-budget" aria-label="Budget"
+                                                        value={budgetSel}
+                                                        onChange={e => setBudgetSel(e.target.value)}
                                                         className="w-full bg-white/[0.03] border border-white/10 rounded-lg px-3.5 py-2.5 text-white text-sm focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none transition-all duration-200 font-medium appearance-none cursor-pointer"
                                                     >
                                                         {t.contactPage.budgetOptions.map((option: string, i: number) => (
-                                                            <option key={i} className="bg-[#111] text-gray-200">{option}</option>
+                                                            <option key={i} value={i < 3 ? option : 'custom'} className="bg-[#111] text-gray-200">{option}</option>
                                                         ))}
                                                     </select>
                                                     <ArrowRight className="absolute right-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-500 rotate-90 pointer-events-none" />
                                                 </div>
+                                                {budgetSel === 'custom' ? (
+                                                    <input
+                                                        name="budget"
+                                                        type="text"
+                                                        placeholder={t.contactPage.budgetCustomPlaceholder}
+                                                        className="w-full bg-white/[0.03] border border-white/10 rounded-lg px-3.5 py-2.5 text-white text-sm placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none transition-all duration-200 font-medium"
+                                                    />
+                                                ) : (
+                                                    <input type="hidden" name="budget" value={budgetSel || t.contactPage.budgetOptions[0]} />
+                                                )}
                                             </div>
 
                                             {/* Message */}

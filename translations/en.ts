@@ -296,8 +296,7 @@ export const en = {
                     "1 kick-off call with the team",
                     "3 revision rounds included (extra rounds billed)",
                     "Post-delivery support: 14 days",
-                    "1h of monthly edits included, for life",
-                    "Option: Unlimited edits \u2192 +€19.90/month (3-month commitment)"
+                    "1h of monthly edits included, for life"
                 ]
             },
             business: {
@@ -311,8 +310,7 @@ export const en = {
                     "Regular calls throughout the build",
                     "5 revision rounds included (extra rounds billed)",
                     "Post-delivery support: 30 days",
-                    "1h of monthly edits included, for life",
-                    "Option: Unlimited edits \u2192 +€19.90/month (3-month commitment)"
+                    "1h of monthly edits included, for life"
                 ]
             },
             empire: {
@@ -326,8 +324,7 @@ export const en = {
                     "Unlimited calls until go-live",
                     "Unlimited revisions until go-live",
                     "Post-delivery support: 60 days",
-                    "1h of monthly edits included, for life",
-                    "Option: Unlimited edits \u2192 +€19.90/month (3-month commitment)"
+                    "1h of monthly edits included, for life"
                 ]
             }
         },
@@ -367,6 +364,8 @@ export const en = {
             company: "Company",
             email: "Email",
             budget: "Estimated budget",
+            budgetOptions: ["Starter — €950", "Business — €1,650", "Empire — €2,950", "Custom amount"],
+            budgetCustomPlaceholder: "e.g. €2,000",
             message: "Message",
             messagePlaceholder: "Tell us about your project...",
             submit: "Book my free call →",
@@ -453,7 +452,7 @@ export const en = {
             { question: "Can payment be staggered?", answer: "Yes. 50% deposit at project launch, and the remaining 50% upon final delivery." },
             { question: "What does the free hosting include?", answer: "High-performance hosting for 1 year, SSL certificate included, and basic technical support." },
             { question: "Can I modify my site after delivery?", answer: "Absolutely. With the included CMS (Business and Empire packs), you manage your content independently." },
-            { question: "Do you offer maintenance?", answer: "Yes, we offer monthly maintenance packages to ensure security and updates." }
+            { question: "Do you offer maintenance?", answer: "Yes, we offer 4 maintenance plans: 1 month with no commitment (€69.90/month), 3-month minimum (€49.90/month), 6-month minimum (€39.90/month) and 12-month minimum (€29.90/month). Includes updates, bug fixes and content edits." }
         ],
         customCta: {
             title: "A specific project?",
@@ -488,7 +487,8 @@ export const en = {
         labelCompany: "Company",
         labelEmail: "Professional email",
         labelBudget: "Estimated budget",
-        budgetOptions: ["Under €5k", "€5k - €15k", "€15k - €50k", "Over €50k"],
+        budgetOptions: ["Starter — €950", "Business — €1,650", "Empire — €2,950", "Custom amount"],
+        budgetCustomPlaceholder: "e.g. €2,000",
         labelMessage: "Message",
         messagePlaceholder: "Describe your project...",
         submitButton: "Launch the project",

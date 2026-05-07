@@ -7,6 +7,7 @@ import { useLanguage } from '../context/LanguageContext';
 export const Contact: React.FC = () => {
   const { t } = useLanguage();
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [budgetSel, setBudgetSel] = useState('');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -115,11 +116,27 @@ export const Contact: React.FC = () => {
 
               <div className="space-y-2">
                 <label htmlFor="contact-budget" className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.budget}</label>
-                <select id="contact-budget" name="budget" aria-label="Budget" className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors appearance-none rounded-xl sm:rounded-2xl">
-                  <option>1k€ - 3k€</option>
-                  <option>3k€ - 10k€</option>
-                  <option>10k€ +</option>
+                <select
+                  id="contact-budget"
+                  aria-label="Budget"
+                  value={budgetSel}
+                  onChange={e => setBudgetSel(e.target.value)}
+                  className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors appearance-none rounded-xl sm:rounded-2xl"
+                >
+                  {(t.contact.form.budgetOptions as string[]).map((opt, i) => (
+                    <option key={i} value={i < 3 ? opt : 'custom'} className="bg-[#111]">{opt}</option>
+                  ))}
                 </select>
+                {budgetSel === 'custom' ? (
+                  <input
+                    name="budget"
+                    type="text"
+                    placeholder={t.contact.form.budgetCustomPlaceholder as string}
+                    className="w-full bg-black/50 border border-white/10 p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl placeholder-gray-600"
+                  />
+                ) : (
+                  <input type="hidden" name="budget" value={budgetSel || (t.contact.form.budgetOptions as string[])[0]} />
+                )}
               </div>
 
               <div className="space-y-2">
