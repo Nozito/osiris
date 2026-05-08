@@ -285,7 +285,7 @@ export const fr = {
         quote: "Devis",
         offers: {
             starter: {
-                title: "Starter",
+                title: "Présence",
                 description: "Une base solide pour lancer votre présence en ligne et inspirer confiance dès la première visite.",
                 features: [
                     "1 à 3 pages 100% custom",
@@ -295,36 +295,33 @@ export const fr = {
                     "SEO : balises de base (title, meta, H1-H6)",
                     "1 call de lancement avec l'équipe",
                     "3 rounds de révisions inclus (rounds sup. payants)",
-                    "Support après livraison : 14 jours",
-                    "1h de modifications offertes par mois, à vie"
+                    "Support après livraison : 14 jours"
                 ]
             },
             business: {
-                title: "Business",
+                title: "Croissance",
                 description: "Le format idéal pour structurer votre offre, rassurer vos prospects et générer plus de demandes qualifiées.",
                 features: [
-                    "Tout le Starter inclus ✓",
+                    "Tout le Présence inclus ✓",
                     "Jusqu'à 5 pages 100% custom",
                     "Animations utiles (transitions, hover, scroll)",
                     "Socle SEO propre (structure technique, vitesse, balises avancées)",
                     "Calls réguliers durant toute la création",
                     "5 rounds de révisions inclus (rounds sup. payants)",
-                    "Support après livraison : 30 jours",
-                    "1h de modifications offertes par mois, à vie"
+                    "Support après livraison : 30 jours"
                 ]
             },
             empire: {
-                title: "Empire",
+                title: "Domination",
                 description: "Pour les projets ambitieux qui demandent un site sur-mesure, évolutif et pensé pour scaler avec votre croissance.",
                 features: [
-                    "Tout le Business inclus ✓",
+                    "Tout le Croissance inclus ✓",
                     "Jusqu'à 10 pages 100% custom",
                     "Animations avancées (parallax, effets scroll complexes, micro-interactions)",
                     "SEO avancé (audit, plan de contenu, optimisation pousssée)",
                     "Calls illimités jusqu'à la mise en ligne",
                     "Révisions illimitées jusqu'à la mise en ligne",
-                    "Support après livraison : 60 jours",
-                    "1h de modifications offertes par mois, à vie"
+                    "Support après livraison : 60 jours"
                 ]
             }
         },
@@ -364,7 +361,7 @@ export const fr = {
             company: "Entreprise",
             email: "Email",
             budget: "Budget estimé",
-            budgetOptions: ["Starter — 950 €", "Business — 1 650 €", "Empire — 2 950 €", "Montant personnalisé"],
+            budgetOptions: ["Présence — 950 €", "Croissance — 1 650 €", "Domination — 2 950 €", "Montant personnalisé"],
             budgetCustomPlaceholder: "Ex : 2 000 €",
             message: "Message",
             messagePlaceholder: "Parlez-nous de votre projet...",
@@ -448,7 +445,7 @@ export const fr = {
             contactSupport: "Contactez le support"
         },
         faqs: [
-            { question: "Quels sont les délais de livraison ?", answer: "Starter : 7 jours ouvrés. Business : 14 jours ouvrés. Empire : 3-5 semaines selon la complexité." },
+            { question: "Quels sont les délais de livraison ?", answer: "Présence : 7 jours ouvrés. Croissance : 14 jours ouvrés. Domination : 3-5 semaines selon la complexité." },
             { question: "Le paiement peut-il être échelonné ?", answer: "Oui. 50% d'acompte au lancement du projet, et les 50% restants à la livraison finale." },
             { question: "Que comprend l'hébergement offert ?", answer: "Hébergement haute performance pendant 1 an, certificat SSL inclus, et support technique de base." },
             { question: "Puis-je modifier mon site après livraison ?", answer: "Absolument. Avec le CMS inclus (packs Business et Empire), vous gérez votre contenu en autonomie." },
@@ -487,7 +484,7 @@ export const fr = {
         labelCompany: "Entreprise",
         labelEmail: "Email professionnel",
         labelBudget: "Budget estimé",
-        budgetOptions: ["Starter — 950 €", "Business — 1 650 €", "Empire — 2 950 €", "Montant personnalisé"],
+        budgetOptions: ["Présence — 950 €", "Croissance — 1 650 €", "Domination — 2 950 €", "Montant personnalisé"],
         budgetCustomPlaceholder: "Ex : 2 000 €",
         labelMessage: "Message",
         messagePlaceholder: "Décrivez votre projet...",

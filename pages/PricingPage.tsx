@@ -89,7 +89,7 @@ export const PricingPage: React.FC = () => {
 
     const offers = [
         {
-            title: "Starter",
+            title: "Présence",
             price: "950",
             description: t.offer.offers.starter.description,
             features: t.offer.offers.starter.features,
@@ -100,7 +100,7 @@ export const PricingPage: React.FC = () => {
             siteTypeId: 'vitrine-simple'
         },
         {
-            title: "Business",
+            title: "Croissance",
             price: "1 650",
             description: t.offer.offers.business.description,
             features: t.offer.offers.business.features,
@@ -111,7 +111,7 @@ export const PricingPage: React.FC = () => {
             siteTypeId: 'vitrine-standard'
         },
         {
-            title: "Empire",
+            title: "Domination",
             price: "2 950",
             description: t.offer.offers.empire.description,
             features: t.offer.offers.empire.features,
@@ -126,18 +126,18 @@ export const PricingPage: React.FC = () => {
     const getIcon = (title: string, color?: string) => {
         const colorClass = color === 'blue' ? 'text-blue-400' : color === 'purple' ? 'text-purple-400' : 'text-premium-green';
         switch (title) {
-            case 'Starter': return <Rocket className={`w-4 h-4 ${colorClass}`} />;
-            case 'Business': return <Zap className={`w-4 h-4 text-black fill-black`} />;
-            case 'Empire': return <Crown className={`w-4 h-4 ${colorClass}`} />;
+            case 'Présence': return <Rocket className={`w-4 h-4 ${colorClass}`} />;
+            case 'Croissance': return <Zap className={`w-4 h-4 text-black fill-black`} />;
+            case 'Domination': return <Crown className={`w-4 h-4 ${colorClass}`} />;
             default: return null;
         }
     };
 
     const getBadge = (title: string) => {
         switch (title) {
-            case 'Starter': return t.pricingPage.badges.starter;
-            case 'Business': return t.pricingPage.badges.business;
-            case 'Empire': return t.pricingPage.badges.empire;
+            case 'Présence': return t.pricingPage.badges.starter;
+            case 'Croissance': return t.pricingPage.badges.business;
+            case 'Domination': return t.pricingPage.badges.empire;
             default: return "";
         }
     };
@@ -185,7 +185,7 @@ export const PricingPage: React.FC = () => {
                     ? 'Tarifs & Offres - Osiris | Agence Web Premium'
                     : 'Pricing & Plans - Osiris | Premium Web Agency'}
                 description={language === 'fr'
-                    ? 'Découvrez nos offres de création de sites web premium. Starter à partir de 950€, Business dès 1650€, Empire dès 2950€. Sites vitrines haute performance sur-mesure.'
+                    ? 'Découvrez nos offres de création de sites web premium. Présence à partir de 950€, Croissance dès 1650€, Domination dès 2950€. Sites vitrines haute performance sur-mesure.'
                     : 'Discover our premium web design packages. Starter from €950, Business from €1650, Empire from €2950. High-performance custom showcase websites.'}
                 canonical="https://osiris-web.com/tarifs"
                 jsonLd={{
@@ -233,7 +233,7 @@ export const PricingPage: React.FC = () => {
                             </span>
                         </div>
 
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black font-display mb-8 tracking-tighter relative inline-block">
+                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black font-display mb-8 tracking-tighter relative inline-block px-2">
                             <span className="absolute -inset-4 blur-3xl bg-premium-green/15 animate-pulse pointer-events-none rounded-full"></span>
                             <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-white via-premium-green to-blue-400 animate-gradient-x">
                                 {t.pricingPage.title} {t.pricingPage.titleHighlight}

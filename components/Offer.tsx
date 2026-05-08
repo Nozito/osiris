@@ -58,6 +58,18 @@ export const Offer: React.FC = () => {
     }
   };
 
+  const getIconLarge = (name: string, color: string) => {
+    const cls = `w-7 h-7 drop-shadow-[0_0_10px_currentColor] ${
+      color === 'blue' ? 'text-blue-400' : color === 'amber' ? 'text-amber-400' : 'text-purple-400'
+    }`;
+    switch (name) {
+      case 'rocket': return <Rocket className={cls} />;
+      case 'zap': return <Zap className={cls} />;
+      case 'crown': return <Crown className={cls} />;
+      default: return null;
+    }
+  };
+
   const getBorderColor = (color: string) => {
     if (color === 'blue') return 'border-blue-500/40 shadow-[0_0_40px_-15px_rgba(59,130,246,0.25)]';
     if (color === 'amber') return 'border-amber-400/40 shadow-[0_0_40px_-15px_rgba(251,191,36,0.25)]';
@@ -201,63 +213,155 @@ export const Offer: React.FC = () => {
           })}
         </div>
 
-        {/* Desktop: Static Grid - 3 cards side by side */}
-        <div className="pricing-container hidden lg:grid grid-cols-3 gap-6 mb-16">
-          {offers.map((offer, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              whileTap={{ scale: 0.99 }}
-              transition={{ delay: 0.1 * index, duration: 0.5 }}
-              className={`pricing-card ${offer.highlight ? 'popular' : ''} p-8 rounded-[2rem] transition-all duration-300 flex flex-col h-full group hover:-translate-y-2 bg-[#0A0A0A] border ${getBorderColor(offer.color)} ${offer.highlight ? 'z-10 scale-105' : ''}`}
-            >
-              <div className="flex justify-center mb-6">
-                <div className={`px-4 py-1.5 rounded-full flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider transition-all border ${getAccentBg(offer.color)} ${offer.color === 'blue' ? 'border-blue-500/20' : offer.color === 'amber' ? 'border-amber-400/20' : 'border-purple-500/20'}`}>
-                  {getIcon(offer.icon)}
-                  {offer.badge}
+        {/* Desktop: PricingPage-style grid */}
+        <div className="hidden lg:grid grid-cols-3 gap-5 mb-16 items-stretch">
+          {offers.map((offer, index) => {
+            const glowColor = offer.color === 'blue'
+              ? 'rgba(59,130,246,0.2)'
+              : offer.color === 'amber'
+                ? 'rgba(251,191,36,0.18)'
+                : 'rgba(168,85,247,0.2)';
+
+            const topLine = offer.color === 'blue'
+              ? 'from-transparent via-blue-500 to-transparent'
+              : offer.color === 'amber'
+                ? 'from-transparent via-amber-400 to-transparent'
+                : 'from-transparent via-purple-500 to-transparent';
+
+            const borderClass = offer.color === 'blue'
+              ? 'border-blue-500/25 hover:border-blue-500/55'
+              : offer.color === 'amber'
+                ? 'border-amber-400/30 hover:border-amber-400/60'
+                : 'border-purple-500/25 hover:border-purple-500/55';
+
+            const iconRing = offer.color === 'blue'
+              ? 'bg-blue-500/10 shadow-[0_0_22px_rgba(59,130,246,0.3)] text-blue-400'
+              : offer.color === 'amber'
+                ? 'bg-amber-400/10 shadow-[0_0_22px_rgba(251,191,36,0.3)] text-amber-400'
+                : 'bg-purple-500/10 shadow-[0_0_22px_rgba(168,85,247,0.3)] text-purple-400';
+
+            const priceNumColor = offer.color === 'blue'
+              ? 'text-blue-500/[0.05]'
+              : offer.color === 'amber'
+                ? 'text-amber-400/[0.06]'
+                : 'text-purple-500/[0.05]';
+
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.6, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -8, transition: { duration: 0.25 } }}
+                className={`relative rounded-[2rem] border bg-[#080a10] flex flex-col overflow-hidden cursor-default transition-shadow duration-500 ${borderClass} ${offer.highlight ? 'shadow-[0_0_70px_-15px_rgba(251,191,36,0.35)]' : ''}`}
+                style={{ boxShadow: `0 0 60px -20px ${glowColor}` }}
+              >
+                {/* Ambient glow spot */}
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{ background: `radial-gradient(ellipse 80% 50% at 50% -5%, ${glowColor}, transparent 70%)` }}
+                />
+
+                {/* Top accent line */}
+                <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${topLine}`} />
+
+                {/* Top gradient wash */}
+                <div className={`absolute top-0 inset-x-0 h-32 pointer-events-none opacity-30 ${
+                  offer.color === 'blue' ? 'bg-gradient-to-b from-blue-500/20 to-transparent'
+                  : offer.color === 'amber' ? 'bg-gradient-to-b from-amber-400/20 to-transparent'
+                  : 'bg-gradient-to-b from-purple-500/20 to-transparent'
+                }`} />
+
+                {/* Large decorative price number in background */}
+                <span className={`absolute -bottom-6 -right-3 font-black font-display text-[9rem] leading-none select-none pointer-events-none ${priceNumColor}`}>
+                  {offer.price.replace(' ', '')}
+                </span>
+
+                <div className="relative z-10 p-6 lg:p-7 flex flex-col flex-1">
+                  {/* Badge */}
+                  <div className="flex justify-center mb-5">
+                    <div className={`px-4 py-1.5 rounded-full flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider border ${
+                      offer.color === 'blue'   ? 'bg-blue-500/10 text-blue-400 border-blue-500/30'
+                      : offer.color === 'amber' ? 'bg-amber-400/10 text-amber-400 border-amber-400/30'
+                                               : 'bg-purple-500/10 text-purple-400 border-purple-500/30'
+                    }`}>
+                      {getIcon(offer.icon)}
+                      {offer.badge}
+                    </div>
+                  </div>
+
+                  {/* Icon ring */}
+                  <div className="flex justify-center mb-5">
+                    <div className={`w-16 h-16 rounded-2xl flex items-center justify-center border border-white/10 ${iconRing}`}>
+                      {getIconLarge(offer.icon, offer.color)}
+                    </div>
+                  </div>
+
+                  {/* Title & Price */}
+                  <div className="mb-5 text-center">
+                    <h3 className="text-xl font-black font-display uppercase tracking-widest mb-3 text-white">
+                      {offer.title}
+                    </h3>
+                    <div className="flex items-start justify-center gap-1">
+                      <span className={`text-5xl lg:text-6xl font-black tracking-tighter ${
+                        offer.color === 'amber' ? 'text-amber-300' : 'text-white'
+                      }`}>
+                        {offer.price}
+                      </span>
+                      <span className="text-xl lg:text-2xl mt-2 lg:mt-3 text-gray-400 font-light">€</span>
+                    </div>
+                    <p className="text-gray-400 text-xs lg:text-sm mt-4 leading-relaxed px-1 lg:px-2">{offer.description}</p>
+                  </div>
+
+                  {/* Separator */}
+                  <div className={`w-full h-px mb-5 bg-gradient-to-r ${
+                    offer.color === 'blue'   ? 'from-transparent via-blue-500/40 to-transparent'
+                    : offer.color === 'amber' ? 'from-transparent via-amber-400/40 to-transparent'
+                                             : 'from-transparent via-purple-500/40 to-transparent'
+                  }`} />
+
+                  {/* Features — all items */}
+                  <ul className="flex flex-col space-y-2.5 mb-6 flex-1">
+                    {offer.features.map((feature, i) => {
+                      const isInherited = i < (offer.newFrom ?? 0);
+                      return (
+                        <li key={i} className="flex items-start gap-3 group/item">
+                          <div className={`mt-0.5 w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+                            isInherited
+                              ? 'bg-amber-400/15 text-amber-400'
+                              : offer.color === 'blue'   ? 'bg-blue-500/15   text-blue-400   group-hover/item:bg-blue-500/30'
+                              : offer.color === 'amber'  ? 'bg-amber-400/15  text-amber-400  group-hover/item:bg-amber-400/30'
+                                                        : 'bg-purple-500/15 text-purple-400 group-hover/item:bg-purple-500/30'
+                          }`}>
+                            {isInherited ? <Check className="w-2.5 h-2.5" /> : <Sparkles className="w-2.5 h-2.5" />}
+                          </div>
+                          <span className={`text-xs leading-relaxed transition-colors duration-300 ${
+                            isInherited ? 'text-amber-400 font-semibold' : 'text-gray-300 group-hover/item:text-white'
+                          }`}>{feature}</span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+
+                  {/* CTA */}
+                  <Link
+                    to="/contact"
+                    className={`mt-auto w-full py-4 lg:py-5 rounded-2xl font-bold text-xs uppercase tracking-[0.15em] flex items-center justify-center gap-2 border transition-all duration-300 ${
+                      offer.color === 'blue'
+                        ? 'bg-blue-600/20 border-blue-500/40 text-blue-300 hover:bg-blue-600 hover:text-white hover:border-transparent hover:shadow-[0_0_30px_rgba(59,130,246,0.4)]'
+                        : offer.color === 'amber'
+                          ? 'bg-amber-400/20 border-amber-400/40 text-amber-300 hover:bg-amber-500 hover:text-black hover:border-transparent hover:shadow-[0_0_30px_rgba(251,191,36,0.4)]'
+                          : 'bg-purple-600/20 border-purple-500/40 text-purple-300 hover:bg-purple-600 hover:text-white hover:border-transparent hover:shadow-[0_0_30px_rgba(168,85,247,0.4)]'
+                    }`}
+                  >
+                    {t.offer.choosePack}
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
                 </div>
-              </div>
-
-              <div className="mb-6 text-center">
-                <h3 className={`text-xl font-bold font-display uppercase tracking-widest mb-3 text-white transition-colors ${getAccentText(offer.color)}`}>
-                  {offer.title}
-                </h3>
-                <div className="flex items-start justify-center gap-1">
-                  <span className="price text-5xl font-black text-white tracking-tighter">{offer.price}</span>
-                  <span className="text-2xl mt-2 text-gray-500 font-light">€</span>
-                </div>
-                <p className="text-gray-500 text-sm mt-3 font-medium">{offer.description}</p>
-              </div>
-
-              <div className={`w-full h-[1px] mb-6 transition-colors ${offer.color === 'blue' ? 'bg-blue-500/20' : offer.color === 'amber' ? 'bg-amber-400/20' : 'bg-purple-500/20'}`}></div>
-
-              <ul className="space-y-3 mb-8 flex-1">
-                {offer.features.slice(0, 4).map((feature, i) => {
-                  const isInherited = i < (offer.newFrom ?? 0);
-                  return (
-                    <li key={i} className="flex items-start gap-3">
-                      <div className={`mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${isInherited ? 'bg-amber-400/15 text-amber-400' : getAccentBg(offer.color)}`}>
-                        {isInherited ? <Check className="w-3 h-3" /> : <Sparkles className="w-3 h-3" />}
-                      </div>
-                      <span className={`text-sm ${isInherited ? 'text-amber-400 font-medium' : 'text-gray-400'}`}>{feature}</span>
-                    </li>
-                  );
-                })}
-              </ul>
-
-              <div className="space-y-2">
-                <Link to="/contact" className={`cta cta-btn w-full py-4 rounded-xl font-bold text-xs uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-2 border group/btn ${
-                  offer.color === 'blue' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20 hover:bg-blue-500 hover:text-white hover:border-transparent hover:shadow-[0_0_25px_rgba(59,130,246,0.3)]' :
-                  offer.color === 'amber' ? 'bg-amber-400/10 text-amber-400 border-amber-400/20 hover:bg-amber-400 hover:text-black hover:border-transparent hover:shadow-[0_0_25px_rgba(251,191,36,0.3)]' :
-                  'bg-purple-500/10 text-purple-400 border-purple-500/20 hover:bg-purple-500 hover:text-white hover:border-transparent hover:shadow-[0_0_25px_rgba(168,85,247,0.3)]'
-                }`}>
-                  {t.offer.choosePack}
-                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
-                </Link>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Info & Tabs Section */}
@@ -295,9 +399,9 @@ export const Offer: React.FC = () => {
                   <div className="bg-white/[0.03] p-4 rounded-xl border border-white/5">
                     <h4 className="text-premium-green font-bold mb-2 text-xs uppercase tracking-wide">{t.offer.faqItems.delays.title}</h4>
                     <p className="text-white text-xs leading-relaxed">
-                      <span className="block mb-0.5"><span className="text-gray-400">Starter :</span> {t.offer.faqItems.delays.starter}</span>
-                      <span className="block mb-0.5"><span className="text-gray-400">Business :</span> {t.offer.faqItems.delays.business}</span>
-                      <span className="block"><span className="text-gray-400">Empire :</span> {t.offer.faqItems.delays.empire}</span>
+                      <span className="block mb-0.5"><span className="text-gray-400">Présence :</span> {t.offer.faqItems.delays.starter}</span>
+                      <span className="block mb-0.5"><span className="text-gray-400">Croissance :</span> {t.offer.faqItems.delays.business}</span>
+                      <span className="block"><span className="text-gray-400">Domination :</span> {t.offer.faqItems.delays.empire}</span>
                     </p>
                   </div>
                   <div className="bg-white/[0.03] p-4 rounded-xl border border-white/5">

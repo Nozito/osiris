@@ -285,7 +285,7 @@ export const en = {
         quote: "Quote",
         offers: {
             starter: {
-                title: "Starter",
+                title: "Présence",
                 description: "A solid foundation to launch your online presence and build trust from the very first visit.",
                 features: [
                     "1 to 3 pages, 100% custom",
@@ -295,36 +295,33 @@ export const en = {
                     "SEO: basic meta tags (title, meta, H1-H6)",
                     "1 kick-off call with the team",
                     "3 revision rounds included (extra rounds billed)",
-                    "Post-delivery support: 14 days",
-                    "1h of monthly edits included, for life"
+                    "Post-delivery support: 14 days"
                 ]
             },
             business: {
-                title: "Business",
+                title: "Croissance",
                 description: "The ideal format to structure your offer, reassure prospects, and generate more qualified leads.",
                 features: [
-                    "Everything in Starter ✓",
+                    "Everything in Présence ✓",
                     "Up to 5 pages, 100% custom",
                     "Useful animations (transitions, hover, scroll)",
                     "Clean SEO foundation (technical structure, speed, advanced tags)",
                     "Regular calls throughout the build",
                     "5 revision rounds included (extra rounds billed)",
-                    "Post-delivery support: 30 days",
-                    "1h of monthly edits included, for life"
+                    "Post-delivery support: 30 days"
                 ]
             },
             empire: {
-                title: "Empire",
+                title: "Domination",
                 description: "For ambitious projects that need a custom, scalable website built to grow with your business.",
                 features: [
-                    "Everything in Business ✓",
+                    "Everything in Croissance ✓",
                     "Up to 10 pages, 100% custom",
                     "Advanced animations (parallax, complex scroll effects, micro-interactions)",
                     "Advanced SEO (audit, content plan, deep optimisation)",
                     "Unlimited calls until go-live",
                     "Unlimited revisions until go-live",
-                    "Post-delivery support: 60 days",
-                    "1h of monthly edits included, for life"
+                    "Post-delivery support: 60 days"
                 ]
             }
         },
@@ -364,7 +361,7 @@ export const en = {
             company: "Company",
             email: "Email",
             budget: "Estimated budget",
-            budgetOptions: ["Starter — €950", "Business — €1,650", "Empire — €2,950", "Custom amount"],
+            budgetOptions: ["Présence — €950", "Croissance — €1,650", "Domination — €2,950", "Custom amount"],
             budgetCustomPlaceholder: "e.g. €2,000",
             message: "Message",
             messagePlaceholder: "Tell us about your project...",
@@ -448,7 +445,7 @@ export const en = {
             contactSupport: "Contact support"
         },
         faqs: [
-            { question: "What are the delivery times?", answer: "Starter: 7 business days. Business: 14 business days. Empire: 3-5 weeks depending on complexity." },
+            { question: "What are the delivery times?", answer: "Présence: 7 business days. Croissance: 14 business days. Domination: 3-5 weeks depending on complexity." },
             { question: "Can payment be staggered?", answer: "Yes. 50% deposit at project launch, and the remaining 50% upon final delivery." },
             { question: "What does the free hosting include?", answer: "High-performance hosting for 1 year, SSL certificate included, and basic technical support." },
             { question: "Can I modify my site after delivery?", answer: "Absolutely. With the included CMS (Business and Empire packs), you manage your content independently." },
@@ -487,7 +484,7 @@ export const en = {
         labelCompany: "Company",
         labelEmail: "Professional email",
         labelBudget: "Estimated budget",
-        budgetOptions: ["Starter — €950", "Business — €1,650", "Empire — €2,950", "Custom amount"],
+        budgetOptions: ["Présence — €950", "Croissance — €1,650", "Domination — €2,950", "Custom amount"],
         budgetCustomPlaceholder: "e.g. €2,000",
         labelMessage: "Message",
         messagePlaceholder: "Describe your project...",
