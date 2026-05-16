@@ -285,7 +285,7 @@ export const fr = {
         quote: "Devis",
         offers: {
             starter: {
-                title: "Présence",
+                title: "Fondation",
                 description: "Une base solide pour lancer votre présence en ligne et inspirer confiance dès la première visite.",
                 features: [
                     "1 à 3 pages 100% custom",
@@ -299,10 +299,10 @@ export const fr = {
                 ]
             },
             business: {
-                title: "Croissance",
+                title: "Stratégie",
                 description: "Le format idéal pour structurer votre offre, rassurer vos prospects et générer plus de demandes qualifiées.",
                 features: [
-                    "Tout le Présence inclus ✓",
+                    "Tout le Fondation inclus ✓",
                     "Jusqu'à 5 pages 100% custom",
                     "Animations utiles (transitions, hover, scroll)",
                     "Socle SEO propre (structure technique, vitesse, balises avancées)",
@@ -312,10 +312,10 @@ export const fr = {
                 ]
             },
             empire: {
-                title: "Domination",
+                title: "Signature",
                 description: "Pour les projets ambitieux qui demandent un site sur-mesure, évolutif et pensé pour scaler avec votre croissance.",
                 features: [
-                    "Tout le Croissance inclus ✓",
+                    "Tout le Stratégie inclus ✓",
                     "Jusqu'à 10 pages 100% custom",
                     "Animations avancées (parallax, effets scroll complexes, micro-interactions)",
                     "SEO avancé (audit, plan de contenu, optimisation pousssée)",
@@ -361,7 +361,7 @@ export const fr = {
             company: "Entreprise",
             email: "Email",
             budget: "Budget estimé",
-            budgetOptions: ["Présence — 950 €", "Croissance — 1 650 €", "Domination — 2 950 €", "Montant personnalisé"],
+            budgetOptions: ["Fondation — 950 €", "Stratégie — 1 650 €", "Signature — 2 950 €", "Montant personnalisé"],
             budgetCustomPlaceholder: "Ex : 2 000 €",
             message: "Message",
             messagePlaceholder: "Parlez-nous de votre projet...",
@@ -445,7 +445,7 @@ export const fr = {
             contactSupport: "Contactez le support"
         },
         faqs: [
-            { question: "Quels sont les délais de livraison ?", answer: "Présence : 7 jours ouvrés. Croissance : 14 jours ouvrés. Domination : 3-5 semaines selon la complexité." },
+            { question: "Quels sont les délais de livraison ?", answer: "Fondation : 7 jours ouvrés. Stratégie : 14 jours ouvrés. Signature : 3-5 semaines selon la complexité." },
             { question: "Le paiement peut-il être échelonné ?", answer: "Oui. 50% d'acompte au lancement du projet, et les 50% restants à la livraison finale." },
             { question: "Que comprend l'hébergement offert ?", answer: "Hébergement haute performance pendant 1 an, certificat SSL inclus, et support technique de base." },
             { question: "Puis-je modifier mon site après livraison ?", answer: "Absolument. Avec le CMS inclus (packs Business et Empire), vous gérez votre contenu en autonomie." },
@@ -484,7 +484,7 @@ export const fr = {
         labelCompany: "Entreprise",
         labelEmail: "Email professionnel",
         labelBudget: "Budget estimé",
-        budgetOptions: ["Présence — 950 €", "Croissance — 1 650 €", "Domination — 2 950 €", "Montant personnalisé"],
+        budgetOptions: ["Fondation — 950 €", "Stratégie — 1 650 €", "Signature — 2 950 €", "Montant personnalisé"],
         budgetCustomPlaceholder: "Ex : 2 000 €",
         labelMessage: "Message",
         messagePlaceholder: "Décrivez votre projet...",

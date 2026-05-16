@@ -89,7 +89,7 @@ export const PricingPage: React.FC = () => {
 
     const offers = [
         {
-            title: "Présence",
+            title: "Fondation",
             price: "950",
             description: t.offer.offers.starter.description,
             features: t.offer.offers.starter.features,
@@ -100,7 +100,7 @@ export const PricingPage: React.FC = () => {
             siteTypeId: 'vitrine-simple'
         },
         {
-            title: "Croissance",
+            title: "Stratégie",
             price: "1 650",
             description: t.offer.offers.business.description,
             features: t.offer.offers.business.features,
@@ -111,7 +111,7 @@ export const PricingPage: React.FC = () => {
             siteTypeId: 'vitrine-standard'
         },
         {
-            title: "Domination",
+            title: "Signature",
             price: "2 950",
             description: t.offer.offers.empire.description,
             features: t.offer.offers.empire.features,
@@ -126,18 +126,18 @@ export const PricingPage: React.FC = () => {
     const getIcon = (title: string, color?: string) => {
         const colorClass = color === 'blue' ? 'text-blue-400' : color === 'purple' ? 'text-purple-400' : 'text-premium-green';
         switch (title) {
-            case 'Présence': return <Rocket className={`w-4 h-4 ${colorClass}`} />;
-            case 'Croissance': return <Zap className={`w-4 h-4 text-black fill-black`} />;
-            case 'Domination': return <Crown className={`w-4 h-4 ${colorClass}`} />;
+            case 'Fondation': return <Rocket className={`w-4 h-4 ${colorClass}`} />;
+            case 'Stratégie': return <Zap className={`w-4 h-4 text-black fill-black`} />;
+            case 'Signature': return <Crown className={`w-4 h-4 ${colorClass}`} />;
             default: return null;
         }
     };
 
     const getBadge = (title: string) => {
         switch (title) {
-            case 'Présence': return t.pricingPage.badges.starter;
-            case 'Croissance': return t.pricingPage.badges.business;
-            case 'Domination': return t.pricingPage.badges.empire;
+            case 'Fondation': return t.pricingPage.badges.starter;
+            case 'Stratégie': return t.pricingPage.badges.business;
+            case 'Signature': return t.pricingPage.badges.empire;
             default: return "";
         }
     };
@@ -185,7 +185,7 @@ export const PricingPage: React.FC = () => {
                     ? 'Tarifs & Offres - Osiris | Agence Web Premium'
                     : 'Pricing & Plans - Osiris | Premium Web Agency'}
                 description={language === 'fr'
-                    ? 'Découvrez nos offres de création de sites web premium. Présence à partir de 950€, Croissance dès 1650€, Domination dès 2950€. Sites vitrines haute performance sur-mesure.'
+                    ? 'Découvrez nos offres de création de sites web premium. Fondation à partir de 950€, Stratégie dès 1650€, Signature dès 2950€. Sites vitrines haute performance sur-mesure.'
                     : 'Discover our premium web design packages. Starter from €950, Business from €1650, Empire from €2950. High-performance custom showcase websites.'}
                 canonical="https://osiris-web.com/tarifs"
                 jsonLd={{
@@ -310,18 +310,6 @@ export const PricingPage: React.FC = () => {
                                     </span>
 
                                     <div className="relative z-10 p-6 lg:p-7 flex flex-col flex-1">
-                                        {/* Badge */}
-                                        <div className="flex justify-center mb-5">
-                                            <div className={`px-4 py-1.5 rounded-full flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider border
-                                                ${offer.color === 'blue'   ? 'bg-blue-500/10 text-blue-400 border-blue-500/30'
-                                                : offer.color === 'amber' ? 'bg-amber-400/10 text-amber-400 border-amber-400/30'
-                                                                           : 'bg-purple-500/10 text-purple-400 border-purple-500/30'}
-                                            `}>
-                                                <offer.icon className={`w-3.5 h-3.5 drop-shadow-[0_0_6px_currentColor]`} />
-                                                {getBadge(offer.title)}
-                                            </div>
-                                        </div>
-
                                         {/* Icon */}
                                         <div className="flex justify-center mb-5">
                                             <div className={`w-16 h-16 rounded-2xl flex items-center justify-center border border-white/10 ${iconRing} transition-transform duration-300`}>

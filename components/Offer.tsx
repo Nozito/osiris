@@ -43,7 +43,7 @@ export const Offer: React.FC = () => {
       highlight: false,
       icon: "crown",
       gradient: "from-purple-500/20 to-transparent",
-      badge: "Domination",
+      badge: "Signature",
       color: "purple",
       newFrom: 1
     }
@@ -148,7 +148,7 @@ export const Offer: React.FC = () => {
                       <div className={`text-[11px] font-black uppercase tracking-widest truncate ${offer.color === 'blue' ? 'text-blue-400' : offer.color === 'amber' ? 'text-amber-400' : 'text-purple-400'}`}>
                         {offer.title}
                       </div>
-                      <div className="text-gray-500 text-[10px] mt-0.5">{offer.badge}</div>
+
                     </div>
                   </div>
                   <div className="flex items-center gap-2 flex-shrink-0">
@@ -279,18 +279,6 @@ export const Offer: React.FC = () => {
                 </span>
 
                 <div className="relative z-10 p-6 lg:p-7 flex flex-col flex-1">
-                  {/* Badge */}
-                  <div className="flex justify-center mb-5">
-                    <div className={`px-4 py-1.5 rounded-full flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider border ${
-                      offer.color === 'blue'   ? 'bg-blue-500/10 text-blue-400 border-blue-500/30'
-                      : offer.color === 'amber' ? 'bg-amber-400/10 text-amber-400 border-amber-400/30'
-                                               : 'bg-purple-500/10 text-purple-400 border-purple-500/30'
-                    }`}>
-                      {getIcon(offer.icon)}
-                      {offer.badge}
-                    </div>
-                  </div>
-
                   {/* Icon ring */}
                   <div className="flex justify-center mb-5">
                     <div className={`w-16 h-16 rounded-2xl flex items-center justify-center border border-white/10 ${iconRing}`}>
@@ -399,9 +387,9 @@ export const Offer: React.FC = () => {
                   <div className="bg-white/[0.03] p-4 rounded-xl border border-white/5">
                     <h4 className="text-premium-green font-bold mb-2 text-xs uppercase tracking-wide">{t.offer.faqItems.delays.title}</h4>
                     <p className="text-white text-xs leading-relaxed">
-                      <span className="block mb-0.5"><span className="text-gray-400">Présence :</span> {t.offer.faqItems.delays.starter}</span>
-                      <span className="block mb-0.5"><span className="text-gray-400">Croissance :</span> {t.offer.faqItems.delays.business}</span>
-                      <span className="block"><span className="text-gray-400">Domination :</span> {t.offer.faqItems.delays.empire}</span>
+                      <span className="block mb-0.5"><span className="text-gray-400">Fondation :</span> {t.offer.faqItems.delays.starter}</span>
+                      <span className="block mb-0.5"><span className="text-gray-400">Stratégie :</span> {t.offer.faqItems.delays.business}</span>
+                      <span className="block"><span className="text-gray-400">Signature :</span> {t.offer.faqItems.delays.empire}</span>
                     </p>
                   </div>
                   <div className="bg-white/[0.03] p-4 rounded-xl border border-white/5">
@@ -461,13 +449,6 @@ export const Offer: React.FC = () => {
 
               {expandedOffer !== null && (
                 <>
-                  <div className="flex justify-center mb-4">
-                    <div className={`px-4 py-1.5 rounded-full flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider border ${getAccentBg(offers[expandedOffer].color)} ${offers[expandedOffer].color === 'blue' ? 'border-blue-500/20' : offers[expandedOffer].color === 'amber' ? 'border-amber-400/20' : 'border-purple-500/20'}`}>
-                      {getIcon(offers[expandedOffer].icon)}
-                      {offers[expandedOffer].badge}
-                    </div>
-                  </div>
-
                   <h3 className={`text-2xl font-bold mb-2 font-display text-center uppercase tracking-wider ${offers[expandedOffer].color === 'blue' ? 'text-blue-400' : offers[expandedOffer].color === 'amber' ? 'text-amber-400' : 'text-purple-400'}`}>
                     {offers[expandedOffer].title}
                   </h3>

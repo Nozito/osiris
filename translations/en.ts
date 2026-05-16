@@ -285,7 +285,7 @@ export const en = {
         quote: "Quote",
         offers: {
             starter: {
-                title: "Présence",
+                title: "Fondation",
                 description: "A solid foundation to launch your online presence and build trust from the very first visit.",
                 features: [
                     "1 to 3 pages, 100% custom",
@@ -299,10 +299,10 @@ export const en = {
                 ]
             },
             business: {
-                title: "Croissance",
+                title: "Stratégie",
                 description: "The ideal format to structure your offer, reassure prospects, and generate more qualified leads.",
                 features: [
-                    "Everything in Présence ✓",
+                    "Everything in Fondation ✓",
                     "Up to 5 pages, 100% custom",
                     "Useful animations (transitions, hover, scroll)",
                     "Clean SEO foundation (technical structure, speed, advanced tags)",
@@ -312,10 +312,10 @@ export const en = {
                 ]
             },
             empire: {
-                title: "Domination",
+                title: "Signature",
                 description: "For ambitious projects that need a custom, scalable website built to grow with your business.",
                 features: [
-                    "Everything in Croissance ✓",
+                    "Everything in Stratégie ✓",
                     "Up to 10 pages, 100% custom",
                     "Advanced animations (parallax, complex scroll effects, micro-interactions)",
                     "Advanced SEO (audit, content plan, deep optimisation)",
@@ -361,7 +361,7 @@ export const en = {
             company: "Company",
             email: "Email",
             budget: "Estimated budget",
-            budgetOptions: ["Présence — €950", "Croissance — €1,650", "Domination — €2,950", "Custom amount"],
+            budgetOptions: ["Fondation — €950", "Stratégie — €1,650", "Signature — €2,950", "Custom amount"],
             budgetCustomPlaceholder: "e.g. €2,000",
             message: "Message",
             messagePlaceholder: "Tell us about your project...",
@@ -445,7 +445,7 @@ export const en = {
             contactSupport: "Contact support"
         },
         faqs: [
-            { question: "What are the delivery times?", answer: "Présence: 7 business days. Croissance: 14 business days. Domination: 3-5 weeks depending on complexity." },
+            { question: "What are the delivery times?", answer: "Fondation: 7 business days. Stratégie: 14 business days. Signature: 3-5 weeks depending on complexity." },
             { question: "Can payment be staggered?", answer: "Yes. 50% deposit at project launch, and the remaining 50% upon final delivery." },
             { question: "What does the free hosting include?", answer: "High-performance hosting for 1 year, SSL certificate included, and basic technical support." },
             { question: "Can I modify my site after delivery?", answer: "Absolutely. With the included CMS (Business and Empire packs), you manage your content independently." },
@@ -484,7 +484,7 @@ export const en = {
         labelCompany: "Company",
         labelEmail: "Professional email",
         labelBudget: "Estimated budget",
-        budgetOptions: ["Présence — €950", "Croissance — €1,650", "Domination — €2,950", "Custom amount"],
+        budgetOptions: ["Fondation — €950", "Stratégie — €1,650", "Signature — €2,950", "Custom amount"],
         budgetCustomPlaceholder: "e.g. €2,000",
         labelMessage: "Message",
         messagePlaceholder: "Describe your project...",
