@@ -7,8 +7,8 @@ export const PortfolioPage: React.FC = () => {
     return (
         <>
             <SEOHead
-                title="Portfolio - Osiris | Nos Réalisations Web Premium"
-                description="Découvrez les sites vitrines et landing pages premium réalisés par Osiris Agency. Design sur-mesure, performance et résultats concrets pour nos clients."
+                title="Portfolio – Osiris Agency | Réalisations Web Manosque"
+                description="Découvrez les réalisations web d'Osiris Agency, agence web à Manosque (04). Sites vitrines et landing pages premium pour des clients exigeants en Alpes-de-Haute-Provence et toute la France."
                 canonical="https://osiris-web.com/portfolio"
                 jsonLd={{
                     "@context": "https://schema.org",

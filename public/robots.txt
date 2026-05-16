@@ -1,7 +1,18 @@
+# robots.txt — Osiris Agency | https://osiris-agency.fr/
+# Dernière mise à jour : 2026-05-16
+
+# Autoriser tous les robots
 User-agent: *
 Allow: /
-Disallow: /api/
 
+# Bloquer les dossiers techniques/sensibles
+Disallow: /api/
+Disallow: /.env
+Disallow: /node_modules/
+Disallow: /src/
+Disallow: /.git/
+
+# IA — autoriser l'indexation pour la visibilité
 User-agent: GPTBot
 Allow: /
 
@@ -20,5 +31,14 @@ Allow: /
 User-agent: OAI-SearchBot
 Allow: /
 
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Bytespider
+Disallow: /
+
+# Sitemap
 Sitemap: https://osiris-agency.fr/sitemap.xml
+
+# Domaine canonique
 Host: https://osiris-agency.fr

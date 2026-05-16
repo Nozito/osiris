@@ -47,6 +47,8 @@ export const Footer: React.FC = () => {
         <div className="border-t border-white/5 pt-3 mt-3">
           <div className="footer-bottom flex flex-col gap-3 items-center text-center">
             <p className="text-xs text-gray-600">© 2026 OSIRIS. Tous droits réservés.</p>
+            {/* NAP SEO local — invisible pour l'utilisateur, lu par Google */}
+            <span className="sr-only">Osiris Agency – Agence Web Manosque, Alpes-de-Haute-Provence (04100) – contact@osiris-agency.fr</span>
 
             <div className="flex flex-wrap justify-center gap-6 text-xs text-gray-500">
               <Link to="/legal#cgv" className="hover:text-white transition-colors">CGV</Link>

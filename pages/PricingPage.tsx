@@ -182,11 +182,11 @@ export const PricingPage: React.FC = () => {
         <div className="min-h-screen bg-transparent selection:bg-premium-green selection:text-white font-sans overflow-x-hidden">
             <SEOHead
                 title={language === 'fr'
-                    ? 'Tarifs & Offres - Osiris | Agence Web Premium'
-                    : 'Pricing & Plans - Osiris | Premium Web Agency'}
+                    ? 'Tarifs Osiris Agency – Agence Web Manosque | Création Site Internet 04'
+                    : 'Pricing - Osiris Agency | Premium Web Design Manosque'}
                 description={language === 'fr'
-                    ? 'Découvrez nos offres de création de sites web premium. Fondation à partir de 950€, Stratégie dès 1650€, Signature dès 2950€. Sites vitrines haute performance sur-mesure.'
-                    : 'Discover our premium web design packages. Starter from €950, Business from €1650, Empire from €2950. High-performance custom showcase websites.'}
+                    ? 'Découvrez les offres d’Osiris Agency, agence web à Manosque (04). Fondation dès 950€, Stratégie dès 1650€, Signature dès 2950€. Sites vitrines haute performance sur-mesure.'
+                    : 'Discover Osiris Agency pricing, web agency based in Manosque (04). Fondation from €950, Stratégie from €1,650, Signature from €2,950. Custom high-performance websites.'}
                 canonical="https://osiris-web.com/tarifs"
                 jsonLd={{
                     "@context": "https://schema.org",

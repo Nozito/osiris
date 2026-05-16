@@ -4,7 +4,7 @@ export const fr = {
         home: "Accueil",
         about: "À propos",
         pricing: "Tarifs",
-        portfolio: "Portfolio",
+
         contact: "Contact",
         auditGratuit: "✦ Audit Gratuit",
     },

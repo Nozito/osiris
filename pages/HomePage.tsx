@@ -36,11 +36,11 @@ export const HomePage: React.FC = () => {
         <>
             <SEOHead
                 title={language === 'fr'
-                    ? 'Osiris - Agence Web Premium | Sites Vitrines Haute Performance'
-                    : 'Osiris - Premium Web Agency | High-Performance Showcase Websites'}
+                    ? 'Osiris Agency – Agence Web Manosque | Création Site Internet 04'
+                    : 'Osiris Agency – Premium Web Agency Manosque | Custom Websites'}
                 description={language === 'fr'
-                    ? 'Osiris, agence web premium spécialisée dans la création de sites vitrines haute performance, landing pages sur-mesure et design UI/UX d\'exception. Dominez votre marché digital.'
-                    : 'Osiris, premium web agency specializing in high-performance showcase websites, custom landing pages and exceptional UI/UX design. Dominate your digital market.'}
+                    ? 'Osiris Agency, agence web à Manosque (Alpes-de-Haute-Provence). Création de sites vitrines haute performance, landing pages et design UI/UX sur-mesure. Devis gratuit sous 24h.'
+                    : 'Osiris Agency, premium web agency based in Manosque, France. High-performance showcase websites, custom landing pages and UI/UX design. Free quote within 24h.'}
                 canonical="https://osiris-web.com/"
                 jsonLd={{
                     "@context": "https://schema.org",

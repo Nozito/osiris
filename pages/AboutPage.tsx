@@ -67,11 +67,11 @@ export const AboutPage: React.FC = () => {
   return (
     <>
       <SEOHead
-        title={isFr ? 'A propos - Osiris Agency' : 'About - Osiris Agency'}
+        title={isFr ? 'À propos – Osiris Agency | Agence Web Manosque' : 'About – Osiris Agency | Web Agency Manosque'}
         description={isFr
-          ? 'Decouvrez les deux fondateurs derriere Osiris Agency et notre facon de travailler pour livrer des sites vitrines premium.'
-          : 'Meet the two founders behind Osiris Agency and how we deliver premium showcase websites.'}
-        canonical="https://osiris-agency.fr/a-propos"
+          ? 'Découvrez Antoine & Noah, fondateurs d’Osiris Agency à Manosque (Alpes-de-Haute-Provence). Agence web spécialisée en création de sites vitrines premium et design sur-mesure.'
+          : 'Meet the two founders behind Osiris Agency in Manosque, France. Premium web agency specialising in custom showcase websites and UI/UX design.'}
+        canonical="https://osiris-web.com/a-propos"
       />
 
       <div className="relative z-10 pt-32 sm:pt-40 pb-20">

@@ -44,8 +44,8 @@ export const ContactPage: React.FC = () => {
                     ? 'Contact - Osiris | Agence Web Premium'
                     : 'Contact - Osiris | Premium Web Agency'}
                 description={language === 'fr'
-                    ? 'Contactez Osiris pour votre projet web. Devis gratuit sous 24h. Création de sites vitrines haute performance, landing pages et design UI/UX sur-mesure.'
-                    : 'Contact Osiris for your web project. Free quote within 24h. High-performance showcase websites, landing pages and custom UI/UX design.'}
+                    ? 'Contactez Osiris Agency à Manosque (04100) pour votre projet web. Devis gratuit sous 24h. Agence web Alpes-de-Haute-Provence spécialisée en sites vitrines premium.'
+                    : 'Contact Osiris Agency in Manosque for your web project. Free quote within 24h. Premium web agency specialising in high-performance showcase websites.'}
                 canonical="https://osiris-web.com/contact"
                 jsonLd={{
                     "@context": "https://schema.org",
@@ -154,6 +154,20 @@ export const ContactPage: React.FC = () => {
                                         </p>
                                     </div>
                                 </div>
+                            </div>
+
+                            {/* Google Maps */}
+                            <div className="rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)]">
+                                <iframe
+                                    title="Osiris Agency — Marseille"
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56210205.017539255!2d-127.86400119999998!3d30.695940900000007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12cbcd6b1128c6e3%3A0x89b8b52ebf05f8b5!2sOsiris%20Agency!5e0!3m2!1sfr!2sfr!4v1778954394063!5m2!1sfr!2sfr"
+                                    width="100%"
+                                    height="200"
+                                    style={{ border: 0, display: 'block' }}
+                                    allowFullScreen
+                                    loading="lazy"
+                                    referrerPolicy="no-referrer-when-downgrade"
+                                />
                             </div>
                         </motion.div>
 
@@ -314,6 +328,7 @@ export const ContactPage: React.FC = () => {
                             </motion.div>
                         </div>
                     </div>
+
                 </div>
             </div>
 

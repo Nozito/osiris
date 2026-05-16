@@ -4,7 +4,7 @@ export const en = {
         home: "Home",
         about: "About",
         pricing: "Pricing",
-        portfolio: "Portfolio",
+
         contact: "Contact",
         auditGratuit: "✦ Free Audit",
     },
