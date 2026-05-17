@@ -106,19 +106,6 @@ export const Hero: React.FC = () => {
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
-
-            {/* CTA secondaire vers les realisations */}
-            <a
-              href="#projects"
-              onClick={(e) => {
-                e.preventDefault();
-                const el = document.getElementById('projects');
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="group relative inline-flex items-center justify-center text-sm sm:text-base font-semibold text-white/85 hover:text-premium-green transition-colors duration-300"
-            >
-              {t.hero.ctaSecondary}
-            </a>
           </div>
         </motion.div>
       </div>

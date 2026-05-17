@@ -187,7 +187,7 @@ export const PricingPage: React.FC = () => {
                 description={language === 'fr'
                     ? 'Découvrez les offres d’Osiris Agency, agence web à Manosque (04). Fondation dès 950€, Stratégie dès 1650€, Signature dès 2950€. Sites vitrines haute performance sur-mesure.'
                     : 'Discover Osiris Agency pricing, web agency based in Manosque (04). Fondation from €950, Stratégie from €1,650, Signature from €2,950. Custom high-performance websites.'}
-                canonical="https://osiris-web.com/tarifs"
+                canonical="https://osiris-agency.fr/tarifs"
                 jsonLd={{
                     "@context": "https://schema.org",
                     "@type": "BreadcrumbList",
@@ -196,13 +196,13 @@ export const PricingPage: React.FC = () => {
                             "@type": "ListItem",
                             "position": 1,
                             "name": "Accueil",
-                            "item": "https://osiris-web.com/"
+                            "item": "https://osiris-agency.fr/"
                         },
                         {
                             "@type": "ListItem",
                             "position": 2,
                             "name": "Tarifs",
-                            "item": "https://osiris-web.com/tarifs"
+                            "item": "https://osiris-agency.fr/tarifs"
                         }
                     ]
                 }}

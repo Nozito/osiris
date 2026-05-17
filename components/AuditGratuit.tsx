@@ -109,10 +109,11 @@ export const AuditGratuit: React.FC = () => {
                         transition={{ duration: 0.6, delay: 0.15 }}
                         className="bg-white/[0.03] border border-white/10 rounded-3xl p-6 sm:p-8 flex flex-col"
                     >
-                        <label className="block text-sm font-semibold text-white/70 mb-3">
+                        <label htmlFor="audit-message" className="block text-sm font-semibold text-white/70 mb-3">
                             {t.audit.textareaLabel}
                         </label>
                         <textarea
+                            id="audit-message"
                             value={message}
                             onChange={(e) => setMessage(e.target.value)}
                             placeholder={t.audit.textareaPlaceholder}

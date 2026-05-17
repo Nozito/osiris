@@ -3,7 +3,7 @@ import type { IncomingMessage, ServerResponse } from 'http';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const FROM   = `Osiris Agency <${process.env.FROM_EMAIL ?? 'no-reply@osiris-web.com'}>`;
+const FROM   = `Osiris Agency <${process.env.FROM_EMAIL ?? 'no-reply@osiris-agency.fr'}>`;
 const TEAM   = [
     process.env.ANTOINE_EMAIL ?? 'antoine@osiris-agency.fr',
     process.env.NOAH_EMAIL    ?? 'noah@osiris-agency.fr',
@@ -26,7 +26,7 @@ function layout(title: string, content: string): string {
     <tr><td style="padding:32px 32px 24px;">${content}</td></tr>
     <tr><td style="background:#f8f9fa;padding:18px 32px;text-align:center;border-top:1px solid #e5e7eb;">
       <p style="margin:0;font-size:11px;color:#9ca3af;">Osiris Agency — contact@osiris-agency.fr</p>
-      <p style="margin:4px 0 0;font-size:11px;color:#d1d5db;">osiris-web.com</p>
+      <p style="margin:4px 0 0;font-size:11px;color:#d1d5db;">osiris-agency.fr</p>
     </td></tr>
   </table>
 </td></tr>

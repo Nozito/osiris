@@ -65,6 +65,8 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
           className="w-full h-full object-cover"
           draggable={false}
           loading="lazy"
+          width="1200"
+          height="800"
         />
       </motion.div>
 
@@ -89,6 +91,8 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
             className="w-full h-full object-cover"
             draggable={false}
             loading="lazy"
+            width="1200"
+            height="800"
           />
         </motion.div>
 

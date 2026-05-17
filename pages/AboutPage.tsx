@@ -71,7 +71,7 @@ export const AboutPage: React.FC = () => {
         description={isFr
           ? 'Découvrez Antoine & Noah, fondateurs d’Osiris Agency à Manosque (Alpes-de-Haute-Provence). Agence web spécialisée en création de sites vitrines premium et design sur-mesure.'
           : 'Meet the two founders behind Osiris Agency in Manosque, France. Premium web agency specialising in custom showcase websites and UI/UX design.'}
-        canonical="https://osiris-web.com/a-propos"
+        canonical="https://osiris-agency.fr/a-propos"
       />
 
       <div className="relative z-10 pt-32 sm:pt-40 pb-20">

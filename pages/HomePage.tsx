@@ -41,7 +41,7 @@ export const HomePage: React.FC = () => {
                 description={language === 'fr'
                     ? 'Osiris Agency, agence web à Manosque (Alpes-de-Haute-Provence). Création de sites vitrines haute performance, landing pages et design UI/UX sur-mesure. Devis gratuit sous 24h.'
                     : 'Osiris Agency, premium web agency based in Manosque, France. High-performance showcase websites, custom landing pages and UI/UX design. Free quote within 24h.'}
-                canonical="https://osiris-web.com/"
+                canonical="https://osiris-agency.fr/"
                 jsonLd={{
                     "@context": "https://schema.org",
                     "@type": "BreadcrumbList",
@@ -50,7 +50,7 @@ export const HomePage: React.FC = () => {
                             "@type": "ListItem",
                             "position": 1,
                             "name": "Accueil",
-                            "item": "https://osiris-web.com/"
+                            "item": "https://osiris-agency.fr/"
                         }
                     ]
                 }}
