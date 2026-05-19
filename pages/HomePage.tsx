@@ -36,21 +36,31 @@ export const HomePage: React.FC = () => {
         <>
             <SEOHead
                 title={language === 'fr'
-                    ? 'Osiris Agency – Agence Web Manosque | Création Site Internet 04'
-                    : 'Osiris Agency – Premium Web Agency Manosque | Custom Websites'}
+                    ? 'Osiris Agency | Création Site Web Manosque – Devis Gratuit'
+                    : 'Osiris Agency | Custom Website Design Manosque – Free Quote'}
                 description={language === 'fr'
-                    ? 'Osiris Agency, agence web à Manosque (Alpes-de-Haute-Provence). Création de sites vitrines haute performance, landing pages et design UI/UX sur-mesure. Devis gratuit sous 24h.'
+                    ? 'Osiris Agency, agence web à Manosque (04100). Création de sites vitrines sur-mesure, landing pages et design UI/UX premium. Devis gratuit sous 24h.'
                     : 'Osiris Agency, premium web agency based in Manosque, France. High-performance showcase websites, custom landing pages and UI/UX design. Free quote within 24h.'}
                 canonical="https://osiris-agency.fr/"
+                ogImage="https://osiris-agency.fr/og-image.png"
                 jsonLd={{
                     "@context": "https://schema.org",
-                    "@type": "BreadcrumbList",
-                    "itemListElement": [
+                    "@graph": [
                         {
-                            "@type": "ListItem",
-                            "position": 1,
-                            "name": "Accueil",
-                            "item": "https://osiris-agency.fr/"
+                            "@type": "BreadcrumbList",
+                            "itemListElement": [
+                                { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://osiris-agency.fr/" }
+                            ]
+                        },
+                        {
+                            "@type": "Service",
+                            "name": "Création de sites web sur-mesure – Manosque",
+                            "provider": { "@type": "LocalBusiness", "name": "Osiris Agency", "url": "https://osiris-agency.fr" },
+                            "areaServed": [
+                                { "@type": "City", "name": "Manosque" },
+                                { "@type": "AdministrativeArea", "name": "Alpes-de-Haute-Provence" }
+                            ],
+                            "serviceType": ["Création de sites web", "Web Design", "Landing Page", "UI/UX Design", "SEO"]
                         }
                     ]
                 }}

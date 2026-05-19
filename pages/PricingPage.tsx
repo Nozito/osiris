@@ -182,27 +182,32 @@ export const PricingPage: React.FC = () => {
         <div className="min-h-screen bg-transparent selection:bg-premium-green selection:text-white font-sans overflow-x-hidden">
             <SEOHead
                 title={language === 'fr'
-                    ? 'Tarifs Osiris Agency – Agence Web Manosque | Création Site Internet 04'
-                    : 'Pricing - Osiris Agency | Premium Web Design Manosque'}
+                    ? 'Osiris Agency Manosque – Tarifs Sites Web | Dès 950 €'
+                    : 'Osiris Agency Manosque – Web Design Pricing | From €950'}
                 description={language === 'fr'
-                    ? 'Découvrez les offres d’Osiris Agency, agence web à Manosque (04). Fondation dès 950€, Stratégie dès 1650€, Signature dès 2950€. Sites vitrines haute performance sur-mesure.'
-                    : 'Discover Osiris Agency pricing, web agency based in Manosque (04). Fondation from €950, Stratégie from €1,650, Signature from €2,950. Custom high-performance websites.'}
+                    ? `Découvrez les offres d'Osiris Agency à Manosque (04). Fondation 950 €, Stratégie 1 650 €, Signature 2 950 €. Sites vitrines sur-mesure, devis gratuit.`
+                    : `Discover Osiris Agency pricing in Manosque (04). Fondation from €950, Stratégie from €1,650, Signature from €2,950. Custom high-performance websites.`}
                 canonical="https://osiris-agency.fr/tarifs"
+                ogImage="https://osiris-agency.fr/og-image.png"
                 jsonLd={{
                     "@context": "https://schema.org",
-                    "@type": "BreadcrumbList",
-                    "itemListElement": [
+                    "@graph": [
                         {
-                            "@type": "ListItem",
-                            "position": 1,
-                            "name": "Accueil",
-                            "item": "https://osiris-agency.fr/"
+                            "@type": "BreadcrumbList",
+                            "itemListElement": [
+                                { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://osiris-agency.fr/" },
+                                { "@type": "ListItem", "position": 2, "name": "Tarifs", "item": "https://osiris-agency.fr/tarifs" }
+                            ]
                         },
                         {
-                            "@type": "ListItem",
-                            "position": 2,
-                            "name": "Tarifs",
-                            "item": "https://osiris-agency.fr/tarifs"
+                            "@type": "OfferCatalog",
+                            "name": "Offres web Osiris Agency – Manosque",
+                            "provider": { "@type": "LocalBusiness", "name": "Osiris Agency", "url": "https://osiris-agency.fr" },
+                            "itemListElement": [
+                                { "@type": "Offer", "name": "Fondation", "description": "Site vitrine essentiel", "price": "950", "priceCurrency": "EUR", "availability": "https://schema.org/InStock" },
+                                { "@type": "Offer", "name": "Stratégie", "description": "Site vitrine avancé", "price": "1650", "priceCurrency": "EUR", "availability": "https://schema.org/InStock" },
+                                { "@type": "Offer", "name": "Signature", "description": "Site vitrine premium sur-mesure", "price": "2950", "priceCurrency": "EUR", "availability": "https://schema.org/InStock" }
+                            ]
                         }
                     ]
                 }}

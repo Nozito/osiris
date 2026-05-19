@@ -20,9 +20,23 @@ export const LegalPage: React.FC = () => {
     return (
         <>
             <SEOHead
-                title="Mentions Légales, CGV & Confidentialité | Osiris Agency"
-                description="CGV, Politique de Confidentialité RGPD et Politique de Cookies d'Osiris Agency — Création de sites web sur-mesure."
+                title="Mentions Légales & CGV | Osiris Agency Manosque"
+                description="Mentions légales, CGV et RGPD d'Osiris Agency à Manosque (04100). Conditions générales de vente pour création de sites web et prestations sur-mesure."
                 canonical="https://osiris-agency.fr/legal"
+                ogImage="https://osiris-agency.fr/og-image.png"
+                noindex={true}
+                jsonLd={{
+                    "@context": "https://schema.org",
+                    "@type": "WebPage",
+                    "name": "Mentions Légales & CGV | Osiris Agency Manosque",
+                    "url": "https://osiris-agency.fr/legal",
+                    "description": "Mentions légales, CGV et RGPD d'Osiris Agency à Manosque (04100).",
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "Osiris Agency",
+                        "url": "https://osiris-agency.fr"
+                    }
+                }}
             />
 
             <section className="min-h-screen pt-24 sm:pt-28 pb-14 sm:pb-16 px-5 sm:px-6 relative bg-[#0B0B0B]">

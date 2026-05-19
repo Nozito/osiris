@@ -69,9 +69,39 @@ export const AboutPage: React.FC = () => {
       <SEOHead
         title={isFr ? 'À propos – Osiris Agency | Agence Web Manosque' : 'About – Osiris Agency | Web Agency Manosque'}
         description={isFr
-          ? 'Découvrez Antoine & Noah, fondateurs d’Osiris Agency à Manosque (Alpes-de-Haute-Provence). Agence web spécialisée en création de sites vitrines premium et design sur-mesure.'
+          ? `Découvrez Antoine & Noah, fondateurs d'Osiris Agency à Manosque (04100). Agence web premium spécialisée en création de sites vitrines et design sur-mesure.`
           : 'Meet the two founders behind Osiris Agency in Manosque, France. Premium web agency specialising in custom showcase websites and UI/UX design.'}
         canonical="https://osiris-agency.fr/a-propos"
+        ogImage="https://osiris-agency.fr/og-image.png"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://osiris-agency.fr/" },
+                { "@type": "ListItem", "position": 2, "name": "À propos", "item": "https://osiris-agency.fr/a-propos" }
+              ]
+            },
+            {
+              "@type": "AboutPage",
+              "name": "À propos – Osiris Agency",
+              "url": "https://osiris-agency.fr/a-propos",
+              "description": "Découvrez l'équipe d'Osiris Agency, agence web à Manosque (Alpes-de-Haute-Provence)",
+              "about": {
+                "@type": "LocalBusiness",
+                "name": "Osiris Agency",
+                "url": "https://osiris-agency.fr",
+                "address": {
+                  "@type": "PostalAddress",
+                  "addressLocality": "Manosque",
+                  "postalCode": "04100",
+                  "addressCountry": "FR"
+                }
+              }
+            }
+          ]
+        }}
       />
 
       <div className="relative z-10 pt-32 sm:pt-40 pb-20">
