@@ -238,7 +238,7 @@ export const PricingPage: React.FC = () => {
                             </span>
                         </div>
 
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black font-display mb-8 tracking-tighter relative inline-block px-2">
+                        <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black font-display mb-8 tracking-tighter relative inline-block px-2">
                             <span className="absolute -inset-4 blur-3xl bg-premium-green/15 animate-pulse pointer-events-none rounded-full"></span>
                             <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-white via-premium-green to-blue-400 animate-gradient-x">
                                 {t.pricingPage.title} {t.pricingPage.titleHighlight}
