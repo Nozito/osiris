@@ -28,7 +28,7 @@ export const DesignPremium: React.FC = () => {
     ];
 
     return (
-        <section className="relative w-full py-14 sm:py-20 px-4 sm:px-6 overflow-hidden bg-premium-black/20">
+        <section className="relative w-full py-14 sm:py-20 px-4 sm:px-6 overflow-hidden bg-[#F0EDE6]">
             <div className="container mx-auto max-w-6xl relative z-10">
                 {/* Section Label */}
                 <motion.div
@@ -41,10 +41,10 @@ export const DesignPremium: React.FC = () => {
                     <span className="inline-block px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-medium mb-6">
                         {t.designPremium.sectionLabel}
                     </span>
-                    <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6">
+                    <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold italic tracking-tight text-[#0F1729] mb-6">
                         {t.designPremium.title}
                     </h2>
-                    <p className="text-lg sm:text-xl text-white/70 max-w-3xl mx-auto">
+                    <p className="text-lg sm:text-xl text-[#0F1729]/55 max-w-3xl mx-auto">
                         {t.designPremium.subtitle}
                     </p>
                 </motion.div>
@@ -63,7 +63,7 @@ export const DesignPremium: React.FC = () => {
                                 className="group relative"
                             >
                                 {/* Card Background */}
-                                <div className="relative p-8 rounded-2xl bg-premium-black/40 backdrop-blur-sm border border-white/10 hover:border-purple-500/30 transition-all duration-300 h-full">
+                                <div className="relative p-8 rounded-2xl bg-white border border-[#E8E3D9] hover:border-purple-500/30 transition-all duration-300 h-full">
                                     {/* Gradient Overlay */}
                                     <div className={`absolute inset-0 bg-gradient-to-br ${card.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl`} />
                                     
@@ -75,12 +75,12 @@ export const DesignPremium: React.FC = () => {
                                         </div>
 
                                         {/* Title */}
-                                        <h3 className="text-xl font-bold text-white mb-4">
+                                        <h3 className="text-xl font-bold text-[#0F1729] mb-4">
                                             {card.title}
                                         </h3>
 
                                         {/* Description */}
-                                        <p className="text-white/70 leading-relaxed">
+                                        <p className="text-[#0F1729]/55 leading-relaxed">
                                             {card.description}
                                         </p>
                                     </div>

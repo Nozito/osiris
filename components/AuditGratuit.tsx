@@ -40,10 +40,9 @@ export const AuditGratuit: React.FC = () => {
             <span id="audit-gratuit" className="absolute -top-24" aria-hidden="true" />
 
             {/* Background */}
-            <div className="absolute inset-0 bg-[#0F1115] pointer-events-none" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(59,130,246,0.05)_0%,transparent_100%)] pointer-events-none" />
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#2A3140] to-transparent" />
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#2A3140] to-transparent" />
+            <div className="absolute inset-0 bg-[#F5F4EF] pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#E8E3D9] to-transparent" />
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#E8E3D9] to-transparent" />
 
             <div className="container mx-auto max-w-6xl relative z-10">
 
@@ -58,7 +57,7 @@ export const AuditGratuit: React.FC = () => {
                     <span className="inline-block px-4 py-1.5 rounded-full bg-premium-green/10 border border-premium-green/30 text-premium-green text-xs font-bold uppercase tracking-widest mb-5">
                         {t.audit.sectionLabel}
                     </span>
-                    <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white mb-5 leading-[1.05]">
+                    <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold italic tracking-tight text-[#0F1729] mb-5 leading-[1.05]">
                         {t.audit.title}
                     </h2>
                 </motion.div>
@@ -79,10 +78,10 @@ export const AuditGratuit: React.FC = () => {
                                     transition={{ duration: 0.5, delay: index * 0.08 }}
                                     className="group relative"
                                 >
-                                    <div className="bg-[#1B202B] border border-[#2A3140] p-4 sm:p-5 rounded-2xl hover:bg-[#1F2535] hover:border-premium-green/40 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(59,130,246,0.08)] transition-all duration-300 h-full flex flex-col justify-between">
+                                    <div className="bg-white border border-[#E8E3D9] p-4 sm:p-5 rounded-2xl hover:bg-[#FDFCFA] hover:border-premium-green/30 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(15,23,41,0.06)] transition-all duration-300 h-full flex flex-col justify-between">
                                         {/* Header Row */}
                                         <div className="flex items-center gap-2 sm:gap-3 mb-3">
-                                            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#0F1115] border border-[#2A3140] flex items-center justify-center group-hover:text-premium-green group-hover:bg-premium-green/10 group-hover:border-premium-green/40 group-hover:scale-110 transition-all duration-300 flex-shrink-0">
+                                            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#F5F4EF] border border-[#E8E3D9] flex items-center justify-center group-hover:text-premium-green group-hover:bg-premium-green/10 group-hover:border-premium-green/30 group-hover:scale-110 transition-all duration-300 flex-shrink-0">
                                                 <Icon className="w-4 h-4 sm:w-[18px] sm:h-[18px] text-premium-green" />
                                             </div>
                                             {pillar.tag && (
@@ -92,8 +91,8 @@ export const AuditGratuit: React.FC = () => {
                                             )}
                                         </div>
                                         <div>
-                                            <h3 className="text-xs sm:text-sm font-bold text-white mb-1 group-hover:text-premium-green transition-colors leading-tight">{pillar.title}</h3>
-                                            <p className="text-[11px] sm:text-xs text-white/50 leading-relaxed group-hover:text-white/60 transition-colors">{pillar.description}</p>
+                                            <h3 className="text-xs sm:text-sm font-semibold text-[#0F1729] mb-1 group-hover:text-premium-green transition-colors leading-tight">{pillar.title}</h3>
+                                            <p className="text-[11px] sm:text-xs text-[#0F1729]/45 leading-relaxed group-hover:text-[#0F1729]/60 transition-colors">{pillar.description}</p>
                                         </div>
                                     </div>
                                 </motion.div>
@@ -107,9 +106,9 @@ export const AuditGratuit: React.FC = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.15 }}
-                        className="bg-[#1B202B] border border-[#2A3140] rounded-3xl p-6 sm:p-8 flex flex-col"
+                        className="bg-white border border-[#E8E3D9] rounded-3xl p-6 sm:p-8 flex flex-col"
                     >
-                        <label htmlFor="audit-message" className="block text-sm font-semibold text-white/70 mb-3">
+                        <label htmlFor="audit-message" className="block text-sm font-semibold text-[#0F1729]/60 mb-3">
                             {t.audit.textareaLabel}
                         </label>
                         <textarea
@@ -118,7 +117,7 @@ export const AuditGratuit: React.FC = () => {
                             onChange={(e) => setMessage(e.target.value)}
                             placeholder={t.audit.textareaPlaceholder}
                             rows={5}
-                            className="w-full bg-[#0F1115] border border-[#2A3140] rounded-xl px-4 py-3 text-sm text-white/80 placeholder:text-white/25 focus:outline-none focus:border-premium-green/40 focus:bg-[#151922] transition-all duration-300 resize-none mb-6 scrollbar-hide"
+                            className="w-full bg-[#F5F4EF] border border-[#E8E3D9] rounded-xl px-4 py-3 text-sm text-[#0F1729]/80 placeholder:text-[#0F1729]/25 focus:outline-none focus:border-premium-green/40 focus:bg-white transition-all duration-300 resize-none mb-6 scrollbar-hide"
                         />
                         <div className="flex flex-col gap-3 items-center">
                             <button
@@ -130,13 +129,13 @@ export const AuditGratuit: React.FC = () => {
                             </button>
                             <Link
                                 to="/contact"
-                                className="btn-reserve w-full justify-center bg-[#1B202B] text-white border border-[#2A3140] hover:bg-[#1F2535] hover:border-[#3B82F6]/40"
+                                className="btn-reserve w-full justify-center bg-white text-[#0F1729] border border-[#E8E3D9] hover:bg-[#F5F4EF] hover:border-[#0F1729]/20"
                             >
                                 <PhoneCall className="btn-icon" />
                                 Réserver mon appel
                             </Link>
                         </div>
-                        <p className="text-xs text-white/35 text-center mt-5 tracking-wide">
+                        <p className="text-xs text-[#0F1729]/30 text-center mt-5 tracking-wide">
                             {t.audit.reassurance}
                         </p>
                     </motion.div>
@@ -153,13 +152,13 @@ export const AuditGratuit: React.FC = () => {
                 >
                     {/* Section label */}
                     <div className="text-center mb-10 sm:mb-14">
-                        <span className="text-xs font-bold uppercase tracking-[0.25em] text-white/35 block mb-4">
+                        <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#0F1729]/30 block mb-4">
                             {t.audit.processTitle}
                         </span>
-                        <p className="text-white font-semibold text-sm sm:text-base max-w-xl mx-auto leading-relaxed mb-3">
+                        <p className="text-[#0F1729] font-semibold text-sm sm:text-base max-w-xl mx-auto leading-relaxed mb-3">
                             {t.audit.subtitle}
                         </p>
-                        <p className="text-white font-bold text-xs sm:text-sm tracking-widest uppercase">
+                        <p className="text-[#0F1729] font-bold text-xs sm:text-sm tracking-widest uppercase">
                             {t.audit.stats}
                         </p>
                     </div>
@@ -206,7 +205,7 @@ export const AuditGratuit: React.FC = () => {
                                                 )}
                                             </motion.div>
                                             <p className={`text-xs sm:text-sm font-medium leading-snug max-w-[120px] ${
-                                                isLast ? 'text-[#25D366] font-bold' : 'text-white/70'
+                                                isLast ? 'text-[#25D366] font-bold' : 'text-[#0F1729]/65'
                                             }`}>
                                                 {isLast ? 'Tu reçois ton audit via WhatsApp' : step.text}
                                             </p>
@@ -214,7 +213,7 @@ export const AuditGratuit: React.FC = () => {
 
                                         {/* Connector segment (between nodes only) */}
                                         {!isLast && (
-                                            <div className="grow mt-7 mx-2 h-[2px] bg-white/[0.07] rounded-full overflow-hidden">
+                                            <div className="grow mt-7 mx-2 h-[2px] bg-[#E8E3D9] rounded-full overflow-hidden">
                                                 <motion.div
                                                     className={`h-full rounded-full ${
                                                         i === allSteps.length - 2
@@ -259,7 +258,7 @@ export const AuditGratuit: React.FC = () => {
                                             )}
                                         </div>
                                         <p className={`text-xs font-medium leading-snug max-w-[130px] ${
-                                            isLast ? 'text-[#25D366] font-bold' : 'text-white/70'
+                                            isLast ? 'text-[#25D366] font-bold' : 'text-[#0F1729]/65'
                                         }`}>
                                             {isLast ? 'Tu reçois ton audit via WhatsApp' : step.text}
                                         </p>

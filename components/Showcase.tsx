@@ -85,7 +85,7 @@ export const Showcase: React.FC = () => {
           >
             <span className="text-premium-green text-xs font-bold uppercase tracking-widest mb-2 block">{t.showcase.sectionLabel}</span>
             <h2 className="text-3xl sm:text-4xl md:text-6xl font-black font-display leading-tight">
-              {t.showcase.title} <br /> <span className="text-white/20">{t.showcase.titleFaded}</span>
+              {t.showcase.title} <br /> <span className="text-[#0F1729]/20">{t.showcase.titleFaded}</span>
             </h2>
           </motion.div>
 
@@ -103,7 +103,7 @@ export const Showcase: React.FC = () => {
                 className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider border transition-all duration-300 whitespace-nowrap flex-shrink-0
                   ${filterIndex === index
                     ? 'bg-premium-green text-white border-premium-green'
-                    : 'bg-white/5 text-gray-400 border-white/5 hover:border-white/20 hover:text-white'
+                    : 'bg-[#F5F4EF] text-[#0F1729]/50 border-[#E8E3D9] hover:border-[#0F1729]/20 hover:text-[#0F1729]'
                   }`}
               >
                 {cat}
@@ -125,7 +125,7 @@ export const Showcase: React.FC = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.4 }}
-                className="relative group overflow-hidden rounded-[1.5rem] border border-white/10 bg-gray-900 shadow-2xl"
+                className="relative group overflow-hidden rounded-[1.5rem] border border-[#E8E3D9] bg-white shadow-2xl"
               >
                 {/* Before/After Slider Component */}
                 <div className="absolute inset-0 z-0">
@@ -144,14 +144,14 @@ export const Showcase: React.FC = () => {
                         {categories[project.categoryKey]}
                       </span>
                     </div>
-                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white font-display drop-shadow-lg">
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#0F1729] font-display drop-shadow-lg">
                       {project.title}
                     </h3>
                   </div>
                 </div>
 
                 {/* Border Glow on Hover */}
-                <div className="absolute inset-0 border border-white/10 rounded-[1.5rem] group-hover:border-premium-green/50 transition-colors duration-300 pointer-events-none z-20"></div>
+                <div className="absolute inset-0 border border-[#E8E3D9] rounded-[1.5rem] group-hover:border-premium-green/50 transition-colors duration-300 pointer-events-none z-20"></div>
               </motion.div>
             ))}
           </AnimatePresence>

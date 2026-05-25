@@ -147,7 +147,7 @@ export const PricingPage: React.FC = () => {
             case 'blue':   return 'border-blue-500/40';
             case 'amber':  return 'border-amber-400/40';
             case 'purple': return 'border-purple-500/40';
-            default:       return 'border-[#2A3140]';
+            default:       return 'border-[#E8E3D9]';
         }
     };
 
@@ -225,7 +225,7 @@ export const PricingPage: React.FC = () => {
                         transition={{ duration: 0.8 }}
                         className="text-center mb-12 md:mb-16"
                     >
-                        <Link to="/" className="inline-flex items-center gap-2 text-gray-500 hover:text-white transition-colors mb-8 text-xs font-mono uppercase tracking-widest group">
+                        <Link to="/" className="inline-flex items-center gap-2 text-[#0F1729]/40 hover:text-[#0F1729] transition-colors mb-8 text-xs font-mono uppercase tracking-widest group">
                             <span className="transform group-hover:-translate-x-1 transition-transform inline-block">
                                 <ArrowRight className="w-3.5 h-3.5 rotate-180" />
                             </span>
@@ -245,8 +245,8 @@ export const PricingPage: React.FC = () => {
                             </span>
                         </h1>
 
-                        <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed font-light">
-                            {t.pricingPage.subtitle}<span className="text-white font-medium">{t.pricingPage.subtitleHighlight}</span>{t.pricingPage.subtitleEnd}
+                        <p className="text-xl text-[#0F1729]/50 max-w-2xl mx-auto leading-relaxed font-light">
+                            {t.pricingPage.subtitle}<span className="text-[#0F1729] font-medium">{t.pricingPage.subtitleHighlight}</span>{t.pricingPage.subtitleEnd}
                         </p>
                     </motion.div>
 
@@ -295,7 +295,7 @@ export const PricingPage: React.FC = () => {
                                     viewport={{ once: true, margin: '-40px' }}
                                     transition={{ duration: 0.6, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
                                     whileHover={{ y: -8, transition: { duration: 0.25 } }}
-                                    className={`relative rounded-[2rem] border bg-[#1B202B] flex flex-col overflow-hidden cursor-default transition-shadow duration-500 ${borderClass} ${offer.highlight ? 'shadow-[0_0_70px_-15px_rgba(251,191,36,0.35)]' : ''}`}
+                                    className={`relative rounded-[2rem] border bg-white flex flex-col overflow-hidden cursor-default transition-shadow duration-500 ${borderClass} ${offer.highlight ? 'shadow-[0_0_70px_-15px_rgba(251,191,36,0.25)]' : 'shadow-sm'}`}
                                     style={{ boxShadow: `0 0 60px -20px ${glowColor}` }}
                                 >
                                     {/* Ambient glow spot */}
@@ -317,25 +317,25 @@ export const PricingPage: React.FC = () => {
                                     <div className="relative z-10 p-6 lg:p-7 flex flex-col flex-1">
                                         {/* Icon */}
                                         <div className="flex justify-center mb-5">
-                                            <div className={`w-16 h-16 rounded-2xl flex items-center justify-center border border-[#2A3140] ${iconRing} transition-transform duration-300`}>
+                                            <div className={`w-16 h-16 rounded-2xl flex items-center justify-center border border-[#E8E3D9] ${iconRing} transition-transform duration-300`}>
                                                 <offer.icon className="w-7 h-7 drop-shadow-[0_0_10px_currentColor]" />
                                             </div>
                                         </div>
 
                                         {/* Title & Price */}
                                         <div className="mb-5 text-center">
-                                            <h2 className="text-xl font-black font-display uppercase tracking-widest mb-3 text-white">
+                                            <h2 className="text-xl font-black font-display uppercase tracking-widest mb-3 text-[#0F1729]">
                                                 {offer.title}
                                             </h2>
                                             <div className="flex items-start justify-center gap-1">
                                                 <span className={`text-5xl lg:text-6xl font-black tracking-tighter
-                                                    ${offer.color === 'blue' ? 'text-white' : offer.color === 'amber' ? 'text-amber-300' : 'text-white'}
+                                                    ${offer.color === 'blue' ? 'text-[#0F1729]' : offer.color === 'amber' ? 'text-amber-600' : 'text-[#0F1729]'}
                                                 `}>
                                                     {offer.price}
                                                 </span>
-                                                <span className="text-xl lg:text-2xl mt-2 lg:mt-3 text-gray-400 font-light">€</span>
+                                                <span className="text-xl lg:text-2xl mt-2 lg:mt-3 text-[#0F1729]/50 font-light">€</span>
                                             </div>
-                                            <p className="text-gray-400 text-xs lg:text-sm mt-4 leading-relaxed px-1 lg:px-2">{offer.description}</p>
+                                            <p className="text-[#0F1729]/50 text-xs lg:text-sm mt-4 leading-relaxed px-1 lg:px-2">{offer.description}</p>
                                         </div>
 
                                         {/* Separator */}
@@ -359,7 +359,7 @@ export const PricingPage: React.FC = () => {
                                                         `}>
                                                             {isInherited ? <Check className="w-2.5 h-2.5" /> : <Sparkles className="w-2.5 h-2.5" />}
                                                         </div>
-                                                        <span className={`text-xs leading-relaxed ${isInherited ? 'text-amber-400 font-semibold' : 'text-gray-300'}`}>{feature}</span>
+                                                        <span className={`text-xs leading-relaxed ${isInherited ? 'text-amber-400 font-semibold' : 'text-[#0F1729]/60'}`}>{feature}</span>
                                                     </li>
                                                 );
                                             })}
@@ -381,7 +381,7 @@ export const PricingPage: React.FC = () => {
                                                             `}>
                                                                 {isInherited ? <Check className="w-2.5 h-2.5" /> : <Sparkles className="w-2.5 h-2.5" />}
                                                             </div>
-                                                            <span className={`text-xs leading-relaxed ${isInherited ? 'text-amber-400 font-semibold' : 'text-gray-300'}`}>{feature}</span>
+                                                            <span className={`text-xs leading-relaxed ${isInherited ? 'text-amber-400 font-semibold' : 'text-[#0F1729]/60'}`}>{feature}</span>
                                                         </li>
                                                     );
                                                 })}
@@ -418,7 +418,7 @@ export const PricingPage: React.FC = () => {
                                                         `}>
                                                             {isInherited ? <Check className="w-2.5 h-2.5" /> : <Sparkles className="w-2.5 h-2.5" />}
                                                         </div>
-                                                        <span className={`text-xs leading-relaxed transition-colors duration-300 ${isInherited ? 'text-amber-400 font-semibold' : 'text-gray-300 group-hover/item:text-white'}`}>{feature}</span>
+                                                        <span className={`text-xs leading-relaxed transition-colors duration-300 ${isInherited ? 'text-amber-600 font-semibold' : 'text-[#0F1729]/60 group-hover/item:text-[#0F1729]'}`}>{feature}</span>
                                                     </li>
                                                 );
                                             })}
@@ -452,11 +452,11 @@ export const PricingPage: React.FC = () => {
                         transition={{ duration: 0.7 }}
                         className="mb-16"
                     >
-                        <div className="relative rounded-[2.5rem] overflow-hidden border border-[#2A3140] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.5)]">
+                        <div className="relative rounded-[2.5rem] overflow-hidden border border-[#E8E3D9] shadow-[0_4px_24px_rgba(15,23,41,0.08)]">
                             {/* Background layers */}
-                            <div className="absolute inset-0 bg-[#1B202B]" />
-                            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(59,130,246,0.08),transparent)]" />
-                            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-premium-green/40 to-transparent" />
+                            <div className="absolute inset-0 bg-white" />
+                            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(59,130,246,0.04),transparent)]" />
+                            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-premium-green/30 to-transparent" />
 
                             <div className="relative z-10 px-10 py-14 sm:px-16 sm:py-20">
                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -465,24 +465,24 @@ export const PricingPage: React.FC = () => {
                                         <span className="inline-block px-4 py-1.5 rounded-full bg-premium-green/10 border border-premium-green/20 text-premium-green text-[10px] font-bold uppercase tracking-[0.2em] mb-7">
                                             Devis personnalisé · Gratuit · Sous 24h
                                         </span>
-                                        <h2 className="text-4xl sm:text-5xl font-black font-display text-white mb-5 tracking-tight leading-[1.05]">
+                                        <h2 className="text-4xl sm:text-5xl font-bold font-display italic text-[#0F1729] mb-5 tracking-tight leading-[1.05]">
                                             Parlons de<br />
-                                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-premium-green to-blue-400">votre projet</span>
+                                            <span className="text-premium-green">votre projet</span>
                                         </h2>
-                                        <p className="text-gray-400 leading-relaxed mb-8 max-w-md">
-                                            Décrivez-nous votre projet en quelques mots. Nous vous revenons sous <strong className="text-white font-semibold">24h</strong> avec une proposition sur-mesure, sans engagement.
+                                        <p className="text-[#0F1729]/50 leading-relaxed mb-8 max-w-md">
+                                            Décrivez-nous votre projet en quelques mots. Nous vous revenons sous <strong className="text-[#0F1729] font-semibold">24h</strong> avec une proposition sur-mesure, sans engagement.
                                         </p>
                                         <div className="flex flex-col sm:flex-row gap-3">
                                             <Link
                                                 to="/contact"
-                                                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-premium-green to-blue-600 text-white font-bold text-sm uppercase tracking-widest hover:brightness-110 hover:shadow-[0_0_40px_rgba(37,99,235,0.45)] transition-all duration-300"
+                                                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-premium-green to-blue-600 text-[#0F1729] font-bold text-sm uppercase tracking-widest hover:brightness-110 hover:shadow-[0_0_40px_rgba(37,99,235,0.45)] transition-all duration-300"
                                             >
                                                 Demander un devis gratuit
                                                 <ArrowRight className="w-4 h-4" />
                                             </Link>
                                             <a
                                                 href="tel:0772328932"
-                                                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl border border-[#2A3140] bg-[#151922] text-white font-semibold text-sm hover:border-[#3B82F6]/40 hover:bg-[#1B202B] transition-all duration-300"
+                                                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl border border-[#E8E3D9] bg-[#F5F4EF] text-[#0F1729] font-semibold text-sm hover:border-[#3B82F6]/40 hover:bg-white transition-all duration-300"
                                             >
                                                 07 72 32 89 32
                                             </a>
@@ -497,9 +497,9 @@ export const PricingPage: React.FC = () => {
                                             { label: 'Acompte 50%', sub: 'Solde à la livraison' },
                                             { label: 'TVA non applicable', sub: 'Art. 293 B CGI' },
                                         ].map((item) => (
-                                            <div key={item.label} className="p-5 rounded-2xl border border-[#2A3140] bg-[#151922] hover:border-premium-green/25 hover:bg-[#1B202B] transition-all duration-300">
-                                                <p className="text-white font-bold text-sm mb-1">{item.label}</p>
-                                                <p className="text-gray-500 text-xs">{item.sub}</p>
+                                            <div key={item.label} className="p-5 rounded-2xl border border-[#E8E3D9] bg-[#F5F4EF] hover:border-premium-green/25 hover:bg-white transition-all duration-300">
+                                                <p className="text-[#0F1729] font-bold text-sm mb-1">{item.label}</p>
+                                                <p className="text-[#0F1729]/40 text-xs">{item.sub}</p>
                                             </div>
                                         ))}
                                     </div>
@@ -518,10 +518,10 @@ export const PricingPage: React.FC = () => {
                             className="text-center mb-12"
                         >
                             <span className="text-premium-green text-xs font-bold uppercase tracking-widest mb-4 block">Après la livraison</span>
-                            <h2 className="text-3xl sm:text-5xl font-black font-display text-white mb-4 tracking-tight">
+                            <h2 className="text-3xl sm:text-5xl font-bold italic font-display text-[#0F1729] mb-4 tracking-tight">
                                 Formules de <span className="text-premium-green">Maintenance</span>
                             </h2>
-                            <p className="text-gray-400 max-w-xl mx-auto">
+                            <p className="text-[#0F1729]/50 max-w-xl mx-auto">
                                 Mises à jour, corrections, modifications de contenu. Sans engagement ou avec engagement pour un tarif préférentiel.
                             </p>
                         </motion.div>
@@ -534,7 +534,7 @@ export const PricingPage: React.FC = () => {
                                     border: 'border-blue-500/20 hover:border-blue-500/50',
                                     iconColor: 'text-blue-400', iconRing: 'bg-blue-500/10 shadow-[0_0_20px_rgba(59,130,246,0.25)]',
                                     topLine: 'from-transparent via-blue-500/60 to-transparent',
-                                    numColor: 'text-blue-500/[0.07]', priceColor: 'text-white',
+                                    numColor: 'text-blue-500/[0.07]', priceColor: 'text-[#0F1729]',
                                 },
                                 {
                                     duration: '3 mois', commitment: '3 mois minimum', price: '49,90', highlight: false,
@@ -543,7 +543,7 @@ export const PricingPage: React.FC = () => {
                                     border: 'border-indigo-500/20 hover:border-indigo-500/50',
                                     iconColor: 'text-indigo-400', iconRing: 'bg-indigo-500/10 shadow-[0_0_20px_rgba(99,102,241,0.25)]',
                                     topLine: 'from-transparent via-indigo-500/60 to-transparent',
-                                    numColor: 'text-indigo-500/[0.07]', priceColor: 'text-white',
+                                    numColor: 'text-indigo-500/[0.07]', priceColor: 'text-[#0F1729]',
                                 },
                                 {
                                     duration: '6 mois', commitment: '6 mois minimum', price: '39,90', highlight: true,
@@ -561,7 +561,7 @@ export const PricingPage: React.FC = () => {
                                     border: 'border-purple-500/20 hover:border-purple-500/50',
                                     iconColor: 'text-purple-400', iconRing: 'bg-purple-500/10 shadow-[0_0_20px_rgba(168,85,247,0.25)]',
                                     topLine: 'from-transparent via-purple-500/60 to-transparent',
-                                    numColor: 'text-purple-500/[0.07]', priceColor: 'text-white',
+                                    numColor: 'text-purple-500/[0.07]', priceColor: 'text-[#0F1729]',
                                 },
                             ] as const).map((plan, i) => (
                                 <motion.div
@@ -571,9 +571,9 @@ export const PricingPage: React.FC = () => {
                                     viewport={{ once: true, margin: '-40px' }}
                                     transition={{ duration: 0.55, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
                                     whileHover={{ y: -6, transition: { duration: 0.25 } }}
-                                    className={`relative flex flex-col rounded-[2rem] border bg-[#1B202B] overflow-hidden cursor-default transition-shadow duration-500
+                                    className={`relative flex flex-col rounded-[2rem] border bg-white overflow-hidden cursor-default transition-shadow duration-500 shadow-sm
                                         ${plan.border}
-                                        ${plan.highlight ? 'shadow-[0_0_60px_-15px_rgba(59,130,246,0.4)]' : ''}
+                                        ${plan.highlight ? 'shadow-[0_0_40px_-15px_rgba(59,130,246,0.25)]' : ''}
                                     `}
                                     style={{ boxShadow: `0 0 60px -20px ${plan.glow}` }}
                                 >
@@ -604,19 +604,19 @@ export const PricingPage: React.FC = () => {
                                         {!plan.highlight && <div className="mb-5 h-7" />}
 
                                         {/* Icon */}
-                                        <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 border border-[#2A3140] ${plan.iconRing} transition-transform duration-300`}>
+                                        <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 border border-[#E8E3D9] ${plan.iconRing} transition-transform duration-300`}>
                                             {plan.highlight && (
                                                 <div className="absolute w-16 h-16 rounded-2xl bg-premium-green/10 animate-ping opacity-30" />
                                             )}
                                             <plan.icon className={`w-7 h-7 ${plan.iconColor} drop-shadow-[0_0_8px_currentColor]`} />
                                         </div>
 
-                                        <p className="text-white font-black font-display text-2xl tracking-tight mb-1">{plan.duration}</p>
-                                        <p className="text-gray-500 text-xs mb-6">{plan.commitment}</p>
+                                        <p className="text-[#0F1729] font-black font-display text-2xl tracking-tight mb-1">{plan.duration}</p>
+                                        <p className="text-[#0F1729]/40 text-xs mb-6">{plan.commitment}</p>
 
                                         <div className="flex items-end justify-center gap-1 mb-1">
                                             <span className={`text-5xl font-black font-display leading-none ${plan.priceColor}`}>{plan.price}</span>
-                                            <span className="text-gray-500 text-sm mb-1">€/mois</span>
+                                            <span className="text-[#0F1729]/40 text-sm mb-1">€/mois</span>
                                         </div>
                                         <p className="text-gray-700 text-[10px] mb-8">TVA non applicable (art. 293 B CGI)</p>
 
@@ -625,7 +625,7 @@ export const PricingPage: React.FC = () => {
                                             className={`mt-auto w-full py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300
                                                 ${plan.highlight
                                                     ? 'bg-premium-green/15 border border-premium-green/40 text-premium-green hover:bg-premium-green hover:text-white hover:shadow-[0_4px_20px_rgba(59,130,246,0.4)]'
-                                                    : 'bg-[#151922] border border-[#2A3140] text-white/60 hover:bg-[#1F2535] hover:text-white hover:border-[#3B82F6]/30'}
+                                                    : 'bg-[#F5F4EF] border border-[#E8E3D9] text-[#0F1729]/50 hover:bg-[#F0EDE6] hover:text-[#0F1729] hover:border-[#3B82F6]/30'}
                                             `}
                                         >
                                             Choisir ce forfait

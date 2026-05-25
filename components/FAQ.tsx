@@ -12,7 +12,7 @@ export const FAQ: React.FC = () => {
     };
 
     return (
-        <section className="relative w-full py-14 sm:py-20 px-4 sm:px-6 overflow-hidden bg-premium-black/20">
+        <section className="relative w-full py-14 sm:py-20 px-4 sm:px-6 overflow-hidden bg-[#F0EDE6]">
             <div className="container mx-auto max-w-4xl relative z-10">
                 {/* Section Label */}
                 <motion.div
@@ -22,10 +22,10 @@ export const FAQ: React.FC = () => {
                     transition={{ duration: 0.6 }}
                     className="text-center mb-16"
                 >
-                    <span className="inline-block px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/70 text-sm font-medium mb-6">
+                    <span className="inline-block px-4 py-2 rounded-full bg-[#F5F4EF] border border-[#E8E3D9] text-[#0F1729]/55 text-sm font-medium mb-6">
                         {t.faq.sectionLabel}
                     </span>
-                    <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white">
+                    <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold italic tracking-tight text-[#0F1729]">
                         {t.faq.title}
                     </h2>
                 </motion.div>
@@ -43,10 +43,10 @@ export const FAQ: React.FC = () => {
                         >
                             <button
                                 onClick={() => toggleFAQ(index)}
-                                className="w-full p-6 rounded-2xl bg-premium-black/40 backdrop-blur-sm border border-white/10 hover:border-premium-green/30 transition-all duration-300 text-left"
+                                className="w-full p-6 rounded-2xl bg-white border border-[#E8E3D9] hover:border-premium-green/30 transition-all duration-300 text-left"
                             >
                                 <div className="flex items-start justify-between gap-4">
-                                    <h3 className="text-lg font-bold text-white pr-4">
+                                    <h3 className="text-lg font-bold text-[#0F1729] pr-4">
                                         {item.question}
                                     </h3>
                                     <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-premium-green/10 border border-premium-green/20 flex items-center justify-center">
@@ -67,7 +67,7 @@ export const FAQ: React.FC = () => {
                                             transition={{ duration: 0.3 }}
                                             className="overflow-hidden"
                                         >
-                                            <p className="text-white/70 leading-relaxed mt-4 pt-4 border-t border-white/5">
+                                            <p className="text-[#0F1729]/55 leading-relaxed mt-4 pt-4 border-t border-[#E8E3D9]">
                                                 {item.answer}
                                             </p>
                                         </motion.div>

@@ -117,8 +117,8 @@ export const Offer: React.FC = () => {
           className="text-center mb-12"
         >
           <span className="text-premium-green text-xs font-bold uppercase tracking-widest mb-2 block">{t.offer.sectionLabel}</span>
-          <h2 className="text-3xl sm:text-4xl font-black font-display text-white mb-3">{t.offer.title}</h2>
-          <p className="text-gray-400 max-w-md mx-auto text-sm">{t.offer.subtitle}</p>
+          <h2 className="text-3xl sm:text-4xl font-bold italic font-display text-[#0F1729] mb-3">{t.offer.title}</h2>
+          <p className="text-[#0F1729]/50 max-w-md mx-auto text-sm">{t.offer.subtitle}</p>
         </motion.div>
 
         {/* Mobile: Accordion Rectangles */}
@@ -133,7 +133,7 @@ export const Offer: React.FC = () => {
                 whileTap={{ scale: 0.985 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08, duration: 0.4 }}
-                className={`bg-[#0A0A0A] rounded-2xl border overflow-hidden transition-colors duration-300 ${getBorderColor(offer.color)}`}
+                className={`bg-white rounded-2xl border overflow-hidden transition-colors duration-300 ${getBorderColor(offer.color)}`}
               >
                 {/* Row header — tap to expand/collapse */}
                 <button
@@ -153,11 +153,11 @@ export const Offer: React.FC = () => {
                   </div>
                   <div className="flex items-center gap-2 flex-shrink-0">
                     <div className="text-right">
-                      <span className="text-lg font-black text-white font-display tabular-nums">{offer.price}</span>
-                      <span className="text-gray-500 text-[10px] ml-0.5">€</span>
+                      <span className="text-lg font-bold text-[#0F1729] font-display tabular-nums">{offer.price}</span>
+                      <span className="text-[#0F1729]/40 text-[10px] ml-0.5">€</span>
                     </div>
                     <ChevronDown
-                      className={`w-4 h-4 text-gray-500 transition-transform duration-300 ${
+                      className={`w-4 h-4 text-[#0F1729]/40 transition-transform duration-300 ${
                         isExpanded ? 'rotate-180 text-premium-green' : ''
                       }`}
                     />
@@ -177,7 +177,7 @@ export const Offer: React.FC = () => {
                     >
                       <div className="px-4 pb-5">
                         <div className="w-full h-[1px] bg-white/5 mb-4" />
-                        <p className="text-gray-400 text-xs leading-relaxed mb-4">
+                        <p className="text-[#0F1729]/50 text-xs leading-relaxed mb-4">
                           {offer.description}
                         </p>
                         <ul className="space-y-2 mb-5">
@@ -254,7 +254,7 @@ export const Offer: React.FC = () => {
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.6, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
                 whileHover={{ y: -8, transition: { duration: 0.25 } }}
-                className={`relative rounded-[2rem] border bg-[#080a10] flex flex-col overflow-hidden cursor-default transition-shadow duration-500 ${borderClass} ${offer.highlight ? 'shadow-[0_0_70px_-15px_rgba(251,191,36,0.35)]' : ''}`}
+                className={`relative rounded-[2rem] border bg-white flex flex-col overflow-hidden cursor-default transition-shadow duration-500 ${borderClass} ${offer.highlight ? 'shadow-[0_0_70px_-15px_rgba(251,191,36,0.35)]' : ''}`}
                 style={{ boxShadow: `0 0 60px -20px ${glowColor}` }}
               >
                 {/* Ambient glow spot */}
@@ -288,18 +288,18 @@ export const Offer: React.FC = () => {
 
                   {/* Title & Price */}
                   <div className="mb-5 text-center">
-                    <h3 className="text-xl font-black font-display uppercase tracking-widest mb-3 text-white">
+                    <h3 className="text-xl font-black font-display uppercase tracking-widest mb-3 text-[#0F1729]">
                       {offer.title}
                     </h3>
                     <div className="flex items-start justify-center gap-1">
                       <span className={`text-5xl lg:text-6xl font-black tracking-tighter ${
-                        offer.color === 'amber' ? 'text-amber-300' : 'text-white'
+                        offer.color === 'amber' ? 'text-amber-600' : 'text-[#0F1729]'
                       }`}>
                         {offer.price}
                       </span>
                       <span className="text-xl lg:text-2xl mt-2 lg:mt-3 text-gray-400 font-light">€</span>
                     </div>
-                    <p className="text-gray-400 text-xs lg:text-sm mt-4 leading-relaxed px-1 lg:px-2">{offer.description}</p>
+                    <p className="text-[#0F1729]/50 text-xs lg:text-sm mt-4 leading-relaxed px-1 lg:px-2">{offer.description}</p>
                   </div>
 
                   {/* Separator */}
@@ -325,7 +325,7 @@ export const Offer: React.FC = () => {
                             {isInherited ? <Check className="w-2.5 h-2.5" /> : <Sparkles className="w-2.5 h-2.5" />}
                           </div>
                           <span className={`text-xs leading-relaxed transition-colors duration-300 ${
-                            isInherited ? 'text-amber-400 font-semibold' : 'text-gray-300 group-hover/item:text-white'
+                            isInherited ? 'text-amber-400 font-semibold' : 'text-[#0F1729]/65 group-hover/item:text-[#0F1729]'
                           }`}>{feature}</span>
                         </li>
                       );
@@ -358,14 +358,14 @@ export const Offer: React.FC = () => {
           <div className="flex p-1.5 gap-1.5 mt-6 bg-black/20 rounded-full border border-white/5">
             <button
               onClick={() => setActiveTab('faq')}
-              className={`py-2.5 px-6 text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all rounded-full ${activeTab === 'faq' ? 'bg-premium-green text-white' : 'text-gray-500 hover:text-white hover:bg-white/5'}`}
+              className={`py-2.5 px-6 text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all rounded-full ${activeTab === 'faq' ? 'bg-premium-green text-white' : 'text-[#0F1729]/50 hover:text-[#0F1729] hover:bg-[#F5F4EF]'}`}
             >
               <HelpCircle className="w-3 h-3" />
               {t.offer.faq}
             </button>
             <button
               onClick={() => setActiveTab('quote')}
-              className={`py-2.5 px-6 text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all rounded-full ${activeTab === 'quote' ? 'bg-premium-green text-white' : 'text-gray-500 hover:text-white hover:bg-white/5'}`}
+              className={`py-2.5 px-6 text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all rounded-full ${activeTab === 'quote' ? 'bg-premium-green text-white' : 'text-[#0F1729]/50 hover:text-[#0F1729] hover:bg-[#F5F4EF]'}`}
             >
               <FileText className="w-3 h-3" />
               {t.offer.quote}

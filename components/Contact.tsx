@@ -36,7 +36,7 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="px-4 sm:px-6 py-6 sm:py-10 bg-[#151922] relative overflow-hidden scroll-mt-20 border-t border-[#2A3140]">
+    <section id="contact" className="px-4 sm:px-6 py-6 sm:py-10 bg-[#F0EDE6] relative overflow-hidden scroll-mt-20 border-t border-[#E8E3D9]">
       {/* Scrolling OSIRIS Marquee Band - Background */}
       <div className="absolute inset-0 flex items-center overflow-hidden pointer-events-none select-none">
         <motion.div
@@ -47,8 +47,8 @@ export const Contact: React.FC = () => {
           {[...Array(10)].map((_, i) => (
             <span
               key={i}
-              className="text-[15vw] md:text-[15vw] lg:text-[14vw] font-black font-display text-white/[0.06] tracking-[-0.05em] mx-8"
-              style={{ WebkitTextStroke: '1px rgba(255,255,255,0.10)' }}
+              className="text-[15vw] md:text-[15vw] lg:text-[14vw] font-black font-display text-[#0F1729]/[0.04] tracking-[-0.05em] mx-8"
+              style={{ WebkitTextStroke: '1px rgba(15,23,41,0.05)' }}
             >
               OSIRIS
             </span>
@@ -57,7 +57,7 @@ export const Contact: React.FC = () => {
       </div>
 
       {/* Decoration */}
-<div className="absolute top-0 right-0 w-1/3 h-full bg-premium-green/3 skew-x-12 pointer-events-none border-l border-[#2A3140]"></div>
+<div className="absolute top-0 right-0 w-1/3 h-full bg-premium-green/3 skew-x-12 pointer-events-none border-l border-[#E8E3D9]"></div>
 
       <div className="container mx-auto max-w-7xl relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 lg:gap-24">
@@ -69,21 +69,21 @@ export const Contact: React.FC = () => {
             viewport={{ once: true }}
           >
             <span className="text-premium-green text-xs font-bold uppercase tracking-widest mb-4 block">{t.contact.sectionLabel}</span>
-            <h2 className="text-3xl sm:text-5xl md:text-7xl font-black font-display text-white mb-6 sm:mb-8">
+            <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold font-display italic text-[#0F1729] mb-6 sm:mb-8">
               {t.contact.title} <br />
-              <span className="text-gray-500">{t.contact.titleFaded}</span>
+              <span className="text-[#0F1729]/25">{t.contact.titleFaded}</span>
             </h2>
-            <p className="text-base sm:text-xl text-gray-400 mb-8 sm:mb-12 leading-relaxed">
+            <p className="text-base sm:text-xl text-[#0F1729]/55 mb-8 sm:mb-12 leading-relaxed">
               {t.contact.subtitle}
             </p>
 
             <div className="space-y-8">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#1B202B] border border-[#2A3140] flex items-center justify-center text-premium-green">
+                <div className="w-12 h-12 rounded-full bg-white border border-[#E8E3D9] flex items-center justify-center text-premium-green">
                   <Mail className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="text-white font-bold mb-1">{t.contact.emailDirect}</h3>
+                  <h3 className="text-[#0F1729] font-bold mb-1">{t.contact.emailDirect}</h3>
                   {/* Additional info removed since email is now the title */}
                 </div>
               </div>
@@ -95,36 +95,36 @@ export const Contact: React.FC = () => {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-[#1B202B] p-3 sm:p-8 md:p-12 border border-[#2A3140] rounded-2xl sm:rounded-[2.5rem]"
+            className="bg-white p-3 sm:p-8 md:p-12 border border-[#E8E3D9] rounded-2xl sm:rounded-[2.5rem]"
           >
             <form className="contact-form space-y-4 sm:space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 <div className="space-y-2">
-                  <label htmlFor="contact-name" className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.name}</label>
-                  <input id="contact-name" name="name" type="text" required className="w-full bg-[#0F1115] border border-[#2A3140] p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl" placeholder="John Doe" />
+                  <label htmlFor="contact-name" className="text-xs uppercase tracking-widest text-[#0F1729]/45 font-bold ml-2">{t.contact.form.name}</label>
+                  <input id="contact-name" name="name" type="text" required className="w-full bg-[#F5F4EF] border border-[#E8E3D9] p-3 sm:p-4 text-[#0F1729] focus:border-premium-green focus:outline-none focus:bg-white transition-colors rounded-xl sm:rounded-2xl" placeholder="John Doe" />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="contact-company" className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.company}</label>
-                  <input id="contact-company" name="company" type="text" className="w-full bg-[#0F1115] border border-[#2A3140] p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl" placeholder="Company Ltd" />
+                  <label htmlFor="contact-company" className="text-xs uppercase tracking-widest text-[#0F1729]/45 font-bold ml-2">{t.contact.form.company}</label>
+                  <input id="contact-company" name="company" type="text" className="w-full bg-[#F5F4EF] border border-[#E8E3D9] p-3 sm:p-4 text-[#0F1729] focus:border-premium-green focus:outline-none focus:bg-white transition-colors rounded-xl sm:rounded-2xl" placeholder="Company Ltd" />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="contact-email" className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.email}</label>
-                <input id="contact-email" name="email" type="email" required className="w-full bg-[#0F1115] border border-[#2A3140] p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl" placeholder="john@company.com" />
+                <label htmlFor="contact-email" className="text-xs uppercase tracking-widest text-[#0F1729]/45 font-bold ml-2">{t.contact.form.email}</label>
+                <input id="contact-email" name="email" type="email" required className="w-full bg-[#F5F4EF] border border-[#E8E3D9] p-3 sm:p-4 text-[#0F1729] focus:border-premium-green focus:outline-none focus:bg-white transition-colors rounded-xl sm:rounded-2xl" placeholder="john@company.com" />
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="contact-budget" className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.budget}</label>
+                <label htmlFor="contact-budget" className="text-xs uppercase tracking-widest text-[#0F1729]/45 font-bold ml-2">{t.contact.form.budget}</label>
                 <select
                   id="contact-budget"
                   aria-label="Budget"
                   value={budgetSel}
                   onChange={e => setBudgetSel(e.target.value)}
-                  className="w-full bg-[#0F1115] border border-[#2A3140] p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors appearance-none rounded-xl sm:rounded-2xl"
+                  className="w-full bg-[#F5F4EF] border border-[#E8E3D9] p-3 sm:p-4 text-[#0F1729] focus:border-premium-green focus:outline-none transition-colors appearance-none rounded-xl sm:rounded-2xl"
                 >
                   {(t.contact.form.budgetOptions as string[]).map((opt, i) => (
-                    <option key={i} value={i < 3 ? opt : 'custom'} className="bg-[#111]">{opt}</option>
+                    <option key={i} value={i < 3 ? opt : 'custom'} className="bg-white">{opt}</option>
                   ))}
                 </select>
                 {budgetSel === 'custom' ? (
@@ -132,7 +132,7 @@ export const Contact: React.FC = () => {
                     name="budget"
                     type="text"
                     placeholder={t.contact.form.budgetCustomPlaceholder as string}
-                    className="w-full bg-[#0F1115] border border-[#2A3140] p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl placeholder-gray-600"
+                    className="w-full bg-[#F5F4EF] border border-[#E8E3D9] p-3 sm:p-4 text-[#0F1729] focus:border-premium-green focus:outline-none focus:bg-white transition-colors rounded-xl sm:rounded-2xl placeholder-[#0F1729]/30"
                   />
                 ) : (
                   <input type="hidden" name="budget" value={budgetSel || (t.contact.form.budgetOptions as string[])[0]} />
@@ -140,8 +140,8 @@ export const Contact: React.FC = () => {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="contact-message" className="text-xs uppercase tracking-widest text-gray-500 font-bold ml-2">{t.contact.form.message}</label>
-                <textarea id="contact-message" name="message" required rows={4} className="w-full bg-[#0F1115] border border-[#2A3140] p-3 sm:p-4 text-white focus:border-premium-green focus:outline-none transition-colors rounded-xl sm:rounded-2xl" placeholder={t.contact.form.messagePlaceholder}></textarea>
+                <label htmlFor="contact-message" className="text-xs uppercase tracking-widest text-[#0F1729]/45 font-bold ml-2">{t.contact.form.message}</label>
+                <textarea id="contact-message" name="message" required rows={4} className="w-full bg-[#F5F4EF] border border-[#E8E3D9] p-3 sm:p-4 text-[#0F1729] focus:border-premium-green focus:outline-none focus:bg-white transition-colors rounded-xl sm:rounded-2xl" placeholder={t.contact.form.messagePlaceholder}></textarea>
               </div>
 
               {status === 'error' && (
@@ -172,7 +172,7 @@ export const Contact: React.FC = () => {
                 )}
               </div>
 
-              <p className="text-center text-xs text-gray-500 mt-3">{t.contact.reassurance}</p>
+              <p className="text-center text-xs text-[#0F1729]/35 mt-3">{t.contact.reassurance}</p>
             </form>
           </motion.div>
         </div>

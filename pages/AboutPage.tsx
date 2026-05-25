@@ -121,10 +121,10 @@ export const AboutPage: React.FC = () => {
                 {isFr ? 'Agence fondée en 2025' : 'Founded in 2025'}
               </span>
             </div>
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-black font-display tracking-tight text-white mb-3 leading-tight">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold italic font-display tracking-tight text-[#0F1729] mb-3 leading-tight">
               {isFr ? "L'agence derriere votre projet" : 'The agency behind your project'}
             </h1>
-            <p className="text-gray-400 mx-auto" style={{ fontSize: 'clamp(14px, 4vw, 18px)', lineHeight: '1.7', maxWidth: '640px' }}>
+            <p className="text-[#0F1729]/50 mx-auto" style={{ fontSize: 'clamp(14px, 4vw, 18px)', lineHeight: '1.7', maxWidth: '640px' }}>
               {isFr
                 ? 'Pas une agence anonyme. Deux passionnes avec un seul objectif : faire de votre site votre meilleur commercial.'
                 : 'Not an anonymous agency. Two passionate experts with one goal: make your website your best salesperson.'}
@@ -136,7 +136,7 @@ export const AboutPage: React.FC = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.15 }}
-              className="flex items-center border border-white/8 rounded-full bg-[#1B202B] overflow-hidden mx-auto"
+              className="flex items-center border border-[#E8E3D9] rounded-full bg-[#F5F4EF] overflow-hidden mx-auto"
               style={{ maxWidth: '560px', paddingInline: 'clamp(12px, 3.5vw, 32px)', paddingBlock: 'clamp(10px, 1.8vw, 14px)', marginBottom: 'clamp(32px, 7vw, 64px)', width: 'fit-content' }}
             >
               {[
@@ -148,7 +148,7 @@ export const AboutPage: React.FC = () => {
                   {i > 0 && <div className="w-px self-stretch bg-white/10 flex-shrink-0" style={{ marginInline: 'clamp(10px, 2.5vw, 32px)' }} />}
                   <div className="flex flex-col items-center gap-0.5">
                     <span className="font-black font-display leading-none" style={{ color: '#C9A84C', fontSize: 'clamp(11px, 3.5vw, 15px)', textShadow: '0 0 12px rgba(201,168,76,0.7), 0 0 28px rgba(201,168,76,0.35)' }}>{stat.value}</span>
-                    <span className="text-gray-400 uppercase font-semibold" style={{ fontSize: 'clamp(8px, 2.2vw, 13px)', letterSpacing: 'clamp(0.04em, 0.3vw, 0.16em)' }}>{stat.label}</span>
+                    <span className="text-[#0F1729]/50 uppercase font-semibold" style={{ fontSize: 'clamp(8px, 2.2vw, 13px)', letterSpacing: 'clamp(0.04em, 0.3vw, 0.16em)' }}>{stat.label}</span>
                   </div>
                 </React.Fragment>
               ))}
@@ -165,7 +165,7 @@ export const AboutPage: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="group relative bg-[#1B202B] border border-[#2A3140] hover:border-premium-green/40 transition-all duration-500 overflow-hidden"
+                  className="group relative bg-white border border-[#E8E3D9] hover:border-premium-green/40 transition-all duration-500 overflow-hidden"
                   style={{ borderRadius: '20px' }}
                 >
                   {/* Top accent line */}
@@ -195,11 +195,11 @@ export const AboutPage: React.FC = () => {
                   {/* Info */}
                   <div style={{ padding: '28px 28px 26px' }}>
                     <div className="mb-3">
-                      <h2 className="font-display font-bold text-white mb-1" style={{ fontSize: '28px' }}>{founder.name}</h2>
+                      <h2 className="font-display font-bold text-[#0F1729] mb-1" style={{ fontSize: '28px' }}>{founder.name}</h2>
                       <p className="text-premium-green font-bold uppercase" style={{ fontSize: '12px', letterSpacing: '0.08em' }}>{founder.title}</p>
                     </div>
-                    <p className="text-gray-400 mb-5" style={{ fontSize: '14px', lineHeight: '1.65' }}>{founder.description}</p>
-                    <span className="inline-flex items-center border border-white/10 bg-white/[0.03] text-gray-300 tracking-wide w-fit" style={{ fontSize: '12px', padding: '5px 14px', borderRadius: '9999px' }}>
+                    <p className="text-[#0F1729]/50 mb-5" style={{ fontSize: '14px', lineHeight: '1.65' }}>{founder.description}</p>
+                    <span className="inline-flex items-center border border-white/10 bg-white/[0.03] text-[#0F1729]/60 tracking-wide w-fit" style={{ fontSize: '12px', padding: '5px 14px', borderRadius: '9999px' }}>
                       {founder.tags}
                     </span>
                   </div>
@@ -212,7 +212,7 @@ export const AboutPage: React.FC = () => {
           <section style={{ padding: 0, marginBottom: '64px' }}>
             <div className="flex items-center gap-3" style={{ marginBottom: '24px' }}>
               <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/10" />
-              <h3 className="text-gray-600 uppercase font-black whitespace-nowrap" style={{ fontSize: '11px', letterSpacing: '0.12em' }}>
+              <h3 className="text-[#0F1729]/35 uppercase font-black whitespace-nowrap" style={{ fontSize: '11px', letterSpacing: '0.12em' }}>
                 {isFr ? 'Ce qui nous différencie' : 'What makes us different'}
               </h3>
               <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/10" />
@@ -238,8 +238,8 @@ export const AboutPage: React.FC = () => {
                       <Icon style={{ width: '16px', height: '16px' }} />
                     </div>
                     <div className="min-w-0">
-                      <h4 className="text-white font-semibold mb-1.5" style={{ fontSize: '14px' }}>{item.title}</h4>
-                      <p className="text-gray-400" style={{ fontSize: '13px', lineHeight: '1.5' }}>{item.description}</p>
+                      <h4 className="text-[#0F1729] font-semibold mb-1.5" style={{ fontSize: '14px' }}>{item.title}</h4>
+                      <p className="text-[#0F1729]/50" style={{ fontSize: '13px', lineHeight: '1.5' }}>{item.description}</p>
                     </div>
                   </motion.div>
                 );
@@ -258,10 +258,10 @@ export const AboutPage: React.FC = () => {
           >
             <div className="absolute top-0 left-1/4 right-1/4 h-px bg-gradient-to-r from-transparent via-premium-green/50 to-transparent" />
             <div className="relative">
-              <h3 className="font-display font-bold text-white" style={{ fontSize: 'clamp(22px, 4vw, 28px)' }}>
+              <h3 className="font-display font-bold text-[#0F1729]" style={{ fontSize: 'clamp(22px, 4vw, 28px)' }}>
                 {isFr ? 'Vous voulez travailler avec nous ?' : 'Do you want to work with us?'}
               </h3>
-              <p className="text-gray-400 mx-auto" style={{ fontSize: '15px', marginTop: '8px', maxWidth: '400px' }}>
+              <p className="text-[#0F1729]/50 mx-auto" style={{ fontSize: '15px', marginTop: '8px', maxWidth: '400px' }}>
                 {isFr ? 'Réponse sous 24h. Premier appel gratuit.' : 'Reply within 24h. First call is free.'}
               </p>
               <Link

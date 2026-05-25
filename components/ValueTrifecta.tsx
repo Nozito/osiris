@@ -35,7 +35,7 @@ const techRow2 = [
 const DesignVisual = () => (
   <div className="relative w-full h-full flex items-center justify-center p-8 perspective-[1000px] group/design">
     {/* Geometric Background Beam */}
-    <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-purple-500/05 to-transparent skew-x-12 border-r border-white/5 rounded-[2.5rem] pointer-events-none"></div>
+    <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-premium-green/03 to-transparent skew-x-12 border-r border-[#E8E3D9] rounded-[2.5rem] pointer-events-none"></div>
 
     {/* Floating Layers Composition */}
     <div className="relative w-full max-w-[300px] aspect-[3/4] transform-style-3d">
@@ -51,9 +51,9 @@ const DesignVisual = () => (
       <div
         className="absolute inset-0 z-10 transition-all duration-700 ease-out group-hover/design:translate-z-[0px]"
       >
-        <div className="w-full h-full bg-gradient-to-br from-white/10 to-transparent backdrop-blur-2xl border border-white/20 rounded-3xl overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.37),inset_0_0_10px_rgba(255,255,255,0.05)] flex flex-col">
+        <div className="w-full h-full bg-white border border-[#E8E3D9] rounded-3xl overflow-hidden shadow-sm flex flex-col">
           {/* Card Header image */}
-          <div className="h-48 bg-gradient-to-br from-purple-500/20 to-blue-600/20 relative p-6 flex flex-col justify-end overflow-hidden border-b border-white/5">
+          <div className="h-48 bg-gradient-to-br from-purple-500/20 to-blue-600/20 relative p-6 flex flex-col justify-end overflow-hidden border-b border-[#E8E3D9]">
             {/* Shimmer effect */}
             <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover/design:animate-[shimmer_2s_infinite]"></div>
 
@@ -64,12 +64,12 @@ const DesignVisual = () => (
                 <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-md border border-white/20 mb-3 shadow-lg group-hover/design:scale-110 transition-transform duration-500"></div>
                 <div className="w-24 h-4 bg-white/20 rounded-full backdrop-blur-sm"></div>
               </div>
-              <div className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full border border-white/10 text-[10px] font-bold tracking-widest text-white uppercase group-hover/design:bg-premium-green group-hover/design:text-white transition-colors duration-500">Pro</div>
+              <div className="px-3 py-1 bg-[#E8E3D9]/40 rounded-full border border-[#E8E3D9] text-[10px] font-bold tracking-widest text-[#0F1729] uppercase group-hover/design:bg-premium-green group-hover/design:text-white transition-colors duration-500">Pro</div>
             </div>
           </div>
 
           {/* Card Body */}
-          <div className="p-6 space-y-4 flex-1 bg-gradient-to-b from-transparent to-black/20">
+          <div className="p-6 space-y-4 flex-1 bg-transparent">
             <div className="space-y-3">
               <div className="w-full h-3 bg-white/5 rounded-full group-hover/design:w-full transition-all duration-500"></div>
               <div className="w-5/6 h-3 bg-white/5 rounded-full group-hover/design:w-full transition-all duration-700"></div>
@@ -88,9 +88,9 @@ const DesignVisual = () => (
       <div
         className="absolute -bottom-8 -left-8 z-30 transition-all duration-700 ease-out group-hover/design:translate-z-[60px] group-hover/design:scale-110 animate-[float-slow_5s_ease-in-out_infinite_1s]"
       >
-        <div className="px-5 py-3 bg-premium-black/90 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.5)] flex items-center gap-3">
+        <div className="px-5 py-3 bg-white border border-[#E8E3D9] rounded-2xl shadow-md flex items-center gap-3">
           <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
-          <span className="text-xs font-bold text-gray-200">System Active</span>
+          <span className="text-xs font-bold text-[#0F1729]/75">System Active</span>
         </div>
       </div>
 
@@ -126,46 +126,46 @@ const CodeVisual = () => {
         {/* Glow Effect */}
         <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
 
-        <div className="bg-white/5 px-4 py-3 flex items-center justify-between border-b border-white/5">
+        <div className="bg-white/5 px-4 py-3 flex items-center justify-between border-b border-[#E8E3D9]">
           <div className="flex gap-1.5">
             <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></div>
             <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></div>
             <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></div>
           </div>
-          <div className="text-[10px] text-gray-500 flex items-center gap-1.5 font-medium">
-            <span className="text-gray-600">~/osiris/core/</span>
+          <div className="text-[10px] text-[#0F1729]/40 flex items-center gap-1.5 font-medium">
+            <span className="text-[#0F1729]/35">~/osiris/core/</span>
             <span className="text-blue-400">security.ts</span>
           </div>
           <div className="w-8"></div>
         </div>
 
-        <div className="p-6 space-y-4 text-gray-400 leading-relaxed relative min-h-[220px]">
+        <div className="p-6 space-y-4 text-[#0F1729]/55 leading-relaxed relative min-h-[220px]">
           <div className="absolute inset-0 bg-gradient-to-b from-blue-500/[0.02] to-transparent pointer-events-none"></div>
 
           {/* Line 1 */}
           <div className="flex group/line">
-            <span className="w-6 text-gray-700 select-none text-right mr-3 group-hover/line:text-gray-500 transition-colors">1</span>
+            <span className="w-6 text-[#0F1729]/20 select-none text-right mr-3 group-hover/line:text-[#0F1729]/40 transition-colors">1</span>
             <span className="text-purple-400">{line1}</span>
             {line1.length < 43 && <span className="w-2 h-4 bg-blue-400 opacity-50 ml-1 inline-block align-middle"></span>}
           </div>
 
           {/* Line 2 */}
           <div className="flex group/line">
-            <span className="w-6 text-gray-700 select-none text-right mr-3 group-hover/line:text-gray-500 transition-colors">2</span>
-            <span className="text-gray-500 italic">// Initialize AI-driven firewall protection</span>
+            <span className="w-6 text-[#0F1729]/20 select-none text-right mr-3 group-hover/line:text-[#0F1729]/40 transition-colors">2</span>
+            <span className="text-[#0F1729]/35 italic">// Initialize AI-driven firewall protection</span>
           </div>
 
           {/* Line 3 */}
           <div className="flex group/line">
-            <span className="w-6 text-gray-700 select-none text-right mr-3 group-hover/line:text-gray-500 transition-colors">3</span>
+            <span className="w-6 text-[#0F1729]/20 select-none text-right mr-3 group-hover/line:text-[#0F1729]/40 transition-colors">3</span>
             <span className="text-blue-300">{line2}</span>
             {line1.length >= 43 && line2.length < 35 && <span className="w-2 h-4 bg-blue-400 animate-pulse ml-1 inline-block align-middle"></span>}
           </div>
 
           {/* Line 4 */}
           <div className="flex group/line">
-            <span className="w-6 text-gray-700 select-none text-right mr-3 group-hover/line:text-gray-500 transition-colors">4</span>
-            <span className="text-white">{line3}</span>
+            <span className="w-6 text-[#0F1729]/20 select-none text-right mr-3 group-hover/line:text-[#0F1729]/40 transition-colors">4</span>
+            <span className="text-[#0F1729]">{line3}</span>
             {line2.length >= 35 && <span className="w-2 h-4 bg-blue-400 animate-pulse ml-1 inline-block align-middle"></span>}
           </div>
 
@@ -178,7 +178,7 @@ const CodeVisual = () => {
                 className="h-full bg-blue-500"
               ></motion.div>
             </div>
-            <div className="text-[9px] text-gray-500">v2.4.0</div>
+            <div className="text-[9px] text-[#0F1729]/35">v2.4.0</div>
           </div>
         </div>
       </motion.div>
@@ -196,8 +196,8 @@ const GrowthVisual = () => (
       {/* Header */}
       <div className="flex justify-between items-start mb-8 relative z-20">
         <div>
-          <div className="text-[10px] text-gray-400 uppercase tracking-widest font-bold mb-1">Total Revenue</div>
-          <div className="text-3xl font-black text-white font-display flex items-baseline gap-2">
+          <div className="text-[10px] text-[#0F1729]/45 uppercase tracking-widest font-bold mb-1">Total Revenue</div>
+          <div className="text-3xl font-black text-[#0F1729] font-display flex items-baseline gap-2">
             <motion.span
               whileInView={{ opacity: 1 }}
             >
@@ -276,7 +276,7 @@ const GrowthVisual = () => (
       </div>
 
       {/* X-Axis */}
-      <div className="mt-4 flex justify-between text-[9px] text-gray-500 font-bold tracking-wider">
+      <div className="mt-4 flex justify-between text-[9px] text-[#0F1729]/35 font-bold tracking-wider">
         <span>LUN</span>
         <span>MAR</span>
         <span>MER</span>
@@ -305,7 +305,7 @@ const Marquee = ({ items, direction = "left", speed = 20 }: { items: typeof tech
             className="flex items-center gap-3 px-6 py-3 bg-white/[0.03] border border-white/5 backdrop-blur-sm group-hover:pause transition-colors hover:border-premium-green/50 hover:bg-premium-green/5 hover:shadow-[0_0_15px_rgba(37,99,235,0.1)] min-w-[140px] justify-center skew-x-[-10deg] rounded-xl"
           >
             <div className="skew-x-[10deg] flex items-center gap-3">
-              <tech.icon className="w-4 h-4 text-gray-400 group-hover:text-premium-green transition-colors" />
+              <tech.icon className="w-4 h-4 text-[#0F1729]/45 group-hover:text-premium-green transition-colors" />
               <span className="text-sm font-bold text-gray-300 font-display uppercase tracking-wide group-hover:text-white transition-colors whitespace-nowrap">
                 {tech.name}
               </span>

@@ -784,6 +784,133 @@ const CSS = `
       stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
     }
   }
+
+  /* ========================================
+     LIGHT MODE OVERRIDES
+     ======================================== */
+
+  /* Dot grid — dark dots on cream */
+  .os-tl::before {
+    background-image: radial-gradient(circle, rgba(15,23,41,0.04) 1px, transparent 1px);
+  }
+  /* Radial glow — softer */
+  .os-tl::after {
+    background: radial-gradient(ellipse, rgba(59,130,246,0.06) 0%, transparent 70%);
+  }
+
+  /* Header text */
+  .os-tl-title { color: #0F1729; }
+  .os-tl-sub   { color: rgba(15,23,41,0.45); }
+
+  /* Main timeline line */
+  .os-tl-line-bg { background: rgba(15,23,41,0.08); }
+  .os-tl-line-bg::before {
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent, transparent 19px,
+      rgba(15,23,41,0.10) 19px,
+      rgba(15,23,41,0.10) 20px
+    );
+  }
+  .os-tl-line-bg::after {
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent, transparent 99px,
+      rgba(15,23,41,0.18) 99px,
+      rgba(15,23,41,0.18) 100px
+    );
+  }
+
+  /* Cursor dot */
+  .os-tl-cursor {
+    background: #0F1729;
+    border: 2px solid #F5F4EF;
+  }
+
+  /* Start label */
+  .os-tl-start {
+    background: rgba(245,244,239,0.97);
+    color: #0F1729;
+    border: 1px solid #E8E3D9;
+    box-shadow: 0 4px 20px rgba(15,23,41,0.10);
+  }
+  .os-tl-start-ico span { background: rgba(15,23,41,0.3); }
+  .os-tl-start-dot {
+    background: rgba(15,23,41,0.12);
+    border: 2px solid rgba(15,23,41,0.2);
+  }
+  .os-tl-start-conn { border-left: 1.5px dashed rgba(15,23,41,0.12); }
+
+  /* Step dots on line */
+  .os-tl-dot { border: 2px solid #F5F4EF; }
+
+  /* Icon node */
+  .os-tl-node {
+    background: #FFFFFF;
+    border: 1.5px solid #E8E3D9;
+    box-shadow: 0 0 0 5px rgba(59,130,246,0.05), 0 4px 16px rgba(15,23,41,0.10);
+    color: #3b82f6;
+  }
+  @media (min-width: 1025px) {
+    .os-tl-step.vis .os-tl-node:hover {
+      border-color: rgba(59,130,246,0.5);
+      box-shadow: 0 0 0 8px rgba(59,130,246,0.08), 0 0 24px rgba(59,130,246,0.35), 0 6px 16px rgba(15,23,41,0.12);
+    }
+    /* Tooltip */
+    .os-tl-node-tip {
+      background: rgba(255,255,255,0.98);
+      border: 1px solid #E8E3D9;
+      box-shadow: 0 10px 28px rgba(15,23,41,0.12);
+    }
+    .os-tl-tip-name  { color: #1d4ed8; }
+    .os-tl-tip-desc  { color: rgba(15,23,41,0.55); }
+  }
+
+  /* Pill cards */
+  .os-tl-pill {
+    background: rgba(255,255,255,0.98);
+    border: 1px solid #E8E3D9;
+    box-shadow: 0 4px 16px rgba(15,23,41,0.06), inset 0 1px 0 rgba(255,255,255,0.9);
+  }
+  .os-tl-pill:hover {
+    border-color: rgba(59,130,246,0.3);
+    box-shadow: 0 6px 24px rgba(15,23,41,0.08), 0 0 16px rgba(59,130,246,0.10);
+  }
+  .os-tl-pill-name              { color: #0F1729; }
+  .os-tl-pill.done-pill .os-tl-pill-name { color: #1d4ed8; }
+  .os-tl-pill-desc              { color: rgba(15,23,41,0.45); }
+
+  /* Extension line */
+  .os-tl-ext { background: linear-gradient(90deg, rgba(59,130,246,0.25), rgba(15,23,41,0.06)); }
+
+  /* Status text */
+  .os-tl-status { color: rgba(59,130,246,0.55); }
+
+  /* Mobile vertical */
+  @media (max-width: 1024px) {
+    .os-tl-vert::before { background: rgba(15,23,41,0.08); }
+
+    .os-tl-vert-node {
+      background: #FFFFFF;
+      border: 1.5px solid #E8E3D9;
+      color: #3b82f6;
+      box-shadow: 0 0 0 5px rgba(59,130,246,0.05), 0 4px 12px rgba(15,23,41,0.08);
+    }
+
+    .os-tl-vert-card {
+      background: rgba(255,255,255,0.97);
+      border: 1px solid #E8E3D9;
+      box-shadow: 0 4px 16px rgba(15,23,41,0.06), inset 0 1px 0 rgba(255,255,255,0.8);
+    }
+    .os-tl-vert-step-right .os-tl-vert-card::before,
+    .os-tl-vert-step-left  .os-tl-vert-card::before {
+      background: linear-gradient(180deg, #3b82f6, #2563eb);
+    }
+
+    .os-tl-vert-name  { color: #1d4ed8; }
+    .os-tl-vert-desc  { color: rgba(15,23,41,0.60); }
+    .os-tl-vert-status { color: rgba(59,130,246,0.65); }
+  }
 `;
 
 export const ProcessTimeline: React.FC = () => {

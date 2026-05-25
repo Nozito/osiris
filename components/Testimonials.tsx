@@ -37,7 +37,7 @@ export const Testimonials: React.FC = () => {
   ];
 
   return (
-    <section className="px-6 py-32 border-b border-white/5 relative dark-bg">
+    <section className="px-6 py-32 border-b border-[#E8E3D9] relative bg-[#F0EDE6]">
       <div className="container mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -49,10 +49,10 @@ export const Testimonials: React.FC = () => {
             {[...Array(5)].map((_, i) => (
               <Star key={i} className="w-4 h-4 fill-premium-green text-premium-green" />
             ))}
-            <span className="ml-2 text-sm text-gray-400 font-medium">5.0 sur Google</span>
+            <span className="ml-2 text-sm text-[#0F1729]/50 font-medium">5.0 sur Google</span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-black text-white font-display">
-            {t.testimonials.title} <span className="text-gray-600">{t.testimonials.titleFaded}</span>
+          <h2 className="text-3xl md:text-5xl font-bold italic text-[#0F1729] font-display">
+            {t.testimonials.title} <span className="text-[#0F1729]/30">{t.testimonials.titleFaded}</span>
           </h2>
         </motion.div>
 
@@ -78,7 +78,7 @@ export const Testimonials: React.FC = () => {
                 hidden: { opacity: 0, y: 40 },
                 visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
               }}
-              className="bg-gradient-to-br from-white/5 to-white/[0.02] p-8 rounded-2xl border border-white/5 hover:border-premium-green/30 transition-all duration-500 backdrop-blur-md relative group flex flex-col"
+              className="bg-white p-8 rounded-2xl border border-[#E8E3D9] hover:border-premium-green/30 transition-all duration-500 shadow-sm relative group flex flex-col"
             >
               {/* Stars for this review */}
               <div className="flex items-center gap-0.5 mb-4">
@@ -91,17 +91,17 @@ export const Testimonials: React.FC = () => {
                 <Quote className="w-10 h-10 text-premium-green" />
               </div>
 
-              <p className="text-lg text-gray-300 mb-8 leading-relaxed relative z-10 font-light flex-1">
+              <p className="text-lg text-[#0F1729]/65 mb-8 leading-relaxed relative z-10 font-light flex-1">
                 "{review.text}"
               </p>
 
-              <div className="flex items-center gap-4 pt-4 border-t border-white/5">
-                <div className="w-12 h-12 rounded-full bg-gray-700 overflow-hidden border-2 border-white/10 group-hover:border-premium-green/50 transition-colors duration-500">
+              <div className="flex items-center gap-4 pt-4 border-t border-[#E8E3D9]">
+                <div className="w-12 h-12 rounded-full bg-[#E0DBD0] overflow-hidden border-2 border-[#E8E3D9] group-hover:border-premium-green/50 transition-colors duration-500">
                   <img src={review.image} alt={review.author} className="w-full h-full object-cover" loading="lazy" width="48" height="48" />
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
-                    <cite className="not-italic font-bold text-white text-sm">{review.author}</cite>
+                    <cite className="not-italic font-bold text-[#0F1729] text-sm">{review.author}</cite>
                     <BadgeCheck className="w-4 h-4 text-premium-green" />
                   </div>
                   <span className="text-xs text-gray-400">{review.role} — <span className="text-premium-green font-semibold">{review.company}</span></span>

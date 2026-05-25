@@ -2,7 +2,6 @@ import React, { Suspense, lazy, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { useScroll, useSpring, motion } from 'framer-motion';
 import { Navbar } from './components/Navbar';
-import { ParticleBackground } from './components/ParticleBackground';
 import { WhatsAppButton } from './components/WhatsAppButton';
 import { ScrollToTop } from './components/ScrollToTop';
 
@@ -16,8 +15,8 @@ const AboutPage = lazy(() => import('./pages/AboutPage').then(m => ({ default: m
 
 // Minimal loading fallback
 const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <div className="w-8 h-8 border-2 border-premium-green/30 border-t-premium-green rounded-full animate-spin" />
+  <div className="min-h-screen flex items-center justify-center bg-[#F5F4EF]">
+    <div className="w-8 h-8 border-2 border-[#E8E3D9] border-t-premium-green rounded-full animate-spin" />
   </div>
 );
 
@@ -113,33 +112,17 @@ export default function App() {
   }, [location.pathname, location.hash]);
 
   return (
-    <div className="relative min-h-screen bg-[#0F1115] text-white overflow-x-hidden font-sans" id="app-root">
-      {/* === GLOBAL BACKGROUND LAYERS === */}
-
-      {/* 1. Base Gradient & Animated Orbs */}
-      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-[#0F1115]" id="app-bg-fixed">
-        <div className="absolute top-[-10%] left-[20%] w-[50vw] h-[50vw] bg-premium-green/8 rounded-full blur-[120px] animate-[float-slow_15s_ease-in-out_infinite] will-change-transform" />
-        <div className="absolute bottom-[-10%] right-[10%] w-[60vw] h-[60vw] bg-purple-900/10 rounded-full blur-[150px] animate-[float-slow_20s_ease-in-out_infinite_reverse] will-change-transform" />
-        <div className="absolute top-[30%] left-[50%] -translate-x-1/2 w-[40vw] h-[40vw] bg-blue-900/8 rounded-full blur-[100px] animate-[pulse_12s_ease-in-out_infinite] will-change-opacity" />
-      </div>
-
-      {/* 2. Interactive Particles (desktop only) */}
-      <div className="fixed inset-0 z-0 pointer-events-none hidden md:block">
-        <ParticleBackground />
-      </div>
-
-      {/* 3. Global Grid Overlay */}
-      <div className="fixed inset-0 z-0 pointer-events-none bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(circle_at_center,black_30%,transparent_100%)]"></div>
+    <div className="relative min-h-screen bg-[#F5F4EF] text-[#0F1729] overflow-x-hidden font-sans" id="app-root">
 
       <ScrollToTop />
       <Navbar />
 
       {/* Global Scroll Progress Bar */}
       <motion.div
-        className="fixed right-0 top-0 bottom-0 w-[2px] bg-white/5 origin-top z-50 hidden lg:block pointer-events-none"
+        className="fixed right-0 top-0 bottom-0 w-[2px] bg-[#E8E3D9] origin-top z-50 hidden lg:block pointer-events-none"
       >
         <motion.div
-          className="absolute top-0 w-full bg-premium-green shadow-[0_0_12px_rgba(37,99,235,0.6)]"
+          className="absolute top-0 w-full bg-premium-green"
           style={{ scaleY, originY: 0, height: '100%' }}
         />
       </motion.div>

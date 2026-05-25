@@ -14,7 +14,7 @@ export const SocialProofBar: React.FC = () => {
     ];
 
     return (
-        <section className="guarantee-section relative w-full py-8 px-4 sm:px-6 overflow-hidden bg-[#151922] border-y border-[#2A3140]">
+        <section className="guarantee-section relative w-full py-8 px-4 sm:px-6 overflow-hidden bg-[#EDE8DF] border-y border-[#E0DBD0]">
             <div className="container mx-auto max-w-6xl">
             <div className="guarantee-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
                     {proofs.map((proof, index) => {
@@ -31,7 +31,7 @@ export const SocialProofBar: React.FC = () => {
                                 <div className="guarantee-icon flex-shrink-0 w-10 h-10 rounded-xl bg-premium-green/10 border border-premium-green/20 flex items-center justify-center">
                                     <Icon className="w-5 h-5 text-premium-green" />
                                 </div>
-                                <p className="text-sm sm:text-base text-white/80 font-medium">
+                                <p className="text-sm sm:text-base text-[#0F1729]/75 font-medium">
                                     {proof.text}
                                 </p>
                             </motion.div>

@@ -8,7 +8,7 @@ export const Footer: React.FC = () => {
   const { t } = useLanguage();
 
   return (
-    <footer className="px-4 sm:px-6 py-4 sm:py-6 border-t border-[#2A3140] bg-[#0F1115]">
+    <footer className="px-4 sm:px-6 py-4 sm:py-6 border-t border-[#E8E3D9] bg-[#F5F4EF]">
       <div className="container mx-auto max-w-7xl">
         {/* Main CTA */}
         <motion.div
@@ -18,21 +18,21 @@ export const Footer: React.FC = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center mb-4"
         >
-          <p className="text-gray-500 mb-3 text-sm uppercase tracking-widest">{t.footer.cta}</p>
+          <p className="text-[#0F1729]/45 mb-3 text-sm uppercase tracking-widest">{t.footer.cta}</p>
           <a
             href="#contact"
-            className="block text-3xl sm:text-5xl md:text-8xl font-black text-white hover:text-premium-green transition-colors duration-500 font-display leading-tight"
+            className="block text-3xl sm:text-5xl md:text-8xl font-display italic font-normal text-[#0F1729] hover:text-premium-green transition-colors duration-500 leading-tight"
           >
             {t.footer.ctaLink.split(' ').slice(0, -2).join(' ')} <br />{t.footer.ctaLink.split(' ').slice(-2).join(' ')}
           </a>
         </motion.div>
 
         {/* Simplified Footer Content */}
-        <div className="footer-main flex flex-col items-center justify-center gap-2 py-4 border-t border-[#2A3140]">
+        <div className="footer-main flex flex-col items-center justify-center gap-2 py-4 border-t border-[#E8E3D9]">
           {/* Company Info - Centered */}
           <div className="flex flex-col items-center text-center max-w-lg">
-            <h2 className="text-white font-bold text-2xl mb-3 font-display">OSIRIS</h2>
-            <p className="text-gray-400 text-sm leading-relaxed mb-3">
+            <h2 className="text-[#0F1729] font-display italic text-2xl mb-3 font-normal">OSIRIS</h2>
+            <p className="text-[#0F1729]/50 text-sm leading-relaxed mb-3">
               {t.footer.companyDesc}
             </p>
             <div className="flex gap-4 mb-2">
@@ -44,16 +44,16 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar - Legal Links */}
-        <div className="border-t border-[#2A3140] pt-3 mt-3">
+        <div className="border-t border-[#E8E3D9] pt-3 mt-3">
           <div className="footer-bottom flex flex-col gap-3 items-center text-center">
-            <p className="text-xs text-gray-600">© 2026 OSIRIS. Tous droits réservés.</p>
+            <p className="text-xs text-[#0F1729]/35">© 2026 OSIRIS. Tous droits réservés.</p>
             {/* NAP SEO local — invisible pour l'utilisateur, lu par Google */}
             <span className="sr-only">Osiris Agency – Agence Web Manosque, Alpes-de-Haute-Provence (04100) – contact@osiris-agency.fr</span>
 
-            <div className="flex flex-wrap justify-center gap-6 text-xs text-gray-500">
-              <Link to="/legal#cgv" className="hover:text-white transition-colors">CGV</Link>
-              <Link to="/legal#confidentialite" className="hover:text-white transition-colors">{t.footer.privacyPolicy}</Link>
-              <Link to="/legal#cookies" className="hover:text-white transition-colors">{t.footer.cookies}</Link>
+            <div className="flex flex-wrap justify-center gap-6 text-xs text-[#0F1729]/40">
+              <Link to="/legal#cgv" className="hover:text-[#0F1729] transition-colors">CGV</Link>
+              <Link to="/legal#confidentialite" className="hover:text-[#0F1729] transition-colors">{t.footer.privacyPolicy}</Link>
+              <Link to="/legal#cookies" className="hover:text-[#0F1729] transition-colors">{t.footer.cookies}</Link>
             </div>
           </div>
         </div>

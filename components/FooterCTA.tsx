@@ -22,17 +22,17 @@ export const FooterCTA: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.7 }}
-                    className="relative p-6 sm:p-12 md:p-16 rounded-3xl bg-[#1B202B] border border-[#2A3140] text-center"
+                    className="relative p-6 sm:p-12 md:p-16 rounded-3xl bg-white border border-[#E8E3D9] text-center"
                 >
                     {/* Glow Effect */}
                     <div className="absolute inset-0 bg-gradient-to-br from-premium-green/8 to-premium-purple/8 rounded-3xl blur-2xl opacity-60 pointer-events-none" />
                     
                     {/* Content */}
                     <div className="relative z-10">
-                        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-6">
+                        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold italic tracking-tight text-[#0F1729] mb-6">
                             {t.footerCta.title}
                         </h2>
-                        <p className="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto mb-10">
+                        <p className="text-lg sm:text-xl text-[#0F1729]/60 max-w-2xl mx-auto mb-10">
                             {t.footerCta.subtitle}
                         </p>
 
@@ -48,20 +48,20 @@ export const FooterCTA: React.FC = () => {
                         </motion.button>
 
                         {/* Badge */}
-                        <div className="flex items-center justify-center gap-2 text-white/60 text-sm">
+                        <div className="flex items-center justify-center gap-2 text-[#0F1729]/50 text-sm">
                             <CheckCircle2 className="w-5 h-5 text-premium-green" />
                             <span>{t.footerCta.badge}</span>
                         </div>
                     </div>
 
                     {/* Decorative accents */}
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-premium-green/10 rounded-full blur-3xl pointer-events-none" />
-                    <div className="absolute bottom-0 left-0 w-32 h-32 bg-premium-purple/10 rounded-full blur-3xl pointer-events-none" />
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-premium-green/5 rounded-full blur-3xl pointer-events-none" />
+                    <div className="absolute bottom-0 left-0 w-32 h-32 bg-premium-purple/5 rounded-full blur-3xl pointer-events-none" />
                 </motion.div>
             </div>
 
             {/* Background Decoration */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-premium-green/5 rounded-full blur-[150px] pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-premium-green/3 rounded-full blur-[150px] pointer-events-none" />
         </section>
     );
 };
