@@ -21,71 +21,28 @@ export const Hero: React.FC = () => {
         >
 
           <div className="font-display text-5xl sm:text-6xl md:text-8xl lg:text-[9rem] font-black tracking-tighter leading-[0.9] mb-4 sm:mb-6 text-white mt-4 sm:mt-8 select-none relative z-20">
-            {/* Enhanced 3D Metal Effect with Premium Glow */}
-            <div className="relative inline-block" style={{ perspective: '1000px' }}>
+            <div className="relative inline-block">
+              {/* Subtle ambient glow */}
+              <div className="absolute inset-0 blur-[60px] bg-premium-green/12 pointer-events-none scale-150"></div>
 
-              {/* Ambient Green Glow - Background Pulse */}
-              <div className="absolute inset-0 blur-[80px] bg-premium-green/20 animate-pulse pointer-events-none scale-150"></div>
-
-              {/* Secondary Glow Ring */}
-              <div className="absolute inset-0 blur-[40px] bg-white/10 animate-[pulse_3s_ease-in-out_infinite] pointer-events-none scale-125"></div>
-
-              {/* 3D Text Container with Transform */}
-              <div
-                className="relative"
+              {/* Clean gradient text */}
+              <span
+                className="relative inline-block bg-clip-text text-transparent bg-[linear-gradient(180deg,#ffffff_0%,#e8f0fe_20%,#c7d9f8_45%,#a0bcf0_60%,#d8e8fc_80%,#ffffff_100%)] px-4 mx-[-16px]"
                 style={{
-                  transform: 'rotateX(5deg)',
-                  transformStyle: 'preserve-3d'
+                  filter: 'drop-shadow(0 0 20px rgba(59,130,246,0.25)) drop-shadow(0 2px 6px rgba(0,0,0,0.6))',
+                  transform: 'translateZ(0)'
                 }}
               >
-                {/* Deep Shadow Layer for 3D Depth */}
-                <span
-                  className="absolute inset-0 bg-clip-text text-transparent bg-gradient-to-b from-gray-900 to-black px-4 mx-[-16px] blur-[2px]"
-                  style={{
-                    transform: 'translateZ(-20px) translateY(8px)',
-                    opacity: 0.5
-                  }}
-                  aria-hidden="true"
-                >
-                  OSIRIS
-                </span>
+                OSIRIS
+              </span>
 
-                {/* Base Metal Text with Enhanced Gradient */}
-                <span
-                  className="relative inline-block bg-clip-text text-transparent bg-[linear-gradient(180deg,#ffffff_0%,#e0eafc_15%,#c0d6f0_30%,#6b7b8a_45%,#2a2a2a_50%,#6b7b8a_55%,#c0d6f0_70%,#e0eafc_85%,#ffffff_100%)] px-4 mx-[-16px]"
-                  style={{
-                    filter: 'drop-shadow(0 0 30px rgba(255,255,255,0.3)) drop-shadow(0 4px 8px rgba(0,0,0,0.8))',
-                    textShadow: '0 0 60px rgba(37,99,235,0.3), 0 0 120px rgba(37,99,235,0.15)',
-                    transform: 'translateZ(0)'
-                  }}
-                >
-                  OSIRIS
-                </span>
-
-                {/* Primary Shimmer Overlay - Bright White Sweep */}
-                <span
-                  className="absolute inset-0 bg-clip-text text-transparent bg-[linear-gradient(110deg,transparent_20%,rgba(255,255,255,0.05)_35%,rgba(255,255,255,0.8)_50%,rgba(255,255,255,0.05)_65%,transparent_80%)] bg-[length:200%_100%] animate-shimmer pointer-events-none px-4 mx-[-16px] mix-blend-plus-lighter"
-                  aria-hidden="true"
-                >
-                  OSIRIS
-                </span>
-
-                {/* Green Tint Overlay - Subtle Color Wash */}
-                <span
-                  className="absolute inset-0 bg-clip-text text-transparent bg-[linear-gradient(180deg,rgba(37,99,235,0.1)_0%,transparent_30%,transparent_70%,rgba(37,99,235,0.1)_100%)] pointer-events-none px-4 mx-[-16px] animate-[pulse_4s_ease-in-out_infinite]"
-                  aria-hidden="true"
-                >
-                  OSIRIS
-                </span>
-
-                {/* Edge Highlight - Top Light */}
-                <span
-                  className="absolute inset-0 bg-clip-text text-transparent bg-[linear-gradient(180deg,rgba(255,255,255,0.4)_0%,transparent_20%,transparent_100%)] pointer-events-none px-4 mx-[-16px]"
-                  aria-hidden="true"
-                >
-                  OSIRIS
-                </span>
-              </div>
+              {/* Shimmer sweep */}
+              <span
+                className="absolute inset-0 bg-clip-text text-transparent bg-[linear-gradient(110deg,transparent_20%,rgba(255,255,255,0.05)_35%,rgba(255,255,255,0.7)_50%,rgba(255,255,255,0.05)_65%,transparent_80%)] bg-[length:200%_100%] animate-shimmer pointer-events-none px-4 mx-[-16px] mix-blend-plus-lighter"
+                aria-hidden="true"
+              >
+                OSIRIS
+              </span>
             </div>
           </div>
 
@@ -101,7 +58,7 @@ export const Hero: React.FC = () => {
             {/* Bouton principal */}
             <div className="group relative w-full md:w-auto">
               <div className="absolute inset-0 bg-premium-green blur-xl opacity-20 group-hover:opacity-50 transition-opacity duration-500 rounded-full"></div>
-              <a href="#contact" className="hero-cta-button relative bg-premium-green text-white font-bold py-3 sm:py-5 px-6 sm:px-10 border border-transparent hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-lg tracking-wider uppercase rounded-full shadow-[0_0_30px_rgba(37,99,235,0.2)] w-full md:w-auto">
+              <a href="#contact" className="hero-cta-button relative bg-premium-green text-white font-bold py-3 sm:py-5 px-6 sm:px-10 border border-transparent hover:bg-blue-600 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-lg tracking-wider uppercase rounded-full shadow-[0_4px_20px_rgba(59,130,246,0.3)] hover:shadow-[0_6px_24px_rgba(59,130,246,0.45)] w-full md:w-auto">
                 {t.hero.cta}
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>

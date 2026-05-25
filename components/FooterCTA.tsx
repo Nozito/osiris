@@ -22,10 +22,10 @@ export const FooterCTA: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.7 }}
-                    className="relative p-6 sm:p-12 md:p-16 rounded-3xl bg-gradient-to-br from-premium-green/10 via-premium-black/40 to-purple-500/10 backdrop-blur-xl border border-white/10 text-center"
+                    className="relative p-6 sm:p-12 md:p-16 rounded-3xl bg-[#1B202B] border border-[#2A3140] text-center"
                 >
                     {/* Glow Effect */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-premium-green/20 to-purple-500/20 rounded-3xl blur-2xl opacity-50 pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-premium-green/8 to-premium-purple/8 rounded-3xl blur-2xl opacity-60 pointer-events-none" />
                     
                     {/* Content */}
                     <div className="relative z-10">
@@ -41,7 +41,7 @@ export const FooterCTA: React.FC = () => {
                             onClick={handleCTAClick}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="inline-flex items-center gap-3 px-6 sm:px-10 py-4 sm:py-5 rounded-xl bg-premium-green text-white font-bold text-base sm:text-lg hover:bg-blue-700 transition-all duration-300 group mb-8 w-full sm:w-auto justify-center"
+                            className="inline-flex items-center gap-3 px-6 sm:px-10 py-4 sm:py-5 rounded-xl bg-premium-green text-white font-bold text-base sm:text-lg hover:bg-blue-600 transition-all duration-300 shadow-[0_4px_16px_rgba(59,130,246,0.3)] hover:shadow-[0_6px_24px_rgba(59,130,246,0.45)] group mb-8 w-full sm:w-auto justify-center"
                         >
                             {t.footerCta.cta}
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -54,9 +54,9 @@ export const FooterCTA: React.FC = () => {
                         </div>
                     </div>
 
-                    {/* Decorative Elements */}
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-premium-green/20 rounded-full blur-3xl pointer-events-none" />
-                    <div className="absolute bottom-0 left-0 w-32 h-32 bg-purple-500/20 rounded-full blur-3xl pointer-events-none" />
+                    {/* Decorative accents */}
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-premium-green/10 rounded-full blur-3xl pointer-events-none" />
+                    <div className="absolute bottom-0 left-0 w-32 h-32 bg-premium-purple/10 rounded-full blur-3xl pointer-events-none" />
                 </motion.div>
             </div>
 

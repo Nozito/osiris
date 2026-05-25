@@ -136,7 +136,7 @@ export const AboutPage: React.FC = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.15 }}
-              className="flex items-center border border-white/8 rounded-full bg-white/[0.02] overflow-hidden mx-auto"
+              className="flex items-center border border-white/8 rounded-full bg-[#1B202B] overflow-hidden mx-auto"
               style={{ maxWidth: '560px', paddingInline: 'clamp(12px, 3.5vw, 32px)', paddingBlock: 'clamp(10px, 1.8vw, 14px)', marginBottom: 'clamp(32px, 7vw, 64px)', width: 'fit-content' }}
             >
               {[
@@ -165,7 +165,7 @@ export const AboutPage: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="group relative bg-white/[0.02] border border-white/[0.08] hover:border-premium-green/40 transition-all duration-500 overflow-hidden"
+                  className="group relative bg-[#1B202B] border border-[#2A3140] hover:border-premium-green/40 transition-all duration-500 overflow-hidden"
                   style={{ borderRadius: '20px' }}
                 >
                   {/* Top accent line */}

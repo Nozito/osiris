@@ -8,7 +8,7 @@ export const Footer: React.FC = () => {
   const { t } = useLanguage();
 
   return (
-    <footer className="px-4 sm:px-6 py-4 sm:py-6 border-t border-white/5 metal-bg">
+    <footer className="px-4 sm:px-6 py-4 sm:py-6 border-t border-[#2A3140] bg-[#0F1115]">
       <div className="container mx-auto max-w-7xl">
         {/* Main CTA */}
         <motion.div
@@ -28,7 +28,7 @@ export const Footer: React.FC = () => {
         </motion.div>
 
         {/* Simplified Footer Content */}
-        <div className="footer-main flex flex-col items-center justify-center gap-2 py-4 border-t border-white/5">
+        <div className="footer-main flex flex-col items-center justify-center gap-2 py-4 border-t border-[#2A3140]">
           {/* Company Info - Centered */}
           <div className="flex flex-col items-center text-center max-w-lg">
             <h2 className="text-white font-bold text-2xl mb-3 font-display">OSIRIS</h2>
@@ -44,7 +44,7 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar - Legal Links */}
-        <div className="border-t border-white/5 pt-3 mt-3">
+        <div className="border-t border-[#2A3140] pt-3 mt-3">
           <div className="footer-bottom flex flex-col gap-3 items-center text-center">
             <p className="text-xs text-gray-600">© 2026 OSIRIS. Tous droits réservés.</p>
             {/* NAP SEO local — invisible pour l'utilisateur, lu par Google */}

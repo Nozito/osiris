@@ -147,7 +147,7 @@ export const PricingPage: React.FC = () => {
             case 'blue':   return 'border-blue-500/40';
             case 'amber':  return 'border-amber-400/40';
             case 'purple': return 'border-purple-500/40';
-            default:       return 'border-white/10';
+            default:       return 'border-[#2A3140]';
         }
     };
 
@@ -295,7 +295,7 @@ export const PricingPage: React.FC = () => {
                                     viewport={{ once: true, margin: '-40px' }}
                                     transition={{ duration: 0.6, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
                                     whileHover={{ y: -8, transition: { duration: 0.25 } }}
-                                    className={`relative rounded-[2rem] border bg-[#080a10] flex flex-col overflow-hidden cursor-default transition-shadow duration-500 ${borderClass} ${offer.highlight ? 'shadow-[0_0_70px_-15px_rgba(251,191,36,0.35)]' : ''}`}
+                                    className={`relative rounded-[2rem] border bg-[#1B202B] flex flex-col overflow-hidden cursor-default transition-shadow duration-500 ${borderClass} ${offer.highlight ? 'shadow-[0_0_70px_-15px_rgba(251,191,36,0.35)]' : ''}`}
                                     style={{ boxShadow: `0 0 60px -20px ${glowColor}` }}
                                 >
                                     {/* Ambient glow spot */}
@@ -317,7 +317,7 @@ export const PricingPage: React.FC = () => {
                                     <div className="relative z-10 p-6 lg:p-7 flex flex-col flex-1">
                                         {/* Icon */}
                                         <div className="flex justify-center mb-5">
-                                            <div className={`w-16 h-16 rounded-2xl flex items-center justify-center border border-white/10 ${iconRing} transition-transform duration-300`}>
+                                            <div className={`w-16 h-16 rounded-2xl flex items-center justify-center border border-[#2A3140] ${iconRing} transition-transform duration-300`}>
                                                 <offer.icon className="w-7 h-7 drop-shadow-[0_0_10px_currentColor]" />
                                             </div>
                                         </div>
@@ -452,10 +452,10 @@ export const PricingPage: React.FC = () => {
                         transition={{ duration: 0.7 }}
                         className="mb-16"
                     >
-                        <div className="relative rounded-[2.5rem] overflow-hidden border border-white/8 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.7)]">
+                        <div className="relative rounded-[2.5rem] overflow-hidden border border-[#2A3140] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.5)]">
                             {/* Background layers */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#0d1117] to-[#080c14]" />
-                            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(37,99,235,0.12),transparent)]" />
+                            <div className="absolute inset-0 bg-[#1B202B]" />
+                            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(59,130,246,0.08),transparent)]" />
                             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-premium-green/40 to-transparent" />
 
                             <div className="relative z-10 px-10 py-14 sm:px-16 sm:py-20">
@@ -482,7 +482,7 @@ export const PricingPage: React.FC = () => {
                                             </Link>
                                             <a
                                                 href="tel:0772328932"
-                                                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl border border-white/10 bg-white/[0.04] text-white font-semibold text-sm hover:border-white/25 hover:bg-white/[0.08] transition-all duration-300"
+                                                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl border border-[#2A3140] bg-[#151922] text-white font-semibold text-sm hover:border-[#3B82F6]/40 hover:bg-[#1B202B] transition-all duration-300"
                                             >
                                                 07 72 32 89 32
                                             </a>
@@ -497,7 +497,7 @@ export const PricingPage: React.FC = () => {
                                             { label: 'Acompte 50%', sub: 'Solde à la livraison' },
                                             { label: 'TVA non applicable', sub: 'Art. 293 B CGI' },
                                         ].map((item) => (
-                                            <div key={item.label} className="p-5 rounded-2xl border border-white/5 bg-white/[0.025] hover:border-premium-green/15 hover:bg-white/[0.04] transition-all duration-300">
+                                            <div key={item.label} className="p-5 rounded-2xl border border-[#2A3140] bg-[#151922] hover:border-premium-green/25 hover:bg-[#1B202B] transition-all duration-300">
                                                 <p className="text-white font-bold text-sm mb-1">{item.label}</p>
                                                 <p className="text-gray-500 text-xs">{item.sub}</p>
                                             </div>
@@ -571,9 +571,9 @@ export const PricingPage: React.FC = () => {
                                     viewport={{ once: true, margin: '-40px' }}
                                     transition={{ duration: 0.55, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
                                     whileHover={{ y: -6, transition: { duration: 0.25 } }}
-                                    className={`relative flex flex-col rounded-[2rem] border bg-[#080a10] overflow-hidden cursor-default transition-shadow duration-500
+                                    className={`relative flex flex-col rounded-[2rem] border bg-[#1B202B] overflow-hidden cursor-default transition-shadow duration-500
                                         ${plan.border}
-                                        ${plan.highlight ? 'shadow-[0_0_60px_-15px_rgba(37,99,235,0.5)]' : ''}
+                                        ${plan.highlight ? 'shadow-[0_0_60px_-15px_rgba(59,130,246,0.4)]' : ''}
                                     `}
                                     style={{ boxShadow: `0 0 60px -20px ${plan.glow}` }}
                                 >
@@ -604,7 +604,7 @@ export const PricingPage: React.FC = () => {
                                         {!plan.highlight && <div className="mb-5 h-7" />}
 
                                         {/* Icon */}
-                                        <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 border border-white/10 ${plan.iconRing} transition-transform duration-300`}>
+                                        <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 border border-[#2A3140] ${plan.iconRing} transition-transform duration-300`}>
                                             {plan.highlight && (
                                                 <div className="absolute w-16 h-16 rounded-2xl bg-premium-green/10 animate-ping opacity-30" />
                                             )}
@@ -624,8 +624,8 @@ export const PricingPage: React.FC = () => {
                                             to="/contact"
                                             className={`mt-auto w-full py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300
                                                 ${plan.highlight
-                                                    ? 'bg-premium-green/20 border border-premium-green/50 text-premium-green hover:bg-premium-green hover:text-black hover:shadow-[0_0_30px_rgba(37,99,235,0.5)]'
-                                                    : 'bg-white/[0.04] border border-white/8 text-white/60 hover:bg-white/10 hover:text-white hover:border-white/20'}
+                                                    ? 'bg-premium-green/15 border border-premium-green/40 text-premium-green hover:bg-premium-green hover:text-white hover:shadow-[0_4px_20px_rgba(59,130,246,0.4)]'
+                                                    : 'bg-[#151922] border border-[#2A3140] text-white/60 hover:bg-[#1F2535] hover:text-white hover:border-[#3B82F6]/30'}
                                             `}
                                         >
                                             Choisir ce forfait

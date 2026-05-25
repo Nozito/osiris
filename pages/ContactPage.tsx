@@ -38,7 +38,7 @@ export const ContactPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#0B0B0B] selection:bg-premium-green selection:text-white overflow-hidden font-sans">
+        <div className="min-h-screen bg-transparent selection:bg-premium-green selection:text-white overflow-hidden font-sans">
             <SEOHead
                 title={language === 'fr'
                     ? 'Contact – Osiris Agency Manosque | Devis Gratuit 24h'
@@ -133,7 +133,7 @@ export const ContactPage: React.FC = () => {
                         >
                             {/* Email + Disponibilité side by side on mobile */}
                             <div className="grid grid-cols-2 lg:grid-cols-1 gap-3 lg:gap-4">
-                                <div className="group p-4 lg:p-5 rounded-2xl bg-white/[0.03] border border-white/8 hover:border-premium-green/30 hover:bg-white/[0.05] transition-all duration-300">
+                                <div className="group p-4 lg:p-5 rounded-2xl bg-white/[0.03] border border-[#2A3140] hover:border-premium-green/40 hover:bg-[#1F2535] transition-all duration-300">
                                     <div className="flex flex-col sm:flex-row items-start gap-3 lg:gap-4">
                                         <div className="w-9 h-9 lg:w-11 lg:h-11 rounded-xl bg-premium-green/10 flex items-center justify-center text-premium-green border border-premium-green/20 group-hover:scale-110 group-hover:bg-premium-green/15 transition-all duration-300 flex-shrink-0">
                                             <Mail className="w-4 h-4" />
@@ -147,7 +147,7 @@ export const ContactPage: React.FC = () => {
                                     </div>
                                 </div>
 
-                                <div className="group p-4 lg:p-5 rounded-2xl bg-white/[0.03] border border-white/8 hover:border-premium-green/30 hover:bg-white/[0.05] transition-all duration-300">
+                                <div className="group p-4 lg:p-5 rounded-2xl bg-white/[0.03] border border-[#2A3140] hover:border-premium-green/40 hover:bg-[#1F2535] transition-all duration-300">
                                     <div className="flex flex-col sm:flex-row items-start gap-3 lg:gap-4">
                                         <div className="w-9 h-9 lg:w-11 lg:h-11 rounded-xl bg-premium-green/10 flex items-center justify-center text-premium-green border border-premium-green/20 group-hover:scale-110 group-hover:bg-premium-green/15 transition-all duration-300 flex-shrink-0">
                                             <Clock className="w-4 h-4" />
@@ -180,7 +180,7 @@ export const ContactPage: React.FC = () => {
                             </div>
 
                             {/* Google Maps */}
-                            <div className="rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)]">
+                            <div className="rounded-2xl overflow-hidden border border-[#2A3140] shadow-[0_0_40px_rgba(0,0,0,0.5)]">
                                 <iframe
                                     title="Osiris Agency — Manosque, Alpes-de-Haute-Provence"
                                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56210205.017539255!2d-127.86400119999998!3d30.695940900000007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12cbcd6b1128c6e3%3A0x89b8b52ebf05f8b5!2sOsiris%20Agency!5e0!3m2!1sfr!2sfr!4v1778954394063!5m2!1sfr!2sfr"
@@ -202,9 +202,9 @@ export const ContactPage: React.FC = () => {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3 }}
-                                className="relative bg-[#0a0a0a]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-5 sm:p-7 overflow-hidden"
+                                className="relative bg-[#1B202B] border border-[#2A3140] rounded-2xl p-5 sm:p-7 overflow-hidden"
                             >
-                                <div className="absolute inset-0 border border-white/5 rounded-2xl pointer-events-none" />
+                                <div className="absolute inset-0 border border-[#2A3140]/50 rounded-2xl pointer-events-none" />
 
                                 <AnimatePresence mode="wait">
                                     {formStatus === 'success' ? (
@@ -236,7 +236,7 @@ export const ContactPage: React.FC = () => {
                                             className="contact-form space-y-4"
                                         >
                                             {/* Form header */}
-                                            <div className="flex items-center gap-3 mb-5 pb-4 border-b border-white/8">
+                                            <div className="flex items-center gap-3 mb-5 pb-4 border-b border-[#2A3140]">
                                                 <div className="w-8 h-8 rounded-lg bg-premium-green/10 flex items-center justify-center text-premium-green">
                                                     <MessageSquare className="w-4 h-4" />
                                                 </div>
@@ -249,7 +249,7 @@ export const ContactPage: React.FC = () => {
                                                     <label htmlFor="cp-name" className="text-[10px] uppercase tracking-widest text-gray-400 font-bold block group-focus-within:text-premium-green transition-colors duration-200">{t.contactPage.labelName}</label>
                                                     <input
                                                         id="cp-name" name="name" required type="text"
-                                                        className="w-full bg-white/[0.03] border border-white/10 rounded-lg px-3.5 py-2.5 text-white text-sm placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none transition-all duration-200 font-medium"
+                                                        className="w-full bg-[#0F1115] border border-[#2A3140] rounded-lg px-3.5 py-2.5 text-white text-sm placeholder-gray-600 focus:border-premium-green/50 focus:bg-[#151922] focus:outline-none transition-all duration-200 font-medium"
                                                         placeholder="Ex: John Doe"
                                                     />
                                                 </div>
@@ -257,7 +257,7 @@ export const ContactPage: React.FC = () => {
                                                     <label htmlFor="cp-company" className="text-[10px] uppercase tracking-widest text-gray-400 font-bold block group-focus-within:text-premium-green transition-colors duration-200">{t.contactPage.labelCompany}</label>
                                                     <input
                                                         id="cp-company" name="company" type="text"
-                                                        className="w-full bg-white/[0.03] border border-white/10 rounded-lg px-3.5 py-2.5 text-white text-sm placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none transition-all duration-200 font-medium"
+                                                        className="w-full bg-[#0F1115] border border-[#2A3140] rounded-lg px-3.5 py-2.5 text-white text-sm placeholder-gray-600 focus:border-premium-green/50 focus:bg-[#151922] focus:outline-none transition-all duration-200 font-medium"
                                                         placeholder="Ex: Studio Osiris"
                                                     />
                                                 </div>
@@ -269,7 +269,7 @@ export const ContactPage: React.FC = () => {
                                                 <div className="relative">
                                                     <input
                                                         id="cp-email" name="email" required type="email"
-                                                        className="w-full bg-white/[0.03] border border-white/10 rounded-lg px-3.5 py-2.5 pr-10 text-white text-sm placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none transition-all duration-200 font-medium"
+                                                        className="w-full bg-[#0F1115] border border-[#2A3140] rounded-lg px-3.5 py-2.5 pr-10 text-white text-sm placeholder-gray-600 focus:border-premium-green/50 focus:bg-[#151922] focus:outline-none transition-all duration-200 font-medium"
                                                         placeholder="Ex: john@osiris.com"
                                                     />
                                                     <Mail className="absolute right-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-600 group-focus-within:text-premium-green transition-colors duration-200" />
@@ -284,7 +284,7 @@ export const ContactPage: React.FC = () => {
                                                         id="cp-budget" aria-label="Budget"
                                                         value={budgetSel}
                                                         onChange={e => setBudgetSel(e.target.value)}
-                                                        className="w-full bg-white/[0.03] border border-white/10 rounded-lg px-3.5 py-2.5 text-white text-sm focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none transition-all duration-200 font-medium appearance-none cursor-pointer"
+                                                        className="w-full bg-[#0F1115] border border-[#2A3140] rounded-lg px-3.5 py-2.5 text-white text-sm focus:border-premium-green/50 focus:bg-[#151922] focus:outline-none transition-all duration-200 font-medium appearance-none cursor-pointer"
                                                     >
                                                         {t.contactPage.budgetOptions.map((option: string, i: number) => (
                                                             <option key={i} value={i < 3 ? option : 'custom'} className="bg-[#111] text-gray-200">{option}</option>
@@ -297,7 +297,7 @@ export const ContactPage: React.FC = () => {
                                                         name="budget"
                                                         type="text"
                                                         placeholder={t.contactPage.budgetCustomPlaceholder}
-                                                        className="w-full bg-white/[0.03] border border-white/10 rounded-lg px-3.5 py-2.5 text-white text-sm placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none transition-all duration-200 font-medium"
+                                                        className="w-full bg-[#0F1115] border border-[#2A3140] rounded-lg px-3.5 py-2.5 text-white text-sm placeholder-gray-600 focus:border-premium-green/50 focus:bg-[#151922] focus:outline-none transition-all duration-200 font-medium"
                                                     />
                                                 ) : (
                                                     <input type="hidden" name="budget" value={budgetSel || t.contactPage.budgetOptions[0]} />
@@ -309,7 +309,7 @@ export const ContactPage: React.FC = () => {
                                                 <label htmlFor="cp-message" className="text-[10px] uppercase tracking-widest text-gray-500 font-bold block group-focus-within:text-premium-green transition-colors duration-200">{t.contactPage.labelMessage}</label>
                                                 <textarea
                                                     id="cp-message" name="message" required rows={4}
-                                                    className="w-full bg-white/[0.03] border border-white/10 rounded-lg px-3.5 py-2.5 text-white text-sm placeholder-gray-600 focus:border-premium-green/50 focus:bg-white/[0.05] focus:outline-none transition-all duration-200 font-medium resize-none leading-relaxed"
+                                                    className="w-full bg-[#0F1115] border border-[#2A3140] rounded-lg px-3.5 py-2.5 text-white text-sm placeholder-gray-600 focus:border-premium-green/50 focus:bg-[#151922] focus:outline-none transition-all duration-200 font-medium resize-none leading-relaxed"
                                                     placeholder={t.contactPage.messagePlaceholder}
                                                 />
                                             </div>

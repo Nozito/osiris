@@ -14,7 +14,7 @@ export const SocialProofBar: React.FC = () => {
     ];
 
     return (
-        <section className="guarantee-section relative w-full py-8 px-4 sm:px-6 overflow-hidden bg-premium-black/30 border-y border-white/5">
+        <section className="guarantee-section relative w-full py-8 px-4 sm:px-6 overflow-hidden bg-[#151922] border-y border-[#2A3140]">
             <div className="container mx-auto max-w-6xl">
             <div className="guarantee-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
                     {proofs.map((proof, index) => {

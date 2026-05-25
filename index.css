@@ -9,39 +9,9 @@
   to { --border-angle: 360deg; }
 }
 
-.border-spin-anim {
-  position: relative;
-}
-
+/* Disable border-spin in new design system — replaced by static solid borders */
 .border-spin-anim::after {
-  content: '';
-  position: absolute;
-  inset: -1.5px;
-  border-radius: inherit;
-  background: conic-gradient(
-    from var(--border-angle),
-    transparent 72%,
-    rgba(37, 99, 235, 0.75) 82%,
-    rgba(147, 197, 253, 0.95) 88%,
-    rgba(37, 99, 235, 0.75) 94%,
-    transparent 100%
-  );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  padding: 1.5px;
-  animation: border-spin 3s linear infinite;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
-/* Pause animation on group hover — applies to all children with border-spin-anim */
-.group:hover .border-spin-anim::after,
-.border-spin-anim:hover::after {
-  opacity: 0;
+  display: none;
 }
 
 /* === GLOBAL STYLES === */
@@ -265,10 +235,10 @@ main section {
 /* === AUDIT PILL GLOW ANIMATION === */
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 6px rgba(37, 99, 235, 0.3), inset 0 0 6px rgba(37, 99, 235, 0.05);
+    box-shadow: 0 0 6px rgba(59, 130, 246, 0.3), inset 0 0 6px rgba(59, 130, 246, 0.05);
   }
   50% {
-    box-shadow: 0 0 18px rgba(37, 99, 235, 0.6), inset 0 0 10px rgba(37, 99, 235, 0.12);
+    box-shadow: 0 0 18px rgba(59, 130, 246, 0.6), inset 0 0 10px rgba(59, 130, 246, 0.12);
   }
 }
 

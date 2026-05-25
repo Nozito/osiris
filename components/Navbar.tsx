@@ -58,7 +58,7 @@ export const Navbar: React.FC = () => {
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
       >
-        <div className="pointer-events-auto relative flex items-center justify-between gap-3 px-5 md:px-6 py-3 rounded-full bg-[#0B0B0B]/80 backdrop-blur-md border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all duration-500 w-[95%] md:w-auto md:min-w-[480px] hover:border-white/20 hover:shadow-[0_8px_40px_rgba(37,99,235,0.15)] group">
+        <div className="pointer-events-auto relative flex items-center justify-between gap-3 px-5 md:px-6 py-3 rounded-full bg-[#0F1115]/90 backdrop-blur-md border border-[#2A3140] shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all duration-500 w-[95%] md:w-auto md:min-w-[480px] hover:border-[#3B82F6]/30 hover:shadow-[0_8px_40px_rgba(59,130,246,0.12)] group">
 
           {/* Logo */}
           <Link to="/" onClick={handleNavClick} className="flex items-center gap-2 group/logo relative z-50">
@@ -116,7 +116,7 @@ export const Navbar: React.FC = () => {
           <div className="hidden md:flex items-center gap-4">
             <Link
               to="/contact"
-              className="relative px-5 py-2 rounded-full bg-white text-black text-[10px] font-black uppercase tracking-widest overflow-hidden hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(37,99,235,0.4)]"
+              className="relative px-5 py-2 rounded-full bg-premium-green text-white text-[10px] font-bold uppercase tracking-widest overflow-hidden hover:bg-blue-600 transition-all duration-300 shadow-[0_4px_14px_rgba(59,130,246,0.3)] hover:shadow-[0_6px_20px_rgba(59,130,246,0.45)]"
             >
               <span className="relative z-10">{t.navbar.contact}</span>
             </Link>
@@ -160,19 +160,18 @@ export const Navbar: React.FC = () => {
               onClick={(e) => e.stopPropagation()}
               className="absolute top-0 left-0 right-0 overflow-hidden"
               style={{
-                background: 'linear-gradient(180deg, rgba(3,4,10,0.97) 0%, rgba(5,7,16,0.93) 100%)',
-                backdropFilter: 'blur(48px) saturate(2)',
-                WebkitBackdropFilter: 'blur(48px) saturate(2)',
-                borderBottom: '1px solid rgba(255,255,255,0.06)',
-                boxShadow: '0 40px 100px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.03)',
+                background: 'linear-gradient(180deg, rgba(15,17,21,0.97) 0%, rgba(21,25,34,0.95) 100%)',
+                backdropFilter: 'blur(48px) saturate(1.5)',
+                WebkitBackdropFilter: 'blur(48px) saturate(1.5)',
+                borderBottom: '1px solid rgba(42,49,64,0.8)',
+                boxShadow: '0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(42,49,64,0.3)',
               }}
             >
-              {/* Top accent line — gradient vert */}
-              <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-premium-green to-transparent opacity-80" />
-              {/* Ambient glow haut-centre */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-56 rounded-full pointer-events-none" style={{ background: 'radial-gradient(ellipse, rgba(37,99,235,0.12) 0%, transparent 70%)' }} />
-              {/* Glow vert bas-gauche */}
-              <div className="absolute bottom-10 -left-8 w-48 h-48 rounded-full pointer-events-none" style={{ background: 'radial-gradient(ellipse, rgba(34,197,94,0.07) 0%, transparent 70%)' }} />
+            <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-premium-green to-transparent opacity-60" />
+              {/* Ambient glow */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-56 rounded-full pointer-events-none" style={{ background: 'radial-gradient(ellipse, rgba(59,130,246,0.08) 0%, transparent 70%)' }} />
+              {/* Side glow */}
+              <div className="absolute bottom-10 -left-8 w-48 h-48 rounded-full pointer-events-none" style={{ background: 'radial-gradient(ellipse, rgba(139,92,246,0.05) 0%, transparent 70%)' }} />
 
               <div className="pt-24 pb-7 px-5">
 
@@ -244,7 +243,7 @@ export const Navbar: React.FC = () => {
                   >
                     <div className="text-[10px] text-premium-green/60 uppercase tracking-[0.18em] font-bold mb-1">Sans engagement</div>
                     <div className="text-premium-green font-bold text-[22px] tracking-tight mb-2">{t.navbar.auditGratuit}</div>
-                    <span className="text-[9px] bg-premium-green text-black font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-[0_0_16px_rgba(34,197,94,0.4)]">
+                    <span className="text-[9px] bg-premium-green text-white font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-[0_0_12px_rgba(59,130,246,0.4)]">
                       Offert
                     </span>
                   </a>

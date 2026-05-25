@@ -26,10 +26,10 @@ const OS_STEPS = [
 ];
 
 const CSS = `
-  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
 
-  /* Base font — Space Grotesk for all timeline elements */
-  [class*="os-tl"] { font-family: 'Space Grotesk', sans-serif !important; }
+  /* Base font — Inter for all timeline elements */
+  [class*="os-tl"] { font-family: 'Inter', ui-sans-serif, sans-serif !important; }
 
   /* ── Section ── */
   .os-tl {

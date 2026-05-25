@@ -34,7 +34,7 @@ export const Process: React.FC = () => {
   ];
 
   return (
-    <section id="process" className="px-4 sm:px-6 py-8 sm:py-12 lg:py-20 bg-[#0B0B0B] relative overflow-hidden scroll-mt-20">
+    <section id="process" className="px-4 sm:px-6 py-8 sm:py-12 lg:py-20 bg-[#151922] relative overflow-hidden scroll-mt-20">
 
       {/* Background Ambience */}
       {/* Premium Smooth Background */}
@@ -66,10 +66,10 @@ export const Process: React.FC = () => {
               whileHover={{ y: -10 }}
               className="group relative"
             >
-              <div className="border-spin-anim bg-gradient-to-br from-white/[0.07] to-white/[0.01] backdrop-blur-sm border border-white/10 p-3 sm:p-4 lg:p-7 rounded-xl sm:rounded-2xl lg:rounded-[1.5rem] hover:bg-white/[0.08] transition-all duration-300 hover:border-premium-green/40 hover:shadow-[0_0_50px_-20px_rgba(37,99,235,0.15)] h-full flex flex-col justify-between">
+              <div className="bg-[#1B202B] border border-[#2A3140] p-3 sm:p-4 lg:p-7 rounded-xl sm:rounded-2xl lg:rounded-[1.5rem] hover:bg-[#1F2535] transition-all duration-300 hover:border-premium-green/40 hover:shadow-[0_8px_32px_rgba(59,130,246,0.08)] h-full flex flex-col justify-between">
                 {/* Header Row */}
                 <div className="flex items-center gap-2 sm:gap-3 lg:gap-6 mb-3 lg:mb-6">
-                  <div className="border-spin-anim w-8 h-8 sm:w-9 sm:h-9 lg:w-14 lg:h-14 rounded-lg sm:rounded-xl lg:rounded-2xl bg-black/50 border border-white/10 flex items-center justify-center text-gray-400 group-hover:text-premium-green group-hover:bg-premium-green/10 group-hover:border-premium-green/50 group-hover:shadow-[0_0_30px_rgba(37,99,235,0.3)] group-hover:scale-110 transition-all duration-300 flex-shrink-0">
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 lg:w-14 lg:h-14 rounded-lg sm:rounded-xl lg:rounded-2xl bg-[#0F1115] border border-[#2A3140] flex items-center justify-center text-gray-400 group-hover:text-premium-green group-hover:bg-premium-green/10 group-hover:border-premium-green/40 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.2)] group-hover:scale-110 transition-all duration-300 flex-shrink-0">
                     <step.icon className="w-4 h-4 sm:w-4 sm:h-4 lg:w-7 lg:h-7" />
                   </div>
                   <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-white/[0.06] group-hover:text-white/[0.1] transition-colors font-display select-none">

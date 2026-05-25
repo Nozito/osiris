@@ -40,10 +40,10 @@ export const AuditGratuit: React.FC = () => {
             <span id="audit-gratuit" className="absolute -top-24" aria-hidden="true" />
 
             {/* Background */}
-            <div className="absolute inset-0 bg-[#111318] pointer-events-none" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(37,99,235,0.07)_0%,transparent_100%)] pointer-events-none" />
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            <div className="absolute inset-0 bg-[#0F1115] pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(59,130,246,0.05)_0%,transparent_100%)] pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#2A3140] to-transparent" />
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#2A3140] to-transparent" />
 
             <div className="container mx-auto max-w-6xl relative z-10">
 
@@ -79,10 +79,10 @@ export const AuditGratuit: React.FC = () => {
                                     transition={{ duration: 0.5, delay: index * 0.08 }}
                                     className="group relative"
                                 >
-                                    <div className="border-spin-anim bg-gradient-to-br from-white/[0.07] to-white/[0.01] backdrop-blur-sm border border-white/10 p-4 sm:p-5 rounded-2xl hover:bg-white/[0.08] hover:border-premium-green/40 hover:-translate-y-1 hover:shadow-[0_0_40px_-15px_rgba(37,99,235,0.2)] transition-all duration-300 h-full flex flex-col justify-between">
+                                    <div className="bg-[#1B202B] border border-[#2A3140] p-4 sm:p-5 rounded-2xl hover:bg-[#1F2535] hover:border-premium-green/40 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(59,130,246,0.08)] transition-all duration-300 h-full flex flex-col justify-between">
                                         {/* Header Row */}
                                         <div className="flex items-center gap-2 sm:gap-3 mb-3">
-                                            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-black/50 border border-white/10 flex items-center justify-center group-hover:text-premium-green group-hover:bg-premium-green/10 group-hover:border-premium-green/50 group-hover:scale-110 transition-all duration-300 flex-shrink-0">
+                                            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#0F1115] border border-[#2A3140] flex items-center justify-center group-hover:text-premium-green group-hover:bg-premium-green/10 group-hover:border-premium-green/40 group-hover:scale-110 transition-all duration-300 flex-shrink-0">
                                                 <Icon className="w-4 h-4 sm:w-[18px] sm:h-[18px] text-premium-green" />
                                             </div>
                                             {pillar.tag && (
@@ -107,7 +107,7 @@ export const AuditGratuit: React.FC = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.15 }}
-                        className="bg-white/[0.03] border border-white/10 rounded-3xl p-6 sm:p-8 flex flex-col"
+                        className="bg-[#1B202B] border border-[#2A3140] rounded-3xl p-6 sm:p-8 flex flex-col"
                     >
                         <label htmlFor="audit-message" className="block text-sm font-semibold text-white/70 mb-3">
                             {t.audit.textareaLabel}
@@ -118,7 +118,7 @@ export const AuditGratuit: React.FC = () => {
                             onChange={(e) => setMessage(e.target.value)}
                             placeholder={t.audit.textareaPlaceholder}
                             rows={5}
-                            className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-white/80 placeholder:text-white/25 focus:outline-none focus:border-premium-green/40 focus:bg-white/[0.06] transition-all duration-300 resize-none mb-6 scrollbar-hide"
+                            className="w-full bg-[#0F1115] border border-[#2A3140] rounded-xl px-4 py-3 text-sm text-white/80 placeholder:text-white/25 focus:outline-none focus:border-premium-green/40 focus:bg-[#151922] transition-all duration-300 resize-none mb-6 scrollbar-hide"
                         />
                         <div className="flex flex-col gap-3 items-center">
                             <button
@@ -130,7 +130,7 @@ export const AuditGratuit: React.FC = () => {
                             </button>
                             <Link
                                 to="/contact"
-                                className="btn-reserve w-full justify-center bg-white/[0.05] text-white border border-white/10 hover:bg-white/10 hover:border-white/25"
+                                className="btn-reserve w-full justify-center bg-[#1B202B] text-white border border-[#2A3140] hover:bg-[#1F2535] hover:border-[#3B82F6]/40"
                             >
                                 <PhoneCall className="btn-icon" />
                                 Réserver mon appel
