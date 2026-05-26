@@ -176,7 +176,7 @@ export const Offer: React.FC = () => {
                       className="overflow-hidden"
                     >
                       <div className="px-4 pb-5">
-                        <div className="w-full h-[1px] bg-white/5 mb-4" />
+                        <div className="w-full h-[1px] bg-[#E8E3D9] mb-4" />
                         <p className="text-[#0F1729]/50 text-xs leading-relaxed mb-4">
                           {offer.description}
                         </p>
@@ -188,17 +188,21 @@ export const Offer: React.FC = () => {
                                 <div className={`mt-0.5 w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 ${isInherited ? 'bg-amber-400/15 text-amber-400' : getAccentBg(offer.color)}`}>
                                   {isInherited ? <Check className="w-2.5 h-2.5" /> : <Sparkles className="w-2.5 h-2.5" />}
                                 </div>
-                                <span className={`text-xs ${isInherited ? 'text-amber-400 font-medium' : 'text-gray-300'}`}>{feature}</span>
+                                <span className={`text-xs ${isInherited ? 'text-amber-600 font-medium' : 'text-[#0F1729]/70'}`}>{feature}</span>
                               </li>
                             );
                           })}
                         </ul>
+                        <div className="flex items-baseline gap-1.5 justify-start pb-3 mb-3 border-b border-[#E8E3D9]">
+                          <span className="text-2xl font-light text-[#0F1729]/80 font-display tracking-tight">{offer.price}</span>
+                          <span className="text-sm font-light text-[#0F1729]/40">€</span>
+                        </div>
                         <Link
                           to="/contact"
-                          className={`w-full py-3 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all flex items-center justify-center gap-2 border ${
-                            offer.color === 'blue' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20 hover:bg-blue-500 hover:text-white hover:border-transparent' :
-                            offer.color === 'amber' ? 'bg-amber-400/10 text-amber-400 border-amber-400/20 hover:bg-amber-400 hover:text-black hover:border-transparent' :
-                            'bg-purple-500/10 text-purple-400 border-purple-500/20 hover:bg-purple-500 hover:text-white hover:border-transparent'
+                          className={`w-full py-3 rounded-xl font-semibold text-[10px] uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${
+                            offer.color === 'blue' ? 'bg-blue-600 text-white hover:bg-blue-700' :
+                            offer.color === 'amber' ? 'bg-amber-500 text-white hover:bg-amber-600' :
+                            'bg-purple-600 text-white hover:bg-purple-700'
                           }`}
                         >
                           {t.offer.choosePack}
@@ -286,20 +290,12 @@ export const Offer: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Title & Price */}
+                  {/* Title */}
                   <div className="mb-5 text-center">
-                    <h3 className="text-xl font-black font-display uppercase tracking-widest mb-3 text-[#0F1729]">
+                    <h3 className="text-xl font-bold font-display uppercase tracking-widest mb-3 text-[#0F1729]">
                       {offer.title}
                     </h3>
-                    <div className="flex items-start justify-center gap-1">
-                      <span className={`text-5xl lg:text-6xl font-black tracking-tighter ${
-                        offer.color === 'amber' ? 'text-amber-600' : 'text-[#0F1729]'
-                      }`}>
-                        {offer.price}
-                      </span>
-                      <span className="text-xl lg:text-2xl mt-2 lg:mt-3 text-gray-400 font-light">€</span>
-                    </div>
-                    <p className="text-[#0F1729]/50 text-xs lg:text-sm mt-4 leading-relaxed px-1 lg:px-2">{offer.description}</p>
+                    <p className="text-[#0F1729]/50 text-xs lg:text-sm leading-relaxed px-1 lg:px-2">{offer.description}</p>
                   </div>
 
                   {/* Separator */}
@@ -325,22 +321,28 @@ export const Offer: React.FC = () => {
                             {isInherited ? <Check className="w-2.5 h-2.5" /> : <Sparkles className="w-2.5 h-2.5" />}
                           </div>
                           <span className={`text-xs leading-relaxed transition-colors duration-300 ${
-                            isInherited ? 'text-amber-400 font-semibold' : 'text-[#0F1729]/65 group-hover/item:text-[#0F1729]'
+                            isInherited ? 'text-amber-600 font-semibold' : 'text-[#0F1729]/65 group-hover/item:text-[#0F1729]'
                           }`}>{feature}</span>
                         </li>
                       );
                     })}
                   </ul>
 
+                  {/* Price — at the end, before CTA */}
+                  <div className="flex items-baseline gap-1.5 justify-center py-4 border-t border-[#E8E3D9] mt-2 mb-4">
+                    <span className="text-3xl font-light text-[#0F1729]/70 font-display tracking-tight">{offer.price}</span>
+                    <span className="text-base font-light text-[#0F1729]/40">€</span>
+                  </div>
+
                   {/* CTA */}
                   <Link
                     to="/contact"
-                    className={`mt-auto w-full py-4 lg:py-5 rounded-2xl font-bold text-xs uppercase tracking-[0.15em] flex items-center justify-center gap-2 border transition-all duration-300 ${
+                    className={`w-full py-4 lg:py-5 rounded-2xl font-bold text-xs uppercase tracking-[0.15em] flex items-center justify-center gap-2 transition-all duration-300 ${
                       offer.color === 'blue'
-                        ? 'bg-blue-600/20 border-blue-500/40 text-blue-300 hover:bg-blue-600 hover:text-white hover:border-transparent hover:shadow-[0_0_30px_rgba(59,130,246,0.4)]'
+                        ? 'bg-blue-600 text-white hover:bg-blue-700 hover:shadow-[0_4px_20px_rgba(59,130,246,0.3)]'
                         : offer.color === 'amber'
-                          ? 'bg-amber-400/20 border-amber-400/40 text-amber-300 hover:bg-amber-500 hover:text-black hover:border-transparent hover:shadow-[0_0_30px_rgba(251,191,36,0.4)]'
-                          : 'bg-purple-600/20 border-purple-500/40 text-purple-300 hover:bg-purple-600 hover:text-white hover:border-transparent hover:shadow-[0_0_30px_rgba(168,85,247,0.4)]'
+                          ? 'bg-amber-500 text-white hover:bg-amber-600 hover:shadow-[0_4px_20px_rgba(251,191,36,0.3)]'
+                          : 'bg-purple-600 text-white hover:bg-purple-700 hover:shadow-[0_4px_20px_rgba(168,85,247,0.3)]'
                     }`}
                   >
                     {t.offer.choosePack}
@@ -353,9 +355,9 @@ export const Offer: React.FC = () => {
         </div>
 
         {/* Info & Tabs Section */}
-        <div className="max-w-2xl mx-auto border border-white/5 bg-white/[0.02] rounded-2xl sm:rounded-[2rem] backdrop-blur-sm overflow-hidden flex flex-col items-center">
+        <div className="max-w-2xl mx-auto border border-[#E8E3D9] bg-white rounded-2xl sm:rounded-[2rem] overflow-hidden flex flex-col items-center">
           {/* Tabs Header */}
-          <div className="flex p-1.5 gap-1.5 mt-6 bg-black/20 rounded-full border border-white/5">
+          <div className="flex p-1.5 gap-1.5 mt-6 bg-[#F0EDE6] rounded-full border border-[#E8E3D9]">
             <button
               onClick={() => setActiveTab('faq')}
               className={`py-2.5 px-6 text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all rounded-full ${activeTab === 'faq' ? 'bg-premium-green text-white' : 'text-[#0F1729]/50 hover:text-[#0F1729] hover:bg-[#F5F4EF]'}`}
@@ -384,17 +386,17 @@ export const Offer: React.FC = () => {
                   transition={{ duration: 0.3 }}
                   className="grid grid-cols-1 sm:grid-cols-2 gap-4"
                 >
-                  <div className="bg-white/[0.03] p-4 rounded-xl border border-white/5">
+                  <div className="bg-[#F5F4EF] p-4 rounded-xl border border-[#E8E3D9]">
                     <h4 className="text-premium-green font-bold mb-2 text-xs uppercase tracking-wide">{t.offer.faqItems.delays.title}</h4>
-                    <p className="text-white text-xs leading-relaxed">
-                      <span className="block mb-0.5"><span className="text-gray-400">Fondation :</span> {t.offer.faqItems.delays.starter}</span>
-                      <span className="block mb-0.5"><span className="text-gray-400">Stratégie :</span> {t.offer.faqItems.delays.business}</span>
-                      <span className="block"><span className="text-gray-400">Signature :</span> {t.offer.faqItems.delays.empire}</span>
+                    <p className="text-[#0F1729]/70 text-xs leading-relaxed">
+                      <span className="block mb-0.5"><span className="text-[#0F1729]/45">Fondation :</span> {t.offer.faqItems.delays.starter}</span>
+                      <span className="block mb-0.5"><span className="text-[#0F1729]/45">Stratégie :</span> {t.offer.faqItems.delays.business}</span>
+                      <span className="block"><span className="text-[#0F1729]/45">Signature :</span> {t.offer.faqItems.delays.empire}</span>
                     </p>
                   </div>
-                  <div className="bg-white/[0.03] p-4 rounded-xl border border-white/5">
+                  <div className="bg-[#F5F4EF] p-4 rounded-xl border border-[#E8E3D9]">
                     <h4 className="text-premium-green font-bold mb-2 text-xs uppercase tracking-wide">{t.offer.faqItems.payment.title}</h4>
-                    <p className="text-white text-xs leading-relaxed">
+                    <p className="text-[#0F1729]/70 text-xs leading-relaxed">
                       {t.offer.faqItems.payment.answer}
                     </p>
                   </div>
@@ -408,11 +410,11 @@ export const Offer: React.FC = () => {
                   transition={{ duration: 0.3 }}
                   className="flex flex-col items-center justify-center text-center h-full"
                 >
-                  <h4 className="text-white font-bold mb-2 text-base">{t.offer.customProject.title}</h4>
-                  <p className="text-gray-400 text-xs leading-relaxed mb-6 max-w-sm">
+                  <h4 className="text-[#0F1729] font-bold mb-2 text-base">{t.offer.customProject.title}</h4>
+                  <p className="text-[#0F1729]/55 text-xs leading-relaxed mb-6 max-w-sm">
                     {t.offer.customProject.description}
                   </p>
-                  <a href="#contact" className="px-6 py-3 bg-white text-black font-bold text-[10px] uppercase tracking-widest rounded-full hover:bg-premium-green transition-all">
+                  <a href="#contact" className="px-6 py-3 bg-[#0F1729] text-white font-bold text-[10px] uppercase tracking-widest rounded-full hover:bg-premium-green transition-all">
                     {t.offer.customProject.cta}
                   </a>
                 </motion.div>

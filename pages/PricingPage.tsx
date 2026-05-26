@@ -322,20 +322,12 @@ export const PricingPage: React.FC = () => {
                                             </div>
                                         </div>
 
-                                        {/* Title & Price */}
+                                        {/* Title */}
                                         <div className="mb-5 text-center">
-                                            <h2 className="text-xl font-black font-display uppercase tracking-widest mb-3 text-[#0F1729]">
+                                            <h2 className="text-xl font-bold font-display uppercase tracking-widest mb-3 text-[#0F1729]">
                                                 {offer.title}
                                             </h2>
-                                            <div className="flex items-start justify-center gap-1">
-                                                <span className={`text-5xl lg:text-6xl font-black tracking-tighter
-                                                    ${offer.color === 'blue' ? 'text-[#0F1729]' : offer.color === 'amber' ? 'text-amber-600' : 'text-[#0F1729]'}
-                                                `}>
-                                                    {offer.price}
-                                                </span>
-                                                <span className="text-xl lg:text-2xl mt-2 lg:mt-3 text-[#0F1729]/50 font-light">€</span>
-                                            </div>
-                                            <p className="text-[#0F1729]/50 text-xs lg:text-sm mt-4 leading-relaxed px-1 lg:px-2">{offer.description}</p>
+                                            <p className="text-[#0F1729]/50 text-xs lg:text-sm leading-relaxed px-1 lg:px-2">{offer.description}</p>
                                         </div>
 
                                         {/* Separator */}
@@ -359,7 +351,7 @@ export const PricingPage: React.FC = () => {
                                                         `}>
                                                             {isInherited ? <Check className="w-2.5 h-2.5" /> : <Sparkles className="w-2.5 h-2.5" />}
                                                         </div>
-                                                        <span className={`text-xs leading-relaxed ${isInherited ? 'text-amber-400 font-semibold' : 'text-[#0F1729]/60'}`}>{feature}</span>
+                                                        <span className={`text-xs leading-relaxed ${isInherited ? 'text-amber-600 font-semibold' : 'text-[#0F1729]/60'}`}>{feature}</span>
                                                     </li>
                                                 );
                                             })}
@@ -374,14 +366,14 @@ export const PricingPage: React.FC = () => {
                                                     return (
                                                         <li key={i} className="flex items-start gap-2.5">
                                                             <div className={`mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center
-                                                                ${isInherited ? 'bg-amber-400/15 text-amber-400'
+                                                                ${isInherited ? 'bg-amber-400/15 text-amber-600'
                                                                 : offer.color === 'blue'   ? 'bg-blue-500/15 text-blue-400'
                                                                 : offer.color === 'amber'  ? 'bg-amber-400/15 text-amber-400'
                                                                                            : 'bg-purple-500/15 text-purple-400'}
                                                             `}>
                                                                 {isInherited ? <Check className="w-2.5 h-2.5" /> : <Sparkles className="w-2.5 h-2.5" />}
                                                             </div>
-                                                            <span className={`text-xs leading-relaxed ${isInherited ? 'text-amber-400 font-semibold' : 'text-[#0F1729]/60'}`}>{feature}</span>
+                                                            <span className={`text-xs leading-relaxed ${isInherited ? 'text-amber-600 font-semibold' : 'text-[#0F1729]/60'}`}>{feature}</span>
                                                         </li>
                                                     );
                                                 })}
@@ -393,9 +385,9 @@ export const PricingPage: React.FC = () => {
                                             <button
                                                 onClick={() => setExpandedCard(isExpanded ? null : offer.title)}
                                                 className={`lg:hidden mt-3 mb-5 text-[11px] font-bold flex items-center gap-1 transition-colors duration-200
-                                                    ${offer.color === 'blue'   ? 'text-blue-400 hover:text-blue-300'
-                                                    : offer.color === 'amber' ? 'text-amber-400 hover:text-amber-300'
-                                                                               : 'text-purple-400 hover:text-purple-300'}
+                                                    ${offer.color === 'blue'   ? 'text-blue-600 hover:text-blue-700'
+                                                    : offer.color === 'amber' ? 'text-amber-600 hover:text-amber-700'
+                                                                               : 'text-purple-600 hover:text-purple-700'}
                                                 `}
                                             >
                                                 {isExpanded ? '− Réduire' : `+ ${extraFeatures.length} infos supplémentaires`}
@@ -424,15 +416,21 @@ export const PricingPage: React.FC = () => {
                                             })}
                                         </ul>
 
+                                        {/* Price — at the end, before CTA */}
+                                        <div className="flex items-baseline gap-1.5 justify-center py-4 border-t border-[#E8E3D9] mt-2 mb-4">
+                                            <span className="text-3xl font-light text-[#0F1729]/70 font-display tracking-tight">{offer.price}</span>
+                                            <span className="text-base font-light text-[#0F1729]/40">€</span>
+                                        </div>
+
                                         {/* CTA */}
                                         <Link
                                             to="/contact"
-                                            className={`mt-auto w-full py-4 lg:py-5 rounded-2xl font-bold text-xs uppercase tracking-[0.15em] flex items-center justify-center gap-2 border transition-all duration-300
+                                            className={`mt-auto w-full py-4 lg:py-5 rounded-2xl font-bold text-xs uppercase tracking-[0.15em] flex items-center justify-center gap-2 transition-all duration-300
                                                 ${offer.color === 'blue'
-                                                    ? 'bg-blue-600/20 border-blue-500/40 text-blue-300 hover:bg-blue-600 hover:text-white hover:border-transparent hover:shadow-[0_0_30px_rgba(59,130,246,0.4)]'
+                                                    ? 'bg-blue-600 text-white hover:bg-blue-700 hover:shadow-[0_4px_20px_rgba(59,130,246,0.3)]'
                                                     : offer.color === 'amber'
-                                                        ? 'bg-amber-400/20 border-amber-400/40 text-amber-300 hover:bg-amber-500 hover:text-black hover:border-transparent hover:shadow-[0_0_30px_rgba(251,191,36,0.4)]'
-                                                        : 'bg-purple-600/20 border-purple-500/40 text-purple-300 hover:bg-purple-600 hover:text-white hover:border-transparent hover:shadow-[0_0_30px_rgba(168,85,247,0.4)]'}
+                                                        ? 'bg-amber-500 text-white hover:bg-amber-600 hover:shadow-[0_4px_20px_rgba(251,191,36,0.3)]'
+                                                        : 'bg-purple-600 text-white hover:bg-purple-700 hover:shadow-[0_4px_20px_rgba(168,85,247,0.3)]'}
                                             `}
                                         >
                                             Demander un devis gratuit

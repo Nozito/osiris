@@ -28,7 +28,13 @@ export const DesignPremium: React.FC = () => {
     ];
 
     return (
-        <section className="relative w-full py-14 sm:py-20 px-4 sm:px-6 overflow-hidden bg-[#F0EDE6]">
+        <motion.section
+            className="relative w-full py-14 sm:py-20 px-4 sm:px-6 overflow-hidden bg-[#F0EDE6]"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-5%" }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        >
             <div className="container mx-auto max-w-6xl relative z-10">
                 {/* Section Label */}
                 <motion.div
@@ -50,16 +56,19 @@ export const DesignPremium: React.FC = () => {
                 </motion.div>
 
                 {/* Cards Grid */}
-                <div className="grid responsive-card-grid gap-6 mb-12">
+                <motion.div
+                    className="grid responsive-card-grid gap-6 mb-12"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-10%" }}
+                    variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
+                >
                     {cards.map((card, index) => {
                         const Icon = card.icon;
                         return (
                             <motion.div
                                 key={index}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.6, delay: index * 0.1 }}
+                                variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } }}
                                 className="group relative"
                             >
                                 {/* Card Background */}
@@ -88,9 +97,7 @@ export const DesignPremium: React.FC = () => {
                             </motion.div>
                         );
                     })}
-                </div>
-
-                {/* Badge */}
+                </motion.div>}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -106,6 +113,6 @@ export const DesignPremium: React.FC = () => {
 
             {/* Background Decoration */}
             <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-[120px] pointer-events-none" />
-        </section>
+        </motion.section>
     );
 };

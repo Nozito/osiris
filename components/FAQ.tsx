@@ -12,7 +12,12 @@ export const FAQ: React.FC = () => {
     };
 
     return (
-        <section className="relative w-full py-14 sm:py-20 px-4 sm:px-6 overflow-hidden bg-[#F0EDE6]">
+    <motion.section
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-5%" }}
+      transition={{ duration: 0.6 }}
+      className="relative w-full py-14 sm:py-20 px-4 sm:px-6 overflow-hidden bg-[#F0EDE6]">
             <div className="container mx-auto max-w-4xl relative z-10">
                 {/* Section Label */}
                 <motion.div
@@ -81,6 +86,6 @@ export const FAQ: React.FC = () => {
 
             {/* Background Decoration */}
             <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-premium-green/5 rounded-full blur-[120px] pointer-events-none" />
-        </section>
+    </motion.section>
     );
 };

@@ -34,7 +34,13 @@ export const Process: React.FC = () => {
   ];
 
   return (
-    <section id="process" className="px-4 sm:px-6 py-8 sm:py-12 lg:py-20 bg-[#F0EDE6] relative overflow-hidden scroll-mt-20">
+    <motion.section
+      id="process"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: "-5%" }}
+      transition={{ duration: 0.5 }}
+      className="px-4 sm:px-6 py-8 sm:py-12 lg:py-20 bg-[#F0EDE6] relative overflow-hidden scroll-mt-20">
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.03)_0%,transparent_60%)] pointer-events-none"></div>
 
@@ -92,6 +98,6 @@ export const Process: React.FC = () => {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
