@@ -59,18 +59,18 @@ export const Navbar: React.FC = () => {
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
-          background: 'rgba(245,244,239,0.96)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
-          borderBottom: scrolled ? '1px solid #E8E3D9' : '1px solid transparent',
-          boxShadow: scrolled ? '0 1px 20px rgba(15,23,41,0.06)' : 'none',
+          background: 'rgba(255,255,255,0.90)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          borderBottom: scrolled ? '1px solid rgba(0,0,0,0.08)' : '1px solid transparent',
+          boxShadow: scrolled ? '0 1px 0 rgba(0,0,0,0.04)' : 'none',
         }}
       >
         <div className="container mx-auto max-w-7xl px-5 sm:px-8 py-4 flex items-center justify-between">
 
           {/* Logo */}
           <Link to="/" onClick={handleNavClick} className="flex-shrink-0">
-            <span className="navbar-logo font-display italic text-[#0F1729] font-normal tracking-tight">
+            <span className="navbar-logo font-sans text-[#1D1D1F] font-semibold tracking-[-0.04em]">
               OSIRIS
             </span>
           </Link>
@@ -120,7 +120,7 @@ export const Navbar: React.FC = () => {
             </div>
             <Link
               to="/contact"
-              className="px-5 py-2.5 rounded-full bg-[#0F1729] text-white text-sm font-medium hover:bg-[#1A2F50] transition-colors duration-200"
+              className="px-5 py-2.5 rounded-full bg-[#1D1D1F] text-white text-sm font-medium hover:bg-[#2D2D2F] transition-colors duration-200"
             >
               {t.navbar.contact}
             </Link>

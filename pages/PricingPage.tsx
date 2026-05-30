@@ -90,7 +90,7 @@ export const PricingPage: React.FC = () => {
     const offers = [
         {
             title: "Fondation",
-            price: "950",
+            price: "1 090",
             description: t.offer.offers.starter.description,
             features: t.offer.offers.starter.features,
             highlight: false,
@@ -101,7 +101,7 @@ export const PricingPage: React.FC = () => {
         },
         {
             title: "Stratégie",
-            price: "1 650",
+            price: "1 690",
             description: t.offer.offers.business.description,
             features: t.offer.offers.business.features,
             highlight: true,
@@ -112,7 +112,7 @@ export const PricingPage: React.FC = () => {
         },
         {
             title: "Signature",
-            price: "2 950",
+            price: "2 990",
             description: t.offer.offers.empire.description,
             features: t.offer.offers.empire.features,
             highlight: false,

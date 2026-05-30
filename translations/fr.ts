@@ -286,42 +286,60 @@ export const fr = {
         offers: {
             starter: {
                 title: "Fondation",
-                description: "Une base solide pour lancer votre présence en ligne et inspirer confiance dès la première visite.",
+                description: "Un site simple, propre et efficace pour être présent en ligne",
                 features: [
-                    "1 à 3 pages 100% custom",
-                    "Design premium responsive (mobile, tablette, desktop)",
-                    "Animations basiques (fade, apparition au scroll)",
-                    "Performance optimisée (chargement rapide)",
-                    "SEO : balises de base (title, meta, H1-H6)",
-                    "1 call de lancement avec l'équipe",
-                    "3 rounds de révisions inclus (rounds sup. payants)",
-                    "Support après livraison : 14 jours"
+                    "1 à 2 pages personnalisées",
+                    "Design propre et adapté à votre activité",
+                    "Structure simple et efficace",
+                    "Site responsive (mobile, tablette, ordinateur)",
+                    "Formulaire de contact fonctionnel",
+                    "Intégration de vos textes et images",
+                    "Optimisation des performances (site fluide et rapide)",
+                    "Mise en ligne du site incluse",
+                    "Aide à la mise en place de l'hébergement (aux frais du client)",
+                    "3 séries de modifications",
+                    "Support pendant 7 jours après livraison"
                 ]
             },
             business: {
                 title: "Stratégie",
-                description: "Le format idéal pour structurer votre offre, rassurer vos prospects et générer plus de demandes qualifiées.",
+                description: "Un site structuré et cohérent, pensé dans son ensemble",
                 features: [
                     "Tout le Fondation inclus ✓",
-                    "Jusqu'à 5 pages 100% custom",
-                    "Animations utiles (transitions, hover, scroll)",
-                    "Socle SEO propre (structure technique, vitesse, balises avancées)",
-                    "Calls réguliers durant toute la création",
-                    "5 rounds de révisions inclus (rounds sup. payants)",
-                    "Support après livraison : 30 jours"
+                    "Jusqu'à 5 pages personnalisées",
+                    "Structure de site plus complète et mieux organisée",
+                    "Hiérarchie des pages et des contenus plus claire",
+                    "Design plus travaillé et cohérent sur l'ensemble du site",
+                    "Mise en page plus soignée section par section",
+                    "Optimisation des performances",
+                    "Préparation du site pour un bon affichage sur Google",
+                    "Maquette de la page d'accueil validée avant intégration",
+                    "Favicon personnalisé",
+                    "4 séries de modifications",
+                    "Support pendant 21 jours après livraison",
+                    "Vérification complète avant mise en ligne",
+                    "Check-up technique 30 jours après livraison"
                 ]
             },
             empire: {
                 title: "Signature",
-                description: "Pour les projets ambitieux qui demandent un site sur-mesure, évolutif et pensé pour scaler avec votre croissance.",
+                description: "Un site premium conçu dans le détail, avec une finition haut de gamme",
                 features: [
                     "Tout le Stratégie inclus ✓",
-                    "Jusqu'à 10 pages 100% custom",
-                    "Animations avancées (parallax, effets scroll complexes, micro-interactions)",
-                    "SEO avancé (audit, plan de contenu, optimisation pousssée)",
-                    "Calls illimités jusqu'à la mise en ligne",
-                    "Révisions illimitées jusqu'à la mise en ligne",
-                    "Support après livraison : 60 jours"
+                    "Jusqu'à 10 pages personnalisées",
+                    "Design premium entièrement sur-mesure (sans modèle)",
+                    "Direction visuelle globale cohérente sur tout le site",
+                    "Travail détaillé sur chaque section (espacement, mise en page, hiérarchie visuelle)",
+                    "Maquette de plusieurs sections validée avant développement",
+                    "Animations avancées et micro-interactions",
+                    "Optimisation technique avancée",
+                    "Optimisation mobile poussée",
+                    "Formation à la gestion du site (1h)",
+                    "Guide de prise en main du site",
+                    "6 séries de modifications",
+                    "Support prioritaire pendant 45 jours",
+                    "Rapport technique 30 jours après livraison",
+                    "Tarif préférentiel sur la maintenance (optionnelle)"
                 ]
             }
         },

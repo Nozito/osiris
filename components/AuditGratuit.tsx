@@ -48,16 +48,16 @@ export const AuditGratuit: React.FC = () => {
 
                 {/* === HEADER === */}
                 <motion.div
-                    initial={{ opacity: 0, y: 24 }}
+                    initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.55 }}
+                    transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
                     className="text-center mb-16 sm:mb-20"
                 >
-                    <span className="inline-block px-4 py-1.5 rounded-full bg-premium-green/10 border border-premium-green/30 text-premium-green text-xs font-bold uppercase tracking-widest mb-5">
+                    <span className="block text-[11px] font-medium tracking-[0.18em] text-[#1D1D1F]/35 uppercase mb-5">
                         {t.audit.sectionLabel}
                     </span>
-                    <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold italic tracking-tight text-[#0F1729] mb-5 leading-[1.05]">
+                    <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.03em] text-[#1D1D1F] mb-5 leading-[1.05]">
                         {t.audit.title}
                     </h2>
                 </motion.div>
@@ -72,27 +72,27 @@ export const AuditGratuit: React.FC = () => {
                             return (
                                 <motion.div
                                     key={index}
-                                    initial={{ opacity: 0, y: 28 }}
+                                    initial={{ opacity: 0, y: 10 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ duration: 0.5, delay: index * 0.08 }}
+                                    transition={{ duration: 0.4, delay: index * 0.05, ease: [0.25, 0.1, 0.25, 1] }}
                                     className="group relative"
                                 >
-                                    <div className="bg-white border border-[#E8E3D9] p-4 sm:p-5 rounded-2xl hover:bg-[#FDFCFA] hover:border-premium-green/30 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(15,23,41,0.06)] transition-all duration-300 h-full flex flex-col justify-between">
+                                    <div className="bg-white border border-[#D2D2D7] p-4 sm:p-5 rounded-2xl hover:border-[#1D1D1F]/15 transition-all duration-300 h-full flex flex-col justify-between">
                                         {/* Header Row */}
                                         <div className="flex items-center gap-2 sm:gap-3 mb-3">
-                                            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#F5F4EF] border border-[#E8E3D9] flex items-center justify-center group-hover:text-premium-green group-hover:bg-premium-green/10 group-hover:border-premium-green/30 group-hover:scale-110 transition-all duration-300 flex-shrink-0">
-                                                <Icon className="w-4 h-4 sm:w-[18px] sm:h-[18px] text-premium-green" />
+                                            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#F5F5F7] flex items-center justify-center flex-shrink-0">
+                                                <Icon className="w-4 h-4 sm:w-[18px] sm:h-[18px] text-[#1D1D1F]/40" strokeWidth={1.5} />
                                             </div>
                                             {pillar.tag && (
-                                                <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-premium-green/10 text-premium-green border border-premium-green/20 uppercase tracking-wider">
+                                                <span className="text-[9px] font-medium px-2 py-0.5 rounded-full bg-[#F5F5F7] text-[#1D1D1F]/40 border border-[#D2D2D7] uppercase tracking-wider">
                                                     {pillar.tag}
                                                 </span>
                                             )}
                                         </div>
                                         <div>
-                                            <h3 className="text-xs sm:text-sm font-semibold text-[#0F1729] mb-1 group-hover:text-premium-green transition-colors leading-tight">{pillar.title}</h3>
-                                            <p className="text-[11px] sm:text-xs text-[#0F1729]/45 leading-relaxed group-hover:text-[#0F1729]/60 transition-colors">{pillar.description}</p>
+                                            <h3 className="text-xs sm:text-sm font-medium text-[#1D1D1F] mb-1 leading-tight">{pillar.title}</h3>
+                                            <p className="text-[11px] sm:text-xs text-[#1D1D1F]/45 leading-relaxed">{pillar.description}</p>
                                         </div>
                                     </div>
                                 </motion.div>
@@ -102,13 +102,13 @@ export const AuditGratuit: React.FC = () => {
 
                     {/* RIGHT: Textarea + WhatsApp CTA */}
                     <motion.div
-                        initial={{ opacity: 0, x: 30 }}
+                        initial={{ opacity: 0, x: 16 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.15 }}
-                        className="bg-white border border-[#E8E3D9] rounded-3xl p-6 sm:p-8 flex flex-col"
+                        transition={{ duration: 0.45, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                        className="bg-white border border-[#D2D2D7] rounded-3xl p-6 sm:p-8 flex flex-col"
                     >
-                        <label htmlFor="audit-message" className="block text-sm font-semibold text-[#0F1729]/60 mb-3">
+                        <label htmlFor="audit-message" className="block text-sm font-medium text-[#1D1D1F]/50 mb-3">
                             {t.audit.textareaLabel}
                         </label>
                         <textarea
@@ -117,7 +117,7 @@ export const AuditGratuit: React.FC = () => {
                             onChange={(e) => setMessage(e.target.value)}
                             placeholder={t.audit.textareaPlaceholder}
                             rows={5}
-                            className="w-full bg-[#F5F4EF] border border-[#E8E3D9] rounded-xl px-4 py-3 text-sm text-[#0F1729]/80 placeholder:text-[#0F1729]/25 focus:outline-none focus:border-premium-green/40 focus:bg-white transition-all duration-300 resize-none mb-6 scrollbar-hide"
+                            className="w-full bg-[#F5F5F7] border border-[#D2D2D7] rounded-xl px-4 py-3 text-sm text-[#1D1D1F]/70 placeholder:text-[#1D1D1F]/25 focus:outline-none focus:border-[#0071E3]/40 focus:bg-white transition-all duration-300 resize-none mb-6 scrollbar-hide"
                         />
                         <div className="flex flex-col gap-3 items-center">
                             <button
@@ -135,7 +135,7 @@ export const AuditGratuit: React.FC = () => {
                                 Réserver mon appel
                             </Link>
                         </div>
-                        <p className="text-xs text-[#0F1729]/30 text-center mt-5 tracking-wide">
+                        <p className="text-xs text-[#1D1D1F]/30 text-center mt-5 tracking-wide">
                             {t.audit.reassurance}
                         </p>
                     </motion.div>
@@ -144,21 +144,21 @@ export const AuditGratuit: React.FC = () => {
                 {/* === PROCESSUS : Comment ça marche ? — Animated timeline === */}
                 <motion.div
                     ref={processRef}
-                    initial={{ opacity: 0, y: 32 }}
+                    initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-60px' }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
                     className="relative"
                 >
                     {/* Section label */}
                     <div className="text-center mb-10 sm:mb-14">
-                        <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#0F1729]/30 block mb-4">
+                        <span className="text-xs font-medium uppercase tracking-[0.18em] text-[#1D1D1F]/35 block mb-4">
                             {t.audit.processTitle}
                         </span>
-                        <p className="text-[#0F1729] font-semibold text-sm sm:text-base max-w-xl mx-auto leading-relaxed mb-3">
+                        <p className="text-[#1D1D1F]/55 font-light text-sm sm:text-base max-w-xl mx-auto leading-relaxed mb-3">
                             {t.audit.subtitle}
                         </p>
-                        <p className="text-[#0F1729] font-bold text-xs sm:text-sm tracking-widest uppercase">
+                        <p className="text-[#1D1D1F]/35 font-medium text-xs sm:text-sm tracking-widest uppercase">
                             {t.audit.stats}
                         </p>
                     </div>

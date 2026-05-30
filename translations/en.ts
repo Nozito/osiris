@@ -286,42 +286,60 @@ export const en = {
         offers: {
             starter: {
                 title: "Fondation",
-                description: "A solid foundation to launch your online presence and build trust from the very first visit.",
+                description: "A simple, clean and effective website to establish your online presence",
                 features: [
-                    "1 to 3 pages, 100% custom",
-                    "Premium responsive design (mobile, tablet, desktop)",
-                    "Basic animations (fade, scroll reveal)",
-                    "Optimised performance (fast loading)",
-                    "SEO: basic meta tags (title, meta, H1-H6)",
-                    "1 kick-off call with the team",
-                    "3 revision rounds included (extra rounds billed)",
-                    "Post-delivery support: 14 days"
+                    "1 to 2 custom pages",
+                    "Clean design tailored to your activity",
+                    "Simple and effective structure",
+                    "Responsive site (mobile, tablet, desktop)",
+                    "Functional contact form",
+                    "Integration of your texts and images",
+                    "Performance optimisation (smooth and fast loading)",
+                    "Site launch included",
+                    "Help setting up hosting (at client's expense)",
+                    "3 revision rounds",
+                    "Support for 7 days after delivery"
                 ]
             },
             business: {
                 title: "Stratégie",
-                description: "The ideal format to structure your offer, reassure prospects, and generate more qualified leads.",
+                description: "A structured and consistent website, designed as a whole",
                 features: [
                     "Everything in Fondation ✓",
-                    "Up to 5 pages, 100% custom",
-                    "Useful animations (transitions, hover, scroll)",
-                    "Clean SEO foundation (technical structure, speed, advanced tags)",
-                    "Regular calls throughout the build",
-                    "5 revision rounds included (extra rounds billed)",
-                    "Post-delivery support: 30 days"
+                    "Up to 5 custom pages",
+                    "More complete and better organised site structure",
+                    "Clearer page and content hierarchy",
+                    "More polished design consistent across the whole site",
+                    "More refined layout section by section",
+                    "Performance optimisation",
+                    "Site prepared for good Google ranking",
+                    "Homepage mockup validated before development",
+                    "Custom favicon",
+                    "4 revision rounds",
+                    "Support for 21 days after delivery",
+                    "Full review before go-live",
+                    "Technical check-up 30 days after delivery"
                 ]
             },
             empire: {
                 title: "Signature",
-                description: "For ambitious projects that need a custom, scalable website built to grow with your business.",
+                description: "A premium website crafted in detail, with high-end finishing",
                 features: [
                     "Everything in Stratégie ✓",
-                    "Up to 10 pages, 100% custom",
-                    "Advanced animations (parallax, complex scroll effects, micro-interactions)",
-                    "Advanced SEO (audit, content plan, deep optimisation)",
-                    "Unlimited calls until go-live",
-                    "Unlimited revisions until go-live",
-                    "Post-delivery support: 60 days"
+                    "Up to 10 custom pages",
+                    "Fully custom premium design (no template)",
+                    "Consistent global visual direction across the entire site",
+                    "Detailed work on each section (spacing, layout, visual hierarchy)",
+                    "Multi-section mockup validated before development",
+                    "Advanced animations and micro-interactions",
+                    "Advanced technical optimisation",
+                    "Advanced mobile optimisation",
+                    "Site management training (1h)",
+                    "Site handover guide",
+                    "6 revision rounds",
+                    "Priority support for 45 days",
+                    "Technical report 30 days after delivery",
+                    "Preferential rate on maintenance (optional)"
                 ]
             }
         },

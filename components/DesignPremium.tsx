@@ -30,27 +30,27 @@ export const DesignPremium: React.FC = () => {
     return (
         <motion.section
             className="relative w-full py-14 sm:py-20 px-4 sm:px-6 overflow-hidden bg-[#F0EDE6]"
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-5%" }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
         >
             <div className="container mx-auto max-w-6xl relative z-10">
                 {/* Section Label */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 8 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
                     className="text-center mb-16"
                 >
-                    <span className="inline-block px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-medium mb-6">
+                    <span className="block text-[11px] font-medium tracking-[0.18em] text-[#1D1D1F]/35 uppercase mb-5">
                         {t.designPremium.sectionLabel}
                     </span>
-                    <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold italic tracking-tight text-[#0F1729] mb-6">
+                    <h2 className="font-sans text-4xl sm:text-5xl md:text-6xl font-semibold tracking-[-0.03em] text-[#1D1D1F] mb-6">
                         {t.designPremium.title}
                     </h2>
-                    <p className="text-lg sm:text-xl text-[#0F1729]/55 max-w-3xl mx-auto">
+                    <p className="text-lg text-[#1D1D1F]/45 max-w-3xl mx-auto font-light">
                         {t.designPremium.subtitle}
                     </p>
                 </motion.div>
@@ -61,58 +61,42 @@ export const DesignPremium: React.FC = () => {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: "-10%" }}
-                    variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
+                    variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.06 } } }}
                 >
                     {cards.map((card, index) => {
                         const Icon = card.icon;
                         return (
                             <motion.div
                                 key={index}
-                                variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } }}
-                                className="group relative"
+                                variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.25, 0.1, 0.25, 1] } } }}
+                                className="group"
                             >
-                                {/* Card Background */}
-                                <div className="relative p-8 rounded-2xl bg-white border border-[#E8E3D9] hover:border-purple-500/30 transition-all duration-300 h-full">
-                                    {/* Gradient Overlay */}
-                                    <div className={`absolute inset-0 bg-gradient-to-br ${card.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl`} />
-                                    
-                                    {/* Content */}
-                                    <div className="relative z-10">
-                                        {/* Icon */}
-                                        <div className="w-14 h-14 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                                            <Icon className="w-7 h-7 text-purple-400" />
-                                        </div>
-
-                                        {/* Title */}
-                                        <h3 className="text-xl font-bold text-[#0F1729] mb-4">
-                                            {card.title}
-                                        </h3>
-
-                                        {/* Description */}
-                                        <p className="text-[#0F1729]/55 leading-relaxed">
-                                            {card.description}
-                                        </p>
-                                    </div>
+                                <div className="p-8 rounded-2xl bg-white border border-[#D2D2D7] hover:border-[#1D1D1F]/15 transition-all duration-300 h-full">
+                                    <Icon className="w-6 h-6 text-[#1D1D1F]/35 mb-6" strokeWidth={1.5} />
+                                    <h3 className="text-xl font-semibold text-[#1D1D1F] mb-4 tracking-[-0.02em]">
+                                        {card.title}
+                                    </h3>
+                                    <p className="text-[#1D1D1F]/50 leading-relaxed font-light">
+                                        {card.description}
+                                    </p>
                                 </div>
                             </motion.div>
                         );
                     })}
                 </motion.div>}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 8 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.4 }}
+                    transition={{ duration: 0.4, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
                     className="text-center"
                 >
-                    <p className="inline-block px-6 py-3 rounded-full bg-purple-500/5 border border-purple-500/10 text-purple-400 text-sm font-medium">
+                    <p className="inline-block px-5 py-2.5 rounded-full bg-white border border-[#D2D2D7] text-[#1D1D1F]/50 text-sm font-medium">
                         {t.designPremium.badge}
                     </p>
                 </motion.div>
             </div>
 
-            {/* Background Decoration */}
-            <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-[120px] pointer-events-none" />
         </motion.section>
     );
 };

@@ -773,3 +773,110 @@ img[loading="lazy"] {
   }
 }
 
+/* ============================================================
+   APPLE-LIKE DESIGN SYSTEM — Global overrides
+   ============================================================ */
+
+/* 1. Remove italic from all display/headline text → Inter is clean sans */
+.font-display,
+.font-serif {
+  font-style: normal !important;
+  letter-spacing: -0.03em;
+}
+
+/* 2. Selection color */
+::selection {
+  background-color: rgba(0, 113, 227, 0.1);
+  color: #1D1D1F;
+}
+
+/* 3. Hardcoded warm backgrounds → pure white / Apple neutral gray */
+.bg-\[\#F5F4EF\] { background-color: #FFFFFF !important; }
+.bg-\[\#F0EDE6\] { background-color: #F5F5F7 !important; }
+.bg-\[\#EDE8DF\] { background-color: #F5F5F7 !important; }
+
+/* 4. Warm borders → Apple hairline gray */
+.border-\[\#E8E3D9\] { border-color: #D2D2D7 !important; }
+.border-\[\#E0DBD0\] { border-color: #D2D2D7 !important; }
+.border-y.border-\[\#E8E3D9\],
+.border-t.border-\[\#E8E3D9\],
+.border-b.border-\[\#E8E3D9\] { border-color: #D2D2D7 !important; }
+
+/* 5. Dark navy text → Apple near-black */
+.text-\[\#0F1729\] { color: #1D1D1F !important; }
+.bg-\[\#0F1729\] { background-color: #1D1D1F !important; }
+
+/* 6. Section backgrounds */
+section.bg-\[\#F5F4EF\],
+section.bg-\[\#F0EDE6\],
+div.bg-\[\#F5F4EF\],
+div.bg-\[\#F0EDE6\] {
+  background-color: #F5F5F7 !important;
+}
+
+/* 7. Mobile nav → white */
+.nav-menu {
+  background: rgba(255, 255, 255, 0.97) !important;
+  border-left-color: rgba(210, 210, 215, 0.8) !important;
+  box-shadow: -8px 0 40px rgba(0, 0, 0, 0.06) !important;
+}
+
+.bar {
+  background: #1D1D1F !important;
+}
+
+.hamburger:hover {
+  background: rgba(29, 29, 31, 0.05) !important;
+}
+
+.nav-links a {
+  color: #1D1D1F !important;
+}
+
+.nav-links a:hover {
+  background: rgba(29, 29, 31, 0.04) !important;
+  color: #0071E3 !important;
+}
+
+.nav-links a.active-link {
+  background: rgba(0, 113, 227, 0.06) !important;
+  color: #0071E3 !important;
+}
+
+.nav-link-icon {
+  background: rgba(29, 29, 31, 0.04) !important;
+}
+
+/* 8. Lang switcher */
+.lang-btn { color: rgba(29, 29, 31, 0.35) !important; }
+.lang-btn.lang-active { color: #1D1D1F !important; }
+.lang-btn:hover { color: rgba(29, 29, 31, 0.75) !important; }
+.lang-separator { color: rgba(29, 29, 31, 0.15) !important; }
+
+/* 9. Premium card hover → lighter Apple shadow */
+.premium-card:hover {
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.07) !important;
+}
+
+/* 10. Audit pill glow → Apple blue */
+@keyframes pulse-glow-apple {
+  0%, 100% { box-shadow: 0 0 8px rgba(0, 113, 227, 0.2); }
+  50% { box-shadow: 0 0 20px rgba(0, 113, 227, 0.45); }
+}
+.audit-pill-glow {
+  animation: pulse-glow-apple 2.5s ease-in-out infinite !important;
+}
+
+/* 11. Hero overrides */
+.hero-title {
+  font-style: normal !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.04em !important;
+}
+
+.hero-subtitle {
+  font-style: normal !important;
+  font-weight: 300 !important;
+  letter-spacing: 0 !important;
+}
+

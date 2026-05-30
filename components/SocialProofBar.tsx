@@ -14,7 +14,7 @@ export const SocialProofBar: React.FC = () => {
     ];
 
     return (
-        <section className="guarantee-section relative w-full py-8 px-4 sm:px-6 overflow-hidden bg-[#EDE8DF] border-y border-[#E0DBD0]">
+        <section className="guarantee-section relative w-full py-8 px-4 sm:px-6 overflow-hidden bg-[#F5F5F7] border-y border-[#D2D2D7]">
             <div className="container mx-auto max-w-6xl">
             <div className="guarantee-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
                     {proofs.map((proof, index) => {
@@ -22,16 +22,13 @@ export const SocialProofBar: React.FC = () => {
                         return (
                             <motion.div
                                 key={index}
-                                initial={{ opacity: 0, y: 20 }}
+                                initial={{ opacity: 0, y: 8 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
-                                className="guarantee-item flex items-center gap-3 justify-start"
-                            >
-                                <div className="guarantee-icon flex-shrink-0 w-10 h-10 rounded-xl bg-premium-green/10 border border-premium-green/20 flex items-center justify-center">
-                                    <Icon className="w-5 h-5 text-premium-green" />
-                                </div>
-                                <p className="text-sm sm:text-base text-[#0F1729]/75 font-medium">
+                                transition={{ duration: 0.4, delay: index * 0.05, ease: [0.25, 0.1, 0.25, 1] }}
+                                className="guarantee-item flex items-center gap-3 justify-start">
+                                <Icon className="w-4 h-4 text-[#1D1D1F]/35 flex-shrink-0" strokeWidth={1.5} />
+                                <p className="text-sm sm:text-base text-[#1D1D1F]/65 font-medium">
                                     {proof.text}
                                 </p>
                             </motion.div>

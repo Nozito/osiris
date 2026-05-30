@@ -15,8 +15,8 @@ const AboutPage = lazy(() => import('./pages/AboutPage').then(m => ({ default: m
 
 // Minimal loading fallback
 const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center bg-[#F5F4EF]">
-    <div className="w-8 h-8 border-2 border-[#E8E3D9] border-t-premium-green rounded-full animate-spin" />
+  <div className="min-h-screen flex items-center justify-center bg-white">
+    <div className="w-8 h-8 border-2 border-[#D2D2D7] border-t-[#0071E3] rounded-full animate-spin" />
   </div>
 );
 
