@@ -1,9 +1,9 @@
 import React, { Suspense, lazy, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { useScroll, useSpring, motion } from 'framer-motion';
 import { Navbar } from './components/Navbar';
 import { WhatsAppButton } from './components/WhatsAppButton';
 import { ScrollToTop } from './components/ScrollToTop';
+import { IntroLoader } from './components/IntroLoader';
 
 // Lazy load pages for code splitting
 const HomePage = lazy(() => import('./pages/HomePage').then(m => ({ default: m.HomePage })));
@@ -22,8 +22,6 @@ const PageLoader = () => (
 
 export default function App() {
   const location = useLocation();
-  const { scrollYProgress } = useScroll();
-  const scaleY = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
   useEffect(() => {
     const handleAuditClick = (event: Event) => {
@@ -113,19 +111,21 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-[#F5F4EF] text-[#0F1729] overflow-x-hidden font-sans" id="app-root">
+      <IntroLoader />
+
+      {/* Subtle global blue glow behind all pages */}
+      <div
+        className="fixed inset-0 pointer-events-none z-0"
+        style={{
+          background:
+            'radial-gradient(55% 35% at 50% 0%, rgba(0,153,255,0.07) 0%, transparent 70%), \
+             radial-gradient(45% 30% at 100% 40%, rgba(0,113,227,0.05) 0%, transparent 70%), \
+             radial-gradient(45% 30% at 0% 70%, rgba(0,153,255,0.05) 0%, transparent 70%)',
+        }}
+      />
 
       <ScrollToTop />
       <Navbar />
-
-      {/* Global Scroll Progress Bar */}
-      <motion.div
-        className="fixed right-0 top-0 bottom-0 w-[2px] bg-[#E8E3D9] origin-top z-50 hidden lg:block pointer-events-none"
-      >
-        <motion.div
-          className="absolute top-0 w-full bg-premium-green"
-          style={{ scaleY, originY: 0, height: '100%' }}
-        />
-      </motion.div>
 
       <main className="relative z-10 flex flex-col">
         <Suspense fallback={<PageLoader />}>

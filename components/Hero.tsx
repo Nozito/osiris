@@ -1,60 +1,153 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
+const AVATARS = [
+  { src: 'https://i.ibb.co/CS4GtTb/IMG-8669.jpg', alt: 'Antoine, fondateur Osiris' },
+  { src: 'https://i.ibb.co/gMzfwQKZ/Noah-PP.jpg', alt: 'Noah, fondateur Osiris' },
+];
+
+const RIBBON_BLUE = ['Sites Vitrines', 'Landing Pages', 'UI/UX Design', 'SEO Technique'];
+const RIBBON_DARK = ['+30 Projets Livrés', '<3 Semaines de Délai', '100% Satisfaction', 'Agence à Manosque'];
+
+// Each "half" repeats the items enough times to always exceed the ribbon's width;
+// the track is exactly two identical halves, so the -50% keyframe lands on a perfect
+// seam and the marquee loops forever with no visible restart/jump.
+const RIBBON_BLUE_HALF = Array(6).fill(RIBBON_BLUE).flat();
+const RIBBON_DARK_HALF = Array(6).fill(RIBBON_DARK).flat();
 
 export const Hero: React.FC = () => {
   const { t } = useLanguage();
 
-  return (
-    <section className="relative min-h-[92vh] w-full flex flex-col items-center justify-center overflow-hidden px-4 sm:px-6 pt-24 pb-16 sm:pt-32 bg-transparent">
+  const heroSection = (
+    <section
+      className="relative w-full flex flex-col items-center overflow-hidden px-4 sm:px-6 pt-32 pb-0 sm:pt-40"
+      style={{ background: 'linear-gradient(180deg, #060B18 0%, #0A2F63 55%, #0099FF 100%)' }}
+    >
+      {/* Grain texture over the gradient */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.08] mix-blend-overlay"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+          backgroundRepeat: 'repeat',
+        }}
+      />
+
 
       <div className="container mx-auto max-w-5xl relative z-10 text-center flex flex-col items-center">
+        {/* Trust cluster */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="flex items-center gap-3 mb-8"
+        >
+          <div className="flex -space-x-3">
+            {AVATARS.map((a) => (
+              <img
+                key={a.src}
+                src={a.src}
+                alt={a.alt}
+                className="w-8 h-8 rounded-full border-2 border-white/80 object-cover"
+                loading="lazy"
+              />
+            ))}
+          </div>
+          <span className="text-[13px] text-white/60">{t.hero.tagline.split('.')[0]}.</span>
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="flex flex-col items-center"
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+          className="flex flex-col items-center w-full"
         >
-          {/* Eyebrow label */}
-          <p className="text-[11px] font-medium tracking-[0.22em] text-[#1D1D1F]/35 uppercase mb-12 sm:mb-16">
-            Osiris Agency &nbsp;·&nbsp; Manosque
-          </p>
-
-          {/* Big H1 — Inter, very large, tight tracking */}
-          <h1 className="hero-title text-[2.8rem] sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem] font-semibold leading-[0.92] text-[#1D1D1F] max-w-4xl mx-auto mb-8 sm:mb-10">
-            {t.hero.headline}
-          </h1>
-
-          {/* Thin divider */}
-          <div className="w-8 h-px bg-[#1D1D1F]/12 mb-8 sm:mb-10" />
-
-          {/* Tagline */}
-          <p className="hero-subtitle text-base sm:text-lg text-[#1D1D1F]/45 max-w-md leading-relaxed font-light mb-10 sm:mb-14 mx-4 sm:mx-0">
-            {t.hero.tagline}
-          </p>
-
-          {/* Apple-style CTA — text link with arrow */}
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 text-[#0071E3] text-[15px] font-medium transition-all duration-300 group hover:gap-3"
+          {/* OSIRIS wordmark — text fades out toward the edges, logo mark reads
+              bigger than the type, page-load reveal */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+            className="relative w-full flex items-center justify-center py-6 sm:py-10 mb-8"
+            style={{
+              maskImage: 'linear-gradient(90deg, transparent 0%, black 22%, black 78%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(90deg, transparent 0%, black 22%, black 78%, transparent 100%)',
+            }}
           >
-            {t.hero.cta}
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+            <h1 className="flex items-center justify-center font-sans font-extrabold text-white leading-none tracking-tight text-[3.2rem] sm:text-[5.5rem] md:text-[7.5rem]">
+              <img
+                src="/logo-osiris.png"
+                alt="Osiris"
+                className="h-[1.35em] w-[1.35em] -mr-3 sm:-mr-5 object-contain flex-shrink-0"
+                style={{ filter: 'invert(1)' }}
+              />
+              SIRIS
+            </h1>
+          </motion.div>
+
+          {/* Subtitle */}
+          <p className="text-base sm:text-lg text-white/60 max-w-xl leading-relaxed mb-9 mx-4 sm:mx-0">
+            {t.hero.subtitle}
+          </p>
+
+          {/* Scroll cue — small, discreet */}
+          <a
+            href="#offer"
+            aria-label={t.hero.ctaSecondary.replace(' ↓', '')}
+            className="text-white/50 hover:text-white transition-colors duration-300"
+          >
+            <ChevronDown className="w-5 h-5 animate-bounce" />
           </a>
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Crossed diagonal ribbons — services / stats. Full-bleed wrapper so the
+          crossing point always sits at the true center of the viewport, regardless
+          of any parent padding/max-width. Still inside the gradient, so the blue
+          carries all the way down to where the two bands cross. */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 1 }}
-        className="absolute bottom-8 sm:bottom-10 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-0"
+        transition={{ delay: 0.9, duration: 0.8 }}
+        className="relative left-1/2 -translate-x-1/2 w-screen h-56 sm:h-64 mt-16 sm:mt-20 overflow-hidden"
       >
-        <div className="w-px h-14 bg-gradient-to-b from-transparent via-[#1D1D1F]/12 to-transparent" />
+        {/* Both ribbons share the exact same center point and rotate by the same
+            magnitude in opposite directions, so they always cross dead-center. */}
+        {/* Dark ribbon */}
+        <div
+          className="absolute left-1/2 top-1/2 w-[250vw] bg-agero-ink py-3 overflow-hidden"
+          style={{ transform: 'translate(-50%, -50%) rotate(6deg)' }}
+        >
+          <div className="flex w-max animate-marquee-left">
+            {[...RIBBON_DARK_HALF, ...RIBBON_DARK_HALF].map((item, i) => (
+              <span key={i} className="mx-6 text-sm sm:text-base font-semibold text-white whitespace-nowrap">
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Blue ribbon */}
+        <div
+          className="absolute left-1/2 top-1/2 w-[250vw] bg-agero-blue py-3 overflow-hidden"
+          style={{ transform: 'translate(-50%, -50%) rotate(-6deg)' }}
+        >
+          <div className="flex w-max animate-marquee-right">
+            {[...RIBBON_BLUE_HALF, ...RIBBON_BLUE_HALF].map((item, i) => (
+              <span key={i} className="mx-6 text-sm sm:text-base font-semibold text-white whitespace-nowrap">
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
       </motion.div>
+
+      {/* Fades back to the site's white background right after the ribbons */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 sm:h-56 bg-gradient-to-b from-transparent to-[#F5F4EF]" />
     </section>
   );
+
+  return heroSection;
 };

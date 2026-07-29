@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Mail, CheckCircle2 } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 
 import { useLanguage } from '../context/LanguageContext';
 
-export const Contact: React.FC = () => {
+export const Contact: React.FC<{ showMap?: boolean }> = ({ showMap = false }) => {
   const { t } = useLanguage();
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
-  const [budgetSel, setBudgetSel] = useState('');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,10 +20,10 @@ export const Contact: React.FC = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           type: 'contact',
-          name:    fd.get('name')    as string,
-          company: fd.get('company') as string,
-          email:   fd.get('email')   as string,
-          budget:  fd.get('budget')  as string,
+          name: fd.get('name') as string,
+          company: '',
+          email: fd.get('email') as string,
+          budget: '',
           message: fd.get('message') as string,
         }),
       });
@@ -36,121 +35,138 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="px-4 sm:px-6 py-6 sm:py-10 bg-[#F0EDE6] relative overflow-hidden scroll-mt-20 border-t border-[#E8E3D9]">
-      {/* Scrolling OSIRIS Marquee Band - Background */}
-      <div className="absolute inset-0 flex items-center overflow-hidden pointer-events-none select-none">
-        <motion.div
-          animate={{ x: [0, -2000] }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          className="flex whitespace-nowrap"
+    <section id="contact" className="px-4 sm:px-6 pt-2 pb-8 relative overflow-hidden scroll-mt-20 bg-transparent">
+      {/* Faded wordmark, stuck to the very top of the section */}
+      <div className="relative flex justify-center pointer-events-none select-none -mb-6 sm:-mb-10">
+        <span
+          className="font-display font-semibold leading-none text-[16vw] sm:text-[9vw] tracking-tight"
+          style={{
+            backgroundImage: 'linear-gradient(180deg, rgba(29,29,31,0.25) 0%, rgba(29,29,31,0.02) 100%)',
+            WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
+            color: 'transparent',
+          }}
         >
-          {[...Array(10)].map((_, i) => (
-            <span
-              key={i}
-              className="text-[15vw] md:text-[15vw] lg:text-[14vw] font-black font-display text-[#0F1729]/[0.04] tracking-[-0.05em] mx-8"
-              style={{ WebkitTextStroke: '1px rgba(15,23,41,0.05)' }}
-            >
-              OSIRIS
-            </span>
-          ))}
-        </motion.div>
+          {t.contact.title}
+        </span>
       </div>
 
-      {/* Decoration */}
-<div className="absolute top-0 right-0 w-1/3 h-full bg-premium-green/3 skew-x-12 pointer-events-none border-l border-[#E8E3D9]"></div>
+      <div className="container mx-auto max-w-7xl relative">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-10%' }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="relative rounded-[2.5rem] overflow-hidden bg-agero-dark"
+        >
+          {/* Ambient blue glow — same treatment as the footer card */}
+          <div
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                'radial-gradient(45% 40% at 20% 0%, rgba(0,153,255,0.22) 0%, transparent 70%), \
+                 radial-gradient(45% 40% at 85% 10%, rgba(0,113,227,0.16) 0%, transparent 70%), \
+                 radial-gradient(60% 45% at 50% 100%, rgba(0,113,227,0.30) 0%, transparent 75%)',
+            }}
+          />
 
-      <div className="container mx-auto max-w-7xl relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 lg:gap-24">
+          {/* Noise / grain texture overlay */}
+          <div
+            className="pointer-events-none absolute inset-0 opacity-[0.07] mix-blend-overlay"
+            style={{
+              backgroundImage:
+                "url(\"data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+              backgroundRepeat: 'repeat',
+            }}
+          />
 
-          {/* Left Column: Info */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            <span className="text-premium-green text-xs font-bold uppercase tracking-widest mb-4 block">{t.contact.sectionLabel}</span>
-            <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold font-display italic text-[#0F1729] mb-6 sm:mb-8">
-              {t.contact.title} <br />
-              <span className="text-[#0F1729]/25">{t.contact.titleFaded}</span>
-            </h2>
-            <p className="text-base sm:text-xl text-[#0F1729]/55 mb-8 sm:mb-12 leading-relaxed">
-              {t.contact.subtitle}
-            </p>
+          <div className="relative grid lg:grid-cols-2 gap-10 sm:gap-16 px-6 sm:px-12 py-14 sm:py-20">
+            {/* Left: heading */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <h2 className="font-display text-3xl sm:text-5xl font-semibold text-white leading-[1.1] mb-4">
+                {t.contact.title}
+                <br />
+                {t.contact.titleFaded}
+              </h2>
+              <p className="text-white/50 text-base sm:text-lg">{t.contact.subtitle}</p>
 
-            <div className="space-y-8">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-white border border-[#E8E3D9] flex items-center justify-center text-premium-green">
-                  <Mail className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="text-[#0F1729] font-bold mb-1">{t.contact.emailDirect}</h3>
-                  {/* Additional info removed since email is now the title */}
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Right Column: Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="bg-white p-3 sm:p-8 md:p-12 border border-[#E8E3D9] rounded-2xl sm:rounded-[2.5rem]"
-          >
-            <form className="contact-form space-y-4 sm:space-y-6" onSubmit={handleSubmit}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                <div className="space-y-2">
-                  <label htmlFor="contact-name" className="text-xs uppercase tracking-widest text-[#0F1729]/45 font-bold ml-2">{t.contact.form.name}</label>
-                  <input id="contact-name" name="name" type="text" required className="w-full bg-[#F5F4EF] border border-[#E8E3D9] p-3 sm:p-4 text-[#0F1729] focus:border-premium-green focus:outline-none focus:bg-white transition-colors rounded-xl sm:rounded-2xl" placeholder="John Doe" />
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="contact-company" className="text-xs uppercase tracking-widest text-[#0F1729]/45 font-bold ml-2">{t.contact.form.company}</label>
-                  <input id="contact-company" name="company" type="text" className="w-full bg-[#F5F4EF] border border-[#E8E3D9] p-3 sm:p-4 text-[#0F1729] focus:border-premium-green focus:outline-none focus:bg-white transition-colors rounded-xl sm:rounded-2xl" placeholder="Company Ltd" />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="contact-email" className="text-xs uppercase tracking-widest text-[#0F1729]/45 font-bold ml-2">{t.contact.form.email}</label>
-                <input id="contact-email" name="email" type="email" required className="w-full bg-[#F5F4EF] border border-[#E8E3D9] p-3 sm:p-4 text-[#0F1729] focus:border-premium-green focus:outline-none focus:bg-white transition-colors rounded-xl sm:rounded-2xl" placeholder="john@company.com" />
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="contact-budget" className="text-xs uppercase tracking-widest text-[#0F1729]/45 font-bold ml-2">{t.contact.form.budget}</label>
-                <select
-                  id="contact-budget"
-                  aria-label="Budget"
-                  value={budgetSel}
-                  onChange={e => setBudgetSel(e.target.value)}
-                  className="w-full bg-[#F5F4EF] border border-[#E8E3D9] p-3 sm:p-4 text-[#0F1729] focus:border-premium-green focus:outline-none transition-colors appearance-none rounded-xl sm:rounded-2xl"
-                >
-                  {(t.contact.form.budgetOptions as string[]).map((opt, i) => (
-                    <option key={i} value={i < 3 ? opt : 'custom'} className="bg-white">{opt}</option>
-                  ))}
-                </select>
-                {budgetSel === 'custom' ? (
-                  <input
-                    name="budget"
-                    type="text"
-                    placeholder={t.contact.form.budgetCustomPlaceholder as string}
-                    className="w-full bg-[#F5F4EF] border border-[#E8E3D9] p-3 sm:p-4 text-[#0F1729] focus:border-premium-green focus:outline-none focus:bg-white transition-colors rounded-xl sm:rounded-2xl placeholder-[#0F1729]/30"
+              {showMap && (
+                <div className="mt-8 rounded-2xl overflow-hidden ring-1 ring-white/10">
+                  <iframe
+                    title="Osiris Agency — Manosque, Alpes-de-Haute-Provence"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56210205.017539255!2d-127.86400119999998!3d30.695940900000007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12cbcd6b1128c6e3%3A0x89b8b52ebf05f8b5!2sOsiris%20Agency!5e0!3m2!1sfr!2sfr!4v1778954394063!5m2!1sfr!2sfr"
+                    width="100%"
+                    height="220"
+                    style={{ border: 0, display: 'block' }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
                   />
-                ) : (
-                  <input type="hidden" name="budget" value={budgetSel || (t.contact.form.budgetOptions as string[])[0]} />
-                )}
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="contact-message" className="text-xs uppercase tracking-widest text-[#0F1729]/45 font-bold ml-2">{t.contact.form.message}</label>
-                <textarea id="contact-message" name="message" required rows={4} className="w-full bg-[#F5F4EF] border border-[#E8E3D9] p-3 sm:p-4 text-[#0F1729] focus:border-premium-green focus:outline-none focus:bg-white transition-colors rounded-xl sm:rounded-2xl" placeholder={t.contact.form.messagePlaceholder}></textarea>
-              </div>
-
-              {status === 'error' && (
-                <p className="text-red-400 text-xs text-center">Une erreur est survenue — réessayez ou contactez-nous directement.</p>
+                </div>
               )}
+            </motion.div>
 
-              <div className="flex justify-center mt-4">
+            {/* Right: minimal form */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div>
+                  <label htmlFor="contact-name" className="block text-white text-sm font-medium mb-2">
+                    {t.contact.form.name}
+                  </label>
+                  <input
+                    id="contact-name"
+                    name="name"
+                    type="text"
+                    required
+                    placeholder={t.contact.form.name}
+                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder-white/30 focus:border-premium-blue focus:outline-none transition-colors"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="contact-email" className="block text-white text-sm font-medium mb-2">
+                    {t.contact.form.email}
+                  </label>
+                  <input
+                    id="contact-email"
+                    name="email"
+                    type="email"
+                    required
+                    placeholder={t.contact.form.email}
+                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder-white/30 focus:border-premium-blue focus:outline-none transition-colors"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="contact-message" className="block text-white text-sm font-medium mb-2">
+                    {t.contact.form.message}
+                  </label>
+                  <textarea
+                    id="contact-message"
+                    name="message"
+                    required
+                    rows={2}
+                    placeholder={t.contact.form.messagePlaceholder}
+                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder-white/30 focus:border-premium-blue focus:outline-none transition-colors resize-none"
+                  />
+                </div>
+
+                {status === 'error' && (
+                  <p className="text-red-400 text-xs">Une erreur est survenue — réessayez ou contactez-nous directement.</p>
+                )}
+
                 {status === 'success' ? (
-                  <div className="flex items-center gap-2 text-premium-green font-bold text-sm">
+                  <div className="flex items-center justify-center gap-2 text-premium-blue font-medium text-sm bg-white/5 rounded-full py-4">
                     <CheckCircle2 className="w-5 h-5" />
                     Message envoyé — on vous répond sous 24h !
                   </div>
@@ -158,24 +174,32 @@ export const Contact: React.FC = () => {
                   <button
                     type="submit"
                     disabled={status === 'sending'}
-                    className="btn-reserve w-full sm:w-auto sm:min-w-[320px] bg-premium-green text-white font-bold py-3 sm:py-5 text-[11px] sm:text-sm uppercase tracking-[0.08em] sm:tracking-widest hover:bg-blue-700 transition-colors duration-300 flex items-center justify-center gap-2 rounded-full disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="w-full bg-white text-agero-ink font-medium py-4 rounded-full hover:bg-white/90 transition-colors duration-300 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {status === 'sending' ? (
                       <span className="animate-pulse">{t.contact.form.submit}…</span>
                     ) : (
-                      <>
-                        <span className="truncate">{t.contact.form.submit}</span>
-                        <ArrowRight className="w-4 h-4 flex-shrink-0" />
-                      </>
+                      <span>{t.contact.form.submit}</span>
                     )}
                   </button>
                 )}
-              </div>
 
-              <p className="text-center text-xs text-[#0F1729]/35 mt-3">{t.contact.reassurance}</p>
-            </form>
-          </motion.div>
-        </div>
+                <p className="text-center text-xs text-white/35">{t.contact.reassurance}</p>
+              </form>
+            </motion.div>
+          </div>
+
+          {/* Bottom ticker */}
+          <div className="relative border-t border-white/10 py-6 overflow-hidden">
+            <div className="flex w-max animate-marquee-left">
+              {[...Array(8)].map((_, i) => (
+                <span key={i} className="mx-6 flex items-center gap-3 text-white font-medium whitespace-nowrap">
+                  {t.contact.emailDirect}
+                </span>
+              ))}
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -36,6 +36,110 @@ export const fr = {
         satisfaction: "Disponibles avant, pendant et après la livraison."
     },
 
+    // About Reveal (mission statement, scroll reveal)
+    aboutReveal: {
+        eyebrow: "(Notre mission)",
+        text: "Un site web n'est pas une carte de visite. C'est un outil de conversion. Chaque projet que nous livrons est conçu et développé sur-mesure pour transformer vos visiteurs en clients."
+    },
+
+    // Delivery Timeline (14-day process)
+    deliveryTimeline: {
+        title: "Livraison en 14 jours,",
+        titleHighlight: "satisfaction garantie.",
+        cta: "Réserver un appel",
+        tasks: {
+            call: "Appel découverte",
+            kickoff: "Kick-off du projet",
+            design: "Nuits blanches de design",
+            v1: "Présentation de votre V1",
+            revisions: "Retouches & finitions",
+            delivery: "Livraison de votre site",
+        }
+    },
+
+    // Works Section (portfolio, real client projects)
+    works: {
+        sectionLabel: "(Réalisations)",
+        title: "Nos derniers projets",
+        subtitle: "On accompagne des indépendants et des entreprises dans la création de sites qui leur ressemblent. Voici quelques-unes de nos réalisations récentes.",
+        yearLabel: "Année",
+        roleLabel: "Rôle",
+        visitCta: "Voir le site",
+        projects: [
+            {
+                brand: "L'Artisan",
+                description: "Restaurant semi-gastronomique à Annecy",
+                intro: "Un restaurant semi-gastronomique à Annecy qui voulait un site aussi soigné que son assiette : réservation simple, ambiance intimiste, expérience fluide sur mobile.",
+                year: "2026",
+                role: "Design & Développement",
+                url: "https://l-artisan-restaurant.vercel.app/"
+            },
+            {
+                brand: "Blyss",
+                description: "Application de gestion pour prothésistes ongulaires",
+                intro: "Une application de gestion pensée pour les prothésistes ongulaires : plus simple à utiliser au quotidien, pour se concentrer sur les clientes plutôt que sur l'administratif.",
+                year: "2025",
+                role: "Design & Développement",
+                url: "https://blyssapp.fr/"
+            },
+            {
+                brand: "Joe",
+                description: "Site vitrine pour coach sportif",
+                intro: "Un coach sportif basé à Manosque qui voulait un site à son image : direct, motivant, et pensé pour transformer les visiteurs en clients.",
+                year: "2026",
+                role: "Design & Développement",
+                url: "https://maquette-joe.vercel.app/"
+            }
+        ]
+    },
+
+    // Services Tabs
+    servicesTabs: {
+        sectionLabel: "(Services)",
+        title: "Ce qu'on fait",
+        tabs: [
+            {
+                title: "Site Vitrine",
+                description: "Un site premium sur-mesure qui présente votre activité avec un design haut de gamme et une performance technique irréprochable.",
+                tags: ["UI/UX", "Responsive", "SEO Technique"]
+            },
+            {
+                title: "Landing Page",
+                description: "Une page unique, pensée pour convertir, avec un parcours utilisateur optimisé et des call-to-action stratégiques.",
+                tags: ["Conversion", "Copywriting", "A/B Testing"]
+            },
+            {
+                title: "Design UI/UX",
+                description: "Une identité visuelle cohérente et une interface intuitive qui renforcent la confiance et la mémorabilité de votre marque.",
+                tags: ["Identité visuelle", "Prototypage", "Design System"]
+            }
+        ]
+    },
+
+    // Founders Intro
+    foundersIntro: {
+        sectionLabel: "(Intro)",
+        title: "Deux fondateurs, un seul objectif",
+        stats: [
+            { value: "+30", label: "projets livrés" },
+            { value: "<3 sem.", label: "de délai" },
+            { value: "100%", label: "satisfaction" },
+            { value: "2025", label: "année de fondation" }
+        ],
+        founders: [
+            {
+                name: "Antoine",
+                title: "CEO & Directeur Commercial / Design",
+                description: "Je prends en charge chaque client dès le premier contact : compréhension de votre activité, direction artistique, identité visuelle et stratégie de conversion."
+            },
+            {
+                name: "Noah",
+                title: "Associé & Lead Développeur",
+                description: "Je transforme les maquettes d'Antoine en sites rapides, solides et optimisés : intégration, back-end, performances et SEO technique."
+            }
+        ]
+    },
+
     // Performance Section
     performance: {
         sectionLabel: "Performance",

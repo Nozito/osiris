@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Quote, Star, BadgeCheck } from 'lucide-react';
+import { Quote, Star } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 export const Testimonials: React.FC = () => {
@@ -12,7 +12,6 @@ export const Testimonials: React.FC = () => {
       author: t.testimonials.reviews[0].author,
       role: t.testimonials.reviews[0].role,
       company: (t.testimonials.reviews[0] as any).company || "ImmoPrestige Lyon",
-      date: (t.testimonials.reviews[0] as any).date || "Janvier 2025",
       image: "https://randomuser.me/api/portraits/men/32.jpg",
       rating: 5
     },
@@ -21,7 +20,6 @@ export const Testimonials: React.FC = () => {
       author: t.testimonials.reviews[1].author,
       role: t.testimonials.reviews[1].role,
       company: (t.testimonials.reviews[1] as any).company || "Maison Éclat Paris",
-      date: (t.testimonials.reviews[1] as any).date || "Décembre 2024",
       image: "https://randomuser.me/api/portraits/women/44.jpg",
       rating: 5
     },
@@ -30,84 +28,102 @@ export const Testimonials: React.FC = () => {
       author: t.testimonials.reviews[2].author,
       role: t.testimonials.reviews[2].role,
       company: (t.testimonials.reviews[2] as any).company || "FinanceFlow",
-      date: (t.testimonials.reviews[2] as any).date || "Novembre 2024",
       image: "https://randomuser.me/api/portraits/men/86.jpg",
       rating: 5
     }
   ];
 
   return (
-    <section className="px-6 py-20 border-b border-[#D2D2D7] relative bg-[#F0EDE6]">
-      <div className="container mx-auto max-w-7xl">
+    <section className="px-4 sm:px-6 py-20 sm:py-28 relative bg-transparent">
+      <div className="container mx-auto max-w-6xl">
         <motion.div
-          initial={{ opacity: 0, y: 8 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-          className="mb-16 text-center"
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-14 text-center"
         >
           <div className="inline-flex items-center gap-1 mb-4">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} className="w-3.5 h-3.5 fill-[#1D1D1F]/40 text-[#1D1D1F]/40" strokeWidth={0} />
+              <Star key={i} className="w-3.5 h-3.5 fill-agero-blue text-agero-blue" strokeWidth={0} />
             ))}
-            <span className="ml-2 text-sm text-[#1D1D1F]/40 font-medium">5.0 sur Google</span>
+            <span className="ml-2 text-sm text-agero-gray font-medium">5.0 sur Google</span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-semibold tracking-[-0.03em] text-[#1D1D1F] font-sans">
-            {t.testimonials.title} <span className="text-[#1D1D1F]/20">{t.testimonials.titleFaded}</span>
+          <h2 className="font-display text-3xl sm:text-5xl font-semibold tracking-tight text-agero-ink">
+            {t.testimonials.title} <span className="text-agero-ink/25">{t.testimonials.titleFaded}</span>
           </h2>
         </motion.div>
 
+        {/* Stats band — real numbers, dark contrast band with the site's blue glow */}
         <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-10%" }}
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: {
-                staggerChildren: 0.07
-              }
-            }
-          }}
-          className="grid responsive-card-grid gap-6"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="relative grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-14 rounded-3xl overflow-hidden bg-agero-ink px-4 sm:px-6 py-8"
         >
-          {reviews.map((review, i) => (
-            <motion.div
-              key={i}
-              variants={{
-              hidden: { opacity: 0, y: 12 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.25, 0.1, 0.25, 1] } }
-              }}
-              className="bg-white p-8 rounded-2xl border border-[#D2D2D7] transition-all duration-300 relative flex flex-col"
-            >
-              <div className="flex items-center gap-0.5 mb-6">
-                {[...Array(review.rating)].map((_, starIdx) => (
-                  <Star key={starIdx} className="w-3.5 h-3.5 fill-[#1D1D1F]/30 text-[#1D1D1F]/30" strokeWidth={0} />
-                ))}
-              </div>
-
-              <div className="absolute top-8 right-8 opacity-[0.04]">
-                <Quote className="w-10 h-10 text-[#1D1D1F]" strokeWidth={1} />
-              </div>
-
-              <p className="text-base text-[#1D1D1F]/55 mb-8 leading-relaxed relative z-10 font-light flex-1">
-                "{review.text}"
-              </p>
-
-              <div className="flex items-center gap-4 pt-4 border-t border-[#D2D2D7]">
-                <div className="w-10 h-10 rounded-full bg-[#F5F5F7] overflow-hidden">
-                  <img src={review.image} alt={review.author} className="w-full h-full object-cover" loading="lazy" width="40" height="40" />
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    <cite className="not-italic font-medium text-[#1D1D1F] text-sm">{review.author}</cite>
-                  </div>
-                  <span className="text-xs text-[#1D1D1F]/40">{review.role} — {review.company}</span>
-                </div>
-              </div>
-            </motion.div>
+          <div
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                'radial-gradient(50% 60% at 15% 0%, rgba(0,153,255,0.22) 0%, transparent 70%), \
+                 radial-gradient(55% 55% at 90% 100%, rgba(0,113,227,0.28) 0%, transparent 75%)',
+            }}
+          />
+          {t.foundersIntro.stats.map((stat, i) => (
+            <div key={i} className="relative flex flex-col items-center text-center">
+              <span className="font-display text-2xl sm:text-4xl font-semibold text-white mb-1">{stat.value}</span>
+              <span className="text-[11px] sm:text-xs uppercase tracking-wide text-white/40">{stat.label}</span>
+            </div>
           ))}
+        </motion.div>
+
+        {/* Infinite marquee — two identical halves (each repeating the 3 reviews
+            several times for width) so the -50% keyframe loops forever with no jump */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="relative -mx-4 sm:-mx-6 overflow-hidden"
+          style={{
+            maskImage: 'linear-gradient(to right, transparent, black 5%, black 95%, transparent)',
+            WebkitMaskImage: 'linear-gradient(to right, transparent, black 5%, black 95%, transparent)',
+          }}
+        >
+          <div className="flex gap-5 w-max animate-marquee-left px-4 sm:px-6" style={{ animationDuration: '50s' }}>
+            {[...reviews, ...reviews, ...reviews, ...reviews].map((review, i) => (
+              <div
+                key={i}
+                className="relative flex flex-col w-[320px] sm:w-[380px] flex-shrink-0 bg-white p-7 sm:p-8 rounded-[2rem] border border-agero-line"
+              >
+                <Quote className="absolute top-7 right-7 w-8 h-8 text-agero-ink/[0.06]" strokeWidth={1} />
+
+                <div className="flex items-center gap-0.5 mb-5">
+                  {[...Array(review.rating)].map((_, starIdx) => (
+                    <Star key={starIdx} className="w-3.5 h-3.5 fill-agero-blue/70 text-agero-blue/70" strokeWidth={0} />
+                  ))}
+                </div>
+
+                <p className="text-agero-ink/70 leading-relaxed mb-8 flex-1">"{review.text}"</p>
+
+                <div className="flex items-center gap-3 pt-5 border-t border-agero-line">
+                  <img
+                    src={review.image}
+                    alt={review.author}
+                    className="w-10 h-10 rounded-full object-cover"
+                    loading="lazy"
+                    width="40"
+                    height="40"
+                  />
+                  <div>
+                    <cite className="not-italic font-medium text-agero-ink text-sm block">{review.author}</cite>
+                    <span className="text-xs text-agero-gray">{review.role} — {review.company}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>

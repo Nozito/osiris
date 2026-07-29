@@ -36,6 +36,110 @@ export const en = {
         satisfaction: "Available before, during, and after launch."
     },
 
+    // About Reveal (mission statement, scroll reveal)
+    aboutReveal: {
+        eyebrow: "(Our mission)",
+        text: "A website is not a business card. It is a conversion tool. Every project we deliver is designed and built custom to turn your visitors into clients."
+    },
+
+    // Delivery Timeline (14-day process)
+    deliveryTimeline: {
+        title: "Delivered in 14 days,",
+        titleHighlight: "satisfaction guaranteed.",
+        cta: "Book a call",
+        tasks: {
+            call: "Discovery call",
+            kickoff: "Project kick-off",
+            design: "Late-night design sprints",
+            v1: "V1 presentation",
+            revisions: "Revisions & polish",
+            delivery: "Your website goes live",
+        }
+    },
+
+    // Works Section (portfolio, real client projects)
+    works: {
+        sectionLabel: "(Selected work)",
+        title: "Our recent projects",
+        subtitle: "We help freelancers and businesses build websites that truly reflect who they are. Here are some of our recent projects.",
+        yearLabel: "Year",
+        roleLabel: "Role",
+        visitCta: "Visit site",
+        projects: [
+            {
+                brand: "L'Artisan",
+                description: "Semi-gourmet restaurant in Annecy, France",
+                intro: "A semi-gourmet restaurant in Annecy that wanted a site as refined as its plates: easy booking, an intimate feel, a smooth experience on mobile.",
+                year: "2026",
+                role: "Design & Development",
+                url: "https://l-artisan-restaurant.vercel.app/"
+            },
+            {
+                brand: "Blyss",
+                description: "Management app for nail technicians",
+                intro: "A management app built for nail technicians: simpler to use day to day, so they can focus on clients instead of admin work.",
+                year: "2025",
+                role: "Design & Development",
+                url: "https://blyssapp.fr/"
+            },
+            {
+                brand: "Joe",
+                description: "Showcase website for a sports coach",
+                intro: "A sports coach based in Manosque who wanted a site that matched his energy: direct, motivating, and built to turn visitors into clients.",
+                year: "2026",
+                role: "Design & Development",
+                url: "https://maquette-joe.vercel.app/"
+            }
+        ]
+    },
+
+    // Services Tabs
+    servicesTabs: {
+        sectionLabel: "(Services)",
+        title: "What we do",
+        tabs: [
+            {
+                title: "Showcase Website",
+                description: "A premium, custom-built site that presents your business with a high-end design and flawless technical performance.",
+                tags: ["UI/UX", "Responsive", "Technical SEO"]
+            },
+            {
+                title: "Landing Page",
+                description: "A single page built to convert, with an optimized user journey and strategic calls to action.",
+                tags: ["Conversion", "Copywriting", "A/B Testing"]
+            },
+            {
+                title: "UI/UX Design",
+                description: "A consistent visual identity and an intuitive interface that build trust and make your brand memorable.",
+                tags: ["Visual identity", "Prototyping", "Design System"]
+            }
+        ]
+    },
+
+    // Founders Intro
+    foundersIntro: {
+        sectionLabel: "(Intro)",
+        title: "Two founders, one goal",
+        stats: [
+            { value: "+30", label: "projects delivered" },
+            { value: "<3 wks", label: "turnaround" },
+            { value: "100%", label: "satisfaction" },
+            { value: "2025", label: "founded" }
+        ],
+        founders: [
+            {
+                name: "Antoine",
+                title: "CEO & Commercial / Design Director",
+                description: "First point of contact at Osiris. I lead each project from A to Z: listening to your goals, art direction, visual identity, and conversion strategy."
+            },
+            {
+                name: "Noah",
+                title: "Partner & Lead Developer",
+                description: "I turn Antoine's mockups into fast, reliable, durable web products: integration, back-end, performance optimization and technical SEO."
+            }
+        ]
+    },
+
     // Performance Section
     performance: {
         sectionLabel: "Performance",

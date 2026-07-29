@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 export const FooterCTA: React.FC = () => {
@@ -42,7 +42,6 @@ export const FooterCTA: React.FC = () => {
                             className="inline-flex items-center gap-3 px-8 sm:px-10 py-4 rounded-full bg-[#1D1D1F] text-white font-medium text-base hover:bg-[#2D2D2F] transition-all duration-300 group mb-8 w-full sm:w-auto justify-center"
                         >
                             {t.footerCta.cta}
-                            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </motion.button>
 
                         {/* Badge */}

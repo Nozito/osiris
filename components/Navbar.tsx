@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
-import { X, ArrowRight } from 'lucide-react';
+import { X } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const [hidden, setHidden] = useState(false);
@@ -57,21 +57,28 @@ export const Navbar: React.FC = () => {
         }}
         animate={hidden ? "hidden" : "visible"}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-        style={{
-          background: 'rgba(255,255,255,0.90)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
-          borderBottom: scrolled ? '1px solid rgba(0,0,0,0.08)' : '1px solid transparent',
-          boxShadow: scrolled ? '0 1px 0 rgba(0,0,0,0.04)' : 'none',
-        }}
+        className="fixed top-3 sm:top-5 left-0 right-0 z-50 px-4 sm:px-6"
       >
-        <div className="container mx-auto max-w-7xl px-5 sm:px-8 py-4 flex items-center justify-between">
+        <div
+          className="container mx-auto max-w-5xl px-5 sm:px-3 py-2.5 flex items-center justify-between rounded-full border border-agero-line"
+          style={{
+            background: 'rgba(255,255,255,0.85)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            boxShadow: scrolled ? '0 8px 24px rgba(0,0,0,0.08)' : '0 1px 3px rgba(0,0,0,0.04)',
+          }}
+        >
 
-          {/* Logo */}
-          <Link to="/" onClick={handleNavClick} className="flex-shrink-0">
-            <span className="navbar-logo font-sans text-[#1D1D1F] font-semibold tracking-[-0.04em]">
-              OSIRIS
+          {/* Logo — dark blue glow effect */}
+          <Link to="/" onClick={handleNavClick} className="flex-shrink-0 pl-2">
+            <span
+              className="font-display font-bold text-lg tracking-tight"
+              style={{
+                color: '#0A2540',
+                textShadow: '0 0 18px rgba(0,113,227,0.35)',
+              }}
+            >
+              osiris
             </span>
           </Link>
 
@@ -83,8 +90,8 @@ export const Navbar: React.FC = () => {
                 to={item.to}
                 className={`text-sm font-medium transition-colors duration-200 ${
                   location.pathname === item.to
-                    ? 'text-[#0F1729]'
-                    : 'text-[#0F1729]/50 hover:text-[#0F1729]'
+                    ? 'text-agero-ink'
+                    : 'text-agero-gray hover:text-agero-ink'
                 }`}
               >
                 {item.label}
@@ -93,14 +100,14 @@ export const Navbar: React.FC = () => {
             <a
               href="/#audit"
               onClick={handleAuditNavClick}
-              className="text-sm font-semibold text-premium-green hover:text-blue-700 transition-colors duration-200"
+              className="text-sm font-semibold text-premium-blue hover:text-agero-blue transition-colors duration-200"
             >
               {t.navbar.auditGratuit}
             </a>
           </div>
 
           {/* Desktop Right: lang + CTA */}
-          <div className="hidden md:flex items-center gap-5">
+          <div className="hidden md:flex items-center gap-4">
             <div className="lang-switcher flex items-center gap-2">
               <button
                 type="button"
@@ -120,7 +127,7 @@ export const Navbar: React.FC = () => {
             </div>
             <Link
               to="/contact"
-              className="px-5 py-2.5 rounded-full bg-[#1D1D1F] text-white text-sm font-medium hover:bg-[#2D2D2F] transition-colors duration-200"
+              className="px-5 py-2.5 rounded-full bg-agero-ink text-white text-sm font-medium hover:bg-agero-ink/85 transition-colors duration-200"
             >
               {t.navbar.contact}
             </Link>
@@ -175,8 +182,11 @@ export const Navbar: React.FC = () => {
 
                 {/* Header */}
                 <div className="flex items-center justify-between mb-8">
-                  <span className="font-display italic text-2xl text-[#0F1729] font-normal">
-                    OSIRIS
+                  <span
+                    className="font-display font-bold text-2xl"
+                    style={{ color: '#0A2540', textShadow: '0 0 18px rgba(0,113,227,0.35)' }}
+                  >
+                    osiris
                   </span>
                   <button
                     onClick={() => setMobileMenuOpen(false)}
@@ -242,7 +252,6 @@ export const Navbar: React.FC = () => {
                     className="flex items-center justify-center gap-2.5 w-full py-4 rounded-full bg-[#0F1729] text-white font-medium text-base transition-colors duration-200 hover:bg-[#1A2F50]"
                   >
                     Démarrer un projet
-                    <ArrowRight className="w-4 h-4" />
                   </Link>
                 </motion.div>
 

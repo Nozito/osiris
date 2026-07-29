@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Hero } from '../components/Hero';
-import { SocialProofBar } from '../components/SocialProofBar';
-import { ProcessTimeline } from '../components/ProcessTimeline';
-import { Process } from '../components/Process';
+import { AboutReveal } from '../components/AboutReveal';
+import { Works } from '../components/Works';
+import { DeliveryTimeline } from '../components/DeliveryTimeline';
+import { Testimonials } from '../components/Testimonials';
 import { Offer } from '../components/Offer';
-import { Contact } from '../components/Contact';
+import { FAQ } from '../components/FAQ';
 import { AuditGratuit } from '../components/AuditGratuit';
 import { Footer } from '../components/Footer';
 import { SEOHead } from '../components/SEOHead';
@@ -66,13 +67,13 @@ export const HomePage: React.FC = () => {
                 }}
             />
             <Hero />
-            <SocialProofBar />
-            <ProcessTimeline />
-            <Process />
+            <AboutReveal />
+            <Works />
+            <DeliveryTimeline />
+            <Testimonials />
             <Offer />
-            {/* Section Audit Gratuit — juste avant Contact (logique narrative) */}
+            <FAQ />
             <AuditGratuit />
-            <Contact />
             <Footer />
         </>
     );

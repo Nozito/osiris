@@ -1,380 +1,177 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, Zap, HelpCircle, ArrowRight, ArrowLeft, FileText, Rocket, Crown, ChevronLeft, ChevronRight, ChevronDown, X, Sparkles } from 'lucide-react';
+import { Check, Rocket, Zap, Crown, HelpCircle, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 
 export const Offer: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'faq' | 'quote'>('faq');
-  const [currentIndex, setCurrentIndex] = useState(1); // Start with Business (middle)
-  const [expandedOffer, setExpandedOffer] = useState<number | null>(null);
   const { t } = useLanguage();
 
   const offers = [
     {
       title: t.offer.offers.starter.title,
-      price: "1 090",
+      price: '1 090',
       description: t.offer.offers.starter.description,
       features: t.offer.offers.starter.features,
       highlight: false,
-      icon: "rocket",
-      gradient: "from-blue-500/20 to-transparent",
-      badge: "Lancement",
-      color: "blue",
-      newFrom: 0
+      icon: Rocket,
+      delivery: t.offer.faqItems.delays.starter,
     },
     {
       title: t.offer.offers.business.title,
-      price: "1 690",
+      price: '1 690',
       description: t.offer.offers.business.description,
       features: t.offer.offers.business.features,
       highlight: true,
-      icon: "zap",
-      gradient: "from-amber-400/20 to-transparent",
-      badge: t.offer.recommended,
-      color: "amber",
-      newFrom: 1
+      icon: Zap,
+      delivery: t.offer.faqItems.delays.business,
     },
     {
       title: t.offer.offers.empire.title,
-      price: "2 990",
+      price: '2 990',
       description: t.offer.offers.empire.description,
       features: t.offer.offers.empire.features,
       highlight: false,
-      icon: "crown",
-      gradient: "from-purple-500/20 to-transparent",
-      badge: "Signature",
-      color: "purple",
-      newFrom: 1
-    }
+      icon: Crown,
+      delivery: t.offer.faqItems.delays.empire,
+    },
   ];
 
-  const getIcon = (name: string) => {
-    switch (name) {
-      case 'rocket': return <Rocket className="w-4 h-4 text-blue-400" />;
-      case 'zap': return <Zap className="w-4 h-4" />;
-      case 'crown': return <Crown className="w-4 h-4 text-purple-400" />;
-      default: return null;
-    }
-  };
-
-  const getIconLarge = (name: string, color: string) => {
-    const cls = `w-7 h-7 drop-shadow-[0_0_10px_currentColor] ${
-      color === 'blue' ? 'text-blue-400' : color === 'amber' ? 'text-amber-400' : 'text-purple-400'
-    }`;
-    switch (name) {
-      case 'rocket': return <Rocket className={cls} />;
-      case 'zap': return <Zap className={cls} />;
-      case 'crown': return <Crown className={cls} />;
-      default: return null;
-    }
-  };
-
-  const getBorderColor = (color: string) => {
-    if (color === 'blue') return 'border-blue-500/40 shadow-[0_0_40px_-15px_rgba(59,130,246,0.25)]';
-    if (color === 'amber') return 'border-amber-400/40 shadow-[0_0_40px_-15px_rgba(251,191,36,0.25)]';
-    return 'border-purple-500/40 shadow-[0_0_40px_-15px_rgba(168,85,247,0.25)]';
-  };
-
-  const getAccentBg = (color: string) => {
-    if (color === 'blue') return 'bg-blue-500/15 text-blue-400';
-    if (color === 'amber') return 'bg-amber-400/15 text-amber-400';
-    return 'bg-purple-500/15 text-purple-400';
-  };
-
-  const getAccentText = (color: string) => {
-    if (color === 'blue') return 'group-hover:text-blue-400';
-    if (color === 'amber') return 'group-hover:text-amber-400';
-    return 'group-hover:text-purple-400';
-  };
-
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % offers.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + offers.length) % offers.length);
-  };
-
-  const getSlidePosition = (index: number) => {
-    const diff = index - currentIndex;
-    if (diff === 0) return 'center';
-    if (diff === 1 || diff === -2) return 'right';
-    if (diff === -1 || diff === 2) return 'left';
-    return 'hidden';
-  };
-
   return (
-    <section id="pricing" className="px-4 sm:px-6 py-10 sm:py-16 relative scroll-mt-20 overflow-hidden">
-      {/* Background Ambient Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl h-[500px] bg-premium-green/5 blur-[100px] rounded-full pointer-events-none"></div>
-
-      <div className="container mx-auto max-w-6xl relative z-10">
+    <section id="pricing" className="px-4 sm:px-6 py-16 sm:py-24 relative scroll-mt-20 overflow-hidden">
+      <div className="container mx-auto max-w-4xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-14"
         >
-          <span className="text-premium-green text-xs font-bold uppercase tracking-widest mb-2 block">{t.offer.sectionLabel}</span>
-          <h2 className="text-3xl sm:text-4xl font-bold italic font-display text-[#0F1729] mb-3">{t.offer.title}</h2>
-          <p className="text-[#0F1729]/50 max-w-md mx-auto text-sm">{t.offer.subtitle}</p>
+          <h2 className="font-display text-3xl sm:text-5xl font-semibold tracking-tight text-agero-ink mb-3">
+            {t.offer.title}
+          </h2>
+          <p className="text-agero-gray max-w-md mx-auto">{t.offer.subtitle}</p>
         </motion.div>
 
-        {/* Mobile: Accordion Rectangles */}
-        <div className="lg:hidden flex flex-col gap-3 mb-10">
+        {/* Stacked pricing cards — click anywhere on a card to go to the full pricing page */}
+        <div className="flex flex-col gap-6 mb-16">
           {offers.map((offer, index) => {
-            const isExpanded = expandedOffer === index;
+            const Icon = offer.icon;
             return (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileTap={{ scale: 0.985 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.08, duration: 0.4 }}
-                className={`bg-white rounded-2xl border overflow-hidden transition-colors duration-300 ${getBorderColor(offer.color)}`}
-              >
-                {/* Row header — tap to expand/collapse */}
-                <button
-                  onClick={() => setExpandedOffer(isExpanded ? null : index)}
-                  className="w-full px-4 py-3.5 flex items-center justify-between gap-3 text-left"
-                >
-                  <div className="flex items-center gap-3 min-w-0">
-                    <div className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 ${getAccentBg(offer.color)}`}>
-                      {getIcon(offer.icon)}
-                    </div>
-                    <div className="min-w-0">
-                      <div className={`text-[11px] font-black uppercase tracking-widest truncate ${offer.color === 'blue' ? 'text-blue-400' : offer.color === 'amber' ? 'text-amber-400' : 'text-purple-400'}`}>
-                        {offer.title}
-                      </div>
-
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2 flex-shrink-0">
-                    <div className="text-right">
-                      <span className="text-lg font-bold text-[#0F1729] font-display tabular-nums">{offer.price}</span>
-                      <span className="text-[#0F1729]/40 text-[10px] ml-0.5">€</span>
-                    </div>
-                    <ChevronDown
-                      className={`w-4 h-4 text-[#0F1729]/40 transition-transform duration-300 ${
-                        isExpanded ? 'rotate-180 text-premium-green' : ''
-                      }`}
-                    />
-                  </div>
-                </button>
-
-                {/* Expandable detail */}
-                <AnimatePresence initial={false}>
-                  {isExpanded && (
-                    <motion.div
-                      key="content"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-4 pb-5">
-                        <div className="w-full h-[1px] bg-[#E8E3D9] mb-4" />
-                        <p className="text-[#0F1729]/50 text-xs leading-relaxed mb-4">
-                          {offer.description}
-                        </p>
-                        <ul className="space-y-2 mb-5">
-                          {offer.features.map((feature, i) => {
-                            const isInherited = i < (offer.newFrom ?? 0);
-                            return (
-                              <li key={i} className="flex items-start gap-2">
-                                <div className={`mt-0.5 w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 ${isInherited ? 'bg-amber-400/15 text-amber-400' : getAccentBg(offer.color)}`}>
-                                  {isInherited ? <Check className="w-2.5 h-2.5" /> : <Sparkles className="w-2.5 h-2.5" />}
-                                </div>
-                                <span className={`text-xs ${isInherited ? 'text-amber-600 font-medium' : 'text-[#0F1729]/70'}`}>{feature}</span>
-                              </li>
-                            );
-                          })}
-                        </ul>
-                        <div className="flex items-baseline gap-1.5 justify-start pb-3 mb-3 border-b border-[#E8E3D9]">
-                          <span className="text-2xl font-light text-[#0F1729]/80 font-display tracking-tight">{offer.price}</span>
-                          <span className="text-sm font-light text-[#0F1729]/40">€</span>
-                        </div>
-                        <Link
-                          to="/contact"
-                          className={`w-full py-3 rounded-xl font-semibold text-[10px] uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${
-                            offer.color === 'blue' ? 'bg-blue-600 text-white hover:bg-blue-700' :
-                            offer.color === 'amber' ? 'bg-amber-500 text-white hover:bg-amber-600' :
-                            'bg-purple-600 text-white hover:bg-purple-700'
-                          }`}
-                        >
-                          {t.offer.choosePack}
-                          <ArrowRight className="w-3.5 h-3.5" />
-                        </Link>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* Desktop: PricingPage-style grid */}
-        <div className="hidden lg:grid grid-cols-3 gap-5 mb-16 items-stretch">
-          {offers.map((offer, index) => {
-            const glowColor = offer.color === 'blue'
-              ? 'rgba(59,130,246,0.2)'
-              : offer.color === 'amber'
-                ? 'rgba(251,191,36,0.18)'
-                : 'rgba(168,85,247,0.2)';
-
-            const topLine = offer.color === 'blue'
-              ? 'from-transparent via-blue-500 to-transparent'
-              : offer.color === 'amber'
-                ? 'from-transparent via-amber-400 to-transparent'
-                : 'from-transparent via-purple-500 to-transparent';
-
-            const borderClass = offer.color === 'blue'
-              ? 'border-blue-500/25 hover:border-blue-500/55'
-              : offer.color === 'amber'
-                ? 'border-amber-400/30 hover:border-amber-400/60'
-                : 'border-purple-500/25 hover:border-purple-500/55';
-
-            const iconRing = offer.color === 'blue'
-              ? 'bg-blue-500/10 shadow-[0_0_22px_rgba(59,130,246,0.3)] text-blue-400'
-              : offer.color === 'amber'
-                ? 'bg-amber-400/10 shadow-[0_0_22px_rgba(251,191,36,0.3)] text-amber-400'
-                : 'bg-purple-500/10 shadow-[0_0_22px_rgba(168,85,247,0.3)] text-purple-400';
-
-            const priceNumColor = offer.color === 'blue'
-              ? 'text-blue-500/[0.05]'
-              : offer.color === 'amber'
-                ? 'text-amber-400/[0.06]'
-                : 'text-purple-500/[0.05]';
-
-            return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.6, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
-                whileHover={{ y: -8, transition: { duration: 0.25 } }}
-                className={`relative rounded-[2rem] border bg-white flex flex-col overflow-hidden cursor-default transition-shadow duration-500 ${borderClass} ${offer.highlight ? 'shadow-[0_0_70px_-15px_rgba(251,191,36,0.35)]' : ''}`}
-                style={{ boxShadow: `0 0 60px -20px ${glowColor}` }}
+                transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
               >
-                {/* Ambient glow spot */}
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{ background: `radial-gradient(ellipse 80% 50% at 50% -5%, ${glowColor}, transparent 70%)` }}
-                />
+                <Link
+                  to="/tarifs"
+                  className={`group relative block rounded-[2rem] overflow-hidden p-8 sm:p-10 transition-transform duration-300 hover:-translate-y-1 ${
+                    offer.highlight ? 'bg-agero-dark' : 'bg-white border border-agero-line'
+                  }`}
+                >
+                  {/* Blue ambient glow for the recommended offer */}
+                  {offer.highlight && (
+                    <div
+                      className="pointer-events-none absolute inset-0"
+                      style={{
+                        background:
+                          'radial-gradient(55% 60% at 15% 10%, rgba(0,153,255,0.28) 0%, transparent 70%), \
+                           radial-gradient(60% 55% at 90% 100%, rgba(0,113,227,0.35) 0%, transparent 75%)',
+                      }}
+                    />
+                  )}
 
-                {/* Top accent line */}
-                <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${topLine}`} />
+                  <div className="relative grid sm:grid-cols-2 gap-8 sm:gap-10">
+                    {/* Left: icon, title, description */}
+                    <div className="flex flex-col">
+                      <div
+                        className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 ${
+                          offer.highlight ? 'bg-white text-agero-ink' : 'bg-agero-ink text-white'
+                        }`}
+                      >
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <h3 className={`font-display text-xl sm:text-2xl font-semibold mb-3 ${offer.highlight ? 'text-white' : 'text-agero-ink'}`}>
+                        {offer.title}
+                      </h3>
+                      <p className={`text-sm leading-relaxed mb-8 ${offer.highlight ? 'text-white/55' : 'text-agero-gray'}`}>
+                        {offer.description}
+                      </p>
 
-                {/* Top gradient wash */}
-                <div className={`absolute top-0 inset-x-0 h-32 pointer-events-none opacity-30 ${
-                  offer.color === 'blue' ? 'bg-gradient-to-b from-blue-500/20 to-transparent'
-                  : offer.color === 'amber' ? 'bg-gradient-to-b from-amber-400/20 to-transparent'
-                  : 'bg-gradient-to-b from-purple-500/20 to-transparent'
-                }`} />
+                      <div
+                        className={`mt-auto flex items-center justify-between text-sm pt-4 border-t ${
+                          offer.highlight ? 'border-white/10 text-white/70' : 'border-agero-line text-agero-ink/70'
+                        }`}
+                      >
+                        <span>Délai</span>
+                        <span className="font-medium">{offer.delivery}</span>
+                      </div>
+                    </div>
 
-                {/* Large decorative price number in background */}
-                <span className={`absolute -bottom-6 -right-3 font-black font-display text-[9rem] leading-none select-none pointer-events-none ${priceNumColor}`}>
-                  {offer.price.replace(' ', '')}
-                </span>
+                    {/* Right: price, features, CTA */}
+                    <div className="flex flex-col">
+                      <div className="flex items-baseline gap-1.5 mb-6">
+                        <span className={`font-display text-4xl font-semibold ${offer.highlight ? 'text-agero-blue' : 'text-agero-ink'}`}>
+                          {offer.price} €
+                        </span>
+                      </div>
+                      <div className={`w-full h-px mb-6 ${offer.highlight ? 'bg-white/10' : 'bg-agero-line'}`} />
 
-                <div className="relative z-10 p-6 lg:p-7 flex flex-col flex-1">
-                  {/* Icon ring */}
-                  <div className="flex justify-center mb-5">
-                    <div className={`w-16 h-16 rounded-2xl flex items-center justify-center border border-white/10 ${iconRing}`}>
-                      {getIconLarge(offer.icon, offer.color)}
+                      <ul className="flex flex-col gap-3 mb-8">
+                        {offer.features.slice(0, 4).map((feature, i) => (
+                          <li key={i} className="flex items-start gap-3">
+                            <span
+                              className={`mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${
+                                offer.highlight ? 'bg-white/10 text-white' : 'bg-agero-surface text-agero-ink'
+                              }`}
+                            >
+                              <Check className="w-3 h-3" />
+                            </span>
+                            <span className={`text-sm leading-relaxed ${offer.highlight ? 'text-white/70' : 'text-agero-ink/70'}`}>
+                              {feature}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+
+                      <span
+                        className={`mt-auto w-full py-4 rounded-full font-medium flex items-center justify-center gap-2 transition-colors duration-300 ${
+                          offer.highlight
+                            ? 'bg-white text-agero-ink group-hover:bg-white/90'
+                            : 'bg-agero-ink text-white group-hover:bg-agero-ink/85'
+                        }`}
+                      >
+                        {t.offer.choosePack}
+                      </span>
                     </div>
                   </div>
-
-                  {/* Title */}
-                  <div className="mb-5 text-center">
-                    <h3 className="text-xl font-bold font-display uppercase tracking-widest mb-3 text-[#0F1729]">
-                      {offer.title}
-                    </h3>
-                    <p className="text-[#0F1729]/50 text-xs lg:text-sm leading-relaxed px-1 lg:px-2">{offer.description}</p>
-                  </div>
-
-                  {/* Separator */}
-                  <div className={`w-full h-px mb-5 bg-gradient-to-r ${
-                    offer.color === 'blue'   ? 'from-transparent via-blue-500/40 to-transparent'
-                    : offer.color === 'amber' ? 'from-transparent via-amber-400/40 to-transparent'
-                                             : 'from-transparent via-purple-500/40 to-transparent'
-                  }`} />
-
-                  {/* Features — all items */}
-                  <ul className="flex flex-col space-y-2.5 mb-6 flex-1">
-                    {offer.features.map((feature, i) => {
-                      const isInherited = i < (offer.newFrom ?? 0);
-                      return (
-                        <li key={i} className="flex items-start gap-3 group/item">
-                          <div className={`mt-0.5 w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
-                            isInherited
-                              ? 'bg-amber-400/15 text-amber-400'
-                              : offer.color === 'blue'   ? 'bg-blue-500/15   text-blue-400   group-hover/item:bg-blue-500/30'
-                              : offer.color === 'amber'  ? 'bg-amber-400/15  text-amber-400  group-hover/item:bg-amber-400/30'
-                                                        : 'bg-purple-500/15 text-purple-400 group-hover/item:bg-purple-500/30'
-                          }`}>
-                            {isInherited ? <Check className="w-2.5 h-2.5" /> : <Sparkles className="w-2.5 h-2.5" />}
-                          </div>
-                          <span className={`text-xs leading-relaxed transition-colors duration-300 ${
-                            isInherited ? 'text-amber-600 font-semibold' : 'text-[#0F1729]/65 group-hover/item:text-[#0F1729]'
-                          }`}>{feature}</span>
-                        </li>
-                      );
-                    })}
-                  </ul>
-
-                  {/* Price — at the end, before CTA */}
-                  <div className="flex items-baseline gap-1.5 justify-center py-4 border-t border-[#E8E3D9] mt-2 mb-4">
-                    <span className="text-3xl font-light text-[#0F1729]/70 font-display tracking-tight">{offer.price}</span>
-                    <span className="text-base font-light text-[#0F1729]/40">€</span>
-                  </div>
-
-                  {/* CTA */}
-                  <Link
-                    to="/contact"
-                    className={`w-full py-4 lg:py-5 rounded-2xl font-bold text-xs uppercase tracking-[0.15em] flex items-center justify-center gap-2 transition-all duration-300 ${
-                      offer.color === 'blue'
-                        ? 'bg-blue-600 text-white hover:bg-blue-700 hover:shadow-[0_4px_20px_rgba(59,130,246,0.3)]'
-                        : offer.color === 'amber'
-                          ? 'bg-amber-500 text-white hover:bg-amber-600 hover:shadow-[0_4px_20px_rgba(251,191,36,0.3)]'
-                          : 'bg-purple-600 text-white hover:bg-purple-700 hover:shadow-[0_4px_20px_rgba(168,85,247,0.3)]'
-                    }`}
-                  >
-                    {t.offer.choosePack}
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
+                </Link>
               </motion.div>
             );
           })}
         </div>
 
         {/* Info & Tabs Section */}
-        <div className="max-w-2xl mx-auto border border-[#E8E3D9] bg-white rounded-2xl sm:rounded-[2rem] overflow-hidden flex flex-col items-center">
-          {/* Tabs Header */}
-          <div className="flex p-1.5 gap-1.5 mt-6 bg-[#F0EDE6] rounded-full border border-[#E8E3D9]">
+        <div className="max-w-2xl mx-auto border border-agero-line bg-white rounded-2xl sm:rounded-[2rem] overflow-hidden flex flex-col items-center">
+          <div className="flex p-1.5 gap-1.5 mt-6 bg-agero-surface rounded-full">
             <button
               onClick={() => setActiveTab('faq')}
-              className={`py-2.5 px-6 text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all rounded-full ${activeTab === 'faq' ? 'bg-premium-green text-white' : 'text-[#0F1729]/50 hover:text-[#0F1729] hover:bg-[#F5F4EF]'}`}
+              className={`py-2.5 px-6 text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all rounded-full ${activeTab === 'faq' ? 'bg-agero-ink text-white' : 'text-agero-gray hover:text-agero-ink'}`}
             >
               <HelpCircle className="w-3 h-3" />
               {t.offer.faq}
             </button>
             <button
               onClick={() => setActiveTab('quote')}
-              className={`py-2.5 px-6 text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all rounded-full ${activeTab === 'quote' ? 'bg-premium-green text-white' : 'text-[#0F1729]/50 hover:text-[#0F1729] hover:bg-[#F5F4EF]'}`}
+              className={`py-2.5 px-6 text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all rounded-full ${activeTab === 'quote' ? 'bg-agero-ink text-white' : 'text-agero-gray hover:text-agero-ink'}`}
             >
               <FileText className="w-3 h-3" />
               {t.offer.quote}
             </button>
           </div>
 
-          {/* Tab Content */}
           <div className="p-6 sm:p-8 w-full min-h-[180px]">
             <AnimatePresence mode="wait">
               {activeTab === 'faq' ? (
@@ -386,17 +183,17 @@ export const Offer: React.FC = () => {
                   transition={{ duration: 0.3 }}
                   className="grid grid-cols-1 sm:grid-cols-2 gap-4"
                 >
-                  <div className="bg-[#F5F4EF] p-4 rounded-xl border border-[#E8E3D9]">
-                    <h4 className="text-premium-green font-bold mb-2 text-xs uppercase tracking-wide">{t.offer.faqItems.delays.title}</h4>
-                    <p className="text-[#0F1729]/70 text-xs leading-relaxed">
-                      <span className="block mb-0.5"><span className="text-[#0F1729]/45">Fondation :</span> {t.offer.faqItems.delays.starter}</span>
-                      <span className="block mb-0.5"><span className="text-[#0F1729]/45">Stratégie :</span> {t.offer.faqItems.delays.business}</span>
-                      <span className="block"><span className="text-[#0F1729]/45">Signature :</span> {t.offer.faqItems.delays.empire}</span>
+                  <div className="bg-agero-surface p-4 rounded-xl">
+                    <h4 className="text-agero-blue font-bold mb-2 text-xs uppercase tracking-wide">{t.offer.faqItems.delays.title}</h4>
+                    <p className="text-agero-ink/70 text-xs leading-relaxed">
+                      <span className="block mb-0.5"><span className="text-agero-ink/45">Fondation :</span> {t.offer.faqItems.delays.starter}</span>
+                      <span className="block mb-0.5"><span className="text-agero-ink/45">Stratégie :</span> {t.offer.faqItems.delays.business}</span>
+                      <span className="block"><span className="text-agero-ink/45">Signature :</span> {t.offer.faqItems.delays.empire}</span>
                     </p>
                   </div>
-                  <div className="bg-[#F5F4EF] p-4 rounded-xl border border-[#E8E3D9]">
-                    <h4 className="text-premium-green font-bold mb-2 text-xs uppercase tracking-wide">{t.offer.faqItems.payment.title}</h4>
-                    <p className="text-[#0F1729]/70 text-xs leading-relaxed">
+                  <div className="bg-agero-surface p-4 rounded-xl">
+                    <h4 className="text-agero-blue font-bold mb-2 text-xs uppercase tracking-wide">{t.offer.faqItems.payment.title}</h4>
+                    <p className="text-agero-ink/70 text-xs leading-relaxed">
                       {t.offer.faqItems.payment.answer}
                     </p>
                   </div>
@@ -410,11 +207,11 @@ export const Offer: React.FC = () => {
                   transition={{ duration: 0.3 }}
                   className="flex flex-col items-center justify-center text-center h-full"
                 >
-                  <h4 className="text-[#0F1729] font-bold mb-2 text-base">{t.offer.customProject.title}</h4>
-                  <p className="text-[#0F1729]/55 text-xs leading-relaxed mb-6 max-w-sm">
+                  <h4 className="text-agero-ink font-bold mb-2 text-base">{t.offer.customProject.title}</h4>
+                  <p className="text-agero-gray text-xs leading-relaxed mb-6 max-w-sm">
                     {t.offer.customProject.description}
                   </p>
-                  <a href="#contact" className="px-6 py-3 bg-[#0F1729] text-white font-bold text-[10px] uppercase tracking-widest rounded-full hover:bg-premium-green transition-all">
+                  <a href="#contact" className="px-6 py-3 bg-agero-ink text-white font-bold text-[10px] uppercase tracking-widest rounded-full hover:bg-agero-blue transition-all">
                     {t.offer.customProject.cta}
                   </a>
                 </motion.div>
@@ -423,77 +220,6 @@ export const Offer: React.FC = () => {
           </div>
         </div>
       </div>
-
-      {/* Expanded Offer Modal */}
-      <AnimatePresence>
-        {expandedOffer !== null && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setExpandedOffer(null)}
-              className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm"
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="fixed inset-4 sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 z-50 bg-[#0A0A0A] border border-white/10 rounded-2xl sm:rounded-[2rem] p-6 sm:p-8 sm:max-w-md sm:w-full max-h-[90vh] overflow-y-auto"
-            >
-              <button
-                onClick={() => setExpandedOffer(null)}
-                aria-label="Close"
-                className="absolute top-4 right-4 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              {expandedOffer !== null && (
-                <>
-                  <h3 className={`text-2xl font-bold mb-2 font-display text-center uppercase tracking-wider ${offers[expandedOffer].color === 'blue' ? 'text-blue-400' : offers[expandedOffer].color === 'amber' ? 'text-amber-400' : 'text-purple-400'}`}>
-                    {offers[expandedOffer].title}
-                  </h3>
-
-                  <div className="flex items-start justify-center gap-1 mb-4">
-                    <span className="text-5xl font-black text-white tracking-tighter font-display">{offers[expandedOffer].price}</span>
-                    <span className="text-2xl mt-2 text-gray-400 font-light">€</span>
-                  </div>
-
-                  <p className="text-gray-400 text-sm mb-6 text-center leading-relaxed">
-                    {offers[expandedOffer].description}
-                  </p>
-
-                  <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent mb-6"></div>
-
-                  <ul className="space-y-3 mb-8">
-                    {offers[expandedOffer].features.map((feature, i) => {
-                      const isInherited = i < (offers[expandedOffer].newFrom ?? 0);
-                      return (
-                        <li key={i} className="flex items-start gap-3">
-                          <div className={`mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${isInherited ? 'bg-amber-400/15 text-amber-400' : getAccentBg(offers[expandedOffer].color)}`}>
-                            {isInherited ? <Check className="w-3 h-3" /> : <Sparkles className="w-3 h-3" />}
-                          </div>
-                          <span className={`text-sm ${isInherited ? 'text-amber-400 font-medium' : 'text-gray-300'}`}>{feature}</span>
-                        </li>
-                      );
-                    })}
-                  </ul>
-
-                  <button className={`w-full py-4 rounded-xl font-bold text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 border ${
-                    offers[expandedOffer].color === 'blue' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20 hover:bg-blue-500 hover:text-white hover:border-transparent hover:shadow-[0_0_25px_rgba(59,130,246,0.3)]' :
-                    offers[expandedOffer].color === 'amber' ? 'bg-amber-400/10 text-amber-400 border-amber-400/20 hover:bg-amber-400 hover:text-black hover:border-transparent hover:shadow-[0_0_25px_rgba(251,191,36,0.3)]' :
-                    'bg-purple-500/10 text-purple-400 border-purple-500/20 hover:bg-purple-500 hover:text-white hover:border-transparent hover:shadow-[0_0_25px_rgba(168,85,247,0.3)]'
-                  }`}>
-                    {t.offer.choosePack}
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </>
-              )}
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
     </section>
   );
 };
