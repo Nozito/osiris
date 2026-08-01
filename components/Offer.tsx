@@ -71,6 +71,17 @@ export const Offer: React.FC = () => {
                     offer.highlight ? 'bg-agero-dark' : 'bg-white border border-agero-line'
                   }`}
                 >
+                  {/* Halftone dot pattern — light dots on the dark card, dark/gray dots on the light cards */}
+                  <div
+                    className="pointer-events-none absolute inset-0"
+                    style={{
+                      backgroundImage: `radial-gradient(${offer.highlight ? 'rgba(255,255,255,0.35)' : 'rgba(15,23,41,0.16)'} 1px, transparent 1px)`,
+                      backgroundSize: '14px 14px',
+                      maskImage: 'radial-gradient(50% 70% at 12% 15%, black 0%, transparent 70%)',
+                      WebkitMaskImage: 'radial-gradient(50% 70% at 12% 15%, black 0%, transparent 70%)',
+                    }}
+                  />
+
                   {/* Blue ambient glow for the recommended offer */}
                   {offer.highlight && (
                     <div

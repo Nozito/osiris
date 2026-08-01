@@ -44,13 +44,13 @@ export const en = {
 
     // Delivery Timeline (14-day process)
     deliveryTimeline: {
-        title: "Delivered in 14 days,",
+        title: "Delivered in 21 days,",
         titleHighlight: "satisfaction guaranteed.",
         cta: "Book a call",
         tasks: {
             call: "Discovery call",
             kickoff: "Project kick-off",
-            design: "Late-night design sprints",
+            design: "Visual design",
             v1: "V1 presentation",
             revisions: "Revisions & polish",
             delivery: "Your website goes live",
@@ -67,6 +67,14 @@ export const en = {
         visitCta: "Visit site",
         projects: [
             {
+                brand: "Joe",
+                description: "Showcase website for a sports coach",
+                intro: "A sports coach based in Manosque who wanted a site that matched his energy: direct, motivating, and built to turn visitors into clients.",
+                year: "2026",
+                role: "Design & Development",
+                url: "https://maquette-joe.vercel.app/"
+            },
+            {
                 brand: "L'Artisan",
                 description: "Semi-gourmet restaurant in Annecy, France",
                 intro: "A semi-gourmet restaurant in Annecy that wanted a site as refined as its plates: easy booking, an intimate feel, a smooth experience on mobile.",
@@ -81,14 +89,6 @@ export const en = {
                 year: "2025",
                 role: "Design & Development",
                 url: "https://blyssapp.fr/"
-            },
-            {
-                brand: "Joe",
-                description: "Showcase website for a sports coach",
-                intro: "A sports coach based in Manosque who wanted a site that matched his energy: direct, motivating, and built to turn visitors into clients.",
-                year: "2026",
-                role: "Design & Development",
-                url: "https://maquette-joe.vercel.app/"
             }
         ]
     },

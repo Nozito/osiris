@@ -44,13 +44,13 @@ export const fr = {
 
     // Delivery Timeline (14-day process)
     deliveryTimeline: {
-        title: "Livraison en 14 jours,",
+        title: "Livraison en 21 jours,",
         titleHighlight: "satisfaction garantie.",
         cta: "Réserver un appel",
         tasks: {
             call: "Appel découverte",
             kickoff: "Kick-off du projet",
-            design: "Nuits blanches de design",
+            design: "Conception visuelle",
             v1: "Présentation de votre V1",
             revisions: "Retouches & finitions",
             delivery: "Livraison de votre site",
@@ -67,6 +67,14 @@ export const fr = {
         visitCta: "Voir le site",
         projects: [
             {
+                brand: "Joe",
+                description: "Site vitrine pour coach sportif",
+                intro: "Un coach sportif basé à Manosque qui voulait un site à son image : direct, motivant, et pensé pour transformer les visiteurs en clients.",
+                year: "2026",
+                role: "Design & Développement",
+                url: "https://maquette-joe.vercel.app/"
+            },
+            {
                 brand: "L'Artisan",
                 description: "Restaurant semi-gastronomique à Annecy",
                 intro: "Un restaurant semi-gastronomique à Annecy qui voulait un site aussi soigné que son assiette : réservation simple, ambiance intimiste, expérience fluide sur mobile.",
@@ -81,14 +89,6 @@ export const fr = {
                 year: "2025",
                 role: "Design & Développement",
                 url: "https://blyssapp.fr/"
-            },
-            {
-                brand: "Joe",
-                description: "Site vitrine pour coach sportif",
-                intro: "Un coach sportif basé à Manosque qui voulait un site à son image : direct, motivant, et pensé pour transformer les visiteurs en clients.",
-                year: "2026",
-                role: "Design & Développement",
-                url: "https://maquette-joe.vercel.app/"
             }
         ]
     },

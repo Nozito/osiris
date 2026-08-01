@@ -22,8 +22,11 @@ export const Hero: React.FC = () => {
 
   const heroSection = (
     <section
-      className="relative w-full flex flex-col items-center overflow-hidden px-4 sm:px-6 pt-32 pb-0 sm:pt-40"
-      style={{ background: 'linear-gradient(180deg, #060B18 0%, #0A2F63 55%, #0099FF 100%)' }}
+      className="relative w-full flex flex-col items-center overflow-hidden pt-32 pb-0 sm:pt-40"
+      style={{
+        background:
+          'linear-gradient(180deg, #060B18 0%, #051D35 12.5%, #052F52 25%, #04406F 37.5%, #03528C 50%, #0264A8 62.5%, #0276C5 75%, #0187E2 87.5%, #0099FF 100%)',
+      }}
     >
       {/* Grain texture over the gradient */}
       <div
@@ -36,7 +39,7 @@ export const Hero: React.FC = () => {
       />
 
 
-      <div className="container mx-auto max-w-5xl relative z-10 text-center flex flex-col items-center">
+      <div className="container mx-auto max-w-5xl relative z-10 text-center flex flex-col items-center px-4 sm:px-6">
         {/* Trust cluster */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -103,15 +106,15 @@ export const Hero: React.FC = () => {
         </motion.div>
       </div>
 
-      {/* Crossed diagonal ribbons — services / stats. Full-bleed wrapper so the
-          crossing point always sits at the true center of the viewport, regardless
-          of any parent padding/max-width. Still inside the gradient, so the blue
-          carries all the way down to where the two bands cross. */}
+      {/* Crossed diagonal ribbons — services / stats. The section itself carries
+          no horizontal padding (it moved to the content div above), so this
+          wrapper at w-full already spans edge-to-edge with no vw-unit/scrollbar
+          mismatch and no margin math needed. */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.9, duration: 0.8 }}
-        className="relative left-1/2 -translate-x-1/2 w-screen h-56 sm:h-64 mt-16 sm:mt-20 overflow-hidden"
+        className="relative w-full h-56 sm:h-64 mt-16 sm:mt-20 overflow-hidden"
       >
         {/* Both ribbons share the exact same center point and rotate by the same
             magnitude in opposite directions, so they always cross dead-center. */}
