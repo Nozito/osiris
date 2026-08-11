@@ -118,15 +118,6 @@ export const AboutPage: React.FC = () => {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <div className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border border-agero-line bg-white">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-agero-green opacity-60" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-agero-green" />
-              </span>
-              <span className="text-[12px] font-medium text-agero-ink/70">
-                {isFr ? 'Agence fondée en 2025' : 'Founded in 2025'}
-              </span>
-            </div>
             <h1 className="font-display text-4xl sm:text-6xl font-semibold tracking-tight text-agero-ink mb-4">
               {isFr ? "L'agence derrière votre projet" : 'The agency behind your project'}
             </h1>

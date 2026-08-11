@@ -125,7 +125,7 @@ export const Footer: React.FC = () => {
 
         {/* Bottom bar */}
         <div className="relative flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/35 pb-8">
-          <span>{t.footer.copyright}</span>
+          <span>{t.footer.copyright.replace('2024', String(new Date().getFullYear()))}</span>
           <span>Manosque &rarr; {time}</span>
           <a
             href="#top"

@@ -1,4 +1,5 @@
 import React, { Suspense, lazy, useEffect } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { WhatsAppButton } from './components/WhatsAppButton';
@@ -22,6 +23,8 @@ const PageLoader = () => (
 
 export default function App() {
   const location = useLocation();
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 300, damping: 40, restDelta: 0.001 });
 
   useEffect(() => {
     const handleAuditClick = (event: Event) => {
@@ -111,6 +114,12 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-[#F5F4EF] text-[#0F1729] overflow-x-hidden font-sans" id="app-root">
+      {/* Custom scroll-progress bar — replaces the native browser scrollbar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[3px] z-[90] origin-left"
+        style={{ scaleX, background: '#0099FF' }}
+      />
+
       <IntroLoader />
 
       {/* Subtle global blue glow behind all pages */}

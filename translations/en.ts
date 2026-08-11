@@ -291,7 +291,7 @@ export const en = {
         items: [
             {
                 question: "How much does a premium site with OSIRIS cost?",
-                answer: "Our premium showcase sites start from €2,500. Since each project is unique, we establish a personalized quote after the free audit, based on your specific needs and business objectives."
+                answer: "Our showcase sites start from €1,090. Since each project is unique, we establish a personalized quote after the free audit, based on your specific needs and business objectives."
             },
             {
                 question: "How long to deliver my site?",
@@ -303,11 +303,11 @@ export const en = {
             },
             {
                 question: "What's the difference with another web agency?",
-                answer: "We don't sell \"a website\", we sell results. Measurable technical performance, premium design without compromise, and post-launch strategic support. No templates, no shortcuts: only custom-made designed to convert."
+                answer: "A custom-made site, designed for your business, with careful design and support at every step of the project."
             },
             {
                 question: "Will I be able to modify my site myself after?",
-                answer: "Absolutely. We train you on using your site and set up an intuitive CMS if necessary. You keep 100% control, and we remain available for future developments."
+                answer: "We hand over all your site's files on delivery. If you're not comfortable using them on your own, our maintenance plan takes care of changes for you."
             }
         ]
     },
@@ -392,7 +392,7 @@ export const en = {
                 title: "Fondation",
                 description: "A simple, clean and effective website to establish your online presence",
                 features: [
-                    "1 to 2 custom pages",
+                    "1 to 3 custom pages",
                     "Clean design tailored to your activity",
                     "Simple and effective structure",
                     "Responsive site (mobile, tablet, desktop)",

@@ -222,16 +222,18 @@ export const PricingPage: React.FC = () => {
                                                 <span className="font-medium">{offer.delivery}</span>
                                             </div>
 
-                                            <Link
-                                                to="/contact"
+                                            <a
+                                                href="https://calendly.com/osiris-agency/30min"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
                                                 className={`mt-auto w-full py-4 rounded-full font-medium flex items-center justify-center gap-2 transition-colors duration-300 ${
                                                     offer.highlight
                                                         ? 'bg-white text-agero-ink hover:bg-white/90'
                                                         : 'bg-agero-ink text-white hover:bg-agero-ink/85'
                                                 }`}
                                             >
-                                                Demander un devis gratuit
-                                            </Link>
+                                                Réserver un appel
+                                            </a>
                                         </div>
                                     </div>
                                 </motion.div>
@@ -278,12 +280,14 @@ export const PricingPage: React.FC = () => {
                                             Décrivez-nous votre projet en quelques mots. Nous vous revenons sous <strong className="text-white font-semibold">24h</strong> avec une proposition sur-mesure, sans engagement.
                                         </p>
                                         <div className="flex flex-col sm:flex-row gap-2.5">
-                                            <Link
-                                                to="/contact"
+                                            <a
+                                                href="https://calendly.com/osiris-agency/30min"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
                                                 className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-white text-agero-ink font-medium text-sm whitespace-nowrap hover:bg-white/90 transition-colors duration-300"
                                             >
-                                                Demander un devis gratuit
-                                            </Link>
+                                                Réserver un appel
+                                            </a>
                                             <a
                                                 href="tel:0772328932"
                                                 className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full border border-white/15 text-white font-medium text-sm whitespace-nowrap hover:bg-white/5 transition-colors duration-300"

@@ -231,22 +231,15 @@
       overflow-x: hidden;
     }
 
-    /* Custom Scrollbar */
+    /* Native scrollbar fully hidden — replaced by a custom progress bar */
+    html {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
     ::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: #FFFFFF;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: #D2D2D7;
-      border-radius: 3px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: #0071E3;
+      width: 0;
+      height: 0;
     }
   </style>
   <script>

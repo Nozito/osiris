@@ -291,7 +291,7 @@ export const fr = {
         items: [
             {
                 question: "Combien coûte un site premium avec OSIRIS ?",
-                answer: "Nos sites vitrines premium démarrent à partir de 2 500€. Chaque projet étant unique, nous établissons un devis personnalisé après l'audit gratuit, en fonction de vos besoins spécifiques et objectifs business."
+                answer: "Nos sites vitrines démarrent à partir de 1 090€. Chaque projet étant unique, nous établissons un devis personnalisé après l'audit gratuit, en fonction de vos besoins spécifiques et objectifs business."
             },
             {
                 question: "Combien de temps pour livrer mon site ?",
@@ -303,11 +303,11 @@ export const fr = {
             },
             {
                 question: "Quelle différence avec une autre agence web ?",
-                answer: "Nous ne vendons pas \"un site\", nous vendons des résultats. Performance technique mesurable, design premium sans compromis, et accompagnement stratégique post-lancement. Pas de templates, pas de shortcuts : que du sur-mesure pensé pour convertir."
+                answer: "Un site sur-mesure, pensé pour votre activité, avec un design soigné et un accompagnement à chaque étape du projet."
             },
             {
                 question: "Est-ce que je pourrai modifier mon site moi-même après ?",
-                answer: "Absolument. Nous vous formons à l'utilisation de votre site et mettons en place un CMS intuitif si nécessaire. Vous gardez 100% de contrôle, et nous restons disponibles pour les évolutions futures."
+                answer: "Nous vous remettons tous les fichiers de votre site à la livraison. Si vous ne savez pas les utiliser seul, notre offre de maintenance s'occupe des modifications à votre place."
             }
         ]
     },
@@ -392,7 +392,7 @@ export const fr = {
                 title: "Fondation",
                 description: "Un site simple, propre et efficace pour être présent en ligne",
                 features: [
-                    "1 à 2 pages personnalisées",
+                    "1 à 3 pages personnalisées",
                     "Design propre et adapté à votre activité",
                     "Structure simple et efficace",
                     "Site responsive (mobile, tablette, ordinateur)",
